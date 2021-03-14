@@ -1,0 +1,2675 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="distill" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ad0000; } /* Alert */
+code span.an { color: #5e5e5e; } /* Annotation */
+code span.at { color: #20794d; } /* Attribute */
+code span.bn { color: #ad0000; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007ba5; } /* ControlFlow */
+code span.ch { color: #20794d; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #5e5e5e; } /* Comment */
+code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+code span.dt { color: #ad0000; } /* DataType */
+code span.dv { color: #ad0000; } /* DecVal */
+code span.er { color: #ad0000; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #ad0000; } /* Float */
+code span.fu { color: #4758ab; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #5e5e5e; } /* Information */
+code span.kw { color: #007ba5; } /* Keyword */
+code span.op { color: #5e5e5e; } /* Operator */
+code span.ot { color: #007ba5; } /* Other */
+code span.pp { color: #ad0000; } /* Preprocessor */
+code span.sc { color: #20794d; } /* SpecialChar */
+code span.ss { color: #20794d; } /* SpecialString */
+code span.st { color: #20794d; } /* String */
+code span.va { color: #111111; } /* Variable */
+code span.vs { color: #20794d; } /* VerbatimString */
+code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+</style>
+
+  <!--radix_placeholder_meta_tags-->
+<title>Franklin Santos: Análisis de Varianza y Prueba de Promedios en R</title>
+
+<meta property="description" itemprop="description" content="La figura de prueba de promedios de TukeyHSD es una buena opción, ya que incluye p-valor del ANVA y de la comparación de medias entre tratamientos."/>
+
+
+<!--  https://schema.org/Article -->
+<meta property="article:published" itemprop="datePublished" content="2020-11-15"/>
+<meta property="article:created" itemprop="dateCreated" content="2020-11-15"/>
+<meta name="article:author" content="Franklin Santos"/>
+
+<!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+<meta property="og:title" content="Franklin Santos: Análisis de Varianza y Prueba de Promedios en R"/>
+<meta property="og:type" content="article"/>
+<meta property="og:description" content="La figura de prueba de promedios de TukeyHSD es una buena opción, ya que incluye p-valor del ANVA y de la comparación de medias entre tratamientos."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:site_name" content="Franklin Santos"/>
+
+<!--  https://dev.twitter.com/cards/types/summary -->
+<meta property="twitter:card" content="summary"/>
+<meta property="twitter:title" content="Franklin Santos: Análisis de Varianza y Prueba de Promedios en R"/>
+<meta property="twitter:description" content="La figura de prueba de promedios de TukeyHSD es una buena opción, ya que incluye p-valor del ANVA y de la comparación de medias entre tratamientos."/>
+
+<!--/radix_placeholder_meta_tags-->
+  <!--radix_placeholder_rmarkdown_metadata-->
+
+<script type="text/json" id="radix-rmarkdown-metadata">
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","categories","author","date","preview","output"]}},"value":[{"type":"character","attributes":{},"value":["Análisis de Varianza y Prueba de Promedios en R"]},{"type":"character","attributes":{},"value":["La figura de prueba de promedios de TukeyHSD es una buena opción, ya que incluye p-valor del ANVA y de la comparación de medias entre tratamientos."]},{"type":"character","attributes":{},"value":["ANOVA","Post hoc","Inferencial Statistic"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","orcid_id"]}},"value":[{"type":"character","attributes":{},"value":["Franklin Santos"]},{"type":"character","attributes":{},"value":["https://franklinsantos.com"]},{"type":"character","attributes":{},"value":["AgriTech Bolivia"]},{"type":"character","attributes":{},"value":["0000-0002-7509-2910"]}]}]},{"type":"character","attributes":{},"value":["11-15-2020"]},{"type":"character","attributes":{},"value":["featured.png"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+</script>
+<!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["anova_files/anchor-4.2.2/anchor.min.js","anova_files/bowser-1.9.3/bowser.min.js","anova_files/crosstalk-1.1.1/css/crosstalk.css","anova_files/crosstalk-1.1.1/js/crosstalk.js","anova_files/crosstalk-1.1.1/js/crosstalk.js.map","anova_files/crosstalk-1.1.1/js/crosstalk.min.js","anova_files/crosstalk-1.1.1/js/crosstalk.min.js.map","anova_files/distill-2.2.21/template.v2.js","anova_files/figure-html5/unnamed-chunk-15-1.png","anova_files/figure-html5/unnamed-chunk-16-1.png","anova_files/figure-html5/unnamed-chunk-17-1.png","anova_files/figure-html5/unnamed-chunk-3-1.png","anova_files/figure-html5/unnamed-chunk-5-1.png","anova_files/figure-html5/unnamed-chunk-6-1.png","anova_files/figure-html5/unnamed-chunk-7-1.png","anova_files/header-attrs-2.7/header-attrs.js","anova_files/highchart-binding-0.8.2/highchart.js","anova_files/highcharts-8.1.2/css/htmlwdgtgrid.css","anova_files/highcharts-8.1.2/css/motion.css","anova_files/highcharts-8.1.2/custom/appear.js","anova_files/highcharts-8.1.2/custom/reset.js","anova_files/highcharts-8.1.2/custom/symbols-extra.js","anova_files/highcharts-8.1.2/custom/text-symbols.js","anova_files/highcharts-8.1.2/highcharts-3d.js","anova_files/highcharts-8.1.2/highcharts-more.js","anova_files/highcharts-8.1.2/highcharts.js","anova_files/highcharts-8.1.2/modules/accessibility.js","anova_files/highcharts-8.1.2/modules/annotations-advanced.js","anova_files/highcharts-8.1.2/modules/annotations.js","anova_files/highcharts-8.1.2/modules/arrow-symbols.js","anova_files/highcharts-8.1.2/modules/boost-canvas.js","anova_files/highcharts-8.1.2/modules/boost.js","anova_files/highcharts-8.1.2/modules/broken-axis.js","anova_files/highcharts-8.1.2/modules/bullet.js","anova_files/highcharts-8.1.2/modules/coloraxis.js","anova_files/highcharts-8.1.2/modules/current-date-indicator.js","anova_files/highcharts-8.1.2/modules/cylinder.js","anova_files/highcharts-8.1.2/modules/data.js","anova_files/highcharts-8.1.2/modules/datagrouping.js","anova_files/highcharts-8.1.2/modules/debugger.js","anova_files/highcharts-8.1.2/modules/dependency-wheel.js","anova_files/highcharts-8.1.2/modules/dotplot.js","anova_files/highcharts-8.1.2/modules/drag-panes.js","anova_files/highcharts-8.1.2/modules/draggable-points.js","anova_files/highcharts-8.1.2/modules/drilldown.js","anova_files/highcharts-8.1.2/modules/dumbbell.js","anova_files/highcharts-8.1.2/modules/export-data.js","anova_files/highcharts-8.1.2/modules/exporting.js","anova_files/highcharts-8.1.2/modules/full-screen.js","anova_files/highcharts-8.1.2/modules/funnel.js","anova_files/highcharts-8.1.2/modules/funnel3d.js","anova_files/highcharts-8.1.2/modules/gantt.js","anova_files/highcharts-8.1.2/modules/grid-axis.js","anova_files/highcharts-8.1.2/modules/heatmap.js","anova_files/highcharts-8.1.2/modules/histogram-bellcurve.js","anova_files/highcharts-8.1.2/modules/item-series.js","anova_files/highcharts-8.1.2/modules/lollipop.js","anova_files/highcharts-8.1.2/modules/map.js","anova_files/highcharts-8.1.2/modules/marker-clusters.js","anova_files/highcharts-8.1.2/modules/networkgraph.js","anova_files/highcharts-8.1.2/modules/no-data-to-display.js","anova_files/highcharts-8.1.2/modules/offline-exporting.js","anova_files/highcharts-8.1.2/modules/oldie-polyfills.js","anova_files/highcharts-8.1.2/modules/oldie.js","anova_files/highcharts-8.1.2/modules/organization.js","anova_files/highcharts-8.1.2/modules/overlapping-datalabels.js","anova_files/highcharts-8.1.2/modules/parallel-coordinates.js","anova_files/highcharts-8.1.2/modules/pareto.js","anova_files/highcharts-8.1.2/modules/pathfinder.js","anova_files/highcharts-8.1.2/modules/pattern-fill.js","anova_files/highcharts-8.1.2/modules/price-indicator.js","anova_files/highcharts-8.1.2/modules/pyramid3d.js","anova_files/highcharts-8.1.2/modules/sankey.js","anova_files/highcharts-8.1.2/modules/series-label.js","anova_files/highcharts-8.1.2/modules/solid-gauge.js","anova_files/highcharts-8.1.2/modules/sonification.js","anova_files/highcharts-8.1.2/modules/static-scale.js","anova_files/highcharts-8.1.2/modules/stock-tools.js","anova_files/highcharts-8.1.2/modules/stock.js","anova_files/highcharts-8.1.2/modules/streamgraph.js","anova_files/highcharts-8.1.2/modules/sunburst.js","anova_files/highcharts-8.1.2/modules/tilemap.js","anova_files/highcharts-8.1.2/modules/timeline.js","anova_files/highcharts-8.1.2/modules/treegrid.js","anova_files/highcharts-8.1.2/modules/treemap.js","anova_files/highcharts-8.1.2/modules/variable-pie.js","anova_files/highcharts-8.1.2/modules/variwide.js","anova_files/highcharts-8.1.2/modules/vector.js","anova_files/highcharts-8.1.2/modules/venn.js","anova_files/highcharts-8.1.2/modules/windbarb.js","anova_files/highcharts-8.1.2/modules/wordcloud.js","anova_files/highcharts-8.1.2/modules/xrange.js","anova_files/highcharts-8.1.2/plugins/draggable-legend.js","anova_files/highcharts-8.1.2/plugins/grouped-categories.js","anova_files/highcharts-8.1.2/plugins/highcharts-regression.js","anova_files/highcharts-8.1.2/plugins/motion.js","anova_files/highcharts-8.1.2/plugins/multicolor_series.js","anova_files/highcharts-8.1.2/plugins/pattern-fill-v2.js","anova_files/highcharts-8.1.2/plugins/tooltip-delay.js","anova_files/htmlwidgets-1.5.3/htmlwidgets.js","anova_files/jquery-1.11.3/jquery.min.js","anova_files/jquery-3.5.0/jquery.min.js","anova_files/jquery-3.5.1/jquery-AUTHORS.txt","anova_files/jquery-3.5.1/jquery.js","anova_files/jquery-3.5.1/jquery.min.js","anova_files/jquery-3.5.1/jquery.min.map","anova_files/plotly-binding-4.9.3/plotly.js","anova_files/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css","anova_files/plotly-main-1.57.1/plotly-latest.min.js","anova_files/popper-2.6.0/popper.min.js","anova_files/proj4js-2.3.15/proj4.js","anova_files/tippy-6.2.7/tippy-bundle.umd.min.js","anova_files/tippy-6.2.7/tippy-light-border.css","anova_files/tippy-6.2.7/tippy.css","anova_files/tippy-6.2.7/tippy.umd.min.js","anova_files/typedarray-0.1/typedarray.min.js","anova_files/webcomponents-2.0.0/webcomponents.js","featured.png"]}
+  </script>
+  <!--radix_placeholder_navigation_in_header-->
+<meta name="distill:offset" content="../.."/>
+
+<script type="application/javascript">
+
+  window.headroom_prevent_pin = false;
+
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+
+    // initialize headroom for banner
+    var header = $('header').get(0);
+    var headerHeight = header.offsetHeight;
+    var headroom = new Headroom(header, {
+      tolerance: 5,
+      onPin : function() {
+        if (window.headroom_prevent_pin) {
+          window.headroom_prevent_pin = false;
+          headroom.unpin();
+        }
+      }
+    });
+    headroom.init();
+    if(window.location.hash)
+      headroom.unpin();
+    $(header).addClass('headroom--transition');
+
+    // offset scroll location for banner on hash change
+    // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
+    window.addEventListener("hashchange", function(event) {
+      window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
+    });
+
+    // responsive menu
+    $('.distill-site-header').each(function(i, val) {
+      var topnav = $(this);
+      var toggle = topnav.find('.nav-toggle');
+      toggle.on('click', function() {
+        topnav.toggleClass('responsive');
+      });
+    });
+
+    // nav dropdowns
+    $('.nav-dropbtn').click(function(e) {
+      $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
+      $(this).parent().siblings('.nav-dropdown')
+         .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $("body").click(function(e){
+      $('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $(".nav-dropdown").click(function(e){
+      e.stopPropagation();
+    });
+  });
+</script>
+
+<style type="text/css">
+
+/* Theme (user-documented overrideables for nav appearance) */
+
+.distill-site-nav {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: #0F2E3D;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.distill-site-nav a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.distill-site-nav a:hover {
+  color: white;
+}
+
+@media print {
+  .distill-site-nav {
+    display: none;
+  }
+}
+
+.distill-site-header {
+
+}
+
+.distill-site-footer {
+
+}
+
+
+/* Site Header */
+
+.distill-site-header {
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+.distill-site-header .nav-left {
+  display: inline-block;
+  margin-left: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .distill-site-header .nav-left {
+    margin-left: 0;
+  }
+}
+
+
+.distill-site-header .nav-right {
+  float: right;
+  margin-right: 8px;
+}
+
+.distill-site-header a,
+.distill-site-header .title {
+  display: inline-block;
+  text-align: center;
+  padding: 14px 10px 14px 10px;
+}
+
+.distill-site-header .title {
+  font-size: 18px;
+  min-width: 150px;
+}
+
+.distill-site-header .logo {
+  padding: 0;
+}
+
+.distill-site-header .logo img {
+  display: none;
+  max-height: 20px;
+  width: auto;
+  margin-bottom: -4px;
+}
+
+.distill-site-header .nav-image img {
+  max-height: 18px;
+  width: auto;
+  display: inline-block;
+  margin-bottom: -3px;
+}
+
+
+
+@media screen and (min-width: 1000px) {
+  .distill-site-header .logo img {
+    display: inline-block;
+  }
+  .distill-site-header .nav-left {
+    margin-left: 20px;
+  }
+  .distill-site-header .nav-right {
+    margin-right: 20px;
+  }
+  .distill-site-header .title {
+    padding-left: 12px;
+  }
+}
+
+
+.distill-site-header .nav-toggle {
+  display: none;
+}
+
+.nav-dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.nav-dropdown .nav-dropbtn {
+  border: none;
+  outline: none;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 16px 10px;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+  margin-top: 1px;
+  z-index: 2;
+}
+
+.nav-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 200px;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 4px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+  z-index: 1;
+  margin-top: 2px;
+  white-space: nowrap;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.nav-dropdown-content hr {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav-dropdown-active {
+  display: block;
+}
+
+.nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
+  color: black;
+  padding: 6px 24px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.nav-dropdown-content .nav-dropdown-header {
+  display: block;
+  padding: 5px 24px;
+  padding-bottom: 0;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #999999;
+  white-space: nowrap;
+}
+
+.nav-dropdown:hover .nav-dropbtn {
+  color: white;
+}
+
+.nav-dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.nav-right .nav-dropdown-content {
+  margin-left: -45%;
+  right: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
+  .distill-site-header a.nav-toggle {
+    float: right;
+    display: block;
+  }
+  .distill-site-header .title {
+    margin-left: 0;
+  }
+  .distill-site-header .nav-right {
+    margin-right: 0;
+  }
+  .distill-site-header {
+    overflow: hidden;
+  }
+  .nav-right .nav-dropdown-content {
+    margin-left: 0;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .distill-site-header.responsive {position: relative; min-height: 500px; }
+  .distill-site-header.responsive a.nav-toggle {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .distill-site-header.responsive a,
+  .distill-site-header.responsive .nav-dropdown {
+    display: block;
+    text-align: left;
+  }
+  .distill-site-header.responsive .nav-left,
+  .distill-site-header.responsive .nav-right {
+    width: 100%;
+  }
+  .distill-site-header.responsive .nav-dropdown {float: none;}
+  .distill-site-header.responsive .nav-dropdown-content {position: relative;}
+  .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/* Site Footer */
+
+.distill-site-footer {
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  z-index: 3;
+  margin-top: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+/* Headroom */
+
+d-title {
+  padding-top: 6rem;
+}
+
+@media print {
+  d-title {
+    padding-top: 4rem;
+  }
+}
+
+.headroom {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.headroom--transition {
+  transition: all .4s ease-in-out;
+}
+
+.headroom--unpinned {
+  top: -100px;
+}
+
+.headroom--pinned {
+  top: 0;
+}
+
+/* adjust viewport for navbar height */
+/* helps vertically center bootstrap (non-distill) content */
+.min-vh-100 {
+  min-height: calc(100vh - 100px) !important;
+}
+
+</style>
+
+<script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
+<link href="../../site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
+<link href="../../site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+<script src="../../site_libs/headroom-0.9.4/headroom.min.js"></script>
+<script src="../../site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
+<script src="../../site_libs/fuse-6.4.1/fuse.min.js"></script>
+
+<script type="application/javascript">
+
+function getMeta(metaName) {
+  var metas = document.getElementsByTagName('meta');
+  for (let i = 0; i < metas.length; i++) {
+    if (metas[i].getAttribute('name') === metaName) {
+      return metas[i].getAttribute('content');
+    }
+  }
+  return '';
+}
+
+function offsetURL(url) {
+  var offset = getMeta('distill:offset');
+  return offset ? offset + '/' + url : url;
+}
+
+function createFuseIndex() {
+
+  // create fuse index
+  var options = {
+    keys: [
+      { name: 'title', weight: 20 },
+      { name: 'categories', weight: 15 },
+      { name: 'description', weight: 10 },
+      { name: 'contents', weight: 5 },
+    ],
+    ignoreLocation: true,
+    threshold: 0
+  };
+  var fuse = new window.Fuse([], options);
+
+  // fetch the main search.json
+  return fetch(offsetURL('search.json'))
+    .then(function(response) {
+      if (response.status == 200) {
+        return response.json().then(function(json) {
+          // index main articles
+          json.articles.forEach(function(article) {
+            fuse.add(article);
+          });
+          // download collections and index their articles
+          return Promise.all(json.collections.map(function(collection) {
+            return fetch(offsetURL(collection)).then(function(response) {
+              if (response.status === 200) {
+                return response.json().then(function(articles) {
+                  articles.forEach(function(article) {
+                    fuse.add(article);
+                  });
+                })
+              } else {
+                return Promise.reject(
+                  new Error('Unexpected status from search index request: ' +
+                            response.status)
+                );
+              }
+            });
+          })).then(function() {
+            return fuse;
+          });
+        });
+
+      } else {
+        return Promise.reject(
+          new Error('Unexpected status from search index request: ' +
+                      response.status)
+        );
+      }
+    });
+}
+
+window.document.addEventListener("DOMContentLoaded", function (event) {
+
+  // get search element (bail if we don't have one)
+  var searchEl = window.document.getElementById('distill-search');
+  if (!searchEl)
+    return;
+
+  createFuseIndex()
+    .then(function(fuse) {
+
+      // make search box visible
+      searchEl.classList.remove('hidden');
+
+      // initialize autocomplete
+      var options = {
+        autoselect: true,
+        hint: false,
+        minLength: 2,
+      };
+      window.autocomplete(searchEl, options, [{
+        source: function(query, callback) {
+          const searchOptions = {
+            isCaseSensitive: false,
+            shouldSort: true,
+            minMatchCharLength: 2,
+            limit: 10,
+          };
+          var results = fuse.search(query, searchOptions);
+          callback(results
+            .map(function(result) { return result.item; })
+          );
+        },
+        templates: {
+          suggestion: function(suggestion) {
+            var img = suggestion.preview && Object.keys(suggestion.preview).length > 0
+              ? `<img src="${offsetURL(suggestion.preview)}"</img>`
+              : '';
+            var html = `
+              <div class="search-item">
+                <h3>${suggestion.title}</h3>
+                <div class="search-item-description">
+                  ${suggestion.description || ''}
+                </div>
+                <div class="search-item-preview">
+                  ${img}
+                </div>
+              </div>
+            `;
+            return html;
+          }
+        }
+      }]).on('autocomplete:selected', function(event, suggestion) {
+        window.location.href = offsetURL(suggestion.path);
+      });
+      // remove inline display style on autocompleter (we want to
+      // manage responsive display via css)
+      $('.algolia-autocomplete').css("display", "");
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+
+});
+
+</script>
+
+<style type="text/css">
+
+.nav-search {
+  font-size: x-small;
+}
+
+/* Algolioa Autocomplete */
+
+.algolia-autocomplete {
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: sub;
+  background-color: white;
+  color: black;
+  padding: 6px;
+  padding-top: 8px;
+  padding-bottom: 0;
+  border-radius: 6px;
+  border: 1px #0F2E3D solid;
+  width: 180px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .distill-site-nav .algolia-autocomplete {
+    display: none;
+    visibility: hidden;
+  }
+  .distill-site-nav.responsive .algolia-autocomplete {
+    display: inline-block;
+    visibility: visible;
+  }
+  .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
+    margin-left: 0;
+    width: 400px;
+    max-height: 400px;
+  }
+}
+
+.algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
+  width: 90%;
+  outline: none;
+  border: none;
+}
+
+.algolia-autocomplete .aa-hint {
+  color: #999;
+}
+.algolia-autocomplete .aa-dropdown-menu {
+  width: 550px;
+  max-height: 70vh;
+  overflow-x: visible;
+  overflow-y: scroll;
+  padding: 5px;
+  margin-top: 3px;
+  margin-left: -150px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #999;
+  border-top: none;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
+  cursor: pointer;
+  padding: 5px 4px;
+  border-bottom: 1px solid #eee;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
+  border-bottom: none;
+  margin-bottom: 2px;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
+  overflow: hidden;
+  font-size: 0.8em;
+  line-height: 1.4em;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
+  font-size: 1rem;
+  margin-block-start: 0;
+  margin-block-end: 5px;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
+  display: inline-block;
+  overflow: hidden;
+  height: 2.8em;
+  width: 80%;
+  margin-right: 4%;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
+  display: inline-block;
+  width: 15%;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
+  height: 3em;
+  width: auto;
+  display: none;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
+  display: initial;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
+  background-color: #eee;
+}
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
+  font-weight: bold;
+  font-style: normal;
+}
+
+</style>
+
+
+<!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+
+<style type="text/css">
+
+body {
+  background-color: white;
+}
+
+.pandoc-table {
+  width: 100%;
+}
+
+.pandoc-table>caption {
+  margin-bottom: 10px;
+}
+
+.pandoc-table th:not([align]) {
+  text-align: left;
+}
+
+.pagedtable-footer {
+  font-size: 15px;
+}
+
+d-byline .byline {
+  grid-template-columns: 2fr 2fr;
+}
+
+d-byline .byline h3 {
+  margin-block-start: 1.5em;
+}
+
+d-byline .byline .authors-affiliations h3 {
+  margin-block-start: 0.5em;
+}
+
+.authors-affiliations .orcid-id {
+  width: 16px;
+  height:16px;
+  margin-left: 4px;
+  margin-right: 4px;
+  vertical-align: middle;
+  padding-bottom: 2px;
+}
+
+d-title .dt-tags {
+  margin-top: 1em;
+  grid-column: text;
+}
+
+.dt-tags .dt-tag {
+  text-decoration: none;
+  display: inline-block;
+  color: rgba(0,0,0,0.6);
+  padding: 0em 0.4em;
+  margin-right: 0.5em;
+  margin-bottom: 0.4em;
+  font-size: 70%;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+d-article table.gt_table td,
+d-article table.gt_table th {
+  border-bottom: none;
+}
+
+.html-widget {
+  margin-bottom: 2.0em;
+}
+
+.l-screen-inset {
+  padding-right: 16px;
+}
+
+.l-screen .caption {
+  margin-left: 10px;
+}
+
+.shaded {
+  background: rgb(247, 247, 247);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.shaded .html-widget {
+  margin-bottom: 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.shaded .shaded-content {
+  background: white;
+}
+
+.text-output {
+  margin-top: 0;
+  line-height: 1.5em;
+}
+
+.hidden {
+  display: none !important;
+}
+
+d-article {
+  padding-top: 2.5rem;
+  padding-bottom: 30px;
+}
+
+d-appendix {
+  padding-top: 30px;
+}
+
+d-article>p>img {
+  width: 100%;
+}
+
+d-article h2 {
+  margin: 1rem 0 1.5rem 0;
+}
+
+d-article h3 {
+  margin-top: 1.5rem;
+}
+
+d-article iframe {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 2.0em;
+  width: 100%;
+}
+
+/* Tweak code blocks */
+
+d-article div.sourceCode code,
+d-article pre code {
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+d-article pre,
+d-article div.sourceCode,
+d-article div.sourceCode pre {
+  overflow: auto;
+}
+
+d-article div.sourceCode {
+  background-color: white;
+}
+
+d-article div.sourceCode pre {
+  padding-left: 10px;
+  font-size: 12px;
+  border-left: 2px solid rgba(0,0,0,0.1);
+}
+
+d-article pre {
+  font-size: 12px;
+  color: black;
+  background: none;
+  margin-top: 0;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+d-article pre a {
+  border-bottom: none;
+}
+
+d-article pre a:hover {
+  border-bottom: none;
+  text-decoration: underline;
+}
+
+d-article details {
+  grid-column: text;
+  margin-bottom: 0.8em;
+}
+
+@media(min-width: 768px) {
+
+d-article pre,
+d-article div.sourceCode,
+d-article div.sourceCode pre {
+  overflow: visible !important;
+}
+
+d-article div.sourceCode pre {
+  padding-left: 18px;
+  font-size: 14px;
+}
+
+d-article pre {
+  font-size: 14px;
+}
+
+}
+
+figure img.external {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+/* CSS for d-contents */
+
+.d-contents {
+  grid-column: text;
+  color: rgba(0,0,0,0.8);
+  font-size: 0.9em;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  padding-bottom: 0.5em;
+  margin-bottom: 1em;
+  padding-left: 0.25em;
+  justify-self: start;
+}
+
+@media(min-width: 1000px) {
+  .d-contents.d-contents-float {
+    height: 0;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    justify-self: center;
+    padding-right: 3em;
+    padding-left: 2em;
+  }
+}
+
+.d-contents nav h3 {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+.d-contents li {
+  list-style-type: none
+}
+
+.d-contents nav > ul {
+  padding-left: 0;
+}
+
+.d-contents ul {
+  padding-left: 1em
+}
+
+.d-contents nav ul li {
+  margin-top: 0.6em;
+  margin-bottom: 0.2em;
+}
+
+.d-contents nav a {
+  font-size: 13px;
+  border-bottom: none;
+  text-decoration: none
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.d-contents nav a:hover {
+  text-decoration: underline solid rgba(0, 0, 0, 0.6)
+}
+
+.d-contents nav > ul > li > a {
+  font-weight: 600;
+}
+
+.d-contents nav > ul > li > ul {
+  font-weight: inherit;
+}
+
+.d-contents nav > ul > li > ul > li {
+  margin-top: 0.2em;
+}
+
+
+.d-contents nav ul {
+  margin-top: 0;
+  margin-bottom: 0.25em;
+}
+
+.d-article-with-toc h2:nth-child(2) {
+  margin-top: 0;
+}
+
+
+/* Figure */
+
+.figure {
+  position: relative;
+  margin-bottom: 2.5em;
+  margin-top: 1.5em;
+}
+
+.figure img {
+  width: 100%;
+}
+
+.figure .caption {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  line-height: 1.5em;
+}
+
+.figure img.external {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+.figure .caption a {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.figure .caption b,
+.figure .caption strong, {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 1.0);
+}
+
+/* Citations */
+
+d-article .citation {
+  color: inherit;
+  cursor: inherit;
+}
+
+div.hanging-indent{
+  margin-left: 1em; text-indent: -1em;
+}
+
+/* Citation hover box */
+
+.tippy-box[data-theme~=light-border] {
+  background-color: rgba(250, 250, 250, 0.95);
+}
+
+.tippy-content > p {
+  margin-bottom: 0;
+  padding: 2px;
+}
+
+
+/* Tweak 1000px media break to show more text */
+
+@media(min-width: 1000px) {
+  .base-grid,
+  distill-header,
+  d-title,
+  d-abstract,
+  d-article,
+  d-appendix,
+  distill-appendix,
+  d-byline,
+  d-footnote-list,
+  d-citation-list,
+  distill-footer {
+    grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+    grid-column-gap: 16px;
+  }
+
+  .grid {
+    grid-column-gap: 16px;
+  }
+
+  d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+  }
+  figure .caption, .figure .caption, figure figcaption {
+    font-size: 13px;
+  }
+}
+
+@media(min-width: 1180px) {
+  .base-grid,
+  distill-header,
+  d-title,
+  d-abstract,
+  d-article,
+  d-appendix,
+  distill-appendix,
+  d-byline,
+  d-footnote-list,
+  d-citation-list,
+  distill-footer {
+    grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+    grid-column-gap: 32px;
+  }
+
+  .grid {
+    grid-column-gap: 32px;
+  }
+}
+
+
+/* Get the citation styles for the appendix (not auto-injected on render since
+   we do our own rendering of the citation appendix) */
+
+d-appendix .citation-appendix,
+.d-appendix .citation-appendix {
+  font-size: 11px;
+  line-height: 15px;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  padding-left: 18px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.02);
+  padding: 10px 18px;
+  border-radius: 3px;
+  color: rgba(150, 150, 150, 1);
+  overflow: hidden;
+  margin-top: -12px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Include appendix styles here so they can be overridden */
+
+d-appendix {
+  contain: layout style;
+  font-size: 0.8em;
+  line-height: 1.7em;
+  margin-top: 60px;
+  margin-bottom: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0,0,0,0.5);
+  padding-top: 60px;
+  padding-bottom: 48px;
+}
+
+d-appendix h3 {
+  grid-column: page-start / text-start;
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 1em;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.65);
+}
+
+d-appendix h3 + * {
+  margin-top: 1em;
+}
+
+d-appendix ol {
+  padding: 0 0 0 15px;
+}
+
+@media (min-width: 768px) {
+  d-appendix ol {
+    padding: 0 0 0 30px;
+    margin-left: -30px;
+  }
+}
+
+d-appendix li {
+  margin-bottom: 1em;
+}
+
+d-appendix a {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+d-appendix > * {
+  grid-column: text;
+}
+
+d-appendix > d-footnote-list,
+d-appendix > d-citation-list,
+d-appendix > distill-appendix {
+  grid-column: screen;
+}
+
+/* Include footnote styles here so they can be overridden */
+
+d-footnote-list {
+  contain: layout style;
+}
+
+d-footnote-list > * {
+  grid-column: text;
+}
+
+d-footnote-list a.footnote-backlink {
+  color: rgba(0,0,0,0.3);
+  padding-left: 0.5em;
+}
+
+
+
+/* Anchor.js */
+
+.anchorjs-link {
+  /*transition: all .25s linear; */
+  text-decoration: none;
+  border-bottom: none;
+}
+*:hover > .anchorjs-link {
+  margin-left: -1.125em !important;
+  text-decoration: none;
+  border-bottom: none;
+}
+
+/* Social footer */
+
+.social_footer {
+  margin-top: 30px;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.67);
+}
+
+.disqus-comments {
+  margin-right: 30px;
+}
+
+.disqus-comment-count {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+#disqus_thread {
+  margin-top: 30px;
+}
+
+.article-sharing a {
+  border-bottom: none;
+  margin-right: 8px;
+}
+
+.article-sharing a:hover {
+  border-bottom: none;
+}
+
+.sidebar-section.subscribe {
+  font-size: 12px;
+  line-height: 1.6em;
+}
+
+.subscribe p {
+  margin-bottom: 0.5em;
+}
+
+
+.article-footer .subscribe {
+  font-size: 15px;
+  margin-top: 45px;
+}
+
+
+.sidebar-section.custom {
+  font-size: 12px;
+  line-height: 1.6em;
+}
+
+.custom p {
+  margin-bottom: 0.5em;
+}
+
+/* Styles for listing layout (hide title) */
+.layout-listing d-title, .layout-listing .d-title {
+  display: none;
+}
+
+/* Styles for posts lists (not auto-injected) */
+
+
+.posts-with-sidebar {
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
+.posts-list .description h2,
+.posts-list .description p {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+.posts-list .description h2 {
+  font-weight: 700;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.posts-list h2.post-tag {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding-bottom: 12px;
+}
+.posts-list {
+  margin-top: 60px;
+  margin-bottom: 24px;
+}
+
+.posts-list .post-preview {
+  text-decoration: none;
+  overflow: hidden;
+  display: block;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 24px 0;
+}
+
+.post-preview-last {
+  border-bottom: none !important;
+}
+
+.posts-list .posts-list-caption {
+  grid-column: screen;
+  font-weight: 400;
+}
+
+.posts-list .post-preview h2 {
+  margin: 0 0 6px 0;
+  line-height: 1.2em;
+  font-style: normal;
+  font-size: 24px;
+}
+
+.posts-list .post-preview p {
+  margin: 0 0 12px 0;
+  line-height: 1.4em;
+  font-size: 16px;
+}
+
+.posts-list .post-preview .thumbnail {
+  box-sizing: border-box;
+  margin-bottom: 24px;
+  position: relative;
+  max-width: 500px;
+}
+.posts-list .post-preview img {
+  width: 100%;
+  display: block;
+}
+
+.posts-list .metadata {
+  font-size: 12px;
+  line-height: 1.4em;
+  margin-bottom: 18px;
+}
+
+.posts-list .metadata > * {
+  display: inline-block;
+}
+
+.posts-list .metadata .publishedDate {
+  margin-right: 2em;
+}
+
+.posts-list .metadata .dt-authors {
+  display: block;
+  margin-top: 0.3em;
+  margin-right: 2em;
+}
+
+.posts-list .dt-tags {
+  display: block;
+  line-height: 1em;
+}
+
+.posts-list .dt-tags .dt-tag {
+  display: inline-block;
+  color: rgba(0,0,0,0.6);
+  padding: 0.3em 0.4em;
+  margin-right: 0.2em;
+  margin-bottom: 0.4em;
+  font-size: 60%;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.posts-list img {
+  opacity: 1;
+}
+
+.posts-list img[data-src] {
+  opacity: 0;
+}
+
+.posts-more {
+  clear: both;
+}
+
+
+.posts-sidebar {
+  font-size: 16px;
+}
+
+.posts-sidebar h3 {
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.sidebar-section {
+  margin-bottom: 30px;
+}
+
+.categories ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.categories li {
+  color: rgba(0, 0, 0, 0.8);
+  margin-bottom: 0;
+}
+
+.categories li>a {
+  border-bottom: none;
+}
+
+.categories li>a:hover {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.categories .active {
+  font-weight: 600;
+}
+
+.categories .category-count {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+
+@media(min-width: 768px) {
+  .posts-list .post-preview h2 {
+    font-size: 26px;
+  }
+  .posts-list .post-preview .thumbnail {
+    float: right;
+    width: 30%;
+    margin-bottom: 0;
+  }
+  .posts-list .post-preview .description {
+    float: left;
+    width: 45%;
+  }
+  .posts-list .post-preview .metadata {
+    float: left;
+    width: 20%;
+    margin-top: 8px;
+  }
+  .posts-list .post-preview p {
+    margin: 0 0 12px 0;
+    line-height: 1.5em;
+    font-size: 16px;
+  }
+  .posts-with-sidebar .posts-list {
+    float: left;
+    width: 75%;
+  }
+  .posts-with-sidebar .posts-sidebar {
+    float: right;
+    width: 20%;
+    margin-top: 60px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+}
+
+
+/* Improve display for browsers without grid (IE/Edge <= 15) */
+
+.downlevel {
+  line-height: 1.6em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+}
+
+.downlevel .d-title {
+  padding-top: 6rem;
+  padding-bottom: 1.5rem;
+}
+
+.downlevel .d-title h1 {
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.1em;
+  margin: 0 0 0.5rem;
+}
+
+.downlevel .d-title p {
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1.55em;
+  margin-top: 0;
+}
+
+.downlevel .d-byline {
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+  font-size: 0.8rem;
+  line-height: 1.8em;
+}
+
+.downlevel .section-separator {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.downlevel .d-article {
+  font-size: 1.06rem;
+  line-height: 1.7em;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+
+.downlevel .d-appendix {
+  padding-left: 0;
+  padding-right: 0;
+  max-width: none;
+  font-size: 0.8em;
+  line-height: 1.7em;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.5);
+  padding-top: 40px;
+  padding-bottom: 48px;
+}
+
+.downlevel .footnotes ol {
+  padding-left: 13px;
+}
+
+.downlevel .base-grid,
+.downlevel .distill-header,
+.downlevel .d-title,
+.downlevel .d-abstract,
+.downlevel .d-article,
+.downlevel .d-appendix,
+.downlevel .distill-appendix,
+.downlevel .d-byline,
+.downlevel .d-footnote-list,
+.downlevel .d-citation-list,
+.downlevel .distill-footer,
+.downlevel .appendix-bottom,
+.downlevel .posts-container {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+@media(min-width: 768px) {
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+  padding-left: 150px;
+  padding-right: 150px;
+  max-width: 900px;
+}
+}
+
+.downlevel pre code {
+  display: block;
+  border-left: 2px solid rgba(0, 0, 0, .1);
+  padding: 0 0 0 20px;
+  font-size: 14px;
+}
+
+.downlevel code, .downlevel pre {
+  color: black;
+  background: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+.downlevel .posts-list .post-preview {
+  color: inherit;
+}
+
+
+
+</style>
+
+<script type="application/javascript">
+
+function is_downlevel_browser() {
+  if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                 window.navigator.userAgent)) {
+    return true;
+  } else {
+    return window.load_distill_framework === undefined;
+  }
+}
+
+// show body when load is complete
+function on_load_complete() {
+
+  // add anchors
+  if (window.anchors) {
+    window.anchors.options.placement = 'left';
+    window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
+  }
+
+
+  // set body to visible
+  document.body.style.visibility = 'visible';
+
+  // force redraw for leaflet widgets
+  if (window.HTMLWidgets) {
+    var maps = window.HTMLWidgets.findAll(".leaflet");
+    $.each(maps, function(i, el) {
+      var map = this.getMap();
+      map.invalidateSize();
+      map.eachLayer(function(layer) {
+        if (layer instanceof L.TileLayer)
+          layer.redraw();
+      });
+    });
+  }
+
+  // trigger 'shown' so htmlwidgets resize
+  $('d-article').trigger('shown');
+}
+
+function init_distill() {
+
+  init_common();
+
+  // create front matter
+  var front_matter = $('<d-front-matter></d-front-matter>');
+  $('#distill-front-matter').wrap(front_matter);
+
+  // create d-title
+  $('.d-title').changeElementType('d-title');
+
+  // create d-byline
+  var byline = $('<d-byline></d-byline>');
+  $('.d-byline').replaceWith(byline);
+
+  // create d-article
+  var article = $('<d-article></d-article>');
+  $('.d-article').wrap(article).children().unwrap();
+
+  // move posts container into article
+  $('.posts-container').appendTo($('d-article'));
+
+  // create d-appendix
+  $('.d-appendix').changeElementType('d-appendix');
+
+  // flag indicating that we have appendix items
+  var appendix = $('.appendix-bottom').children('h3').length > 0;
+
+  // replace footnotes with <d-footnote>
+  $('.footnote-ref').each(function(i, val) {
+    appendix = true;
+    var href = $(this).attr('href');
+    var id = href.replace('#', '');
+    var fn = $('#' + id);
+    var fn_p = $('#' + id + '>p');
+    fn_p.find('.footnote-back').remove();
+    var text = fn_p.html();
+    var dtfn = $('<d-footnote></d-footnote>');
+    dtfn.html(text);
+    $(this).replaceWith(dtfn);
+  });
+  // remove footnotes
+  $('.footnotes').remove();
+
+  // move refs into #references-listing
+  $('#references-listing').replaceWith($('#refs'));
+
+  $('h1.appendix, h2.appendix').each(function(i, val) {
+    $(this).changeElementType('h3');
+  });
+  $('h3.appendix').each(function(i, val) {
+    var id = $(this).attr('id');
+    $('.d-contents a[href="#' + id + '"]').parent().remove();
+    appendix = true;
+    $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+  });
+
+  // show d-appendix if we have appendix content
+  $("d-appendix").css('display', appendix ? 'grid' : 'none');
+
+  // localize layout chunks to just output
+  $('.layout-chunk').each(function(i, val) {
+
+    // capture layout
+    var layout = $(this).attr('data-layout');
+
+    // apply layout to markdown level block elements
+    var elements = $(this).children().not('details, div.sourceCode, pre, script');
+    elements.each(function(i, el) {
+      var layout_div = $('<div class="' + layout + '"></div>');
+      if (layout_div.hasClass('shaded')) {
+        var shaded_content = $('<div class="shaded-content"></div>');
+        $(this).wrap(shaded_content);
+        $(this).parent().wrap(layout_div);
+      } else {
+        $(this).wrap(layout_div);
+      }
+    });
+
+
+    // unwrap the layout-chunk div
+    $(this).children().unwrap();
+  });
+
+  // remove code block used to force  highlighting css
+  $('.distill-force-highlighting-css').parent().remove();
+
+  // remove empty line numbers inserted by pandoc when using a
+  // custom syntax highlighting theme
+  $('code.sourceCode a:empty').remove();
+
+  // load distill framework
+  load_distill_framework();
+
+  // wait for window.distillRunlevel == 4 to do post processing
+  function distill_post_process() {
+
+    if (!window.distillRunlevel || window.distillRunlevel < 4)
+      return;
+
+    // hide author/affiliations entirely if we have no authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+    if (!have_authors)
+      $('d-byline').addClass('hidden');
+
+    // article with toc class
+    $('.d-contents').parent().addClass('d-article-with-toc');
+
+    // strip links that point to #
+    $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+
+    // add orcid ids
+    $('.authors-affiliations').find('.author').each(function(i, el) {
+      var orcid_id = front_matter.authors[i].orcidID;
+      if (orcid_id) {
+        var a = $('<a></a>');
+        a.attr('href', 'https://orcid.org/' + orcid_id);
+        var img = $('<img></img>');
+        img.addClass('orcid-id');
+        img.attr('alt', 'ORCID ID');
+        img.attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==');
+        a.append(img);
+        $(this).append(a);
+      }
+    });
+
+    // hide elements of author/affiliations grid that have no value
+    function hide_byline_column(caption) {
+      $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+    }
+
+    // affiliations
+    var have_affiliations = false;
+    for (var i = 0; i<front_matter.authors.length; ++i) {
+      var author = front_matter.authors[i];
+      if (author.affiliation !== "&nbsp;") {
+        have_affiliations = true;
+        break;
+      }
+    }
+    if (!have_affiliations)
+      $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+
+    // published date
+    if (!front_matter.publishedDate)
+      hide_byline_column("Published");
+
+    // document object identifier
+    var doi = $('d-byline').find('h3:contains("DOI")');
+    var doi_p = doi.next().empty();
+    if (!front_matter.doi) {
+      // if we have a citation and valid citationText then link to that
+      if ($('#citation').length > 0 && front_matter.citationText) {
+        doi.html('Citation');
+        $('<a href="#citation"></a>')
+          .text(front_matter.citationText)
+          .appendTo(doi_p);
+      } else {
+        hide_byline_column("DOI");
+      }
+    } else {
+      $('<a></a>')
+         .attr('href', "https://doi.org/" + front_matter.doi)
+         .html(front_matter.doi)
+         .appendTo(doi_p);
+    }
+
+     // change plural form of authors/affiliations
+    if (front_matter.authors.length === 1) {
+      var grid = $('.authors-affiliations');
+      grid.children('h3:contains("Authors")').text('Author');
+      grid.children('h3:contains("Affiliations")').text('Affiliation');
+    }
+
+    // remove d-appendix and d-footnote-list local styles
+    $('d-appendix > style:first-child').remove();
+    $('d-footnote-list > style:first-child').remove();
+
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+
+    // hoverable references
+    $('span.citation[data-cites]').each(function() {
+      var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+      window.tippy(this, {
+        allowHTML: true,
+        content: refHtml,
+        maxWidth: 500,
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'light-border',
+        placement: 'bottom-start'
+      });
+    });
+
+    // clear polling timer
+    clearInterval(tid);
+
+    // show body now that everything is ready
+    on_load_complete();
+  }
+
+  var tid = setInterval(distill_post_process, 50);
+  distill_post_process();
+
+}
+
+function init_downlevel() {
+
+  init_common();
+
+   // insert hr after d-title
+  $('.d-title').after($('<hr class="section-separator"/>'));
+
+  // check if we have authors
+  var front_matter = JSON.parse($("#distill-front-matter").html());
+  var have_authors = front_matter.authors && front_matter.authors.length > 0;
+
+  // manage byline/border
+  if (!have_authors)
+    $('.d-byline').remove();
+  $('.d-byline').after($('<hr class="section-separator"/>'));
+  $('.d-byline a').remove();
+
+  // remove toc
+  $('.d-contents').remove();
+
+  // move appendix elements
+  $('h1.appendix, h2.appendix').each(function(i, val) {
+    $(this).changeElementType('h3');
+  });
+  $('h3.appendix').each(function(i, val) {
+    $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+  });
+
+
+  // inject headers into references and footnotes
+  var refs_header = $('<h3></h3>');
+  refs_header.text('References');
+  $('#refs').prepend(refs_header);
+
+  var footnotes_header = $('<h3></h3');
+  footnotes_header.text('Footnotes');
+  $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+
+  // move appendix-bottom entries to the bottom
+  $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+  $('.appendix-bottom').remove();
+
+  // remove appendix if it's empty
+  if ($('.d-appendix').children().length === 0)
+    $('.d-appendix').remove();
+
+  // prepend separator above appendix
+  $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+
+  // trim code
+  $('pre>code').each(function(i, val) {
+    $(this).html($.trim($(this).html()));
+  });
+
+  // move posts-container right before article
+  $('.posts-container').insertBefore($('.d-article'));
+
+  $('body').addClass('downlevel');
+
+  on_load_complete();
+}
+
+
+function init_common() {
+
+  // jquery plugin to change element types
+  (function($) {
+    $.fn.changeElementType = function(newType) {
+      var attrs = {};
+
+      $.each(this[0].attributes, function(idx, attr) {
+        attrs[attr.nodeName] = attr.nodeValue;
+      });
+
+      this.replaceWith(function() {
+        return $("<" + newType + "/>", attrs).append($(this).contents());
+      });
+    };
+  })(jQuery);
+
+  // prevent underline for linked images
+  $('a > img').parent().css({'border-bottom' : 'none'});
+
+  // mark non-body figures created by knitr chunks as 100% width
+  $('.layout-chunk').each(function(i, val) {
+    var figures = $(this).find('img, .html-widget');
+    if ($(this).attr('data-layout') !== "l-body") {
+      figures.css('width', '100%');
+    } else {
+      figures.css('max-width', '100%');
+      figures.filter("[width]").each(function(i, val) {
+        var fig = $(this);
+        fig.css('width', fig.attr('width') + 'px');
+      });
+
+    }
+  });
+
+  // auto-append index.html to post-preview links in file: protocol
+  // and in rstudio ide preview
+  $('.post-preview').each(function(i, val) {
+    if (window.location.protocol === "file:")
+      $(this).attr('href', $(this).attr('href') + "index.html");
+  });
+
+  // get rid of index.html references in header
+  if (window.location.protocol !== "file:") {
+    $('.distill-site-header a[href]').each(function(i,val) {
+      $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+    });
+  }
+
+  // add class to pandoc style tables
+  $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+  $('.kable-table').children('table').addClass('pandoc-table');
+
+  // add figcaption style to table captions
+  $('caption').parent('table').addClass("figcaption");
+
+  // initialize posts list
+  if (window.init_posts_list)
+    window.init_posts_list();
+
+  // implmement disqus comment link
+  $('.disqus-comment-count').click(function() {
+    window.headroom_prevent_pin = true;
+    $('#disqus_thread').toggleClass('hidden');
+    if (!$('#disqus_thread').hasClass('hidden')) {
+      var offset = $(this).offset();
+      $(window).resize();
+      $('html, body').animate({
+        scrollTop: offset.top - 35
+      });
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (is_downlevel_browser())
+    init_downlevel();
+  else
+    window.addEventListener('WebComponentsReady', init_distill);
+});
+
+</script>
+
+<!--/radix_placeholder_distill-->
+  <script src="../../site_libs/header-attrs-2.7/header-attrs.js"></script>
+  <script src="../../site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+  <script src="../../site_libs/plotly-binding-4.9.3/plotly.js"></script>
+  <script src="../../site_libs/typedarray-0.1/typedarray.min.js"></script>
+  <script src="../../site_libs/jquery-3.5.1/jquery.min.js"></script>
+  <link href="../../site_libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+  <script src="../../site_libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+  <link href="../../site_libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+  <script src="../../site_libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+  <script src="../../site_libs/popper-2.6.0/popper.min.js"></script>
+  <link href="../../site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="../../site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="../../site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="../../site_libs/anchor-4.2.2/anchor.min.js"></script>
+  <script src="../../site_libs/bowser-1.9.3/bowser.min.js"></script>
+  <script src="../../site_libs/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="../../site_libs/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+<!--/radix_placeholder_site_in_header-->
+
+
+</head>
+
+<body>
+
+<!--radix_placeholder_front_matter-->
+
+<script id="distill-front-matter" type="text/json">
+{"title":"Análisis de Varianza y Prueba de Promedios en R","description":"La figura de prueba de promedios de TukeyHSD es una buena opción, ya que incluye p-valor del ANVA y de la comparación de medias entre tratamientos.","authors":[{"author":"Franklin Santos","authorURL":"https://franklinsantos.com","affiliation":"AgriTech Bolivia","affiliationURL":"#","orcidID":"0000-0002-7509-2910"}],"publishedDate":"2020-11-15T00:00:00.000+00:00","citationText":"Santos, 2020"}
+</script>
+
+<!--/radix_placeholder_front_matter-->
+<!--radix_placeholder_navigation_before_body-->
+<header class="header header--fixed" role="banner">
+<nav class="distill-site-nav distill-site-header">
+<div class="nav-left">
+<a class="logo" href="https://www.franklinsantos.com">
+<img src="../../fsm.png" alt="Logo"/>
+</a>
+<a href="../../index.html" class="title">Franklin Santos</a>
+<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
+</div>
+<div class="nav-right">
+<a href="../../index.html">Home</a>
+<a href="../../about.html">About</a>
+<a href="../../index.xml">
+<i class="fa fa-rss" aria-hidden="true"></i>
+</a>
+<a href="https://facebook.com/agritechbolivia">
+<i class="fa fa-facebook" aria-hidden="true"></i>
+</a>
+<a href="https://twitter.com/FranklinSantosM">
+<i class="fa fa-twitter" aria-hidden="true"></i>
+</a>
+<a href="https://github.com/FranklinSantosM">
+<i class="fa fa-github" aria-hidden="true"></i>
+</a>
+<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
+</div>
+</nav>
+</header>
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>Análisis de Varianza y Prueba de Promedios en R</h1>
+<!--radix_placeholder_categories-->
+<div class="dt-tags">
+  <a href="../../index.html#category:ANOVA" class="dt-tag">ANOVA</a>
+  <a href="../../index.html#category:Post_hoc" class="dt-tag">Post hoc</a>
+  <a href="../../index.html#category:Inferencial_Statistic" class="dt-tag">Inferencial Statistic</a>
+</div>
+<!--/radix_placeholder_categories-->
+<p><p>La figura de prueba de promedios de TukeyHSD es una buena opción, ya que incluye p-valor del ANVA y de la comparación de medias entre tratamientos.</p></p>
+</div>
+
+<div class="d-byline">
+  Franklin Santos <a href="https://franklinsantos.com" class="uri">https://franklinsantos.com</a> (AgriTech Bolivia)
+  
+<br/>11-15-2020
+</div>
+
+<div class="d-article">
+<h2 id="introducción">Introducción</h2>
+<p>El análisis de varianza es una prueba estadística para determinar si dos o más medias poblacionales son diferentes entre si. En otras palabras, se usa para comparar dos o más grupos para ver si son significativamente diferentes.</p>
+<p>En el resto del post lo comentaremos desde un punto de vista más práctico y en particular abordaremos los siguientes puntos:</p>
+<ul>
+<li>el objetivo del análisis de varianza y cuándo debe usarse</li>
+<li>cómo realizar el ANVA en R</li>
+<li>cómo interpretar los resultados del ANVA</li>
+<li>comprender la noción de prueba de promedios e interpretar los resultados</li>
+<li>cómo visualizar los resultados de ANVA y pruebas de promedio</li>
+</ul>
+<h2 id="datos">Datos</h2>
+<p>El dato que se utilizará es <code>iris</code>, que se encuentra en la base de datos de R. Estos datos como tratamientos tienen tres especies (<code>setosa</code>, <code>versicolor</code> y <code>virginica</code>) y cuatro variables (<code>Sepal.Length</code>, <code>Sepal.Width</code>, <code>Petal.Length</code> y <code>Petal.Width</code>) cuantitativas</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#paquetes R a utilizar</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>easyanova</span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://r-forge.r-project.org/projects/car/'>car</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://lattice.r-forge.r-project.org/'>lattice</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://multcomp.R-forge.R-project.org'>multcomp</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://rpkgs.datanovia.com/ggpubr/'>ggpubr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://rpkgs.datanovia.com/rstatix/'>rstatix</a></span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>La librería de <code>easyanova</code> es un paquete para realizar análisis de experimentos agrícolas y animales. Las funciones de esta librería son fáciles de usar. Realiza análisis en varios diseños, con datos balanceados y no balanceados.</p>
+<p>Salida de datos a utilizar:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#datos</span>
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 150 x 5
+   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
+ 1          5.1         3.5          1.4         0.2 setosa 
+ 2          4.9         3            1.4         0.2 setosa 
+ 3          4.7         3.2          1.3         0.2 setosa 
+ 4          4.6         3.1          1.5         0.2 setosa 
+ 5          5           3.6          1.4         0.2 setosa 
+ 6          5.4         3.9          1.7         0.4 setosa 
+ 7          4.6         3.4          1.4         0.3 setosa 
+ 8          5           3.4          1.5         0.2 setosa 
+ 9          4.4         2.9          1.4         0.2 setosa 
+10          4.9         3.1          1.5         0.1 setosa 
+# … with 140 more rows</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#inspección de datos</span>
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Species</span>, y <span class='op'>=</span> <span class='va'>Sepal.Width</span>, color <span class='op'>=</span> <span class='va'>Species</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_jitter</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"none"</span><span class='op'>)</span>
+
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://plotly-r.com'>plotly</a></span><span class='op'>)</span>
+<span class='va'>fig</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://docs.ropensci.org/plotly/reference/ggplotly.html'>ggplotly</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
+
+<span class='va'>fig</span>
+</code></pre>
+</div>
+<div id="htmlwidget-179b29ea07cf9357f710" style="width:624px;height:384px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-179b29ea07cf9357f710">{"x":{"data":[{"x":[0.777640529535711,1.20614191424102,1.13414816372097,1.09095564857125,1.37048771493137,0.931908190064132,1.37971688210964,0.767883115261793,1.37356221247464,1.30918436199427,1.0266430426389,1.0195543570444,0.987668373808265,1.34190563391894,1.0259136043489,0.642592507600784,0.72313800547272,0.956460146047175,0.98689306024462,0.632468907348812,0.899297484755516,0.726184121519327,1.32616886533797,0.817160544171929,0.841006673499942,1.20536491516978,1.37036766931415,0.825376521795988,0.848591803014278,1.02201912775636,0.790157722122967,0.971354461088777,1.1250799080357,0.626818666420877,0.780223679728806,0.654182387329638,0.861218596808612,1.15207113139331,1.13688632268459,0.625441245734692,0.74554249625653,1.09194862246513,1.06652112081647,0.800288302823901,1.08558353371918,0.668344919010997,1.25930271968246,1.2557179024443,0.928246599063277,1.21316787302494],"y":[3.50170901337638,2.98354775810614,3.22421556169167,3.07006819082424,3.56811689266935,3.86560424523428,3.39179494207725,3.40456507332623,2.90772188447416,3.06102755200118,3.70028153799474,3.42374865958467,2.96112494520843,2.96649892212823,3.99290630334988,4.43937004735693,3.87648459194228,3.50437812218443,3.8168031697534,3.81744166012853,3.37042657518759,3.72561066269875,3.60675516135991,3.29028648389503,3.40512863138691,2.96518752189353,3.41912375973538,3.49440621530637,3.42732927247882,3.17158288570121,3.10338617924601,3.39228251023218,4.1150112981908,4.1675990729034,3.07505293468013,3.22352691367269,3.49058062195778,3.62597709560767,3.03445106301457,3.38596674950793,3.53807923113927,2.31273973863572,3.18098363837227,3.4998209808208,3.81839446248487,3.02202529724687,3.77735434839502,3.1636970263347,3.69871278373525,3.30352511309087],"text":["Species: setosa<br />Sepal.Width: 3.5<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.0<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.2<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.1<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.6<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.9<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.4<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.4<br />Species: setosa","Species: setosa<br />Sepal.Width: 2.9<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.1<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.7<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.4<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.0<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.0<br />Species: setosa","Species: setosa<br />Sepal.Width: 4.0<br />Species: setosa","Species: setosa<br />Sepal.Width: 4.4<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.9<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.5<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.8<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.8<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.4<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.7<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.6<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.3<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.4<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.0<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.4<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.5<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.4<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.2<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.1<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.4<br />Species: setosa","Species: setosa<br />Sepal.Width: 4.1<br />Species: setosa","Species: setosa<br />Sepal.Width: 4.2<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.1<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.2<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.5<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.6<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.0<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.4<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.5<br />Species: setosa","Species: setosa<br />Sepal.Width: 2.3<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.2<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.5<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.8<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.0<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.8<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.2<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.7<br />Species: setosa","Species: setosa<br />Sepal.Width: 3.3<br />Species: setosa"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"setosa","legendgroup":"setosa","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1.88192864526063,2.21894835326821,1.81725524999201,2.01821605805308,1.78237409088761,2.35075340922922,1.71938470993191,1.9650271076709,1.74361601043493,2.2206513363868,1.71341678984463,1.87662484440953,2.0049346441403,2.32744434289634,1.74447690546513,2.08835738468915,1.98413985855877,2.3521527191624,1.85528076905757,2.1404302302748,2.33910116683692,2.17711785323918,2.1600897250697,1.82667600102723,1.92811422497034,1.9718694338575,2.17618363052607,2.18017188310623,1.6188618760556,1.69896076004952,2.32030580602586,2.36052462570369,1.60200159084052,1.9669837391004,2.23548760581762,2.34056501314044,1.77132593151182,2.05739429462701,1.79078744333237,1.88809672724456,1.75527351275086,2.15196358039975,1.76423519104719,1.89266820214689,1.90381966494024,2.18934530466795,2.22189292665571,2.21017093323171,1.64245438445359,1.79714556410909],"y":[3.18554594187066,3.21965003915131,3.07344224272296,2.32058827819303,2.83401517631486,2.7967186082527,3.32990760717541,2.40565790859982,2.92577909339219,2.7395958250761,1.98950148040429,2.96002031899989,2.17030265662819,2.86622568193823,2.91003072081134,3.08041724814102,3.02960637718439,2.68981643548235,2.20763857925311,2.51040271360427,3.2106544521451,2.81905850816518,2.50716527212411,2.82557834040374,2.91105990339071,2.97906388537958,2.7629112970829,3.01450126480311,2.90073614925146,2.59439382435754,2.39643513932824,2.40342303955927,2.70610372310504,2.68275056188926,3.00645201712847,3.41249740406871,3.13081881230697,2.27215245913714,2.99612287197262,2.46878457160667,2.57859245693311,3.02926684932783,2.60465688625351,2.26838650431484,2.69016850801185,3.02002379590645,2.91261622516438,2.87901089385152,2.52873443851247,2.81140949081629],"text":["Species: versicolor<br />Sepal.Width: 3.2<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.2<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.1<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.3<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.8<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.8<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.3<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.4<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.9<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.7<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.0<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.0<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.2<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.9<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.9<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.1<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.0<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.7<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.2<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.5<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.2<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.8<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.5<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.8<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.9<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.0<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.8<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.0<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.9<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.6<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.4<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.4<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.7<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.7<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.0<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.4<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.1<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.3<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.0<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.5<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.6<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.0<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.6<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.3<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.7<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 3.0<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.9<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.9<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.5<br />Species: versicolor","Species: versicolor<br />Sepal.Width: 2.8<br />Species: versicolor"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"versicolor","legendgroup":"versicolor","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2.73680393788964,3.32869765534997,3.11533326841891,2.60794715248048,3.05284463111311,2.73074953332543,3.11932567153126,3.20987364053726,2.8562920242548,2.73777774758637,3.31583513133228,3.08622309118509,3.0988567976281,3.37075693644583,2.95538740474731,2.75843807626516,3.25310055613518,3.36747228745371,3.08033422995359,3.21054039075971,3.18390248157084,2.61872531622648,2.80815144497901,2.89581924993545,2.80878450348973,2.62700659632683,3.37201340217143,2.82634423077106,2.72463825978339,2.61162238772958,2.95211426503956,2.91776697468013,2.77136020176113,3.0364843480289,2.76072459686548,2.98691415712237,3.03550778981298,3.26748693399131,2.68694431465119,2.91939916759729,3.32945713996887,3.13457126580179,2.78328992798924,2.62434947621077,3.25553038474172,2.90907525345683,2.81774402465671,2.91889317110181,3.17376871686429,2.92338436301798],"y":[3.29787336273119,2.73386696090922,3.00114287409931,2.88417381688952,3.00792852234095,2.98707547467202,2.49506788045168,2.92415682923049,2.49463644595817,3.60008052680641,3.19135230707005,2.7178095818311,2.98191102879122,2.50869183601812,2.76047558974475,3.22738498922437,3.01396964289248,3.82212835062295,2.57822027420625,2.2115132278204,3.16404158717021,2.76743402795866,2.77720152920112,2.67828659674153,3.27789730641991,3.19165820110589,2.79310903580859,3.03572468718514,2.83071814041585,3.00721119271591,2.76015721224248,3.82674165675417,2.76518767304718,2.80952575435862,2.62838606746867,2.99283941186965,3.40488186078146,3.12920513002202,3.01175968848169,3.13192838478833,3.08031917437911,3.09722172375768,2.70784049581736,3.18936891451478,3.3393070628494,2.97879927780479,2.47525968482718,2.97819240409881,3.39514876464382,2.98132692672312],"text":["Species: virginica<br />Sepal.Width: 3.3<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.7<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.9<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.5<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.9<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.5<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.6<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.2<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.7<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.5<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.8<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.2<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.8<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.6<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.2<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.2<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.8<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.8<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.7<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.3<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.2<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.8<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.8<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.8<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.8<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.8<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.8<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.6<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.4<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.1<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.1<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.1<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.1<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.7<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.2<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.3<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica","Species: virginica<br />Sepal.Width: 2.5<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.4<br />Species: virginica","Species: virginica<br />Sepal.Width: 3.0<br />Species: virginica"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"virginica","legendgroup":"virginica","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":27.8721461187215,"r":7.30593607305936,"b":41.8264840182648,"l":43.1050228310502},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,3.6],"tickmode":"array","ticktext":["setosa","versicolor","virginica"],"tickvals":[1,2,3],"categoryorder":"array","categoryarray":["setosa","versicolor","virginica"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Species","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1.86700805205666,4.56186347570457],"tickmode":"array","ticktext":["2.0","2.5","3.0","3.5","4.0","4.5"],"tickvals":[2,2.5,3,3.5,4,4.5],"categoryorder":"array","categoryarray":["2.0","2.5","3.0","3.5","4.0","4.5"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Sepal.Width","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"42b537db77a4":{"x":{},"y":{},"colour":{},"type":"scatter"}},"cur_data":"42b537db77a4","visdat":{"42b537db77a4":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<h2 id="objetivo-del-anva">Objetivo del ANVA</h2>
+<p>Como se mencionó en la introducción, el ANVA se usa para comparar grupos (en la práctica, 3 o más grupos). De manera más general, se utiliza para:</p>
+<ul>
+<li>estudiar si las mediciones son similares en diferentes modalidades (también llamadas niveles o tratamientos en el contexto de ANVA) de una variable categórica</li>
+<li>comparar el impacto de los diferentes niveles de una variable categórica sobre una variable cuantitativa</li>
+<li>explicar una variable cuantitativa basada en una variable cualitativa</li>
+</ul>
+<h2 id="supuestos-subyacentes-de-anva">Supuestos subyacentes de ANVA</h2>
+<p>Como ocurre con muchas pruebas estadísticas, hay algunas suposiciones que deben cumplirse para poder interpretar los resultados. Cuando no se cumplen uno o varios supuestos, aunque técnicamente es posible realizar estas pruebas, sería incorrecto interpretar los resultados y confiar en las conclusiones.</p>
+<h3 id="tipo-de-variable">1. Tipo de variable</h3>
+<p>Las variables dependientes <code>Sepal.Length</code>, <code>Sepal.Width</code>, <code>Petal.Length</code> y <code>Petal.Width</code> es una variable <strong>cuantitativa</strong> y la variable independiente <code>Species</code> es <strong>cualitativa</strong> (con 3 niveles correspondientes a las 3 especies). Así que tenemos una combinación de los dos tipos de variables y se cumple este supuesto.</p>
+<h3 id="independencia">2. Independencia</h3>
+<p>Se asume la independencia de las observaciones ya que los datos se han recopilado de una parte de la población seleccionada al azar y las mediciones dentro y entre las 3 muestras no están relacionadas.</p>
+<p>El supuesto de independencia se verifica con mayor frecuencia con base en el diseño del experimento y en el buen control de las condiciones experimentales, como es el caso aquí. Sin embargo, si realmente desea probarlo de manera más formal, puede probarlo mediante una prueba estadística: la prueba de Durbin-Watson (en R: <code>durbinWatsonTest(res_lm)</code> donde <code>res_lm</code> es un modelo lineal). La hipótesis nula de esta prueba especifica un coeficiente de autocorrelación = 0, mientras que la hipótesis alternativa especifica un coeficiente de autocorrelación ≠ 0.</p>
+<h3 id="normalidad">3. Normalidad</h3>
+<p>Recuerde que la <strong>normalidad</strong> de los residuos se puede probar visualmente mediante un histograma y un gráfico QQ, y/o formalmente mediante una prueba de normalidad (prueba de Shapiro-Wilk, por ejemplo).</p>
+<p>Antes de verificar el supuesto de normalidad, primero debemos calcular el ANVA. Luego guardamos los resultados en <code>res_aov</code>:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>res_aov</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>Sepal.Width</span> <span class='op'>~</span> <span class='va'>Species</span>,
+  data <span class='op'>=</span> <span class='va'>iris</span>
+<span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>Ahora podemos comprobar la normalidad visualmente:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># combine plots</span>
+
+<span class='co'># histogram</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/hist.html'>hist</a></span><span class='op'>(</span><span class='va'>res_aov</span><span class='op'>$</span><span class='va'>residuals</span><span class='op'>)</span>
+
+<span class='co'># QQ-plot</span>
+<span class='fu'><a href='https://rdrr.io/pkg/car/man/qqPlot.html'>qqPlot</a></span><span class='op'>(</span><span class='va'>res_aov</span><span class='op'>$</span><span class='va'>residuals</span>,
+  id <span class='op'>=</span> <span class='cn'>FALSE</span> <span class='co'># id = FALSE to remove point identification</span>
+<span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="anova_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
+</div>
+<p>A partir del histograma y el gráfico QQ anteriores, ya podemos ver que el supuesto de normalidad parece cumplirse. De hecho, el histograma forma aproximadamente una curva de campana, lo que indica que los residuos siguen una distribución normal. Además, los puntos en las gráficas QQ siguen aproximadamente la línea recta y la mayoría de ellos están dentro de las bandas de confianza, lo que también indica que los residuos siguen aproximadamente una distribución normal.</p>
+<p>Algunos investigadores se detienen aquí y asumen que se cumple la normalidad, mientras que otros también prueban la suposición a través de una prueba estadística formal. Es su elección probarlo <em>(i)</em> solo visualmente, <em>(ii)</em> solo a través de una prueba de normalidad, o <em>(iii)</em> tanto visualmente como a través de una prueba de normalidad. Sin embargo, tenga en cuenta los dos puntos siguientes:</p>
+<blockquote>
+<ol type="1">
+<li>ANVA es bastante robusto a pequeñas desviaciones de la normalidad. Esto significa que no es un problema (desde la perspectiva de la interpretación de los resultados de ANVA) si un pequeño número de puntos se desvía ligeramente de la normalidad,</li>
+<li>Las pruebas de normalidad son a veces bastante conservadoras, lo que significa que la hipótesis nula de normalidad puede rechazarse debido a una desviación limitada de la normalidad. Este es especialmente el caso con muestras grandes, ya que la potencia de la prueba aumenta con el tamaño de la muestra.</li>
+</ol>
+</blockquote>
+<p>En la práctica, se tiende a preferir el (i) enfoque visual solamente, pero nuevamente, esto es una cuestión de elección personal y también depende del contexto del análisis. Tambien, puede utilizar la prueba de Shapiro-Wilk o la prueba de Kolmogorov-Smirnov, entre otras.</p>
+<h3 id="igualdad-de-varianzas---homogeneidad">4. Igualdad de varianzas - homogeneidad</h3>
+<p>Suponiendo que los residuos siguen una distribución normal, ahora es el momento de comprobar si las varianzas son iguales entre especies o no. El resultado tendrá un impacto en si usamos el ANVA o la prueba de Welch.</p>
+<p>Esto se puede verificar nuevamente visualmente, a través de una gráfica de caja o gráfica de puntos, o más formalmente a través de una prueba estadística (la prueba de Levene, entre otras).</p>
+<p>Visualmente tenemos:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Boxplot</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/boxplot.html'>boxplot</a></span><span class='op'>(</span><span class='va'>Sepal.Width</span> <span class='op'>~</span> <span class='va'>Species</span>,
+  data <span class='op'>=</span> <span class='va'>iris</span>
+<span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="anova_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Dotplot</span>
+
+<span class='fu'><a href='https://rdrr.io/pkg/lattice/man/xyplot.html'>dotplot</a></span><span class='op'>(</span><span class='va'>Sepal.Width</span> <span class='op'>~</span> <span class='va'>Species</span>,
+  data <span class='op'>=</span> <span class='va'>iris</span>
+<span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="anova_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
+</div>
+<p>Tanto la gráfica de boxplot como la gráfica de puntos muestran una variación similar para las diferentes especies. En el boxplot, esto se puede ver por el hecho de que las cajas y los bigotes tienen un tamaño comparable para todas las especies. Hay un par de valores atípicos como lo muestran los puntos fuera de los bigotes, pero esto no cambia el hecho de que la dispersión es más o menos la misma entre las diferentes especies.</p>
+<p>En la gráfica de puntos, esto se puede ver por el hecho de que los puntos para las 3 especies tienen más o menos el mismo rango, un signo de la dispersión y, por lo tanto, la varianza es similar.</p>
+<p>Al igual que el supuesto de normalidad, si cree que el enfoque visual no es suficiente, puede probar formalmente la igualdad de las varianzas con una prueba de <em>Levene</em> o de <em>Bartlett</em>. Observe que la prueba de Levene es menos sensible a las desviaciones de la distribución normal que la prueba de Bartlett.</p>
+<p>Las hipótesis nula y alternativa para ambas pruebas son:</p>
+<ul>
+<li>H0: las variaciones son iguales</li>
+<li>H1: al menos una varianza es diferente</li>
+</ul>
+<p>En R, la prueba de Levene se puede realizar gracias a la función <code>leveneTest()</code> del paquete <code>{car}</code>:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Levene's test</span>
+
+<span class='fu'><a href='https://rdrr.io/pkg/car/man/leveneTest.html'>leveneTest</a></span><span class='op'>(</span><span class='va'>Sepal.Width</span> <span class='op'>~</span> <span class='va'>Species</span>,
+  data <span class='op'>=</span> <span class='va'>iris</span>
+<span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Levene&#39;s Test for Homogeneity of Variance (center = median)
+       Df F value Pr(&gt;F)
+group   2  0.5902 0.5555
+      147               </code></pre>
+</div>
+<p>Siendo el <em>p</em>-valor mayor que el nivel de significancia de 0.05, no rechazamos la hipótesis nula, por lo que no podemos rechazar la hipótesis de que las varianzas son iguales entre especies (<em>p</em>-valor = 0.556).</p>
+<p>Este resultado también está en línea con el enfoque visual, por lo que la homogeneidad de las variaciones se cumple tanto visual como formalmente.</p>
+<h2 id="análisis-de-varianza-en-r">Análisis de varianza en R</h2>
+<p>El ANVA puede ayudarnos a hacer inferencias sobre la población dada la muestra en cuestión y ayudarnos a responder la pregunta de investigación “¿Existe diferencia en ancho de sépalo para las 3 especies?”.</p>
+<p>El ANVA en R se puede realizar de varias formas, de las cuales tres se presentan a continuación:</p>
+<p>a). Con la función <code>oneway.test()</code>:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># primer metodo:</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/oneway.test.html'>oneway.test</a></span><span class='op'>(</span><span class='va'>Sepal.Width</span> <span class='op'>~</span> <span class='va'>Species</span>,
+  data <span class='op'>=</span> <span class='va'>iris</span>,
+  var.equal <span class='op'>=</span> <span class='cn'>TRUE</span> <span class='co'># asumiendo varianzas iguales</span>
+<span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>
+    One-way analysis of means
+
+data:  Sepal.Width and Species
+F = 49.16, num df = 2, denom df = 147, p-value &lt; 2.2e-16</code></pre>
+</div>
+<p>b). Con las funciones de <code>summary()</code> y <code>aov()</code>:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># 2nd method:</span>
+<span class='va'>res_aov</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>Sepal.Width</span> <span class='op'>~</span> <span class='va'>Species</span>,
+  data <span class='op'>=</span> <span class='va'>iris</span>
+<span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>res_aov</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>             Df Sum Sq Mean Sq F value Pr(&gt;F)    
+Species       2  11.35   5.672   49.16 &lt;2e-16 ***
+Residuals   147  16.96   0.115                   
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<p>Como puede ver en los dos resultados anteriores, la estadística de prueba (F = en el primer método y el valor F en el segundo) y el <em>p</em>-valor (<em>p</em>-valor en el primer método y Pr (&gt; F) en el segundo) son exactamente iguales para ambos métodos, lo que significa que en caso de variaciones iguales, los resultados y las conclusiones no cambiarán.</p>
+<p>La ventaja del primer método es que es fácil cambiar del ANVA (utilizado cuando las variaciones son iguales) a la prueba de Welch (utilizado cuando las variaciones son desiguales). Esto se puede hacer reemplazando <code>nvar.equal = TRUE</code> por <code>var.equal = FALSE</code>, como se presenta a continuación:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/stats/oneway.test.html'>oneway.test</a></span><span class='op'>(</span><span class='va'>Sepal.Width</span> <span class='op'>~</span> <span class='va'>Species</span>,
+  data <span class='op'>=</span> <span class='va'>iris</span>,
+  var.equal <span class='op'>=</span> <span class='cn'>FALSE</span> <span class='co'># asumiendo variaciones desiguales</span>
+<span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>
+    One-way analysis of means (not assuming equal variances)
+
+data:  Sepal.Width and Species
+F = 45.012, num df = 2.000, denom df = 97.402, p-value =
+1.433e-14</code></pre>
+</div>
+<p>Sin embargo, la ventaja del segundo método es que:</p>
+<ul>
+<li>Se imprime la tabla ANVA completa (con grados de libertad, cuadrados medios, etc.), lo que puede ser de interés en algunos casos (teóricos).</li>
+<li>los resultados del ANVA (<code>res_aov</code>) se pueden guardar para su uso posterior (especialmente útil para pruebas de promedio)</li>
+</ul>
+<h3 id="interpretaciones-de-los-resultados-del-anva">Interpretaciones de los resultados del ANVA</h3>
+<p>Dado que el p-valor es menor que 0.05, rechazamos la hipótesis nula, por lo que rechazamos la hipótesis de que todas las medias son iguales. Por tanto, podemos concluir que al menos una especie es diferente a las otras en términos del ancho de sépalo (<em>p</em>-valor &lt;2.2e-16).</p>
+<h3 id="que-sigue">¿Que sigue?</h3>
+<p>Si <strong>no se rechaza la hipótesis nula</strong> (<em>p</em>-valor ≥ 0,05), significa que no rechazamos la hipótesis de que todos los grupos son iguales. El ANVA más o menos se detiene aquí. Por supuesto, se pueden realizar otros tipos de análisis, pero, dados los datos disponibles, no pudimos probar que al menos un grupo fuera diferente, por lo que generalmente no avanzamos más con el ANVA.</p>
+<p>Por el contrario, <em>si y solo si</em> se <strong>rechaza la hipótesis nula</strong> (como es nuestro caso ya que el <em>p</em>-valor &lt; 0.05), probamos que al menos un grupo es diferente. Podemos decidir detenernos aquí si solo estamos interesados en probar si todas las especies son iguales en términos de ancho de sépalo.</p>
+<p>Pero la mayoría de las veces, cuando demostramos gracias a un ANVA que al menos un grupo es diferente, también nos interesa saber cuál es diferente. Para probar esto, necesitamos usar otros tipos de prueba, denominados pruebas de promedio o pruebas de comparación múltiple por pares. Esta familia de pruebas estadísticas es el tema de las siguientes secciones.</p>
+<h2 id="pruebas-de-promedio-en-r-y-su-interpretación">Pruebas de promedio en R y su interpretación</h2>
+<p>Las pruebas de promedio son una familia de pruebas estadísticas, por lo que hay varias. Las más utilizadas son las pruebas <strong>Tukey HSD</strong> y <strong>Dunnett</strong>:</p>
+<ul>
+<li>Tukey HSD se utiliza para comparar <strong>todos los grupos</strong> entre sí (por lo que todas las posibles comparaciones de 2 grupos).</li>
+<li>Dunnett se utiliza para hacer comparaciones con un <strong>grupo de referencia</strong>. Por ejemplo, considere 2 grupos de tratamiento y un grupo de control. Si solo desea comparar los 2 grupos de tratamiento con respecto al grupo de control y no desea comparar los 2 grupos de tratamiento entre sí, se prefiere la prueba de Dunnett.</li>
+</ul>
+<p>Ambas pruebas se presentan en las siguientes secciones.</p>
+<h3 id="prueba-de-tukey-hsd">Prueba de Tukey HSD</h3>
+<p>En nuestro caso, dado que no existe una especie de “referencia” y nos interesa comparar todas las especies, vamos a utilizar la prueba de Tukey HSD.</p>
+<p>En R, la prueba de Tukey HSD se realiza de la siguiente manera. Aquí es donde el <em>segundo método</em> para realizar el ANVA resulta útil porque los resultados (<code>res_aov</code>) se reutilizan para la prueba de promedios:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Prueba de Tukey HSD:</span>
+<span class='va'>post_test</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/multcomp/man/glht.html'>glht</a></span><span class='op'>(</span><span class='va'>res_aov</span>,
+  linfct <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/multcomp/man/glht.html'>mcp</a></span><span class='op'>(</span>Species <span class='op'>=</span> <span class='st'>"Tukey"</span><span class='op'>)</span>
+<span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>post_test</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>
+     Simultaneous Tests for General Linear Hypotheses
+
+Multiple Comparisons of Means: Tukey Contrasts
+
+
+Fit: aov(formula = Sepal.Width ~ Species, data = iris)
+
+Linear Hypotheses:
+                            Estimate Std. Error t value Pr(&gt;|t|)    
+versicolor - setosa == 0    -0.65800    0.06794  -9.685  &lt; 1e-04 ***
+virginica - setosa == 0     -0.45400    0.06794  -6.683  &lt; 1e-04 ***
+virginica - versicolor == 0  0.20400    0.06794   3.003  0.00874 ** 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+(Adjusted p values reported -- single-step method)</code></pre>
+</div>
+<p>En el resultado de la prueba Tukey HSD, nos interesa la tabla que se muestra después de las <code>Hipótesis lineales</code>: más precisamente, en la primera y última columna de la tabla. La primera columna muestra las comparaciones que se han realizado; la última columna (<code>Pr(&gt;|t|)</code>) muestra los <em>p</em>-valores ajustados para cada comparación (con la hipótesis nula siendo los dos grupos iguales y la hipótesis alternativa siendo los dos grupos diferentes).</p>
+<p>Son estos <em>p</em>-valores ajustados los que se utilizan para probar si dos grupos son significativamente diferentes o no. En nuestro ejemplo, probamos:</p>
+<ol type="1">
+<li>versicolor vs setosa (línea <code>versicolor - setosa == 0</code>)</li>
+<li>virginica vs setosa (línea <code>virginica - setosa == 0</code>)</li>
+<li>virginica vs versicolor (línea <code>virginica - versicolor == 0</code>)</li>
+</ol>
+<p>Los tres p-valores son menores que 0.05, por lo que rechazamos la hipótesis nula para todas las comparaciones, lo que significa que todas las especies son <strong>significativamente diferentes</strong> en términos de ancho de sépalo.</p>
+<p>Tenga en cuenta que la prueba Tukey HSD también se puede realizar en R con la función <code>TukeyHSD()</code>:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/stats/TukeyHSD.html'>TukeyHSD</a></span><span class='op'>(</span><span class='va'>res_aov</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = Sepal.Width ~ Species, data = iris)
+
+$Species
+                       diff         lwr        upr     p adj
+versicolor-setosa    -0.658 -0.81885528 -0.4971447 0.0000000
+virginica-setosa     -0.454 -0.61485528 -0.2931447 0.0000000
+virginica-versicolor  0.204  0.04314472  0.3648553 0.0087802</code></pre>
+</div>
+<p>Con este código, es la columna <code>p adj</code> (también la última columna) la que interesa. Tenga en cuenta que las conclusiones son las mismas que las anteriores: todas las especies son significativamente diferentes en términos de ancho de sépalo.</p>
+<h2 id="visualización-de-anva-y-pruebas-de-promedio">Visualización de ANVA y pruebas de promedio</h2>
+<p>Para realizar de forma más fácil un análisis de varianza, se puede usar la librería <code>easyanova</code> para analizar diferentes diseños experimentales.</p>
+<h3 id="análisis-de-varianza-con-easyanova">Análisis de varianza con <code>easyanova</code></h3>
+<p>Para proceder con ANVA los datos de <code>iris</code> se selecciona y ordena para dar uso con el paquete <code>easyanova</code>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fsdata</span> <span class='op'>&lt;-</span> <span class='va'>iris</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>Species</span>, <span class='va'>Sepal.Width</span><span class='op'>)</span>
+<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span><span class='va'>fsdata</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 150 x 2
+   Species Sepal.Width
+   &lt;fct&gt;         &lt;dbl&gt;
+ 1 setosa          3.5
+ 2 setosa          3  
+ 3 setosa          3.2
+ 4 setosa          3.1
+ 5 setosa          3.6
+ 6 setosa          3.9
+ 7 setosa          3.4
+ 8 setosa          3.4
+ 9 setosa          2.9
+10 setosa          3.1
+# … with 140 more rows</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Análisis de varianza para DCA</span>
+
+<span class='va'>r1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/easyanova/man/ea1.html'>ea1</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>fsdata</span>, <span class='co'># Base de datos</span>
+          design <span class='op'>=</span> <span class='fl'>1</span>, <span class='co'># Diseño experimental: 1=DCA, 2=DBCA, etc.</span>
+          alpha <span class='op'>=</span> <span class='fl'>0.05</span><span class='op'>)</span> <span class='co'># Probabilidad estadística</span>
+</code></pre>
+</div>
+<img src="anova_files/figure-html5/unnamed-chunk-15-1.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>r1</span>
+</code></pre>
+</div>
+<pre><code>$`Analysis of variance`
+            df type I SS mean square F value    p&gt;F
+treatments   2   11.3449      5.6725   49.16 &lt;0.001
+Residuals  147   16.9620      0.1154       -      -
+
+$Means
+   treatment  mean standard.error tukey snk duncan t scott_knott
+1     setosa 3.428          0.048     a   a      a a           a
+2  virginica 2.974          0.048     b   b      b b           b
+3 versicolor 2.770          0.048     c   c      c c           c
+
+$`Multiple comparison test`
+                    pair contrast p(tukey) p(snk) p(duncan)   p(t)
+1     setosa - virginica    0.454   0.0000 0.0000    0.0000 0.0000
+2    setosa - versicolor    0.658   0.0000 0.0000    0.0000 0.0000
+3 virginica - versicolor    0.204   0.0087 0.0031    0.0031 0.0031
+
+$`Residual analysis`
+$`Residual analysis`$`residual analysis`
+                               values
+p.value Shapiro-Wilk test      0.3230
+p.value Bartlett test          0.3515
+coefficient of variation (%)  11.1100
+first value most discrepant   42.0000
+second value most discrepant  16.0000
+third value most discrepant  118.0000
+
+$`Residual analysis`$residuals
+     1      2      3      4      5      6      7      8      9     10 
+ 0.072 -0.428 -0.228 -0.328  0.172  0.472 -0.028 -0.028 -0.528 -0.328 
+    11     12     13     14     15     16     17     18     19     20 
+ 0.272 -0.028 -0.428 -0.428  0.572  0.972  0.472  0.072  0.372  0.372 
+    21     22     23     24     25     26     27     28     29     30 
+-0.028  0.272  0.172 -0.128 -0.028 -0.428 -0.028  0.072 -0.028 -0.228 
+    31     32     33     34     35     36     37     38     39     40 
+-0.328 -0.028  0.672  0.772 -0.328 -0.228  0.072  0.172 -0.428 -0.028 
+    41     42     43     44     45     46     47     48     49     50 
+ 0.072 -1.128 -0.228  0.072  0.372 -0.428  0.372 -0.228  0.272 -0.128 
+    51     52     53     54     55     56     57     58     59     60 
+ 0.430  0.430  0.330 -0.470  0.030  0.030  0.530 -0.370  0.130 -0.070 
+    61     62     63     64     65     66     67     68     69     70 
+-0.770  0.230 -0.570  0.130  0.130  0.330  0.230 -0.070 -0.570 -0.270 
+    71     72     73     74     75     76     77     78     79     80 
+ 0.430  0.030 -0.270  0.030  0.130  0.230  0.030  0.230  0.130 -0.170 
+    81     82     83     84     85     86     87     88     89     90 
+-0.370 -0.370 -0.070 -0.070  0.230  0.630  0.330 -0.470  0.230 -0.270 
+    91     92     93     94     95     96     97     98     99    100 
+-0.170  0.230 -0.170 -0.470 -0.070  0.230  0.130  0.130 -0.270  0.030 
+   101    102    103    104    105    106    107    108    109    110 
+ 0.326 -0.274  0.026 -0.074  0.026  0.026 -0.474 -0.074 -0.474  0.626 
+   111    112    113    114    115    116    117    118    119    120 
+ 0.226 -0.274  0.026 -0.474 -0.174  0.226  0.026  0.826 -0.374 -0.774 
+   121    122    123    124    125    126    127    128    129    130 
+ 0.226 -0.174 -0.174 -0.274  0.326  0.226 -0.174  0.026 -0.174  0.026 
+   131    132    133    134    135    136    137    138    139    140 
+-0.174  0.826 -0.174 -0.174 -0.374  0.026  0.426  0.126  0.026  0.126 
+   141    142    143    144    145    146    147    148    149    150 
+ 0.126  0.126 -0.274  0.226  0.326  0.026 -0.474  0.026  0.426  0.026 
+
+$`Residual analysis`$`standardized residuals`
+          1           2           3           4           5 
+ 0.21339641 -1.26852308 -0.67575529 -0.97213918  0.50978030 
+          6           7           8           9          10 
+ 1.39893200 -0.08298749 -0.08298749 -1.56490698 -0.97213918 
+         11          12          13          14          15 
+ 0.80616420 -0.08298749 -1.26852308 -1.26852308  1.69531589 
+         16          17          18          19          20 
+ 2.88085148  1.39893200  0.21339641  1.10254810  1.10254810 
+         21          22          23          24          25 
+-0.08298749  0.80616420  0.50978030 -0.37937139 -0.08298749 
+         26          27          28          29          30 
+-1.26852308 -0.08298749  0.21339641 -0.08298749 -0.67575529 
+         31          32          33          34          35 
+-0.97213918 -0.08298749  1.99169979  2.28808369 -0.97213918 
+         36          37          38          39          40 
+-0.67575529  0.21339641  0.50978030 -1.26852308 -0.08298749 
+         41          42          43          44          45 
+ 0.21339641 -3.34321036 -0.67575529  0.21339641  1.10254810 
+         46          47          48          49          50 
+-1.26852308  1.10254810 -0.67575529  0.80616420 -0.37937139 
+         51          52          53          54          55 
+ 1.27445076  1.27445076  0.97806686 -1.39300432  0.08891517 
+         56          57          58          59          60 
+ 0.08891517  1.57083466 -1.09662042  0.38529907 -0.20746873 
+         61          62          63          64          65 
+-2.28215601  0.68168296 -1.68938822  0.38529907  0.38529907 
+         66          67          68          69          70 
+ 0.97806686  0.68168296 -0.20746873 -1.68938822 -0.80023652 
+         71          72          73          74          75 
+ 1.27445076  0.08891517 -0.80023652  0.08891517  0.38529907 
+         76          77          78          79          80 
+ 0.68168296  0.08891517  0.68168296  0.38529907 -0.50385263 
+         81          82          83          84          85 
+-1.09662042 -1.09662042 -0.20746873 -0.20746873  0.68168296 
+         86          87          88          89          90 
+ 1.86721855  0.97806686 -1.39300432  0.68168296 -0.80023652 
+         91          92          93          94          95 
+-0.50385263  0.68168296 -0.50385263 -1.39300432 -0.20746873 
+         96          97          98          99         100 
+ 0.68168296  0.38529907  0.38529907 -0.80023652  0.08891517 
+        101         102         103         104         105 
+ 0.96621151 -0.81209188  0.07705981 -0.21932408  0.07705981 
+        106         107         108         109         110 
+ 0.07705981 -1.40485967 -0.21932408 -1.40485967  1.85536320 
+        111         112         113         114         115 
+ 0.66982761 -0.81209188  0.07705981 -1.40485967 -0.51570798 
+        116         117         118         119         120 
+ 0.66982761  0.07705981  2.44813099 -1.10847578 -2.29401137 
+        121         122         123         124         125 
+ 0.66982761 -0.51570798 -0.51570798 -0.81209188  0.96621151 
+        126         127         128         129         130 
+ 0.66982761 -0.51570798  0.07705981 -0.51570798  0.07705981 
+        131         132         133         134         135 
+-0.51570798  2.44813099 -0.51570798 -0.51570798 -1.10847578 
+        136         137         138         139         140 
+ 0.07705981  1.26259540  0.37344371  0.07705981  0.37344371 
+        141         142         143         144         145 
+ 0.37344371  0.37344371 -0.81209188  0.66982761  0.96621151 
+        146         147         148         149         150 
+ 0.07705981 -1.40485967  0.07705981  1.26259540  0.07705981 </code></pre>
+</div>
+<p>En la salida se puede observar el resultado de <code>análisis de varianza</code>, <code>prueba de promedios</code> y <code>comparación múltiple de medias</code>. Estas salidas son muy fáciles de obtener y poder interpretar las mismas. Asimismo, se puede verificar la <code>normalidad</code> y <code>coeficiente de variación</code> de los datos.</p>
+<h3 id="visualización-de-la-prueba-de-promedios">Visualización de la prueba de promedios</h3>
+<p>Si está interesado en incluir resultados de ANVA y pruebas de promedio directamente en los boxplot, aquí hay un fragmento de código que puede ser de su interés:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#paquete para p-valor en la visualización de prueba de promedios</span>
+
+<span class='va'>dat</span> <span class='op'>&lt;-</span> <span class='va'>iris</span>
+<span class='co'># Editar desde aquí</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/which.html'>which</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>dat</span><span class='op'>)</span> <span class='op'>==</span> <span class='st'>"Species"</span><span class='op'>)</span> <span class='co'>#variable de agrupación</span>
+<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/which.html'>which</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>dat</span><span class='op'>)</span> <span class='op'>==</span> <span class='st'>"Sepal.Width"</span><span class='op'>)</span> 
+<span class='co'>#variables para la prueba de promedios</span>
+          <span class='co'>#| names(dat) == "Sepal.Length"</span>
+          <span class='co'>#| names(dat) == "Petal.Length"</span>
+          <span class='co'>#| names(dat) == "Petal.Width")</span>
+<span class='va'>method1</span> <span class='op'>&lt;-</span> <span class='st'>"anova"</span> <span class='co'># Una de "anova" o "kruskal.test"</span>
+<span class='va'>method2</span> <span class='op'>&lt;-</span> <span class='st'>"t.test"</span> <span class='co'># Una de "wilcox.test" o "t.test"</span>
+<span class='va'>my_comparisons</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"setosa"</span>, <span class='st'>"versicolor"</span><span class='op'>)</span>, 
+                       <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"setosa"</span>, <span class='st'>"virginica"</span><span class='op'>)</span>, 
+                       <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"versicolor"</span>, <span class='st'>"virginica"</span><span class='op'>)</span><span class='op'>)</span> 
+<span class='co'># comparaciones para pruebas de promedio</span>
+<span class='co'># Editar hasta aquí</span>
+
+<span class='co'># Edit at your own risk</span>
+<span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='va'>y</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='kw'>for</span> <span class='op'>(</span><span class='va'>j</span> <span class='kw'>in</span> <span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rpkgs.datanovia.com/ggpubr/reference/ggboxplot.html'>ggboxplot</a></span><span class='op'>(</span><span class='va'>dat</span>,
+      x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>dat</span><span class='op'>[</span><span class='va'>j</span><span class='op'>]</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>dat</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span><span class='op'>)</span>,
+      color <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>dat</span><span class='op'>[</span><span class='va'>j</span><span class='op'>]</span><span class='op'>)</span>,
+      legend <span class='op'>=</span> <span class='st'>"none"</span>,
+      palette <span class='op'>=</span> <span class='st'>"npg"</span>,
+      add <span class='op'>=</span> <span class='st'>"jitter"</span>
+    <span class='op'>)</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span>
+      <span class='va'>p</span> <span class='op'>+</span> <span class='fu'><a href='https://rpkgs.datanovia.com/ggpubr/reference/stat_compare_means.html'>stat_compare_means</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>
+        label <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>..method..</span>, <span class='st'>", p-value = "</span>, <span class='va'>..p.format..</span><span class='op'>)</span><span class='op'>)</span>,
+        method <span class='op'>=</span> <span class='va'>method1</span>, label.y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>dat</span><span class='op'>[</span>, <span class='va'>i</span><span class='op'>]</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+      <span class='op'>)</span>
+      <span class='op'>+</span> <span class='fu'><a href='https://rpkgs.datanovia.com/ggpubr/reference/stat_compare_means.html'>stat_compare_means</a></span><span class='op'>(</span>comparisons <span class='op'>=</span> <span class='va'>my_comparisons</span>, 
+                           method <span class='op'>=</span> <span class='va'>method2</span>, label <span class='op'>=</span> <span class='st'>"p.format"</span><span class='op'>)</span> 
+      <span class='co'># remove if p-value of ANOVA or Kruskal-Wallis test &gt;= alpha</span>
+    <span class='op'>)</span>
+  <span class='op'>}</span>
+<span class='op'>}</span>
+</code></pre>
+</div>
+<p><img src="anova_files/figure-html5/unnamed-chunk-16-1.png" width="624" /></p>
+</div>
+<p>Otra opción de gráfica para observar la significancia entre las medias de cada par de especies.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># pairwise comparisons</span>
+
+<span class='va'>pwc</span> <span class='op'>&lt;-</span> <span class='va'>fsdata</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rpkgs.datanovia.com/rstatix/reference/t_test.html'>pairwise_t_test</a></span><span class='op'>(</span>
+    <span class='va'>Sepal.Width</span> <span class='op'>~</span> <span class='va'>Species</span>, pool.sd <span class='op'>=</span> <span class='cn'>FALSE</span>,
+    p.adjust.method <span class='op'>=</span> <span class='st'>"none"</span>
+    <span class='op'>)</span>
+
+<span class='co'># Visualization: box plots with p-values</span>
+<span class='va'>pwc</span> <span class='op'>&lt;-</span> <span class='va'>pwc</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rpkgs.datanovia.com/rstatix/reference/get_pvalue_position.html'>add_xy_position</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Species"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rpkgs.datanovia.com/ggpubr/reference/ggboxplot.html'>ggboxplot</a></span><span class='op'>(</span><span class='va'>fsdata</span>, x <span class='op'>=</span> <span class='st'>"Species"</span>, y <span class='op'>=</span> <span class='st'>"Sepal.Width"</span>,
+          color <span class='op'>=</span> <span class='st'>"Species"</span>, 
+          legend <span class='op'>=</span> <span class='st'>"none"</span>, 
+          add <span class='op'>=</span> <span class='st'>"jitter"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://rpkgs.datanovia.com/ggpubr/reference/stat_pvalue_manual.html'>stat_pvalue_manual</a></span><span class='op'>(</span><span class='va'>pwc</span>, hide.ns <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> 
+</code></pre>
+</div>
+<p><img src="anova_files/figure-html5/unnamed-chunk-17-1.png" width="624" /></p>
+</div>
+<h2 id="conclusión">Conclusión</h2>
+<p>La figura de prueba de promedios es muy buena opción para incluir en la sección de resultados de los reportes de investigación. La figura incluye el resultado de p-valor del análisis de varianza, además, p-valor para la comparación de medias entre especies o tratamientos de la investigación.</p>
+<h2 id="referencias">Referencias</h2>
+<ol type="1">
+<li>R bloggers 2020. <a href="https://www.r-bloggers.com/2020/10/anova-in-r/">ANOVA in R</a></li>
+<li>Soetewey A. 2020. <a href="https://towardsdatascience.com/how-to-do-a-t-test-or-anova-for-many-variables-at-once-in-r-and-communicate-the-results-in-a-6defaa712e5">How to do a t-test or ANOVA for more than one variable at once in R</a></li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<!--radix_placeholder_article_footer-->
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom"></div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>
