@@ -1,0 +1,56 @@
+---
+title: "Franklin Santos"
+image: "fsm.png"
+links:
+  - label: ORCID
+    url: "https://orcid.org/0000-0002-7509-2910"
+  - label: Researchgate
+    url: "https://www.researchgate.net/profile/Franklin_Santos6"
+  - label: GitHub
+    url: "https://github.com/FranklinSantoM"
+  - label: Publons
+    url: "https://publons.com/researcher/1566228/franklin-santos/"
+  - label: Google Scholar
+    url: "https://scholar.google.com/citations?user=e0Tt_lAAAAAJ&hl=en"
+  - label: Email
+    url: "mailto:ssantoss19@hotmail.com"
+  - label: Twitter
+    url: "https://twitter.com/FranklinSantosM"
+  - label: Facebook
+    url: "https://www.facebook.com/franklinsantosm"  
+output:
+  postcards::trestles
+---
+ 
+## **Biography**
+
+Franklin Santos is plant and data scientist. He develops research work and data analysis. His research interests include plant and animal breeding. He directs a group of researchers and he is a undergraduate thesis advisor for the Agronomic Engineering Career at the Public University of El Alto.
+
+## **Education**
+
+* **Statistics with R** | 2020
+  - Duke University | [Coursera Specialization](http://coursera.org/verify/specialization/S4SMJQVSK3FV)
+
+* **Animal Breeding and Genetics** | 2020
+  - Wageningen University & Research | [edX Professional Certificate](https://credentials.edx.org/credentials/4988fa30ecac452593dfd51f9a0ab994/)
+
+* **Data Science** | 2020
+  - Johns Hopkins University | [Coursera Specialization](http://coursera.org/verify/specialization/RYJW3XRY9FYD)
+
+* **Agronomist Engineer, B.Sc.** | 2017
+  - El Alto Public University
+
+## **Experience**
+
+* **INIAF** | Research Technician | January 2018 - June 2020
+
+* **GAM-Licoma** | Director of Agricultural Development | June 2016 - Dec 2017
+
+* **INE** | Municipal Census Chief | August 2013 - November 2013
+
+## **Interests**
+
+* **Plant and Animal Breeding**
+* **Mentoring**
+* **Data Science**
+* **R programming**
