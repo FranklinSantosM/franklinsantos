@@ -1,0 +1,448 @@
+---
+title: "Rendimiento de los cultivos importantes de Bolivia"
+description: |
+  Tendencias de rendimiento de los cultivos más importantes de Bolivia desde 1984 hasta 2019.
+categories:
+  - R
+  - Data Science
+  - Crop Yield
+author:
+  - name: Franklin Santos
+    url: https://franklinsantos.com
+    affiliation: AgriTech Bolivia
+    orcid_id: 0000-0002-7509-2910
+date: 01-01-2021
+preview: newplot.png
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+## Introducción
+La agricultura de Bolivia es muy variada; sin embargo, los cultivos más importantes se basan en trigo, arroz, maíz y papa. Las estadísticas de rendimiento son para observar las tendencias de productividad en cada departamento de Bolivia. En función a ello, se podría generar proyectos de investigación e incrementar las tendencias de productividad en Bolivia.
+
+## Base de datos
+Los datos se descargarón del Instituto Nacional de Estadística de Bolivia (INE). Los datos nos proporcionan en una planilla excel. Dentro del documento se encuentra distribuido en hojas. En cada hoja se encuentra información estadística de cada departamento.
+
+### Limpieza de datos por departamento
+
+Se muestra un ejemplo de programación para la limpieza de datos para el departamento de Chuquisaca. El mismo proceso se repite para cada departamento.
+
+```{r, warning=FALSE, message=FALSE, echo=TRUE}
+##librerias para el proceso de limpieza
+library(tidyverse)
+library(readxl)
+library(knitr)
+```
+
+```{r,  echo=TRUE}
+## Importando datos 
+chuq <- read_xlsx("Bolivia-Rendimiento_1984-2019.xlsx",
+                sheet = "Chuquisaca",
+                range = cell_rows(3:82))
+chuq[chuq == "-"] <- NA
+chuq[chuq == "0"] <- NA
+
+## Pivotando datos de años y rendimientos
+chuq1 <- chuq %>%
+  type_convert(col_types = NULL) %>%
+  pivot_longer(
+    cols = `1983-1984`:`2018-2019(p)`,
+    names_to = "Year",
+    values_to = "yield",
+    values_drop_na = TRUE
+  )
+
+# filtrar cultivos de interes para graficar
+cropfilter <- chuq1 %>%
+  janitor::clean_names() %>%
+  filter(descripcion %in% c("Trigo (1)", 
+                            "Papa", 
+                            "Maíz en grano (1)",
+                            "Arroz con cáscara")
+  )
+
+# Separar la columna descripción
+chuq2 <- cropfilter %>%
+  separate(descripcion, c("cultivo"), sep = " ") %>%
+  separate(year, c("ano1", "años"), sep ="-", 
+           convert = TRUE) %>%
+  mutate(year = ano1 + 1) %>%
+  mutate(Chuquisaca = yield/1000)%>%
+  select(cultivo, year, Chuquisaca)
+kable(head(chuq2))
+```
+
+
+```{r, echo=FALSE, include=FALSE}
+################# Limpieza de datos La Paz #########################
+
+lp <- read_xlsx("Bolivia-Rendimiento_1984-2019.xlsx",
+                  sheet = "La Paz",
+                  range = cell_rows(3:82))
+lp[lp == "-"] <- NA
+lp[lp == "0"] <- NA
+
+# Pivotando datos de años y rendimientos
+lp1 <- lp %>%
+  type_convert(col_types = NULL) %>%
+  pivot_longer(
+    cols = `1983-1984`:`2018-2019(p)`,
+    names_to = "Year",
+    values_to = "Yield",
+    values_drop_na = TRUE
+  )
+
+# filtrar cultivos de interes para graficar
+filterlp <- lp1 %>%
+  janitor::clean_names() %>%
+  filter(descripcion %in% c("Trigo (1)", 
+                            "Papa", 
+                            "Maíz en grano (1)",
+                            "Arroz con cáscara")
+  )
+
+# Separar la descripción
+lp2 <- filterlp %>%
+  separate(descripcion, c("cultivo"), sep = " ") %>%
+  separate(year, c("ano1", "años"), sep ="-", 
+           convert = TRUE) %>%
+  mutate(year = ano1 + 1) %>%
+  mutate(La_Paz = yield/1000)%>%
+  select(cultivo, year, La_Paz)
+tibble(lp2)
+
+##################### Cochabamba #####################
+
+cbb <- read_xlsx("Bolivia-Rendimiento_1984-2019.xlsx",
+                sheet = "Cochabamba",
+                range = cell_rows(3:82))
+cbb[cbb == "-"] <- NA
+cbb[cbb == "0"] <- NA
+
+# Pivotando datos de años y rendimientos
+cbb1 <- cbb %>%
+  type_convert(col_types = NULL) %>%
+  pivot_longer(
+    cols = `1983-1984`:`2018-2019(p)`,
+    names_to = "Year",
+    values_to = "Yield",
+    values_drop_na = TRUE
+  )
+
+# filtrar cultivos de interes para graficar
+cbbfilter <- cbb1 %>%
+  janitor::clean_names() %>%
+  filter(descripcion %in% c("Trigo (1)", 
+                            "Papa", 
+                            "Maíz en grano (1)",
+                            "Arroz con cáscara")
+  )
+
+# Separar la descripción
+cbb2 <- cbbfilter %>%
+  separate(descripcion, c("cultivo"), sep = " ") %>%
+  separate(year, c("ano1", "años"), sep ="-", 
+           convert = TRUE) %>%
+  mutate(year = ano1 + 1) %>%
+  mutate(Cochabamba = yield/1000)%>%
+  select(cultivo, year, Cochabamba)
+tibble(cbb2)
+
+##################### Potosí #####################
+
+pt <- read_xlsx("Bolivia-Rendimiento_1984-2019.xlsx",
+                 sheet = "Potosí",
+                 range = cell_rows(3:82))
+pt[pt == "-"] <- NA
+pt[pt == "0"] <- NA
+
+# Pivotando datos de años y rendimientos
+pt1 <- pt %>%
+  type_convert(col_types = NULL) %>%
+  pivot_longer(
+    cols = `1983-1984`:`2018-2019(p)`,
+    names_to = "Year",
+    values_to = "Yield",
+    values_drop_na = TRUE
+  )
+
+# filtrar cultivos de interes para graficar
+ptfilter <- pt1 %>%
+  janitor::clean_names() %>%
+  filter(descripcion %in% c("Trigo (1)", 
+                            "Papa", 
+                            "Maíz en grano (1)",
+                            "Arroz con cáscara")
+  )
+
+# Separar la descripción
+pt2 <- ptfilter %>%
+  separate(descripcion, c("cultivo"), sep = " ") %>%
+  separate(year, c("ano1", "años"), sep ="-", 
+           convert = TRUE) %>%
+  mutate(year = ano1 + 1) %>%
+  mutate(Potosi = yield/1000)%>%
+  select(cultivo, year, Potosi)
+tibble(pt2)
+
+##################### Tarija #####################
+
+tj <- read_xlsx("Bolivia-Rendimiento_1984-2019.xlsx",
+                sheet = "Tarija",
+                range = cell_rows(3:82))
+tj[tj == "-"] <- NA
+tj[tj == "0"] <- NA
+
+# Pivotando datos de años y rendimientos
+tj1 <- tj %>%
+  type_convert(col_types = NULL) %>%
+  pivot_longer(
+    cols = `1983-1984`:`2018-2019(p)`,
+    names_to = "Year",
+    values_to = "Yield",
+    values_drop_na = TRUE
+  )
+
+# filtrar cultivos de interes para graficar
+tjfilter <- tj1 %>%
+  janitor::clean_names() %>%
+  filter(descripcion %in% c("Trigo (1)", 
+                            "Papa", 
+                            "Maíz en grano (1)",
+                            "Arroz con cáscara")
+  )
+
+# Separar la descripción
+tj2 <- tjfilter %>%
+  separate(descripcion, c("cultivo"), sep = " ") %>%
+  separate(year, c("ano1", "años"), sep ="-", 
+           convert = TRUE) %>%
+  mutate(year = ano1 + 1) %>%
+  mutate(Tarija = yield/1000)%>%
+  select(cultivo, year, Tarija)
+tibble(tj2)
+
+##################### Santa Cruz #####################
+
+sc <- read_xlsx("Bolivia-Rendimiento_1984-2019.xlsx",
+                sheet = "Santa Cruz",
+                range = cell_rows(3:82))
+sc[sc == "-"] <- NA
+sc[sc == "0"] <- NA
+
+# Pivotando datos de años y rendimientos
+sc1 <- sc %>%
+  type_convert(col_types = NULL) %>%
+  pivot_longer(
+    cols = `1983-1984`:`2018-2019(p)`,
+    names_to = "Year",
+    values_to = "Yield",
+    values_drop_na = TRUE
+  )
+
+# filtrar cultivos de interes para graficar
+scfilter <- sc1 %>%
+  janitor::clean_names() %>%
+  filter(descripcion %in% c("Trigo (1)", 
+                            "Papa", 
+                            "Maíz en grano (1)",
+                            "Arroz con cáscara")
+  )
+
+# Separar la descripción
+sc2 <- scfilter %>%
+  separate(descripcion, c("cultivo"), sep = " ") %>%
+  separate(year, c("ano1", "años"), sep ="-", 
+           convert = TRUE) %>%
+  mutate(year = ano1 + 1) %>%
+  mutate(Santa_Cruz = yield/1000)%>%
+  select(cultivo, year, Santa_Cruz)
+tibble(sc2)
+
+
+##################### Potosí #####################
+
+bn <- read_xlsx("Bolivia-Rendimiento_1984-2019.xlsx",
+                sheet = "Beni",
+                range = cell_rows(3:82))
+bn[bn == "-"] <- NA
+bn[bn == "0"] <- NA
+
+# Pivotando datos de años y rendimientos
+bn1 <- bn %>%
+  type_convert(col_types = NULL) %>%
+  pivot_longer(
+    cols = `1983-1984`:`2018-2019(p)`,
+    names_to = "Year",
+    values_to = "Yield",
+    values_drop_na = TRUE
+  )
+
+# filtrar cultivos de interes para graficar
+bnfilter <- bn1 %>%
+  janitor::clean_names() %>%
+  filter(descripcion %in% c("Trigo (1)", 
+                            "Papa", 
+                            "Maíz en grano (1)",
+                            "Arroz con cáscara")
+  )
+
+# Separar la descripción
+bn2 <- bnfilter %>%
+  separate(descripcion, c("cultivo"), sep = " ") %>%
+  separate(year, c("ano1", "años"), sep ="-", 
+           convert = TRUE) %>%
+  mutate(year = ano1 + 1) %>%
+  mutate(Beni = yield/1000)%>%
+  select(cultivo, year, Beni)
+tibble(bn2)
+
+##################### Pando #####################
+
+pn <- read_xlsx("Bolivia-Rendimiento_1984-2019.xlsx",
+                sheet = "Pando",
+                range = cell_rows(3:82))
+pn[pn == "-"] <- NA
+pn[pn == "0"] <- NA
+
+# Pivotando datos de años y rendimientos
+pn1 <- pn %>%
+  type_convert(col_types = NULL) %>%
+  pivot_longer(
+    cols = `1983-1984`:`2018-2019(p)`,
+    names_to = "Year",
+    values_to = "Yield",
+    values_drop_na = TRUE
+  )
+
+# filtrar cultivos de interes para graficar
+pnfilter <- pn1 %>%
+  janitor::clean_names() %>%
+  filter(descripcion %in% c("Trigo (1)", 
+                            "Papa", 
+                            "Maíz en grano (1)",
+                            "Arroz con cáscara")
+  )
+
+# Separar la descripción
+pn2 <- pnfilter %>%
+  separate(descripcion, c("cultivo"), sep = " ") %>%
+  separate(year, c("ano1", "años"), sep ="-", 
+           convert = TRUE) %>%
+  mutate(year = ano1 + 1) %>%
+  mutate(Pando = yield/1000)%>%
+  select(cultivo, year, Pando)
+tibble(pn2)
+
+
+##################### Oruro #####################
+
+or <- read_xlsx("Bolivia-Rendimiento_1984-2019.xlsx",
+                sheet = "Oruro",
+                range = cell_rows(3:82))
+or[or == "-"] <- NA
+or[or == "0"] <- NA
+
+# Pivotando datos de años y rendimientos
+or1 <- or %>%
+  type_convert(col_types = NULL) %>%
+  pivot_longer(
+    cols = `1983-1984`:`2018-2019(p)`,
+    names_to = "Year",
+    values_to = "Yield",
+    values_drop_na = TRUE
+  )
+
+# filtrar cultivos de interes para graficar
+orfilter <- or1 %>%
+  janitor::clean_names() %>%
+  filter(descripcion %in% c("Trigo (1)", 
+                            "Papa", 
+                            "Maíz en grano (1)",
+                            "Arroz con cáscara")
+  )
+
+# Separar la descripción
+or2 <- orfilter %>%
+  separate(descripcion, c("cultivo"), sep = " ") %>%
+  separate(year, c("ano1", "años"), sep ="-", 
+           convert = TRUE) %>%
+  mutate(year = ano1 + 1) %>%
+  mutate(Oruro = yield/1000)%>%
+  select(cultivo, year, Oruro)
+tibble(or2)
+
+```
+
+
+Con los siguientes códigos se consolidó los datos de cada departamento en una sola base de datos.
+
+```{r, echo=TRUE}
+################# Unir datos #######################
+
+yieldfs <- chuq2 %>%
+  left_join(lp2) %>%
+  left_join(cbb2) %>%
+  left_join(pt2) %>%
+  left_join(tj2) %>%
+  left_join(sc2) %>%
+  left_join(bn2) %>%
+  left_join(pn2) %>%
+  left_join(or2)
+
+kable(head(yieldfs))
+```
+
+## Resultados
+
+```{r, echo=TRUE}
+# Pivotando datos de años y rendimientos
+yieldclean <- yieldfs %>%
+  pivot_longer(
+    cols = `Chuquisaca`:`Oruro`,
+    names_to = "Depto",
+    values_to = "Yield",
+    values_drop_na = TRUE
+  )
+
+kable(head(yieldclean))
+```
+
+
+```{r, layout="l-body-outset", fig.width=10, fig.height=6, echo=TRUE}
+######## Plot option #############
+library(reshape2)
+library(plotly)
+
+p <- yieldclean %>%
+  ggplot(aes(year, Yield, color = Depto)) +
+  geom_line() +
+  facet_wrap(~cultivo, ncol = 2) +
+  labs(x = "Year", y = "Yield (t ha)")
+
+fig <- ggplotly(p)
+fig
+```
+
+### Rendimiento del año 2019
+Se puede generar una gráfica de barras del rendimiento del año 2019.
+
+```{r, layout="l-body-outset", fig.width=10, fig.height=6, echo=TRUE}
+yearfs <- yieldclean %>%
+  filter(year == 2019)
+
+# seleccion de tema para la gráfica
+theme_set(
+  theme_classic() +
+    theme(legend.position = "top")
+)
+
+#Generando gráfica de barras
+f<-ggplot(yearfs, aes(x=Depto, y=Yield, fill=cultivo)) +
+  geom_bar(stat="identity", position = position_dodge()) +
+  labs(x = "Departamentos", y = "Yield (t ha)")
+fig2 <- ggplotly(f)
+fig2
+```
+
