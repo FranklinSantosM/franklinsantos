@@ -85,635 +85,39 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-  <title>Franklin Santos: My blog</title>
+  <title>Análisis de Componentes Principales</title>
+
+  <meta property="description" itemprop="description" content="l análisis de componentes principales nos permite resumir y visualizar la información de un conjunto de datos que contiene observaciones descritos por múltiples variables cuantitativas inter-correlacionadas."/>
 
 
-
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2020-12-15"/>
+  <meta property="article:created" itemprop="dateCreated" content="2020-12-15"/>
+  <meta name="article:author" content="Franklin Santos"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Franklin Santos: My blog"/>
+  <meta property="og:title" content="Análisis de Componentes Principales"/>
   <meta property="og:type" content="article"/>
+  <meta property="og:description" content="l análisis de componentes principales nos permite resumir y visualizar la información de un conjunto de datos que contiene observaciones descritos por múltiples variables cuantitativas inter-correlacionadas."/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Franklin Santos"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Franklin Santos: My blog"/>
+  <meta property="twitter:title" content="Análisis de Componentes Principales"/>
+  <meta property="twitter:description" content="l análisis de componentes principales nos permite resumir y visualizar la información de un conjunto de datos que contiene observaciones descritos por múltiples variables cuantitativas inter-correlacionadas."/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","site","listing"]}},"value":[{"type":"character","attributes":{},"value":["My blog"]},{"type":"character","attributes":{},"value":["distill::distill_website"]},{"type":"character","attributes":{},"value":["posts"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","categories","author","date","preview","output"]}},"value":[{"type":"character","attributes":{},"value":["Análisis de Componentes Principales"]},{"type":"character","attributes":{},"value":["l análisis de componentes principales nos permite resumir y visualizar la información de un conjunto de datos que contiene observaciones descritos por múltiples variables cuantitativas inter-correlacionadas.\n"]},{"type":"character","attributes":{},"value":["Biplot","Componentes Principales","Correlation"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","orcid_id"]}},"value":[{"type":"character","attributes":{},"value":["Franklin Santos"]},{"type":"character","attributes":{},"value":["https://franklinsantos.com"]},{"type":"character","attributes":{},"value":["AgriTech Bolivia"]},{"type":"character","attributes":{},"value":["0000-0002-7509-2910"]}]}]},{"type":"character","attributes":{},"value":["12-15-2020"]},{"type":"character","attributes":{},"value":["featured.png"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["componentes-principales_files/anchor-4.2.2/anchor.min.js","componentes-principales_files/bowser-1.9.3/bowser.min.js","componentes-principales_files/distill-2.2.21/template.v2.js","componentes-principales_files/figure-html5/unnamed-chunk-10-1.png","componentes-principales_files/figure-html5/unnamed-chunk-7-1.png","componentes-principales_files/figure-html5/unnamed-chunk-8-1.png","componentes-principales_files/figure-html5/unnamed-chunk-9-1.png","componentes-principales_files/figure-html5/unnamed-chunk-9-2.png","componentes-principales_files/header-attrs-2.7/header-attrs.js","componentes-principales_files/jquery-1.11.3/jquery.min.js","componentes-principales_files/popper-2.6.0/popper.min.js","componentes-principales_files/tippy-6.2.7/tippy-bundle.umd.min.js","componentes-principales_files/tippy-6.2.7/tippy-light-border.css","componentes-principales_files/tippy-6.2.7/tippy.css","componentes-principales_files/tippy-6.2.7/tippy.umd.min.js","componentes-principales_files/webcomponents-2.0.0/webcomponents.js","featured.png"]}
+  </script>
   <!--radix_placeholder_navigation_in_header-->
-  <meta name="distill:offset" content=""/>
-
-  <script type="application/javascript">
-
-    window.headroom_prevent_pin = false;
-
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-
-      // initialize headroom for banner
-      var header = $('header').get(0);
-      var headerHeight = header.offsetHeight;
-      var headroom = new Headroom(header, {
-        tolerance: 5,
-        onPin : function() {
-          if (window.headroom_prevent_pin) {
-            window.headroom_prevent_pin = false;
-            headroom.unpin();
-          }
-        }
-      });
-      headroom.init();
-      if(window.location.hash)
-        headroom.unpin();
-      $(header).addClass('headroom--transition');
-
-      // offset scroll location for banner on hash change
-      // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
-      window.addEventListener("hashchange", function(event) {
-        window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
-      });
-
-      // responsive menu
-      $('.distill-site-header').each(function(i, val) {
-        var topnav = $(this);
-        var toggle = topnav.find('.nav-toggle');
-        toggle.on('click', function() {
-          topnav.toggleClass('responsive');
-        });
-      });
-
-      // nav dropdowns
-      $('.nav-dropbtn').click(function(e) {
-        $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
-        $(this).parent().siblings('.nav-dropdown')
-           .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
-      });
-      $("body").click(function(e){
-        $('.nav-dropdown-content').removeClass('nav-dropdown-active');
-      });
-      $(".nav-dropdown").click(function(e){
-        e.stopPropagation();
-      });
-    });
-  </script>
-
-  <style type="text/css">
-
-  /* Theme (user-documented overrideables for nav appearance) */
-
-  .distill-site-nav {
-    color: rgba(255, 255, 255, 0.8);
-    background-color: #0F2E3D;
-    font-size: 15px;
-    font-weight: 300;
-  }
-
-  .distill-site-nav a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .distill-site-nav a:hover {
-    color: white;
-  }
-
-  @media print {
-    .distill-site-nav {
-      display: none;
-    }
-  }
-
-  .distill-site-header {
-
-  }
-
-  .distill-site-footer {
-
-  }
-
-
-  /* Site Header */
-
-  .distill-site-header {
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 3;
-  }
-
-  .distill-site-header .nav-left {
-    display: inline-block;
-    margin-left: 8px;
-  }
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header .nav-left {
-      margin-left: 0;
-    }
-  }
-
-
-  .distill-site-header .nav-right {
-    float: right;
-    margin-right: 8px;
-  }
-
-  .distill-site-header a,
-  .distill-site-header .title {
-    display: inline-block;
-    text-align: center;
-    padding: 14px 10px 14px 10px;
-  }
-
-  .distill-site-header .title {
-    font-size: 18px;
-    min-width: 150px;
-  }
-
-  .distill-site-header .logo {
-    padding: 0;
-  }
-
-  .distill-site-header .logo img {
-    display: none;
-    max-height: 20px;
-    width: auto;
-    margin-bottom: -4px;
-  }
-
-  .distill-site-header .nav-image img {
-    max-height: 18px;
-    width: auto;
-    display: inline-block;
-    margin-bottom: -3px;
-  }
-
-
-
-  @media screen and (min-width: 1000px) {
-    .distill-site-header .logo img {
-      display: inline-block;
-    }
-    .distill-site-header .nav-left {
-      margin-left: 20px;
-    }
-    .distill-site-header .nav-right {
-      margin-right: 20px;
-    }
-    .distill-site-header .title {
-      padding-left: 12px;
-    }
-  }
-
-
-  .distill-site-header .nav-toggle {
-    display: none;
-  }
-
-  .nav-dropdown {
-    display: inline-block;
-    position: relative;
-  }
-
-  .nav-dropdown .nav-dropbtn {
-    border: none;
-    outline: none;
-    color: rgba(255, 255, 255, 0.8);
-    padding: 16px 10px;
-    background-color: transparent;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    margin: 0;
-    margin-top: 1px;
-    z-index: 2;
-  }
-
-  .nav-dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 200px;
-    border: 1px solid rgba(0,0,0,0.15);
-    border-radius: 4px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
-    z-index: 1;
-    margin-top: 2px;
-    white-space: nowrap;
-    padding-top: 4px;
-    padding-bottom: 4px;
-  }
-
-  .nav-dropdown-content hr {
-    margin-top: 4px;
-    margin-bottom: 4px;
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-
-  .nav-dropdown-active {
-    display: block;
-  }
-
-  .nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
-    color: black;
-    padding: 6px 24px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-  }
-
-  .nav-dropdown-content .nav-dropdown-header {
-    display: block;
-    padding: 5px 24px;
-    padding-bottom: 0;
-    text-transform: uppercase;
-    font-size: 14px;
-    color: #999999;
-    white-space: nowrap;
-  }
-
-  .nav-dropdown:hover .nav-dropbtn {
-    color: white;
-  }
-
-  .nav-dropdown-content a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-
-  .nav-right .nav-dropdown-content {
-    margin-left: -45%;
-    right: 0;
-  }
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
-    .distill-site-header a.nav-toggle {
-      float: right;
-      display: block;
-    }
-    .distill-site-header .title {
-      margin-left: 0;
-    }
-    .distill-site-header .nav-right {
-      margin-right: 0;
-    }
-    .distill-site-header {
-      overflow: hidden;
-    }
-    .nav-right .nav-dropdown-content {
-      margin-left: 0;
-    }
-  }
-
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header.responsive {position: relative; min-height: 500px; }
-    .distill-site-header.responsive a.nav-toggle {
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-    .distill-site-header.responsive a,
-    .distill-site-header.responsive .nav-dropdown {
-      display: block;
-      text-align: left;
-    }
-    .distill-site-header.responsive .nav-left,
-    .distill-site-header.responsive .nav-right {
-      width: 100%;
-    }
-    .distill-site-header.responsive .nav-dropdown {float: none;}
-    .distill-site-header.responsive .nav-dropdown-content {position: relative;}
-    .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
-      display: block;
-      width: 100%;
-      text-align: left;
-    }
-  }
-
-  /* Site Footer */
-
-  .distill-site-footer {
-    width: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
-    z-index: 3;
-    margin-top: 30px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    text-align: center;
-  }
-
-  /* Headroom */
-
-  d-title {
-    padding-top: 6rem;
-  }
-
-  @media print {
-    d-title {
-      padding-top: 4rem;
-    }
-  }
-
-  .headroom {
-    z-index: 1000;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-
-  .headroom--transition {
-    transition: all .4s ease-in-out;
-  }
-
-  .headroom--unpinned {
-    top: -100px;
-  }
-
-  .headroom--pinned {
-    top: 0;
-  }
-
-  /* adjust viewport for navbar height */
-  /* helps vertically center bootstrap (non-distill) content */
-  .min-vh-100 {
-    min-height: calc(100vh - 100px) !important;
-  }
-
-  </style>
-
-  <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
-  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
-  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
-  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
-  <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
-  <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
-
-  <script type="application/javascript">
-
-  function getMeta(metaName) {
-    var metas = document.getElementsByTagName('meta');
-    for (let i = 0; i < metas.length; i++) {
-      if (metas[i].getAttribute('name') === metaName) {
-        return metas[i].getAttribute('content');
-      }
-    }
-    return '';
-  }
-
-  function offsetURL(url) {
-    var offset = getMeta('distill:offset');
-    return offset ? offset + '/' + url : url;
-  }
-
-  function createFuseIndex() {
-
-    // create fuse index
-    var options = {
-      keys: [
-        { name: 'title', weight: 20 },
-        { name: 'categories', weight: 15 },
-        { name: 'description', weight: 10 },
-        { name: 'contents', weight: 5 },
-      ],
-      ignoreLocation: true,
-      threshold: 0
-    };
-    var fuse = new window.Fuse([], options);
-
-    // fetch the main search.json
-    return fetch(offsetURL('search.json'))
-      .then(function(response) {
-        if (response.status == 200) {
-          return response.json().then(function(json) {
-            // index main articles
-            json.articles.forEach(function(article) {
-              fuse.add(article);
-            });
-            // download collections and index their articles
-            return Promise.all(json.collections.map(function(collection) {
-              return fetch(offsetURL(collection)).then(function(response) {
-                if (response.status === 200) {
-                  return response.json().then(function(articles) {
-                    articles.forEach(function(article) {
-                      fuse.add(article);
-                    });
-                  })
-                } else {
-                  return Promise.reject(
-                    new Error('Unexpected status from search index request: ' +
-                              response.status)
-                  );
-                }
-              });
-            })).then(function() {
-              return fuse;
-            });
-          });
-
-        } else {
-          return Promise.reject(
-            new Error('Unexpected status from search index request: ' +
-                        response.status)
-          );
-        }
-      });
-  }
-
-  window.document.addEventListener("DOMContentLoaded", function (event) {
-
-    // get search element (bail if we don't have one)
-    var searchEl = window.document.getElementById('distill-search');
-    if (!searchEl)
-      return;
-
-    createFuseIndex()
-      .then(function(fuse) {
-
-        // make search box visible
-        searchEl.classList.remove('hidden');
-
-        // initialize autocomplete
-        var options = {
-          autoselect: true,
-          hint: false,
-          minLength: 2,
-        };
-        window.autocomplete(searchEl, options, [{
-          source: function(query, callback) {
-            const searchOptions = {
-              isCaseSensitive: false,
-              shouldSort: true,
-              minMatchCharLength: 2,
-              limit: 10,
-            };
-            var results = fuse.search(query, searchOptions);
-            callback(results
-              .map(function(result) { return result.item; })
-            );
-          },
-          templates: {
-            suggestion: function(suggestion) {
-              var img = suggestion.preview && Object.keys(suggestion.preview).length > 0
-                ? `<img src="${offsetURL(suggestion.preview)}"</img>`
-                : '';
-              var html = `
-                <div class="search-item">
-                  <h3>${suggestion.title}</h3>
-                  <div class="search-item-description">
-                    ${suggestion.description || ''}
-                  </div>
-                  <div class="search-item-preview">
-                    ${img}
-                  </div>
-                </div>
-              `;
-              return html;
-            }
-          }
-        }]).on('autocomplete:selected', function(event, suggestion) {
-          window.location.href = offsetURL(suggestion.path);
-        });
-        // remove inline display style on autocompleter (we want to
-        // manage responsive display via css)
-        $('.algolia-autocomplete').css("display", "");
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-
-  });
-
-  </script>
-
-  <style type="text/css">
-
-  .nav-search {
-    font-size: x-small;
-  }
-
-  /* Algolioa Autocomplete */
-
-  .algolia-autocomplete {
-    display: inline-block;
-    margin-left: 10px;
-    vertical-align: sub;
-    background-color: white;
-    color: black;
-    padding: 6px;
-    padding-top: 8px;
-    padding-bottom: 0;
-    border-radius: 6px;
-    border: 1px #0F2E3D solid;
-    width: 180px;
-  }
-
-
-  @media screen and (max-width: 768px) {
-    .distill-site-nav .algolia-autocomplete {
-      display: none;
-      visibility: hidden;
-    }
-    .distill-site-nav.responsive .algolia-autocomplete {
-      display: inline-block;
-      visibility: visible;
-    }
-    .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
-      margin-left: 0;
-      width: 400px;
-      max-height: 400px;
-    }
-  }
-
-  .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
-    width: 90%;
-    outline: none;
-    border: none;
-  }
-
-  .algolia-autocomplete .aa-hint {
-    color: #999;
-  }
-  .algolia-autocomplete .aa-dropdown-menu {
-    width: 550px;
-    max-height: 70vh;
-    overflow-x: visible;
-    overflow-y: scroll;
-    padding: 5px;
-    margin-top: 3px;
-    margin-left: -150px;
-    background-color: #fff;
-    border-radius: 5px;
-    border: 1px solid #999;
-    border-top: none;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
-    cursor: pointer;
-    padding: 5px 4px;
-    border-bottom: 1px solid #eee;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
-    border-bottom: none;
-    margin-bottom: 2px;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
-    overflow: hidden;
-    font-size: 0.8em;
-    line-height: 1.4em;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
-    font-size: 1rem;
-    margin-block-start: 0;
-    margin-block-end: 5px;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
-    display: inline-block;
-    overflow: hidden;
-    height: 2.8em;
-    width: 80%;
-    margin-right: 4%;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
-    display: inline-block;
-    width: 15%;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
-    height: 3em;
-    width: auto;
-    display: none;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
-    display: initial;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
-    background-color: #eee;
-  }
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
-    font-weight: bold;
-    font-style: normal;
-  }
-
-  </style>
-
-
   <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
 
@@ -2029,382 +1433,233 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
-  <script src="site_libs/popper-2.6.0/popper.min.js"></script>
-  <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
-  <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
-  <script src="site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
-  <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
-  <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
-  <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
-  <script src="site_libs/distill-2.2.21/template.v2.js"></script>
+  <script src="componentes-principales_files/header-attrs-2.7/header-attrs.js"></script>
+  <script src="componentes-principales_files/jquery-1.11.3/jquery.min.js"></script>
+  <script src="componentes-principales_files/popper-2.6.0/popper.min.js"></script>
+  <link href="componentes-principales_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="componentes-principales_files/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="componentes-principales_files/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="componentes-principales_files/anchor-4.2.2/anchor.min.js"></script>
+  <script src="componentes-principales_files/bowser-1.9.3/bowser.min.js"></script>
+  <script src="componentes-principales_files/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="componentes-principales_files/distill-2.2.21/template.v2.js"></script>
   <!--radix_placeholder_site_in_header-->
   <!--/radix_placeholder_site_in_header-->
 
 
 </head>
 
-<body class="layout-listing">
+<body>
 
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"My blog","authors":[]}
+{"title":"Análisis de Componentes Principales","description":"l análisis de componentes principales nos permite resumir y visualizar la información de un conjunto de datos que contiene observaciones descritos por múltiples variables cuantitativas inter-correlacionadas.","authors":[{"author":"Franklin Santos","authorURL":"https://franklinsantos.com","affiliation":"AgriTech Bolivia","affiliationURL":"#","orcidID":"0000-0002-7509-2910"}],"publishedDate":"2020-12-15T00:00:00.000+00:00","citationText":"Santos, 2020"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
 <!--radix_placeholder_navigation_before_body-->
-<header class="header header--fixed" role="banner">
-<nav class="distill-site-nav distill-site-header">
-<div class="nav-left">
-<a class="logo" href="https://www.franklinsantos.com">
-<img src="fsm.png" alt="Logo"/>
-</a>
-<a href="index.html" class="title">Franklin Santos</a>
-<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
-</div>
-<div class="nav-right">
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<a href="index.xml">
-<i class="fa fa-rss" aria-hidden="true"></i>
-</a>
-<a href="https://facebook.com/agritechbolivia">
-<i class="fa fa-facebook" aria-hidden="true"></i>
-</a>
-<a href="https://twitter.com/FranklinSantosM">
-<i class="fa fa-twitter" aria-hidden="true"></i>
-</a>
-<a href="https://github.com/FranklinSantosM">
-<i class="fa fa-github" aria-hidden="true"></i>
-</a>
-<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
-</div>
-</nav>
-</header>
 <!--/radix_placeholder_navigation_before_body-->
 <!--radix_placeholder_site_before_body-->
 <!--/radix_placeholder_site_before_body-->
-<!--radix_placeholder_article_listing-->
-
-
-<script type="application/javascript">
-
-function init_posts_list() {
-
-  function load_image(img) {
-    var src = $(img).attr('data-src');
-    if (src) {
-      $(img).attr('src', src);
-      $(img).load(function() {
-        img.removeAttribute('data-src');
-      });
-    }
-  }
-
-  function set_posts_visible(posts, visible) {
-    if (visible) {
-
-      // show bottom border by default
-      $(posts).removeClass('post-preview-last');
-
-      // apply limits if need be
-      var max_posts = 25;
-      var apply_limits = $('.posts-container').hasClass('posts-apply-limit');
-      if (apply_limits && posts.length > max_posts) {
-        posts = $(posts).slice(0, max_posts);
-      } else {
-        $('.posts-more a').addClass('hidden');
-      }
-
-      // apply last style
-      $(posts.slice(-1)[0]).addClass('post-preview-last');
-
-      $(posts).removeClass('hidden');
-      $(posts).find('img[data-src]').each(function(i, img) {
-        load_image(img);
-      });
-    } else {
-      $(posts).addClass('hidden');
-    }
-  }
-
-  function apply_hash_filter() {
-
-    // clear active state
-    $('.categories .active').removeClass('active');
-
-    // mark all posts invisible to start
-    set_posts_visible($('.posts-list').children('a'), false);
-
-    // if we have a hash filter
-    if (window.location.hash && window.location.hash.startsWith("#category:")) {
-
-      // mark posts that match the category visible
-      var page_category = window.location.hash.replace(/^#category:/, "");
-      var posts = $('.post-metadata').map(function(idx, script) {
-        var metadata = $.parseJSON($(script).html());
-        var post = null;
-        $.each(metadata.categories, function(idx, category) {
-          category = category.replace(/ /g,"_");
-          if ((page_category || '').toLowerCase() === "articles" || category === page_category) {
-            post = $(script).parent().get();
-            return false;
-          }
-        });
-        return post;
-      });
-      set_posts_visible(posts, true);
-
-      // mark the hash active
-      $('.categories li>a[href="' + window.location.hash + '"]').addClass('active');
-
-      // update the list_caption
-      var list_caption = $('.posts-list-caption');
-      var caption = (page_category || '').toLowerCase() === "articles"
-        ? list_caption.attr('data-caption')
-        : ('Category: ' + page_category.replace(/_/g," "));
-      list_caption.text(caption);
-
-    } else {
-
-      // no hash filter, make all posts visible (subject to max display)
-      set_posts_visible($('.posts-list').children(), true);
-
-      // reset list caption
-      var list_caption = $('.posts-list-caption');
-      list_caption.text(list_caption.attr('data-caption'));
-
-
-    }
-  }
-
-  // more articles
-  function apply_post_limits(apply) {
-    if (apply) {
-      $('.posts-container').addClass('posts-apply-limit');
-      $('.posts-more a').removeClass('hidden');
-    } else {
-      $('.posts-container').removeClass('posts-apply-limit');
-      $('.posts-more a').addClass('hidden');
-    }
-  }
-
-  // click handling for tags
-  $('.dt-tag').click(function(ev) {
-    window.location.hash = '#category:' + $(this).text().replace(/ /g, "_");
-    return false;
-  })
-
-  // hash filter handling
-  apply_hash_filter();
-  $(window).on('hashchange',function() {
-    apply_post_limits(true);
-    apply_hash_filter();
-  });
-
-  // more articles link
-  $('.posts-more a').click(function(e) {
-    e.preventDefault();
-    apply_post_limits(false);
-    apply_hash_filter();
-    return false;
-  });
-
-}
-
-</script>
-
-
-
-<div class="posts-container posts-with-sidebar posts-apply-limit l-screen-inset">
-<div class="posts-list">
-<h1 class="posts-list-caption" data-caption="My blog">My blog</h1>
-<a href="posts/2021-03-14-componentes-principales/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["Biplot","Componentes Principales","Correlation"]}</script>
-<div class="metadata">
-<div class="publishedDate">Dec. 15, 2020</div>
-<div class="dt-authors">
-<div class="dt-author">Franklin Santos</div>
-</div>
-</div>
-<div class="thumbnail">
-<img src="posts/2021-03-14-componentes-principales/featured.png"/>
-</div>
-<div class="description">
-<h2>Análisis de Componentes Principales</h2>
-<div class="dt-tags">
-<div class="dt-tag">Biplot</div>
-<div class="dt-tag">Componentes Principales</div>
-<div class="dt-tag">Correlation</div>
-</div>
-<p>l análisis de componentes principales nos permite resumir y visualizar la información de un conjunto de datos que contiene observaciones descritos por múltiples variables cuantitativas inter-correlacionadas.</p>
-</div>
-</a>
-<a href="posts/2021-03-14-tidyfaostat/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["FAOSTAT Data","Yield Crop","Crop Stats"]}</script>
-<div class="metadata">
-<div class="publishedDate">Nov. 30, 2020</div>
-<div class="dt-authors">
-<div class="dt-author">Franklin Santos</div>
-</div>
-</div>
-<div class="thumbnail">
-<img src="posts/2021-03-14-tidyfaostat/featured.png"/>
-</div>
-<div class="description">
-<h2>Extraer y ordenar datos FAOSTAT con Tidyverse</h2>
-<div class="dt-tags">
-<div class="dt-tag">FAOSTAT Data</div>
-<div class="dt-tag">Yield Crop</div>
-<div class="dt-tag">Crop Stats</div>
-</div>
-<p>Un post replicable para extraer y ordenar datos FAOSTAT con el paquete Tidyverse. Se presenta un análisis comparativo de paises latinoamericanos en función al rendimiento de los cultivos mas consumidas por la humanidad.</p>
-</div>
-</a>
-<a href="posts/2021-03-14-anova/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["ANOVA","Post hoc","Inferencial Statistic"]}</script>
-<div class="metadata">
-<div class="publishedDate">Nov. 15, 2020</div>
-<div class="dt-authors">
-<div class="dt-author">Franklin Santos</div>
-</div>
-</div>
-<div class="thumbnail">
-<img src="posts/2021-03-14-anova/featured.png"/>
-</div>
-<div class="description">
-<h2>Análisis de Varianza y Prueba de Promedios en R</h2>
-<div class="dt-tags">
-<div class="dt-tag">ANOVA</div>
-<div class="dt-tag">Post hoc</div>
-<div class="dt-tag">Inferencial Statistic</div>
-</div>
-<p>La figura de prueba de promedios de TukeyHSD es una buena opción, ya que incluye p-valor del ANVA y de la comparación de medias entre tratamientos.</p>
-</div>
-</a>
-<a href="posts/2021-03-14-analiscorrespondencia/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["Chi-cuadrado","Biplot","Componentes Principales"]}</script>
-<div class="metadata">
-<div class="publishedDate">Nov. 7, 2020</div>
-<div class="dt-authors">
-<div class="dt-author">Franklin Santos</div>
-</div>
-</div>
-<div class="thumbnail">
-<img src="posts/2021-03-14-analiscorrespondencia/featured.png"/>
-</div>
-<div class="description">
-<h2>Análisis de correspondencia con R</h2>
-<div class="dt-tags">
-<div class="dt-tag">Chi-cuadrado</div>
-<div class="dt-tag">Biplot</div>
-<div class="dt-tag">Componentes Principales</div>
-</div>
-<p>Análisis para variables categóricas utilizando la metodología de tablas cruzadas con la prueba de chi-cuadrado. Este análisis es una recopilación del libro Multivariate Analysis II: Practical Guide To Principal Component Methods in R.</p>
-</div>
-</a>
-<a href="posts/2021-03-14-tidyexam/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["Data Science","Tidy Data","Tidyverse"]}</script>
-<div class="metadata">
-<div class="publishedDate">Oct. 31, 2020</div>
-<div class="dt-authors">
-<div class="dt-author">Franklin Santos</div>
-</div>
-</div>
-<div class="thumbnail">
-<img src="posts/2021-03-14-tidyexam/featured.png"/>
-</div>
-<div class="description">
-<h2>Ordenar datos con el paquete Tidyverse</h2>
-<div class="dt-tags">
-<div class="dt-tag">Data Science</div>
-<div class="dt-tag">Tidy Data</div>
-<div class="dt-tag">Tidyverse</div>
-</div>
-<p>Es un ejemplo de caso extraido del libro R4DS.</p>
-</div>
-</a>
-</div>
-<div class="posts-sidebar">
-<div class="sidebar-section categories">
-<h3>Categories</h3>
-<ul>
-<li>
-<a href="#category:Articles">Articles</a>
-<span class="category-count">(5)</span>
-</li>
-<li>
-<a href="#category:ANOVA">ANOVA</a>
-<span class="category-count">(1)</span>
-</li>
-<li>
-<a href="#category:Biplot">Biplot</a>
-<span class="category-count">(2)</span>
-</li>
-<li>
-<a href="#category:Chi-cuadrado">Chi-cuadrado</a>
-<span class="category-count">(1)</span>
-</li>
-<li>
-<a href="#category:Componentes_Principales">Componentes Principales</a>
-<span class="category-count">(2)</span>
-</li>
-<li>
-<a href="#category:Correlation">Correlation</a>
-<span class="category-count">(1)</span>
-</li>
-<li>
-<a href="#category:Crop_Stats">Crop Stats</a>
-<span class="category-count">(1)</span>
-</li>
-<li>
-<a href="#category:Data_Science">Data Science</a>
-<span class="category-count">(1)</span>
-</li>
-<li>
-<a href="#category:FAOSTAT_Data">FAOSTAT Data</a>
-<span class="category-count">(1)</span>
-</li>
-<li>
-<a href="#category:Inferencial_Statistic">Inferencial Statistic</a>
-<span class="category-count">(1)</span>
-</li>
-<li>
-<a href="#category:Post_hoc">Post hoc</a>
-<span class="category-count">(1)</span>
-</li>
-<li>
-<a href="#category:Tidy_Data">Tidy Data</a>
-<span class="category-count">(1)</span>
-</li>
-<li>
-<a href="#category:Tidyverse">Tidyverse</a>
-<span class="category-count">(1)</span>
-</li>
-<li>
-<a href="#category:Yield_Crop">Yield Crop</a>
-<span class="category-count">(1)</span>
-</li>
-</ul>
-</div>
-</div>
-<div class="posts-more">
-<a href="#">More articles &raquo;</a>
-</div>
-</div>
-<!--/radix_placeholder_article_listing-->
 
 <div class="d-title">
-<h1>My blog</h1>
+<h1>Análisis de Componentes Principales</h1>
 <!--radix_placeholder_categories-->
+<div class="dt-tags">
+<div class="dt=tag">Biplot</div>
+<div class="dt=tag">Componentes Principales</div>
+<div class="dt=tag">Correlation</div>
+</div>
 <!--/radix_placeholder_categories-->
-
+<p><p>l análisis de componentes principales nos permite resumir y visualizar la información de un conjunto de datos que contiene observaciones descritos por múltiples variables cuantitativas inter-correlacionadas.</p></p>
 </div>
 
+<div class="d-byline">
+  Franklin Santos <a href="https://franklinsantos.com" class="uri">https://franklinsantos.com</a> (AgriTech Bolivia)
+  
+<br/>12-15-2020
+</div>
 
 <div class="d-article">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h2 id="introducción">Introducción</h2>
+<p>El <strong>análisis de componentes principales (PCA)</strong> nos permite resumir y visualizar la información en un conjunto de datos que contiene individuos/observaciones descritos por múltiples variables cuantitativas inter-correlacionadas. Cada variable podría considerarse como una dimensión diferente. Si tiene más de 3 variables en sus conjuntos de datos, podría ser muy difícil visualizar un hiperespacio multidimensional.</p>
+<p>El análisis de componentes principales se utiliza para extraer la información importante de una tabla de datos multivariados y para expresar esta información como un conjunto de algunas variables nuevas llamadas <strong>componentes principales</strong>. Estas nuevas variables corresponden a una combinación lineal de las originales. El número de componentes principales es menor o igual al número de variables originales.</p>
+<p>La información de un conjunto de datos dado corresponde a la <em>variación total</em> que contiene. El objetivo de PCA es identificar direcciones (o componentes principales) a lo largo de los cuales la variación en los datos es máxima.</p>
+<p>En otras palabras, PCA reduce la dimensionalidad de un dato multivariado a dos o tres componentes principales, que se pueden visualizar gráficamente, con una mínima pérdida de información.</p>
+<blockquote>
+<p>En este capítulo, describimos la idea básica de PCA y demostramos cómo calcular y visualizar PCA usando el software R. Además, mostraremos cómo identificar las variables más importantes que explican las variaciones en un conjunto de datos.</p>
+</blockquote>
+<p>En conjunto, el objetivo principal del análisis de componentes principales es:</p>
+<blockquote>
+<ul>
+<li>identificar patrones ocultos en un conjunto de datos,</li>
+<li>reducir la dimensionalidad de los datos <strong>eliminando el ruido</strong> y la <strong>redundancia</strong> en los datos,</li>
+<li>identificar variables correlacionadas</li>
+</ul>
+</blockquote>
+<h2 id="metodología-de-análisis">Metodología de análisis</h2>
+<p>Instale los dos paquetes de la siguiente manera:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"FactoMineR"</span>, <span class='st'>"factoextra"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>Cargar paquetes en R:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='http://factominer.free.fr'>"FactoMineR"</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='http://www.sthda.com/english/rpkgs/factoextra'>"factoextra"</a></span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<h3 id="cargando-datos">Cargando datos</h3>
+<p>Usaremos los conjuntos de datos de demostración <strong>decathlon2</strong> del paquete <code>factoextra</code>:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>decathlon2</span><span class='op'>)</span>
+<span class='co'>#head(decathlon2)</span>
+</code></pre>
+</div>
+</div>
+<p>De esta base de datos seleccionamos variables cuantitativas para el análisis de componentes principales:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#seleccionamos 27 filas y las primeras 10 variables</span>
+<span class='va'>decathlon2.active</span> <span class='op'>&lt;-</span> <span class='va'>decathlon2</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>23</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>]</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>decathlon2.active</span><span class='op'>[</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>]</span>, <span class='fl'>4</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>        X100m Long.jump Shot.put High.jump X400m X110m.hurdle Discus
+SEBRLE  11.04      7.58    14.83      2.07 49.81        14.69  43.75
+CLAY    10.76      7.40    14.26      1.86 49.37        14.05  50.72
+BERNARD 11.02      7.23    14.25      1.92 48.93        14.99  40.87
+YURKOV  11.34      7.09    15.19      2.10 50.42        15.31  46.26</code></pre>
+</div>
+<h3 id="código-r">Código R</h3>
+<p>Se puede utilizar la función <code>PCA()</code> [paquete <em>FactoMineR</em>]. Un formato simplificado es:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/FactoMineR/man/PCA.html'>PCA</a></span><span class='op'>(</span><span class='va'>X</span>, scale.unit <span class='op'>=</span> <span class='cn'>TRUE</span>, ncp <span class='op'>=</span> <span class='fl'>5</span>, graph <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<blockquote>
+<ul>
+<li><strong>X</strong>: un marco de datos. Las filas son individuos y las columnas son variables numéricas</li>
+<li><strong>scale.unit</strong>: un valor lógico. Si es <code>TRUE</code>, los datos se escalan a la varianza de la unidad antes del análisis. Esta estandarización a la misma escala evita que algunas variables se conviertan en dominantes solo por sus grandes unidades de medida. Hace que la variable sea comparable.</li>
+<li><strong>ncp</strong>: número de dimensiones mantenidas en los resultados finales.</li>
+<li><strong>graph</strong>: un valor lógico. Si es <code>TRUE</code>, se muestra un gráfico.</li>
+</ul>
+</blockquote>
+<p>El código R a continuación, calcula el análisis de componentes principales de las variables seleccionadas o activas:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='http://factominer.free.fr'>"FactoMineR"</a></span><span class='op'>)</span>
+<span class='va'>res.pca</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/FactoMineR/man/PCA.html'>PCA</a></span><span class='op'>(</span><span class='va'>decathlon2.active</span>, graph <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<blockquote>
+<p>El objeto que se crea usando la función <code>PCA()</code> contiene mucha información que se encuentra en muchas listas y matrices diferentes. Estos valores se describen en la siguiente sección.</p>
+</blockquote>
+<h3 id="extraiga-y-visualice-valores-propiosvarianzas">Extraiga y visualice valores propios/varianzas:</h3>
+<p>Los valores propios o varianzas miden la cantidad de variación retenida por cada componente principal. Las varianzas son grandes para los primeros componentes y pequeños para las siguientes. Es decir, las primeras PC corresponden a las direcciones con la cantidad máxima de variación en el conjunto de datos.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Extraer valores propios/varianzas</span>
+<span class='fu'><a href='https://rdrr.io/pkg/factoextra/man/eigenvalue.html'>get_eig</a></span><span class='op'>(</span><span class='va'>res.pca</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>       eigenvalue variance.percent cumulative.variance.percent
+Dim.1   4.1242133        41.242133                    41.24213
+Dim.2   1.8385309        18.385309                    59.62744
+Dim.3   1.2391403        12.391403                    72.01885
+Dim.4   0.8194402         8.194402                    80.21325
+Dim.5   0.7015528         7.015528                    87.22878
+Dim.6   0.4228828         4.228828                    91.45760
+Dim.7   0.3025817         3.025817                    94.48342
+Dim.8   0.2744700         2.744700                    97.22812
+Dim.9   0.1552169         1.552169                    98.78029
+Dim.10  0.1219710         1.219710                   100.00000</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Visualizar valores propios/variaciones</span>
+<span class='fu'><a href='https://rdrr.io/pkg/factoextra/man/eigenvalue.html'>fviz_screeplot</a></span><span class='op'>(</span><span class='va'>res.pca</span>, addlabels <span class='op'>=</span> <span class='cn'>TRUE</span>, ylim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>50</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="componentes-principales_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
+</div>
+<p>La suma de todos los valores propios da una varianza total de 10.</p>
+<p>La proporción de variación explicada por cada valor propio se da en la segunda columna. Por ejemplo, 4,124 dividido por 10 es igual a 0,4124, o aproximadamente el 41,24% de la variación se explica por este primer valor propio. El porcentaje acumulado explicado se obtiene sumando las sucesivas proporciones de variación explicadas para obtener el total acumulado. Por ejemplo, 41,242% más 18,385% es igual a 59,627%, y así sucesivamente. Por lo tanto, aproximadamente el 59,627% de la variación se explica por los dos primeros valores propios juntos.</p>
+<p>Los valores propios se pueden utilizar para determinar la cantidad de componentes principales que se deben retener después de la PCA (Kaiser 1961):</p>
+<blockquote>
+<ul>
+<li>Un <em>valor propio</em> &gt; 1 indica que los PCs representan más varianza que la contabilizada por una de las variables originales en los datos estandarizados. Esto se usa comúnmente como un punto de corte para el cual se retienen las PCs. Esto es válido solo cuando los datos están estandarizados.</li>
+<li>También puede limitar el número de componentes a ese número que representa una cierta fracción de la varianza total. Por ejemplo, si está satisfecho con el 70% de la varianza total explicada, utilice el número de componentes para lograrlo.</li>
+</ul>
+</blockquote>
+<p>Desafortunadamente, no existe una forma objetiva bien aceptada de decidir cuántos componentes principales son suficientes. Esto dependerá del campo de aplicación específico y del conjunto de datos específico. En la práctica, tendemos a mirar los primeros componentes principales para encontrar patrones interesantes en los datos.</p>
+<p>En nuestro análisis, los tres primeros componentes principales explican el 72% de la variación. Este es un porcentaje aceptablemente grande.</p>
+<h3 id="gráfica-círculo-de-correlación">Gráfica círculo de correlación</h3>
+<p>La correlación entre una variable y un componente principal (PC) se utiliza como coordenadas de la variable en la PC. La representación de las variables difiere del gráfico de las observaciones: las observaciones están representadas por sus proyecciones, pero las variables están representadas por sus correlaciones (Abdi y Williams 2010).</p>
+<p>Es posible controlar los colores de las variables usando sus contribuciones (“contrib”) a los ejes principales:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Control variable colors using their contributions</span>
+<span class='fu'><a href='https://rdrr.io/pkg/factoextra/man/fviz_pca.html'>fviz_pca_var</a></span><span class='op'>(</span><span class='va'>res.pca</span>, col.var<span class='op'>=</span><span class='st'>"contrib"</span>,
+             gradient.cols <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"#00AFBB"</span>, <span class='st'>"#E7B800"</span>, <span class='st'>"#FC4E07"</span><span class='op'>)</span>,
+             repel <span class='op'>=</span> <span class='cn'>TRUE</span> <span class='co'># Avoid text overlapping</span>
+             <span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="componentes-principales_files/figure-html5/unnamed-chunk-8-1.png" width="624" /></p>
+</div>
+<p>La gráfica anterior también se conoce como gráficas de correlación variable. Muestra las relaciones entre todas las variables. Se puede interpretar de la siguiente manera:</p>
+<ul>
+<li>Las variables correlacionadas positivamente se agrupan.</li>
+<li>Las variables correlacionadas negativamente se colocan en lados opuestos del origen de la gráfica (cuadrantes opuestos).</li>
+<li>La distancia entre las variables y el origen mide la calidad de las variables en el mapa de factores. Las variables que están lejos del origen están bien representadas en el mapa de factores.</li>
+</ul>
+<h3 id="contribucion-de-las-variables-a-los-ejes-principales">Contribucion de las variables a los ejes principales:</h3>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Contributions of variables to PC1</span>
+<span class='fu'><a href='https://rdrr.io/pkg/factoextra/man/fviz_contrib.html'>fviz_contrib</a></span><span class='op'>(</span><span class='va'>res.pca</span>, choice <span class='op'>=</span> <span class='st'>"var"</span>, axes <span class='op'>=</span> <span class='fl'>1</span>, top <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
+</code></pre>
+</div>
+<img src="componentes-principales_files/figure-html5/unnamed-chunk-9-1.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Contributions of variables to PC2</span>
+<span class='fu'><a href='https://rdrr.io/pkg/factoextra/man/fviz_contrib.html'>fviz_contrib</a></span><span class='op'>(</span><span class='va'>res.pca</span>, choice <span class='op'>=</span> <span class='st'>"var"</span>, axes <span class='op'>=</span> <span class='fl'>2</span>, top <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="componentes-principales_files/figure-html5/unnamed-chunk-9-2.png" width="624" /></p>
+</div>
+<p>La línea discontinua roja en el gráfico anterior indica la contribución promedio esperada. Si la contribución de las variables fuera uniforme, el valor esperado sería 1/longitud(variables) = 1/10 = 10%. Para un componente dado, una variable con una contribución mayor que este límite podría considerarse importante para contribuir al componente.</p>
+<blockquote>
+<p>Se puede observar que las variables <code>X100m</code>, <code>Long.jump</code> y <code>Pole.vault</code> contribuyen más a las dimensiones 1 y 2.</p>
+</blockquote>
+<h3 id="biplot">Biplot</h3>
+<p>Para hacer un biplot simple de individuos y variables, escriba esto:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Biplot of individuals and variables</span>
+<span class='fu'><a href='https://rdrr.io/pkg/factoextra/man/fviz_pca.html'>fviz_pca_biplot</a></span><span class='op'>(</span><span class='va'>res.pca</span>, repel <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="componentes-principales_files/figure-html5/unnamed-chunk-10-1.png" width="624" /></p>
+</div>
+<p>En biplot, debe centrarse principalmente en la dirección de las variables pero no en sus posiciones absolutas en la gráfica.</p>
+<p>En términos generales, un biplot se puede interpretar de la siguiente manera:</p>
+<ul>
+<li>un individuo que está en el mismo lado de una variable dada tiene un valor alto para esta variable;</li>
+<li>un individuo que está en el lado opuesto de una variable dada tiene un valor bajo para esta variable.</li>
+</ul>
+<p>Nota: Este post fue extraido del libro <strong>“Multivariate Analisis II”</strong></p>
+<h2 id="referencias">Referencias</h2>
+<p>Kassambara A. 2017. Multivariate Analysis: Practical Guide to Principal Component Methods in R.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
