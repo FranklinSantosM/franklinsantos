@@ -1,0 +1,125 @@
+---
+title: "Análisis de datos climáticos de la E.E. Kallutaca"
+description: |
+  Breve análisis de datos climáticos de la Estación Experimental de Kallutaca, durante la campaña agrícola 2019-2020.
+categories:
+  - Tidyverse
+  - Climate Analysis
+  - Kallutaca
+author:
+  - name: Franklin Santos
+    url: https://franklinsantos.com
+    affiliation: AgriTech Bolivia
+    orcid_id: 0000-0002-7509-2910
+date: 02-01-2021
+output:
+  distill::distill_article:
+    self_contained: false
+editor_options: 
+  chunk_output_type: inline
+---
+### Load library
+```{r, echo=TRUE}
+library(tidyverse)
+library(readxl)
+```
+
+
+### Import data
+
+```{r, echo=TRUE}
+kallutaca <- read_xlsx("Weather_Kallutaca.xlsx",
+                       sheet = "Hoja1")
+
+kallutaca
+```
+
+### Pivot data
+```{r, echo=TRUE}
+fsg <- kallutaca %>%
+  pivot_longer(
+    cols = c("Mean_temp", "High_t", "Low_t", "Rain"), 
+    names_to = "Var_weat", 
+    values_to = "weather"
+  )
+```
+
+
+
+### Plots 
+
+```{r, layout="l-body-outset", fig.width=10, fig.height=6, echo=TRUE}
+library(plotly)
+## High temperature
+p <- ggplot(kallutaca, aes(Time_h, High_t)) +
+  geom_boxplot(colour = "blue")+
+  geom_jitter(colour = "blue")
+
+fig <- ggplotly(p)
+
+fig
+
+## Law temperature
+p1 <- ggplot(kallutaca, aes(Time_l, Low_t)) +
+  geom_boxplot(colour = "red")+
+  geom_jitter(colour = "red")
+fig1 <- ggplotly(p1)
+
+fig1
+## High wind
+p2 <- ggplot(kallutaca, aes(Time_w, High_w)) +
+  geom_violin(colour = "purple")+
+  geom_jitter(colour = "purple")
+fig2 <- ggplotly(p2)
+
+fig2
+## Dominance direction wind
+p3 <- ggplot(kallutaca, aes(Dom_Dir, High_w)) +
+  geom_violin(colour = "blue")+
+  geom_jitter(colour = "blue")
+fig3 <- ggplotly(p3)
+
+fig3
+```
+
+
+
+### Rain Plot and temperature
+
+```{r, layout="l-body-outset", fig.width=10, fig.height=6, echo=TRUE}
+p4 <- ggplot(fsg, aes(x=Date, y=weather, color = Var_weat)) + 
+  geom_point(size=1) +
+  geom_line() + 
+  xlab("Months") + 
+  ylab("")
+
+fig4 <- ggplotly(p4)
+fig4
+```
+
+
+```{r, layout="l-body-outset", fig.width=10, fig.height=6, echo=TRUE}
+fs <- fsg %>%
+  ggplot(aes(Date, weather, color = Var_weat)) +
+  geom_line() +
+  facet_wrap(~Var_weat, ncol = 1) +
+  labs(x = "Month", y = "")
+
+fig5 <- ggplotly(fs)
+fig5
+```
+
+### Pearson Correlation
+```{r, layout="l-body-outset", fig.width=10, fig.height=6, echo=TRUE}
+library(metan)
+## select variable
+corrd <- kallutaca %>%
+  select(Mean_temp, High_t, Low_t, Rain, AVG_Wind_Speed, High_w)
+corrd
+
+## Correlation plot
+coef2 <- corr_coef(corrd)
+plot(coef2)
+```
+
+
