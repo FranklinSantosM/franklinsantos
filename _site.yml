@@ -10,6 +10,8 @@ navbar:
   right:
     - text: "Home"
       href: index.html
+    - text: "CV"
+      href: cv.pdf
     - text: "About"
       href: about.html
     - icon: fa fa-rss
