@@ -12,14 +12,14 @@ navbar:
       href: index.html
     - text: "CV"
       href: cv.pdf
-    - text: "About"
-      href: about.html
+    - text: "Blog"
+      href: blog.html
     - icon: fa fa-rss
       href: index.xml
     - icon: fa fa-facebook
       href: https://facebook.com/agritechbolivia
     - icon: fa fa-twitter
-      href: https://twitter.com/FranklinSantosM
+      href: https://twitter.com/FranklinSantosM 
     - icon: fa fa-github
       href: https://github.com/FranklinSantosM 
 output: distill::distill_article
