@@ -1,0 +1,364 @@
+---
+title: "Análisis del cambio de la temperatura"
+description: |
+  Se analiza las tendencias del cambio de la temperatura desde el año 1960 hasta 2019 en cada región de los continentes del mundo.
+categories:
+  - Climate Change
+  - Air Temperature
+  - World
+author:
+  - name: Franklin Santos
+    url: https://franklinsantos.com
+    affiliation: Agritech Bolivia
+    orcid_id: 0000-0002-7509-2910
+date: 03-01-2021
+preview: image.png
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+## Análisis del cambio de la temperatura
+
+### Paquetes
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(plotly)
+library(highcharter)
+library(ggbeeswarm)
+library(wesanderson)
+```
+
+### Importar datos
+La base de datos se descargó de [FAOSTAT](http://www.fao.org/faostat/en/#data/ET)
+
+```{r, message=FALSE}
+key_crops <- read_csv("FAOSTAT_data_3-10-2021.csv")
+
+key_crops
+```
+
+La base de datos fue adecuada para la respectiva visualización. Para ello, el siguiente código es pertinente.
+
+```{r}
+fsdata <- key_crops%>%
+  select(Area, Months, Year, Element, Value)%>%
+  pivot_wider(names_from = Element,
+              values_from = Value) %>%
+  rename(Temperature="Temperature change", sd="Standard Deviation")
+
+fsdata
+```
+
+
+## Cambio de temperatura en America
+
+```{r}
+america <- fsdata %>%
+  filter(Area %in% c("South America", 
+                        "Northern America", 
+                        "Caribbean",
+                        "Central America")
+  )
+```
+
+
+```{r, layout="l-body-outset", fig.width=10, fig.height=6, echo=TRUE}
+p <- america %>%
+  ggplot(aes(Year, Temperature, color = Months)) +
+  geom_line() +
+  facet_wrap(~Area, ncol = 2) +
+  labs(x = "Year", y = "Temperature (°C)")
+
+fig <- ggplotly(p)
+
+fig
+```
+
+
+```{r, layout="l-body-outset", fig.width=10, fig.height=6, echo=TRUE}
+Atemyear <- america %>%
+  group_by(Year, Area) %>%
+  summarise(Tempyear = mean(Temperature))
+
+hc <- hchart(Atemyear, "line",
+              hcaes(x=Year, y=Tempyear, group = Area, color = Area)
+              )
+hc
+```
+
+```{r, layout="l-body-outset", fig.width=10, fig.height=6, echo=TRUE, preview=TRUE}
+pfs <- ggplot(america, aes(x=Area, y=Temperature, color = Area))+
+  geom_quasirandom() +
+  theme_minimal() +
+  scale_color_manual(values = wes_palette("Darjeeling2")) +
+  theme_minimal()
+
+figfs <- ggplotly(pfs)
+
+figfs
+
+summ <- america %>%
+  group_by(Area) %>%
+  summarise(mean = mean(Temperature), SD = sd(Temperature)) %>%
+  arrange(desc(mean))
+summ
+```
+
+## Cambio de temperatura en Europe
+
+```{r}
+Europe <- fsdata %>%
+  filter(Area %in% c("Eastern Europe", 
+                        "Northern Europe", 
+                        "Southern Europe",
+                        "Western Europe")
+  )
+```
+
+
+```{r, layout="l-body-outset", fig.width=10, fig.height=6, echo=TRUE}
+p1 <- Europe %>%
+  ggplot(aes(Year, Temperature, color = Months)) +
+  geom_line() +
+  facet_wrap(~Area, ncol = 2) +
+  labs(x = "Year", y = "Temperature (°C)")
+
+
+fig1 <- ggplotly(p1)
+
+fig1
+```
+
+
+```{r, layout="l-body-outset", fig.width=10, fig.height=6, echo=TRUE}
+Etemyear <- Europe %>%
+  group_by(Year, Area) %>%
+  summarise(Tempyear = mean(Temperature))
+
+hc1 <- hchart(Etemyear, "line",
+              hcaes(x=Year, y=Tempyear, group = Area, color = Area)
+              )
+hc1
+```
+
+```{r, layout="l-body-outset", fig.width=10, fig.height=6, echo=TRUE}
+pfs1 <- ggplot(Europe, aes(x=Area, y=Temperature, color = Area))+
+  geom_quasirandom() +
+  theme_minimal() +
+  scale_color_manual(values = wes_palette("Darjeeling2")) +
+  theme_minimal()
+
+figfs1 <- ggplotly(pfs1)
+
+figfs1
+
+summ1 <- Europe %>%
+  group_by(Area) %>%
+  summarise(mean = mean(Temperature), SD = sd(Temperature)) %>%
+  arrange(desc(mean))
+
+summ1
+```
+
+
+## Cambio de temperatura en Asia
+
+```{r}
+asia <- fsdata %>%
+  filter(Area %in% c("Eastern Asia", 
+                        "South-eastern Asia",
+                        "Western Asia")
+  )
+```
+
+
+```{r, layout="l-body-outset", fig.width=10, fig.height=6, echo=TRUE}
+p3 <- asia %>%
+  ggplot(aes(Year, Temperature, color = Months)) +
+  geom_line() +
+  facet_wrap(~Area, ncol = 2) +
+  labs(x = "Year", y = "Temperature (°C)")
+
+
+fig3 <- ggplotly(p3)
+
+fig3
+```
+
+
+```{r, layout="l-body-outset", fig.width=10, fig.height=6, echo=TRUE}
+Astemyear <- asia %>%
+  group_by(Year, Area) %>%
+  summarise(Tempyear = mean(Temperature))
+
+hc2 <- hchart(Astemyear, "line",
+              hcaes(x=Year, y=Tempyear, group = Area, color = Area)
+              )
+hc2
+```
+
+```{r, layout="l-body-outset", fig.width=10, fig.height=6, echo=TRUE}
+pfs2 <- ggplot(asia, aes(x=Area, y=Temperature, color = Area))+
+  geom_quasirandom() +
+  theme_minimal() +
+  scale_color_manual(values = wes_palette("Darjeeling2")) +
+  theme_minimal()
+
+figfs2 <- ggplotly(pfs2)
+
+figfs2
+
+summ2 <- asia %>%
+  group_by(Area) %>%
+  summarise(mean = mean(Temperature), SD = sd(Temperature)) %>%
+  arrange(desc(mean))
+
+summ2
+```
+
+
+## Cambio de temperatura en Africa
+
+```{r}
+africa <- fsdata %>%
+  filter(Area %in% c("Eastern Africa", 
+                        "Middle Africa", 
+                        "Northern Africa",
+                        "Southern Africa",
+                        "Western Africa")
+  )
+```
+
+
+```{r, layout="l-body-outset", fig.width=10, fig.height=6, echo=TRUE}
+p4 <- africa %>%
+  ggplot(aes(Year, Temperature, color = Months)) +
+  geom_line() +
+  facet_wrap(~Area, ncol = 2) +
+  labs(x = "Year", y = "Temperature (°C)")
+
+
+fig4 <- ggplotly(p4)
+
+fig4
+```
+
+
+```{r, layout="l-body-outset", fig.width=10, fig.height=6, echo=TRUE}
+Aftemyear <- africa %>%
+  group_by(Year, Area) %>%
+  summarise(Tempyear = mean(Temperature))
+
+hc3 <- hchart(Aftemyear, "line",
+              hcaes(x=Year, y=Tempyear, group = Area, color = Area)
+              )
+hc3
+```
+
+```{r, layout="l-body-outset", fig.width=10, fig.height=6, echo=TRUE}
+pfs3 <- ggplot(africa, aes(x=Area, y=Temperature, color = Area))+
+  geom_quasirandom() +
+  theme_minimal() +
+  scale_color_manual(values = wes_palette("Darjeeling2")) +
+  theme_minimal()
+
+figfs3 <- ggplotly(pfs3)
+
+figfs3
+
+summ3 <- africa %>%
+  group_by(Area) %>%
+  summarise(mean = mean(Temperature), SD = sd(Temperature)) %>%
+  arrange(desc(mean))
+
+summ3
+```
+
+
+## Cambio de temperatura en Oceania
+
+```{r}
+oceania <- fsdata %>%
+  filter(Area %in% c("Melanesia", 
+                        "Micronesia", 
+                        "Polynesia",
+                        "Australia and New Zealand")
+  )
+```
+
+
+```{r, layout="l-body-outset", fig.width=10, fig.height=6, echo=TRUE}
+p5 <- oceania %>%
+  ggplot(aes(Year, Temperature, color = Months)) +
+  geom_line() +
+  facet_wrap(~Area, ncol = 2) +
+  labs(x = "Year", y = "Temperature (°C)")
+
+
+fig5 <- ggplotly(p5)
+
+fig5
+```
+
+
+```{r, layout="l-body-outset", fig.width=10, fig.height=6, echo=TRUE}
+Otemyear <- oceania %>%
+  group_by(Year, Area) %>%
+  summarise(Tempyear = mean(Temperature))
+
+hc4 <- hchart(Otemyear, "line",
+              hcaes(x=Year, y=Tempyear, group = Area, color = Area)
+              )
+hc4
+```
+
+```{r, layout="l-body-outset", fig.width=10, fig.height=6, echo=TRUE}
+pfs4 <- ggplot(oceania, aes(x=Area, y=Temperature, color = Area))+
+  geom_quasirandom() +
+  theme_minimal() +
+  scale_color_manual(values = wes_palette("Darjeeling2")) +
+  theme_minimal()
+
+figfs4 <- ggplotly(pfs4)
+
+figfs4
+
+summ4 <- oceania %>%
+  group_by(Area) %>%
+  summarise(mean = mean(Temperature), SD = sd(Temperature)) %>%
+  arrange(desc(mean))
+
+summ4
+```
+
+## Conclusión
+
+- En el continente Americano la temperatura más elvedada que cambió fue **0.523° C** con una variación **±0.872° C**, la cual es superior a la temperatura media. Esta información corresponde a América del norte. La tendencia de las temperaturas en el continente Americano ya superó **1° C** durante los últimos cinco años.
+
+- En el continente Europeo, Europa del este liderá el ránking de cambios de la temperatura con **0.757 ±1.13° C**. De acuerdo a las tendencias, dos regiones de este continente ya superaron los **2° C**. 
+
+- Asia oriental liderá el cambio de temperatura en el continente Asiático con **0.562° C** y una variación de **±0.768° C**. La tendencia del cambio de temperatura de este continente estaría por superar los **1.5° C**. Sin embargo, en el Asia Occidental ya se tuvo registros superiores a los **2° C**. 
+
+- En el continente Africano, la región de África occidental lidera el cambio de temperatura con **0.596 ±0.624° C**. Los cambios de temperatura en este continente ya superon los **1.5° C**. Sin embargo, ya existe un registro que supera **2° C**. 
+
+- Australia y Nueva Zelanda son líderes en los registros de cambio de temperatura con **0.428 ±0.572° C** en el continente de Oceania. Las tendencias del cambio de temperatura aún no superaron los **1.5° C**.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
