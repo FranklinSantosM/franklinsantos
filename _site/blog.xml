@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:distill="https://distill.pub/journal/" version="2.0">
+  <channel>
+    <title>Franklin Santos</title>
+    <link>https://franklinsantos.com</link>
+    <atom:link href="https://franklinsantos.com/blog.xml" rel="self" type="application/rss+xml"/>
+    <description>Data Scientist, Plant Breeder and Analist Data
+</description>
+    <generator>Distill</generator>
+    <lastBuildDate>Mon, 01 Feb 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Análisis de datos climáticos de la E.E. Kallutaca</title>
+      <dc:creator>Franklin Santos</dc:creator>
+      <link>https://franklinsantos.com/posts/2021-03-14-weatherdatakallutaca</link>
+      <description>Breve análisis de datos climáticos de la Estación Experimental de Kallutaca, durante la campaña agrícola 2019-2020.</description>
+      <category>Tidyverse</category>
+      <category>Climate Analysis</category>
+      <category>Kallutaca</category>
+      <guid>https://franklinsantos.com/posts/2021-03-14-weatherdatakallutaca</guid>
+      <pubDate>Mon, 01 Feb 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://franklinsantos.com/posts/2021-03-14-weatherdatakallutaca/weatherdatakallutaca_files/figure-html5/unnamed-chunk-7-1.png" medium="image" type="image/png" width="1920" height="1152"/>
+    </item>
+    <item>
+      <title>Rendimiento de los cultivos importantes de Bolivia</title>
+      <dc:creator>Franklin Santos</dc:creator>
+      <link>https://franklinsantos.com/posts/2021-03-14-tidyinebolivia</link>
+      <description>Tendencias de rendimiento de los cultivos más importantes de Bolivia desde 1984 hasta 2019.</description>
+      <category>R</category>
+      <category>Data Science</category>
+      <category>Crop Yield</category>
+      <guid>https://franklinsantos.com/posts/2021-03-14-tidyinebolivia</guid>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://franklinsantos.com/posts/2021-03-14-tidyinebolivia/newplot.png" medium="image" type="image/png" width="888" height="576"/>
+    </item>
+    <item>
+      <title>Análisis de Componentes Principales</title>
+      <dc:creator>Franklin Santos</dc:creator>
+      <link>https://franklinsantos.com/posts/2021-03-14-componentes-principales</link>
+      <description>l análisis de componentes principales nos permite resumir y visualizar la información de un conjunto de datos que contiene observaciones descritos por múltiples variables cuantitativas inter-correlacionadas.</description>
+      <category>Biplot</category>
+      <category>Componentes Principales</category>
+      <category>Correlation</category>
+      <guid>https://franklinsantos.com/posts/2021-03-14-componentes-principales</guid>
+      <pubDate>Tue, 15 Dec 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://franklinsantos.com/posts/2021-03-14-componentes-principales/featured.png" medium="image" type="image/png" width="947" height="822"/>
+    </item>
+    <item>
+      <title>Extraer y ordenar datos FAOSTAT con Tidyverse</title>
+      <dc:creator>Franklin Santos</dc:creator>
+      <link>https://franklinsantos.com/posts/2021-03-14-tidyfaostat</link>
+      <description>Un post replicable para extraer y ordenar datos FAOSTAT con el paquete Tidyverse. Se presenta un análisis comparativo de paises latinoamericanos en función al rendimiento de los cultivos mas consumidas por la humanidad.</description>
+      <category>FAOSTAT Data</category>
+      <category>Yield Crop</category>
+      <category>Crop Stats</category>
+      <guid>https://franklinsantos.com/posts/2021-03-14-tidyfaostat</guid>
+      <pubDate>Mon, 30 Nov 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://franklinsantos.com/posts/2021-03-14-tidyfaostat/featured.png" medium="image" type="image/png" width="1834" height="1532"/>
+    </item>
+    <item>
+      <title>Análisis de Varianza y Prueba de Promedios en R</title>
+      <dc:creator>Franklin Santos</dc:creator>
+      <link>https://franklinsantos.com/posts/2021-03-14-anova</link>
+      <description>La figura de prueba de promedios de TukeyHSD es una buena opción, ya que incluye p-valor del ANVA y de la comparación de medias entre tratamientos.</description>
+      <category>ANOVA</category>
+      <category>Post hoc</category>
+      <category>Inferencial Statistic</category>
+      <guid>https://franklinsantos.com/posts/2021-03-14-anova</guid>
+      <pubDate>Sun, 15 Nov 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://franklinsantos.com/posts/2021-03-14-anova/featured.png" medium="image" type="image/png" width="494" height="405"/>
+    </item>
+    <item>
+      <title>Análisis de correspondencia con R</title>
+      <dc:creator>Franklin Santos</dc:creator>
+      <link>https://franklinsantos.com/posts/2021-03-14-analiscorrespondencia</link>
+      <description>Análisis para variables categóricas utilizando la metodología de tablas cruzadas con la prueba de chi-cuadrado. Este análisis es una recopilación del libro Multivariate Analysis II: Practical Guide To Principal Component Methods in R.</description>
+      <category>Chi-cuadrado</category>
+      <category>Biplot</category>
+      <category>Componentes Principales</category>
+      <guid>https://franklinsantos.com/posts/2021-03-14-analiscorrespondencia</guid>
+      <pubDate>Sat, 07 Nov 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://franklinsantos.com/posts/2021-03-14-analiscorrespondencia/featured.png" medium="image" type="image/png" width="494" height="405"/>
+    </item>
+    <item>
+      <title>Ordenar datos con el paquete Tidyverse</title>
+      <dc:creator>Franklin Santos</dc:creator>
+      <link>https://franklinsantos.com/posts/2021-03-14-tidyexam</link>
+      <description>Es un ejemplo de caso extraido del libro R4DS.</description>
+      <category>Data Science</category>
+      <category>Tidy Data</category>
+      <category>Tidyverse</category>
+      <guid>https://franklinsantos.com/posts/2021-03-14-tidyexam</guid>
+      <pubDate>Sat, 31 Oct 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://franklinsantos.com/posts/2021-03-14-tidyexam/featured.png" medium="image" type="image/png" width="1262" height="586"/>
+    </item>
+  </channel>
+</rss>

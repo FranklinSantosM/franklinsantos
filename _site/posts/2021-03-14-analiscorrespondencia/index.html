@@ -89,6 +89,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <meta property="description" itemprop="description" content="Análisis para variables categóricas utilizando la metodología de tablas cruzadas con la prueba de chi-cuadrado. Este análisis es una recopilación del libro Multivariate Analysis II: Practical Guide To Principal Component Methods in R."/>
 
+<link rel="canonical" href="https://franklinsantos.com/posts/2021-03-14-analiscorrespondencia/"/>
 
 <!--  https://schema.org/Article -->
 <meta property="article:published" itemprop="datePublished" content="2020-11-07"/>
@@ -99,19 +100,34 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <meta property="og:title" content="Franklin Santos: Análisis de correspondencia con R"/>
 <meta property="og:type" content="article"/>
 <meta property="og:description" content="Análisis para variables categóricas utilizando la metodología de tablas cruzadas con la prueba de chi-cuadrado. Este análisis es una recopilación del libro Multivariate Analysis II: Practical Guide To Principal Component Methods in R."/>
+<meta property="og:url" content="https://franklinsantos.com/posts/2021-03-14-analiscorrespondencia/"/>
+<meta property="og:image" content="https://franklinsantos.com/posts/2021-03-14-analiscorrespondencia/featured.png"/>
+<meta property="og:image:width" content="494"/>
+<meta property="og:image:height" content="405"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Franklin Santos"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
-<meta property="twitter:card" content="summary"/>
+<meta property="twitter:card" content="summary_large_image"/>
 <meta property="twitter:title" content="Franklin Santos: Análisis de correspondencia con R"/>
 <meta property="twitter:description" content="Análisis para variables categóricas utilizando la metodología de tablas cruzadas con la prueba de chi-cuadrado. Este análisis es una recopilación del libro Multivariate Analysis II: Practical Guide To Principal Component Methods in R."/>
+<meta property="twitter:url" content="https://franklinsantos.com/posts/2021-03-14-analiscorrespondencia/"/>
+<meta property="twitter:image" content="https://franklinsantos.com/posts/2021-03-14-analiscorrespondencia/featured.png"/>
+<meta property="twitter:image:width" content="494"/>
+<meta property="twitter:image:height" content="405"/>
 
+<!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing -->
+<meta name="citation_title" content="Franklin Santos: Análisis de correspondencia con R"/>
+<meta name="citation_fulltext_html_url" content="https://franklinsantos.com/posts/2021-03-14-analiscorrespondencia/"/>
+<meta name="citation_online_date" content="2020/11/07"/>
+<meta name="citation_publication_date" content="2020/11/07"/>
+<meta name="citation_author" content="Franklin Santos"/>
+<meta name="citation_author_institution" content="AgriTech Bolivia"/>
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","categories","author","date","preview","output"]}},"value":[{"type":"character","attributes":{},"value":["Análisis de correspondencia con R"]},{"type":"character","attributes":{},"value":["Análisis para variables categóricas utilizando la metodología de tablas cruzadas con la prueba de chi-cuadrado. Este análisis es una recopilación del libro Multivariate Analysis II: Practical Guide To Principal Component Methods in R."]},{"type":"character","attributes":{},"value":["Chi-cuadrado","Biplot","Componentes Principales"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","orcid_id"]}},"value":[{"type":"character","attributes":{},"value":["Franklin Santos"]},{"type":"character","attributes":{},"value":["https://franklinsantos.com"]},{"type":"character","attributes":{},"value":["AgriTech Bolivia"]},{"type":"character","attributes":{},"value":["0000-0002-7509-2910"]}]}]},{"type":"character","attributes":{},"value":["11-07-2020"]},{"type":"character","attributes":{},"value":["featured.png"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","categories","author","date","preview","output","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Análisis de correspondencia con R"]},{"type":"character","attributes":{},"value":["Análisis para variables categóricas utilizando la metodología de tablas cruzadas con la prueba de chi-cuadrado. Este análisis es una recopilación del libro Multivariate Analysis II: Practical Guide To Principal Component Methods in R."]},{"type":"character","attributes":{},"value":["Chi-cuadrado","Biplot","Componentes Principales"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","orcid_id"]}},"value":[{"type":"character","attributes":{},"value":["Franklin Santos"]},{"type":"character","attributes":{},"value":["https://franklinsantos.com"]},{"type":"character","attributes":{},"value":["AgriTech Bolivia"]},{"type":"character","attributes":{},"value":["0000-0002-7509-2910"]}]}]},{"type":"character","attributes":{},"value":["11-07-2020"]},{"type":"character","attributes":{},"value":["featured.png"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["https://franklinsantos.com/posts/2021-03-14-analiscorrespondencia/"]},{"type":"character","attributes":{},"value":["https://franklinsantos.com/posts/2021-03-14-analiscorrespondencia/"]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -2514,6 +2530,22 @@ Husband      0.6019199</code></pre>
 </div>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
+<div class="article-footer">
+  <p class="social_footer">
+    <span class="article-sharing">
+      Share: &nbsp;
+      <a href="https://twitter.com/share?text=An%C3%A1lisis%20de%20correspondencia%20con%20R&amp;url=https%3A%2F%2Ffranklinsantos.com%2Fposts%2F2021-03-14-analiscorrespondencia%2F">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=https%3A%2F%2Ffranklinsantos.com%2Fposts%2F2021-03-14-analiscorrespondencia%2F">
+        <i class="fab fa-facebook"></i>
+      </a>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Ffranklinsantos.com%2Fposts%2F2021-03-14-analiscorrespondencia%2F&amp;title=An%C3%A1lisis%20de%20correspondencia%20con%20R">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </span>
+  </p>
+</div>
 <!--/radix_placeholder_article_footer-->
 </div>
 
@@ -2524,7 +2556,18 @@ Husband      0.6019199</code></pre>
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->
 <!--radix_placeholder_appendices-->
-<div class="appendix-bottom"></div>
+<div class="appendix-bottom">
+  <h3 id="citation">Citation</h3>
+  <p>For attribution, please cite this work as</p>
+  <pre class="citation-appendix short">Santos (2020, Nov. 7). Franklin Santos: Análisis de correspondencia con R. Retrieved from https://franklinsantos.com/posts/2021-03-14-analiscorrespondencia/</pre>
+  <p>BibTeX citation</p>
+  <pre class="citation-appendix long">@misc{santos2020análisis,
+  author = {Santos, Franklin},
+  title = {Franklin Santos: Análisis de correspondencia con R},
+  url = {https://franklinsantos.com/posts/2021-03-14-analiscorrespondencia/},
+  year = {2020}
+}</pre>
+</div>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
 <!--/radix_placeholder_navigation_after_body-->
