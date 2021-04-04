@@ -23,7 +23,9 @@ navbar:
       href: https://twitter.com/FranklinSantosM 
     - icon: fa fa-github
       href: https://github.com/FranklinSantosM 
-output: distill::distill_article
+output: 
+  distill::distill_article:
+    css: my_theme.css
 rss:
   full_content: true
 collections:
