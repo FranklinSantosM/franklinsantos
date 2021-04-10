@@ -1,5 +1,5 @@
 ---
-title: "Análisis del cambio de la temperatura"
+title: "Análisis del cambio de la temperatura del aire"
 description: |
   Se analiza las tendencias del cambio de la temperatura desde el año 1960 hasta 2019 en cada región de los continentes del mundo.
 categories:
