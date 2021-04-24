@@ -7,7 +7,19 @@
     <description>Data Scientist, Plant Breeder and Analist Data
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Mon, 01 Mar 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 01 Apr 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Análisis de la situación de pesticidas en la agricultura</title>
+      <dc:creator>Franklin Santos</dc:creator>
+      <link>https://franklinsantos.com/posts/2021-04-10-pesticides</link>
+      <description>Situación de pesticidas en la agricultura desde 1990 hasta 2017.</description>
+      <category>Pesticides</category>
+      <category>Herbecides</category>
+      <category>Insecticides</category>
+      <guid>https://franklinsantos.com/posts/2021-04-10-pesticides</guid>
+      <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://franklinsantos.com/posts/2021-04-10-pesticides/picture.png" medium="image" type="image/png" width="1408" height="1052"/>
+    </item>
     <item>
       <title>Análisis del cambio de la temperatura del aire</title>
       <dc:creator>Franklin Santos</dc:creator>

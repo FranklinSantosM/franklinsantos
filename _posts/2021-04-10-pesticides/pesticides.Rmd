@@ -1,0 +1,294 @@
+---
+title: "Análisis de la situación de pesticidas en la agricultura"
+description: |
+  Situación de pesticidas en la agricultura desde 1990 hasta 2017.
+categories:
+  - Pesticides
+  - Herbecides
+  - Insecticides
+author:
+  - name: Franklin Santos
+    url: https://franklinsantos.com
+    affiliation: Agritech Bolivia
+    orcid_id: 0000-0002-7509-2910
+date: 04-01-2021
+preview: picture.png
+output:
+  distill::distill_article:
+    self_contained: false
+bibliography: refs.bib
+---
+<style>
+body {
+text-align: justify}
+</style>
+
+## Introducción
+
+La FAO (Organización de las Naciones Unidas para la Agricultura y la Alimentación) define los plaguicidas como cualquier sustancia o mezcla de sustancias de ingredientes químicos o biológicos destinados a repeler, destruir o controlar cualquier plaga, o regular el crecimiento de las plantas [@world2016international]. 
+
+Las moléculas activas de los plaguicidas pertenecen a diversos grupos químicos y son capaces de interactuar con el funcionamiento normal de los sistemas vivos, por lo que pueden alterar diversas vías metabólicas para crear numerosas patologías. Las pesticidas pueden clasificarse en función de la plaga que controlan (fungicidas, insecticidas, herbicidas) o de la clase química (organoclorados, piretroides, organofosforados) [@barros2016contributing].
+>El objetivo de este post es analizar las tendencias de plaguicidas en los principales países con mayor producción agrícola y algunos países de América Latina.
+
+## Metodología 
+
+La información base para este post se recopiló de la pagina oficial de [FAOSTAT](http://www.fao.org/faostat/en/#data/EP). Esta información contiene el total de pesticidas usadas por hectárea que corresponde a cada país. Por otro lado, para conocer las plaguicidas por tipo se obtuvo de la página oficial de [Our World in Data](https://ourworldindata.org/pesticides). Sin embargo, no existe información para muchos países. Para el análisis estadístico se utilizó los paquetes *tidyverse* @tidyverse y *highcharter* @highcharter. 
+
+
+```{r, echo=FALSE}
+## Load libraries
+library(tidyverse)
+library(highcharter)
+library(kableExtra)
+```
+
+```{r, echo=FALSE}
+## Import data
+datap<- read.csv("~/Documents/R_practice/franklinsantos/_posts/2021-04-10-pesticides/plaguicidas.csv")
+
+pestby <- read.csv("~/Documents/R_practice/franklinsantos/_posts/2021-04-10-pesticides/pesticide-breakdown-by-type.csv")
+
+```
+
+La primera base de datos corresponde a la información total de pesticidas por país. Esta información presenta datos históricos y además reporta la cantidad de pesticida utilizada en kilogramos por hectárea de cada país.
+
+```{r, echo=FALSE}
+## Tidy data
+# tidy datap
+dataselect <- datap %>%
+  select(Área, Año, Valor) %>%
+  rename(Pais="Área", Plaguicida = "Valor")
+
+#develop table with scroll
+kable(cbind(dataselect, dataselect), "html", caption = 'Información total de pesticidas por país (kg ha^-1^)') %>%
+    kable_styling() %>%
+    scroll_box(width = "100%", height = "200px")
+
+```
+
+
+
+La segunda base de datos reporta la cantidad total acumulada en toneladas por tipo de pesticidas. Esta información se relaciona con la superficie cultivada. Entonces, aquellos países con mayor cantidad de superficie cultivada obviamente demandan mayor cantidad de pesticidas.
+
+
+```{r, echo=FALSE}
+#tidy data pestby
+datapestby <- pestby %>%
+  rename(Herbicides = "Pesticides.Use...Herbicides...1320...Agricultural.Use...5157...tonnes", Insecticides = "Pesticides.Use...Insecticides...1309...Agricultural.Use...5157...tonnes", FungiBacte = "Pesticides.Use...Fungicides.and.Bactericides...1331...Agricultural.Use...5157...tonnes") %>%
+  select(Entity, Year, Herbicides, Insecticides, FungiBacte) %>%
+  pivot_longer(
+    cols = Herbicides:FungiBacte,
+    names_to = "Pesticides",
+    values_to = "Valortonnes"
+  ) 
+
+#develop table with scroll
+kable(cbind(datapestby, datapestby), "html", caption = 'Información de pesticidas por tipo (t)') %>%
+    kable_styling() %>%
+    scroll_box(width = "100%", height = "200px")
+```
+
+
+## Resultados
+
+### Tendencia de uso de pesticidas en la agricultura
+
+El uso de pesticidas en los diferentes países desde 1990 hasta 2018, tuvo una tendencia de incremento por hectárea (Figura 1). En específico, Brasil tuvo crecimiento significativo. Este país en los años 90 utilizaba alrededor 1 kg ha^-1^; sin embargo, ahora el uso de pesticidas oscila alrededor de 6 kg ha^-1^. Asimismo, Argentina comparte estas tendencias de incremento en el uso de pesticidas. Durante 1990 al 2005, Chile lideraba el ranking de uso de pesticidas.  
+
+```{r, echo=FALSE, fig.cap="Tendencia de pesticidas desde 1990 hasta 2018 (kg ha^-1^)"}
+## plots
+# Pesticidas kg/ha diferentes paises
+country <- dataselect %>%
+  filter(Pais %in% c("Estados Unidos de América", 
+                      "Bolivia (Estado Plurinacional de)", 
+                      "Chile",
+                      "Brasil",
+                     "Perú",
+                     "Argentina")
+  )
+
+
+# Plot pesticidas latinamerica y Estados Unidos
+hc <- hchart(country, "line",
+              hcaes(x=Año, y=Plaguicida, group = Pais, color = Pais)) %>%
+              hc_xAxis(title = list(text = "Años")) %>%
+              hc_yAxis(title = list(text = "Cantidad pesticidas (kg ha^-1^)"))%>%
+              hc_credits(
+                enabled =TRUE,
+                text = "Data Source: FAOSTAT;http://www.fao.org/faostat/en/#data/EP",
+                style = list(fontSize = "10px")
+                )
+
+hc
+```
+
+De acuerdo a los datos, Perú fue el país que menos usó y usa pesticidas en sus áreas de cultivo (Figura 1). En 1990 Perú usaba 0.34 kg ha^-1^ y en 2017 registró el dato más alto de uso de pesticidas (2.06 kg ha^-1^). Asimismo, Bolivia tiene una tendencia de incremento de uso de pesticidas. Sin embargo, la tendencia de Estados Unidos llama la atención en la figura 1. Este país siempre está entre las primeras ubicaciones del ranking de productividad, superficie cultivada y rendimiento. Pero el uso de pesticidas en este país solamente fluctuó entre un rango de 2.14 y 2.59 kg ha^-1^. Esta tendencia constante del uso de pesticidas genera varias interrogantes para analizar. 
+
+
+```{r, echo=FALSE, fig.cap="Tendencia de pesticidas totales"}
+# Consumo de pesticida total por año
+pestyear <- datapestby %>%
+  group_by(Entity, Year) %>%
+  summarise(Pesticitot = sum(Valortonnes))
+
+# Selección de paises
+selcountry <- pestyear %>%
+  filter(Entity %in% c("Bolivia",
+                       "Argentina",
+                       "Brazil",
+                       "Peru",
+                       "United States")
+  )
+
+# Plot Total pesticidas en toneladas
+hc1 <- hchart(selcountry, "line",
+              hcaes(x=Year, y=Pesticitot, group = Entity, color = Entity)) %>%
+              hc_xAxis(title = list(text = "Años")) %>%
+              hc_yAxis(title = list(text = "Cantidad pesticidas (t)"))%>%
+              hc_credits(
+                enabled =TRUE,
+                text = "Data Source: Our Data;https://ourworldindata.org/pesticides",
+                style = list(fontSize = "10px")
+                )
+
+hc1
+```
+
+De acuerdo a la figura 2, Brasil y Argentina son los países que usaron mayor cantidad de pesticidas en el transcurso de 1990 al 2017. Esto podría deberse al incremento de la superficie cultivable u otro factor. 
+
+### Uso de pesticidas por tipo
+
+#### Bolivia
+
+```{r, echo=FALSE, fig.cap="Tendencia de pesticidas totales por tipo en Bolivia"}
+#Pesticidas por categoría Bolivia
+bypestbolivia <- datapestby %>%
+  filter(Entity %in% c("Bolivia")
+  )
+
+#grouped area plot with highcharter Bolivia
+hc2 <- hchart(bypestbolivia, 'area', 
+              hcaes(x = 'Year', y = 'Valortonnes', group = "Pesticides")) %>%
+              hc_xAxis(title = list(text = "Años")) %>%
+              hc_yAxis(title = list(text = "Cantidad pesticidas (t)"))%>%
+              hc_credits(
+                enabled =TRUE,
+                text = "Data Source: Our Data;https://ourworldindata.org/pesticides",
+                style = list(fontSize = "10px")
+                )
+hc2
+```
+
+De acuerdo a esta información, Bolivia usa mayor cantidad de herbicidas entre los pesticidas. Las fungicidas y bactericidas se ubican en segundo lugar seguida por insecticidas. 
+
+#### Brasil
+
+```{r, echo=FALSE, fig.cap="Tendencia de pesticidas totales por tipo en Brasil"}
+#Pesticidas por categoría Brazil
+bypestbrazil <- datapestby %>%
+  filter(Entity %in% c("Brazil")
+  )
+
+#grouped area plot with highcharter Bolivia
+hc3 <- hchart(bypestbrazil, 'area', 
+              hcaes(x = 'Year', y = 'Valortonnes', group = "Pesticides")) %>%
+              hc_xAxis(title = list(text = "Años")) %>%
+              hc_yAxis(title = list(text = "Cantidad pesticidas (t)"))%>%
+              hc_credits(
+                enabled =TRUE,
+                text = "Data Source: Our Data;https://ourworldindata.org/pesticides",
+                style = list(fontSize = "10px")
+                )
+
+hc3
+```
+
+En Brasil las pesticidas lideran en cuanto al primer requerimiento en la agricultura seguida por insecticidas.
+
+#### Argentina
+
+```{r, echo=FALSE, fig.cap="Tendencia de pesticidas totales por tipo en Argentina"}
+#Pesticidas por categoría Agentina
+bypestargentina <- datapestby %>%
+  filter(Entity %in% c("Argentina")
+  )
+
+#grouped area plot with highcharter Bolivia
+hc4 <- hchart(bypestargentina, 'area', 
+              hcaes(x = 'Year', y = 'Valortonnes', group = "Pesticides")) %>%
+              hc_xAxis(title = list(text = "Años")) %>%
+              hc_yAxis(title = list(text = "Cantidad pesticidas (t)"))%>%
+              hc_credits(
+                enabled =TRUE,
+                text = "Data Source: Our Data;https://ourworldindata.org/pesticides",
+                style = list(fontSize = "10px")
+                )
+hc4
+```
+
+En Argentina las herbicidas fueron las más requeridas para controlar las malezas en los diferentes cultivos de este país. 
+
+#### Estados Unidos
+
+```{r, echo=FALSE, fig.cap="Tendencia de pesticidas totales por tipo en Estados Unidos"}
+#Pesticidas por categoría USA
+bypestUS <- datapestby %>%
+  filter(Entity %in% c("United States")
+  )
+
+#grouped area plot with highcharter Bolivia
+hc5 <- hchart(bypestUS, 'area', 
+              hcaes(x = 'Year', y = 'Valortonnes', group = "Pesticides")) %>%
+              hc_xAxis(title = list(text = "Años")) %>%
+              hc_yAxis(title = list(text = "Cantidad pesticidas (t)"))%>%
+              hc_credits(
+                enabled =TRUE,
+                text = "Data Source: Our Data;https://ourworldindata.org/pesticides",
+                style = list(fontSize = "10px")
+                )
+hc5
+```
+
+En los Estados Unidos las herbicidas son las más demandadas para controlar las malezas. Asimismo, las insecticidas se ubican en segundo lugar para controlar el daño de insectos en los diferentes cultivos.
+
+#### Perú
+
+```{r, echo=FALSE, fig.cap="Tendencia de pesticidas totales por tipo en Perú"}
+#Pesticidas por categoría Perú
+bypestperu <- datapestby %>%
+  filter(Entity %in% c("Peru")
+  )
+
+#grouped area plot with highcharter Bolivia
+hc6 <- hchart(bypestperu, 'area', 
+              hcaes(x = 'Year', y = 'Valortonnes', group = "Pesticides")) %>%
+              hc_xAxis(title = list(text = "Años")) %>%
+              hc_yAxis(title = list(text = "Cantidad pesticidas (t)")) %>%
+              hc_credits(
+                enabled =TRUE,
+                text = "Data Source: Our Data;https://ourworldindata.org/pesticides",
+                style = list(fontSize = "10px")
+                )
+hc6
+```
+
+
+En Perú, las fungicidas y bactercidas fueron las más demandas hasta el año 2010. Posterior a ello, las herbicidas se hubicaron en primer lugar para controlar las malezas. 
+
+## Conclusión
+
+Argentina y Brasil lideran en cuanto al uso de pesticidas por hectárea. Además, tuvieron el mayor incremento de uso de pesticidas de acuerdo a las tendencias históricas. Por otro lado, el uso de herbicidas tuvo un incremento exponencial en los diferentes países de la región.   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
