@@ -28,6 +28,7 @@ text-align: justify}
 La FAO (Organización de las Naciones Unidas para la Agricultura y la Alimentación) define los plaguicidas como cualquier sustancia o mezcla de sustancias de ingredientes químicos o biológicos destinados a repeler, destruir o controlar cualquier plaga, o regular el crecimiento de las plantas [@world2016international]. 
 
 Las moléculas activas de los plaguicidas pertenecen a diversos grupos químicos y son capaces de interactuar con el funcionamiento normal de los sistemas vivos, por lo que pueden alterar diversas vías metabólicas para crear numerosas patologías. Las pesticidas pueden clasificarse en función de la plaga que controlan (fungicidas, insecticidas, herbicidas) o de la clase química (organoclorados, piretroides, organofosforados) [@barros2016contributing].
+
 >El objetivo de este post es analizar las tendencias de plaguicidas en los principales países con mayor producción agrícola y algunos países de América Latina.
 
 ## Metodología 
