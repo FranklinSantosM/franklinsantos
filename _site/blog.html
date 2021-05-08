@@ -2050,6 +2050,17 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     border-left: 0;
   }
 
+  :root {
+    --green: #212D2C;
+    --sky: #A9FDFF;
+  }
+
+  .my-color {
+    background-color: var(--green);
+    color: var(--sky); 
+    padding: 1em;
+  }
+
   .distill-site-nav {
     color: #ffffff;
     font-weight: 400;
@@ -2074,6 +2085,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     border-top: 2px solid #DECF40;
     border-bottom: 0;
   }
+
   </style>
   <!--/radix_placeholder_site_in_header-->
 
@@ -2258,6 +2270,27 @@ function init_posts_list() {
 <div class="posts-container posts-with-sidebar posts-apply-limit l-screen-inset">
 <div class="posts-list">
 <h1 class="posts-list-caption" data-caption="Posts">Posts</h1>
+<a href="posts/2021-05-05-datable/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":["data.table","R","Data Science"]}</script>
+<div class="metadata">
+<div class="publishedDate">May 5, 2021</div>
+<div class="dt-authors">
+<div class="dt-author">Franklin Santos</div>
+</div>
+</div>
+<div class="thumbnail">
+<img src="posts/2021-05-05-datable/dt.png"/>
+</div>
+<div class="description">
+<h2>Transformación de datos con el paquete data.table</h2>
+<div class="dt-tags">
+<div class="dt-tag">data.table</div>
+<div class="dt-tag">R</div>
+<div class="dt-tag">Data Science</div>
+</div>
+<p>Es una recopilación de "data.table Introduction" y "Listen Data". Los ejemplos se tradujeron del Ingles al Español para facilitar la comprensión de este paquete.</p>
+</div>
+</a>
 <a href="posts/2021-04-10-pesticides/" class="post-preview">
 <script class="post-metadata" type="text/json">{"categories":["Pesticides","Herbecides","Insecticides"]}</script>
 <div class="metadata">
@@ -2351,7 +2384,7 @@ function init_posts_list() {
 </div>
 </div>
 <div class="thumbnail">
-<img src="posts/2021-03-14-componentes-principales/featured.png"/>
+<img data-src="posts/2021-03-14-componentes-principales/featured.png"/>
 </div>
 <div class="description">
 <h2>Análisis de Componentes Principales</h2>
@@ -2454,7 +2487,7 @@ function init_posts_list() {
 <ul>
 <li>
 <a href="#category:Articles">Articles</a>
-<span class="category-count">(9)</span>
+<span class="category-count">(10)</span>
 </li>
 <li>
 <a href="#category:Air_Temperature">Air Temperature</a>
@@ -2498,7 +2531,11 @@ function init_posts_list() {
 </li>
 <li>
 <a href="#category:Data_Science">Data Science</a>
-<span class="category-count">(2)</span>
+<span class="category-count">(3)</span>
+</li>
+<li>
+<a href="#category:data.table">data.table</a>
+<span class="category-count">(1)</span>
 </li>
 <li>
 <a href="#category:FAOSTAT_Data">FAOSTAT Data</a>
@@ -2530,7 +2567,7 @@ function init_posts_list() {
 </li>
 <li>
 <a href="#category:R">R</a>
-<span class="category-count">(1)</span>
+<span class="category-count">(2)</span>
 </li>
 <li>
 <a href="#category:Tidy_Data">Tidy Data</a>

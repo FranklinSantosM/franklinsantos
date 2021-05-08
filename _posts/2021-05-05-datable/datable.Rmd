@@ -1,0 +1,346 @@
+---
+title: "Transformación de datos con el paquete data.table"
+description: |
+  Es una recopilación de "data.table Introduction" y "Listen Data". Los ejemplos se tradujeron del Ingles al Español para facilitar la comprensión de este paquete.
+categories:
+  - data.table
+  - R
+  - Data Science
+author:
+  - name: Franklin Santos
+    url: https://franklinsantos.com
+    affiliation: Agritech Bolivia
+    orcid_id: 0000-0002-7509-2910
+date: 05-05-2021
+preview: dt.png
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+    toc_depth: 3
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+
+## 1. Introducción
+
+El paquete **data.table** es una interfaz de limpieza y transformación de datos altamente optimizada. Este paquete es áltamente eficiente para operar grandes tamaños de datos más conocido como *Big Data* (por ejemplo, más de 10 millones de filas o > 10 GB). La mayor razón para usar **data.table** es simple: la velocidad.
+
+Este paquete se diseñó para ser conciso y sin complicaciones. Hay algunas referencias que comparan *dplyr* vs *data.table* y en la cual **data.table** es el ganador. La eficiencia de este paquete también se comparó con el paquete de **python** (*panda*) y también gana **data.table**.
+
+## 2. Procedimiento con data.table 
+### 2.1. Sintaxis de data.table
+La sintaxis de [data.table]{.my-color} se muestra en la siguiente imagen:
+
+![](dt.png)
+
+- El primer parámetro de data.table es **i** se refiere a las filas. Implica un subconjunto de filas. Equivale a la cláusula *WHERE* de SQL
+- El segundo parámetro de data.table es **j** se refiere a las columnas. Implica el subconjunto de columnas. Equivale a la cláusula *SELECT* en SQL.
+- El tercer parámetro de data.table es **by** se refiere a añadir un grupo para que todos los cálculos se hagan dentro de un grupo. Equivale a la cláusula *GROUP BY* de SQL.
+
+### 2.2. Cómo instalar y cargar el paquete **data.table**
+
+```{r, eval=FALSE}
+install.packages("data.table") #Instalar el paquete
+```
+
+```{r}
+library(data.table)
+```
+
+### 2.3. Leer o importar datos
+
+En el paquete *data.table*, la función **fread()** está disponible para leer u obtener datos de su ordenador o de una página web. Es equivalente a la función read.csv() de R básico.
+
+```{r}
+#base de datos 
+mydata = fread("https://github.com/arunsrinivasan/satrdays-workshop/raw/master/flights_2014.csv")
+```
+
+### 2.4. Caracteristicas de los datos
+
+Este conjunto de datos contiene 253000 observaciones y 17 columnas. Constituye información sobre la hora de llegada o salida de los vuelos, los retrasos, la cancelación de vuelos y el destino en el año 2014.
+
+```{r}
+nrow(mydata) #número de filas
+ncol(mydata) #número de columnas
+```
+
+```{r}
+names(mydata) #nombre de las variables de respuesta
+```
+
+```{r}
+head(mydata) #mostrar las primeras filas de datos
+```
+
+### 2.5. Seleccionar o mantener columnas
+
+Suponga que necesita seleccionar sólo la columna `origin`. Puede utilizar el siguiente código
+
+```{r}
+dat1 <- mydata[, origin] #devuelve un vector
+```
+
+>La línea de código anterior devuelve un vector no una tabla de datos.
+
+Para obtener el resultado en formato data.table, ejecute el siguiente código:
+
+```{r}
+dat01 <- mydata[, .(origin)] #devuelve una tabla de datos
+```
+
+#### 2.5.1. Mantener múltiples columnas
+
+El siguiente código le dice a R que seleccione las columnas 'origin', 'year', 'month', y 'hour'.
+
+```{r}
+dat2 <- mydata[, .(origin, year, month, hour)]
+head(dat2)
+```
+
+
+#### 2.5.2. Mantener varias columnas en función de la posición de la columna
+
+Puede mantener de la segunda a la cuarta columna utilizando el siguiente código
+
+```{r}
+dat3 <- mydata[, c(2:4)]
+head(dat3)
+```
+
+#### 2.5.3. Cómo eliminar una columna
+
+Suponga que quiere incluir todas las variables excepto una columna, digamos 'origin'. Se puede hacer fácilmente añadiendo el signo **!** (implica la negación en R)
+
+```{r}
+dat4 <- mydata[, !c("origin")] #eliminar una sola columna
+dat5 <- mydata[, !c("origin", "year", "month")] #eliminar varias columnas
+head(dat5)
+```
+
+### 2.6. Renombrar variables
+
+Seleccionamos las columnas `arr_delay` y `dep_delay`, luego renombramos como `redelay_arr` y `redelay_dep`.
+
+```{r}
+ans <- mydata[, .(delay_arr = arr_delay, delay_dep = dep_delay)]
+head(ans)
+```
+
+**Otra opción** 
+Puedes renombrar las variables con la función **setnames()**. En el siguiente código, estamos renombrando una variable *'dest'* a *'destination'*.
+
+```{r, eval=FALSE}
+fs01 <- setnames(mydata,           #datos
+         c("month"),        #variable a renombrar
+         c("meses")  #variable renombrada
+         )
+```
+
+Para renombrar múltiples variables, puedes simplemente añadir variables en ambos lados.
+
+```{r, eval=FALSE}
+fs02 <- setnames(mydata,           #datos
+         c("dest", "origin"),        #variable a renombrar
+         c("Destination", "origin.of.flight")  #variable renombrada
+         )
+```
+
+
+### 2.7. Subconjunto de filas/Filtrado
+
+Supongamos que se le pide que encuentre todos los vuelos cuyo origen sea "JFK".
+
+```{r}
+dat6 <- mydata[origin == "JFK"] 
+```
+
+#### 2.7.1. Seleccionar varios valores
+
+Filtrar todos los vuelos cuyo origen sea "JFK" o "LGA
+
+```{r}
+dat7 <- mydata[origin %in% c("JFK", "LGA")]
+```
+
+#### 2.7.2. Aplicar el operador lógico : NOT
+
+El siguiente código selecciona todos los vuelos cuyo origen no es igual a 'JFK' y 'LGA'
+
+```{r}
+dat8 <- mydata[!origin %in% c("JFK", "LGA")] #Excluir valores
+```
+
+#### 2.7.3. Filtro basado en múltiples variables
+
+Si necesita seleccionar todos los vuelos cuyo origen sea igual a 'JFK' y la compañía aérea = 'AA'
+
+```{r}
+dat9 <- mydata[origin == "JFK" & carrier == "AA"]
+```
+
+### 2.8. Ordenar los datos
+
+Podemos ordenar los datos utilizando la función **setorder()**, por defecto, ordena los datos en orden ascendente.
+
+```{r}
+mydata01 <- setorder(mydata, origin)
+```
+
+#### 2.8.1. Ordenar los datos en orden descendente
+
+En este caso, estamos ordenando los datos por la variable *'origin'* en orden descendente.
+
+```{r}
+mydata02 <- setorder(mydata, -origin)
+```
+
+#### 2.8.2. Ordenación de datos basada en múltiples variables
+
+En este ejemplo, le decimos a R que reordene los datos primero por el origen en orden ascendente y luego por la variable 'carrier' en orden descendente.
+
+```{r}
+mydata03 <- setorder(mydata, origin, -carrier)
+```
+
+### 2.9. Adición de columnas (Cálculo sobre filas)
+
+Puede realizar cualquier operación en las filas añadiendo el operador **:=**. En este ejemplo, estamos restando la variable *'dep_delay'* de la variable *'dep_time'* para calcular la hora de salida programada.
+
+```{r}
+mydata[, dep_sch := dep_time-dep_delay]
+```
+
+#### 2.9.1. Añadiendo varias columnas
+
+```{r}
+mydata[, c("dep_sch","arr_sch"):=list(dep_time - dep_delay, 
+                                      arr_time - arr_delay)]
+```
+
+Si no quiere hacer cambios (adición de columnas) en los datos originales, puede hacer una copia de los mismos.
+
+```{r}
+mydata_C <- copy(mydata)
+mydata_C[, c("dep_sch","arr_sch"):=list(dep_time - dep_delay, 
+                                        arr_time - arr_delay)]
+```
+
+### 2.10. Resumir o agregar columnas
+
+Al igual que el procedimiento *SAS* PROC MEANS, podemos generar estadísticas de resumen de variables específicas. En este caso, estamos calculando la media, la mediana, el valor mínimo y el máximo de la variable *arr_delay*.
+
+```{r}
+mydata[, .(mean = mean(arr_delay, na.rm = TRUE),
+           median = median(arr_delay, na.rm = TRUE),
+           min = min(arr_delay, na.rm = TRUE),
+           max = max(arr_delay, na.rm = TRUE))]
+```
+
+#### 2.10.1. Subconjunto en i y hacer en j
+
+- Calcule el retraso promedio de llegada y salida de todos los vuelos con "JFK" como aeropuerto de origen en el mes de junio.
+
+```{r}
+ans1 <- mydata[origin == "JFK" & month == 6L,
+               .(m_arr = mean(arr_delay), m_dep = mean(dep_delay))]
+ans1
+```
+
+  - En primer lugar, se realiza un subconjunto en **i** para encontrar los índices de las filas que coinciden con el aeropuerto de origen igual a `"JFK"` y el mes igual a `6L`. Todavía no hacemos un subconjunto de toda la tabla de datos correspondiente a esas filas.
+
+  - Ahora, miramos en **j** y descubrimos que sólo utiliza dos columnas. Y lo que tenemos que hacer es calcular su `mean()`. Por lo tanto, subconjuntamos sólo las columnas correspondientes a las filas que coinciden, y calculamos su `mean()`.
+
+Como los tres componentes principales de la consulta (**i**, **j** y **by**) están juntos dentro de `[...]`, data.table puede ver los tres y optimizar la consulta en conjunto antes de la evaluación, no cada uno por separado. Por lo tanto, podemos evitar el subconjunto completo (es decir, el subconjunto de las columnas además de `arr_delay` y `dep_delay`), tanto por velocidad como por eficiencia de memoria.
+
+
+#### 2.10.2. Resumir múltiples columnas
+
+Para resumir múltiples variables, podemos simplemente escribir toda la función de estadísticas de resumen en un corchete. Véase el siguiente comando.
+
+```{r}
+mydata[, .(mean(arr_delay), mean(dep_delay))]
+```
+
+Si necesita calcular estadísticas de resumen para una lista más amplia de variables, puede utilizar los operadores **.SD** y **.SDcols**. El operador **.SD** implica *subconjunto de datos*.
+
+```{r}
+mydata[, lapply(.SD, mean), .SDcols = c("arr_delay", "dep_delay")]
+```
+
+En este caso, estamos calculando la media de dos variables - *arr_delay* y *dep_delay*.
+
+#### 2.10.3. Resumir todas las columnas numéricas
+
+Por defecto, **.SD** toma todas las variables continuas (excluyendo las variables de agrupación).
+
+```{r}
+mydata[, lapply(.SD, mean)]
+```
+
+#### 2.10.4. Resumir con múltiples estadísticas`
+
+```{r}
+fs <- mydata[, .(year, month, day, dep_delay, arr_time, hour)]
+fs[, sapply(.SD, function(x) c(mean=mean(x), 
+                               median=median(x),
+                               min = min(x),
+                               max = max(x),
+                               sd = sd(x)))]
+```
+
+
+### 2.11. GROUP BY (Cálculo dentro del grupo)
+
+#### 2.11.1. Resumir by group `origin`
+
+```{r}
+mydata[, .(mean_arr_delay = mean(arr_delay, na.rm = TRUE)), by = origin]
+```
+
+#### 2.11.2. Utilizar la columna clave en una operación by
+
+En lugar de `by`, puede utilizar el operador **keyby=**.
+
+```{r}
+mydata[, .(mean_arr_delay = mean(arr_delay, na.rm = TRUE)), keyby = origin]
+```
+
+#### 2.11.3. Resumir múltiples variables by group `origin`
+
+```{r}
+mydata[, .(mean(arr_delay, na.rm = TRUE), 
+           mean(dep_delay, na.rm = TRUE)), 
+       by = origin]
+```
+
+O bien, puede escribirse como se indica a continuación
+
+```{r}
+mydata[, lapply(.SD, mean, na.rm = TRUE), 
+       .SDcols = c("arr_delay", "dep_delay"), 
+       by = origin]
+```
+
+- ¿Cómo podemos obtener el número total de viajes para cada par de origen y destino para el código de la compañía aérea "AA"?
+
+```{r}
+ans3 <- mydata[carrier == "AA", .N, by = .(origin, dest)]
+head(ans3)
+```
+
+## 3. Conclusión
+
+- Este paquete es muy recomendable para ordenar o limpiar grandes cantidades de datos. Práctimamente **data.table** es una alternativa eficaz que el paquete **dplyr**.
+- Puede explorar más funciones en el [CHEAT SHEET](https://github.com/rstudio/cheatsheets/raw/master/datatable.pdf) o introducción a [data.table](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html)
+
+
+
+
+
+

@@ -7,6 +7,17 @@ d-article div.sourceCode pre {
   border-left: 0;
 }
 
+:root {
+  --green: #212D2C;
+  --sky: #A9FDFF;
+}
+
+.my-color {
+  background-color: var(--green);
+  color: var(--sky); 
+  padding: 1em;
+}
+
 .distill-site-nav {
   color: #ffffff;
   font-weight: 400;

@@ -7,7 +7,19 @@
     <description>Data Scientist, Plant Breeder and Analist Data
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Thu, 01 Apr 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 05 May 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Transformación de datos con el paquete data.table</title>
+      <dc:creator>Franklin Santos</dc:creator>
+      <link>https://franklinsantos.com/posts/2021-05-05-datable</link>
+      <description>Es una recopilación de "data.table Introduction" y "Listen Data". Los ejemplos se tradujeron del Ingles al Español para facilitar la comprensión de este paquete.</description>
+      <category>data.table</category>
+      <category>R</category>
+      <category>Data Science</category>
+      <guid>https://franklinsantos.com/posts/2021-05-05-datable</guid>
+      <pubDate>Wed, 05 May 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://franklinsantos.com/posts/2021-05-05-datable/dt.png" medium="image" type="image/png" width="1928" height="1174"/>
+    </item>
     <item>
       <title>Análisis de la situación de pesticidas en la agricultura</title>
       <dc:creator>Franklin Santos</dc:creator>
