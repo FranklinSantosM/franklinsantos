@@ -2,21 +2,21 @@
 title: "Franklin Santos"
 image: "fsm.png"
 links:
-  - label: ORCID
+  - label: '<i class="ai ai-orcid"></i> ORCID'
     url: "https://orcid.org/0000-0002-7509-2910"
-  - label: Researchgate
+  - label: '<i class="ai ai-researchgate"></i> Research Gate'
     url: "https://www.researchgate.net/profile/Franklin_Santos6"
-  - label: GitHub
-    url: "https://github.com/FranklinSantoM"
+  - label: '<i class="fab fa-github"></i> GitHub'
+    url: "https://github.com/FranklinSantosM"
   - label: Publons
     url: "https://publons.com/researcher/1566228/franklin-santos/"
-  - label: Google Scholar
+  - label: '<i class="ai ai-google-scholar"></i> Google Scholar'
     url: "https://scholar.google.com/citations?user=e0Tt_lAAAAAJ&hl=en"
-  - label: Email
+  - label: '<i class="fas fa-envelope"></i> Email'
     url: "mailto:ssantoss19@hotmail.com"
-  - label: Twitter
+  - label: '<i class="fab fa-twitter"></i> Twitter'
     url: "https://twitter.com/FranklinSantosM"
-  - label: Facebook
+  - label: '<i class="fab fa-facebook"></i> Facebook'
     url: "https://www.facebook.com/franklinsantosm"  
 
 site: distill::distill_website
@@ -56,3 +56,4 @@ Franklin Santos is plant and data scientist. He develops research work and data 
 * **Mentoring**
 * **Data Science**
 * **R programming**
+
