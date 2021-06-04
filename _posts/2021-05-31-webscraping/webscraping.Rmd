@@ -1,0 +1,100 @@
+---
+title: "Cosecha de datos de la web"
+description: |
+  Se realiza una introducción al web scraping con el paquete rvest para la cosecha de datos de la web.
+categories:
+  - Web Scraping
+  - Rvest
+  - Worldmeter
+author:
+  - name: Franklin Santos
+    url: https://franklinsantos.com
+    affiliation: Agritech Bolivia
+    orcid_id: 0000-0002-7509-2910
+date: 06-01-2021
+preview: logo.png
+output:
+  distill::distill_article:
+    self_contained: false
+bibliography: refs.bib
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+## 1. Introducción
+El "web scraping" es un proceso automatizado de recolección de datos e información de los sitios web. R es un lenguaje de programación muy popular para el web scraping. En él se utilizará un popular paquete de R llamado *rvest* para el raspado de datos web. **rvest** es un paquete que facilita el scrape (o cosecha) de datos de páginas web html, inspirado en librerías como *beautiful soup*. Está diseñado para trabajar con *magrittr* de manera que puedas expresar operaciones complejas como elegantes pipelines compuestos de piezas simples y fáciles de entender [@rv].
+
+
+## 2. Metodología
+Para realizar el web scraping (raspado de datos web), las librerías más usuales son *rvest* y *rselenium*. En este caso daremos uso al paquete *rvest* [@rv]. Para la limpieza de datos se usará el paquete *tidyverse* [@tidyverse]. 
+
+### 2.1. Cargado de paquetes
+```{r}
+#paquete para el raspado de datos de la web
+library(rvest)
+library(tidyverse)
+```
+
+### 2.2. Procedimiento de raspado de datos web
+Los datos a explorar serán de la página web de [Worldometer](https://www.worldometers.info/). Esta página contiene diferentes reportes estadídticos; sin embargo, a nosotros nos interesa los reportes diarios del COVID-19 del mundo. Para ello se procederá de la siguiente manera:
+
+  - El primer paso es ingresar a la página web y ubicar la información que se requiere.
+  - Ubicada la información en formato tabla se procede a copiar el link del sitio.
+  - Este link lo guardamos en un objeto llamado *url*.
+  - La función *read_html()* realiza la lectura de todo el archivo *html* que soporta a la página web en nuestro entorno de R.
+  - La función *html_table()* extrae todos los datos que esten en formato tabla del archivo *html*.
+
+```{r}
+#Raspar datos formato tabla
+url = "https://www.worldometers.info/coronavirus/"
+datacovid = read_html(url) %>% 
+  html_table()
+head(datacovid)
+
+```
+
+En este caso se pudo obtener tres tablas con su respectiva información. La primera tabla se refiere a la información COVID de hoy. La segunda tabla es la información COVID de ayer y la tercera es información de hace dos días. 
+
+### 2.3. Limpieza de datos
+
+Para este propósito realizaremos la limpieza de datos de la primera tabla.
+
+```{r}
+# Asignar a un objeto la primera tabla 
+table1 = datacovid[[1]]
+head(table1)
+
+```
+
+Los datos no estan limpios para operar algun análisis exploratorio, para ello necesitamos eliminar las primeras filas de continentes y las últimas filas de totales. El propósito es solamente quedarse con los países. 
+
+Para este proceso, necesito filtrar a traves de la columna *#*, ya que solamente anumera a los países.
+
+El objeto *aux* es para diferencias entre los números perdidos (NA) y los dátos existentes en la columna *#*. La función *is.na* identificará datos faltantes. Si identifica *NA*  nos dirá *TRUE* y se encuentra información será *FALSE*. Esto nos ayuda a filtrar de forma más sencilla y quedarnos con los datos que requerimos.
+
+```{r}
+#Filtrado de datos
+aux = is.na(table1$'#')
+
+tablecountry = table1[!aux,]
+tablecountry
+```
+
+La base de datos aún presenta signos `+` y `,` en las columnas. El siguiente procedimiento es quitar esos signos y convertirlo a datos numéricos.
+
+```{r}
+#Eliminando los signos
+tableclean = tablecountry %>% 
+  mutate_at(3:15, parse_number)
+
+head(tableclean)
+```
+
+Ahora nuestra base de datos desde la colunma *3* al *15* ya estan en formato numérica. La cual posibilita realizar operaciones estadíticas.
+
+## 3. Conclusión
+*rvest* es muy manejable para raspar datos de la web. En esta opurtunidad solamente vimos una opción de cosecha de datos disponibles en formato tabla. Para datos que no esten en formato tabla se requiere utilizar una herramienta llamada [selector gadget](https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb?hl=en). Esta herramienta ayuda a extraer nodos de html y a traves de ellos capturamos información.
+

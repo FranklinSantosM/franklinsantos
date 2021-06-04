@@ -7,7 +7,19 @@
     <description>Data Scientist, Plant Breeder and Analist Data
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Wed, 05 May 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 01 Jun 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Cosecha de datos de la web</title>
+      <dc:creator>Franklin Santos</dc:creator>
+      <link>https://franklinsantos.com/posts/2021-05-31-webscraping</link>
+      <description>Se realiza una introducción al web scraping con el paquete rvest para la cosecha de datos de la web.</description>
+      <category>Web Scraping</category>
+      <category>Rvest</category>
+      <category>Worldmeter</category>
+      <guid>https://franklinsantos.com/posts/2021-05-31-webscraping</guid>
+      <pubDate>Tue, 01 Jun 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://franklinsantos.com/posts/2021-05-31-webscraping/logo.png" medium="image" type="image/png" width="240" height="278"/>
+    </item>
     <item>
       <title>Transformación de datos con el paquete data.table</title>
       <dc:creator>Franklin Santos</dc:creator>
@@ -115,18 +127,6 @@
       <guid>https://franklinsantos.com/posts/2021-03-14-analiscorrespondencia</guid>
       <pubDate>Sat, 07 Nov 2020 00:00:00 +0000</pubDate>
       <media:content url="https://franklinsantos.com/posts/2021-03-14-analiscorrespondencia/featured.png" medium="image" type="image/png" width="494" height="405"/>
-    </item>
-    <item>
-      <title>Ordenar datos con el paquete Tidyverse</title>
-      <dc:creator>Franklin Santos</dc:creator>
-      <link>https://franklinsantos.com/posts/2021-03-14-tidyexam</link>
-      <description>Es un ejemplo de caso extraido del libro R4DS.</description>
-      <category>Data Science</category>
-      <category>Tidy Data</category>
-      <category>Tidyverse</category>
-      <guid>https://franklinsantos.com/posts/2021-03-14-tidyexam</guid>
-      <pubDate>Sat, 31 Oct 2020 00:00:00 +0000</pubDate>
-      <media:content url="https://franklinsantos.com/posts/2021-03-14-tidyexam/featured.png" medium="image" type="image/png" width="1262" height="586"/>
     </item>
   </channel>
 </rss>
