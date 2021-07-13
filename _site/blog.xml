@@ -7,7 +7,19 @@
     <description>Data Scientist, Plant Breeder and Analist Data
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Tue, 01 Jun 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 13 Jul 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Tendencias de rendimiento de los cultivos</title>
+      <dc:creator>Franklin Santos</dc:creator>
+      <link>https://franklinsantos.com/posts/2021-07-13-crop-model-yield</link>
+      <description>Se presenta las tendencias de rendimiento de los principales cultivos en los diez paises más poblados del mundo.</description>
+      <category>Crop Yield</category>
+      <category>Model</category>
+      <category>TidyTuesday</category>
+      <guid>https://franklinsantos.com/posts/2021-07-13-crop-model-yield</guid>
+      <pubDate>Tue, 13 Jul 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://franklinsantos.com/posts/2021-07-13-crop-model-yield/crop-model-yield_files/figure-html5/unnamed-chunk-8-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
     <item>
       <title>Cosecha de datos de la web</title>
       <dc:creator>Franklin Santos</dc:creator>
@@ -115,18 +127,6 @@
       <guid>https://franklinsantos.com/posts/2021-03-14-anova</guid>
       <pubDate>Sun, 15 Nov 2020 00:00:00 +0000</pubDate>
       <media:content url="https://franklinsantos.com/posts/2021-03-14-anova/featured.png" medium="image" type="image/png" width="494" height="405"/>
-    </item>
-    <item>
-      <title>Análisis de correspondencia con R</title>
-      <dc:creator>Franklin Santos</dc:creator>
-      <link>https://franklinsantos.com/posts/2021-03-14-analiscorrespondencia</link>
-      <description>Análisis para variables categóricas utilizando la metodología de tablas cruzadas con la prueba de chi-cuadrado. Este análisis es una recopilación del libro Multivariate Analysis II: Practical Guide To Principal Component Methods in R.</description>
-      <category>Chi-cuadrado</category>
-      <category>Biplot</category>
-      <category>Componentes Principales</category>
-      <guid>https://franklinsantos.com/posts/2021-03-14-analiscorrespondencia</guid>
-      <pubDate>Sat, 07 Nov 2020 00:00:00 +0000</pubDate>
-      <media:content url="https://franklinsantos.com/posts/2021-03-14-analiscorrespondencia/featured.png" medium="image" type="image/png" width="494" height="405"/>
     </item>
   </channel>
 </rss>
