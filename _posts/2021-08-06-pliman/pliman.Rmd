@@ -1,0 +1,126 @@
+---
+title: "Área foliar e índice de severidad con R"
+description: |
+   Les presento una alternativa para hallar área foliar e indice de severidad de enfermedades foliares utilizando el paquete pliman. pliman (PLant IMage ANalysis) es un paquete de R para el análisis de imágenes de plantas, principalmente de hojas.
+categories:
+  - Leaf Area
+  - Pliman
+  - Disease Severity
+author:
+  - name: Franklin Santos
+    url: https://franklinsantos.com
+    affiliation: Agritech Bolivia
+    orcid_id: 0000-0002-7509-2910
+date: 08-06-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+## Introducción
+
+La investigación agrícola conlleva evaluar distintas variables de respuesta. Una de ellas es *área foliar*. Determinar su valor y con precisión es muy importante en el fenotipado de plantas. Por otro lado, en la evaluación de enfermedades, generalmente una variable de respuesta es determinar la *severidad de la enfermedad* en las hojas. Registrar con precisión este valor es muy importante en las investigaciones agrícolas.
+
+Para facilitar y obtener datos precisos de área foliar y severidad de enfermedades se han desarrollado equipos y programas informáticos; sin embargo, la mayoría de ellos son patentados. Por tanto, la disponibilidad de herramientas de análisis de imágenes es de gran importancia principalmente para propósitos de investigación. Ademas, un procesamiento por lotes puede automatizar y acelerar en gran medida el proceso, lo que por supuesto es beneficioso en cualquier campo de investigación.
+
+En el cran de R existe un paquete que se llama [pliman](https://tiagoolivoto.github.io/pliman/), es un paquete de R desarrollado por [Tiago Olivoto](https://github.com/TiagoOlivoto) que ofrece un conjunto de funciones para realizar diversos análisis sobre imágenes de plantas, entre ellas está área foliar e índice de severidad. Por tanto, el objetivo de este post es obtener área foliar y severidad de enfermedades en base a imágenes de hojas utilizando el paquete pliman de R.
+
+## Análisis y visualización
+
+### Instalación
+
+Previamente, se recomienda instalar el paquete [EBImage](https://bioconductor.org/packages/release/bioc/html/EBImage.html), ya que *pliman* aprovecha varias funciones potentes del paquete *EBImage*. Para lo cual ejecute el siguiente código:
+
+```{r, eval=FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("EBImage")
+```
+
+*Nota*: Si usted es un usuario de Windows, primero se recomienda descargar e instalar la última versión de [Rtools](https://cran.r-project.org/bin/windows/Rtools/).
+
+Una vez instalado el paquete *EBImage*, instale la última versión estable de *pliman* desde CRAN con:
+
+```{r, eval=FALSE}
+install.packages("pliman")
+```
+
+### Área foliar
+
+Cargar el paquete
+
+```{r}
+library(pliman)
+```
+
+Importación de las imágenes a ser analizadas. En este ejemplo, se utiliza una imagen con cinco hojas de árbol y una plantilla amarilla con un área conocida de 4 cm^2^.
+
+```{r}
+img <- image_import(image_pliman("la_pattern.JPG"))
+leaf <- image_import(image_pliman("la_leaf.jpg"))
+tmpl <- image_import(image_pliman("la_temp.jpg"))
+background <- image_import(image_pliman("la_back.jpg"))
+
+# Combinar las imágenes
+image_combine(img, leaf, tmpl, background)
+```
+
+Para calcular el área de la hoja en la imagen, se utiliza la función [leaf_area()](). Despues, se utiliza [get_measures()]() para obtener los valores dados en la escala del argumento *area_template*. Las otras medidas (a saber, perímetro, radio_medio, radio_mín y radio_máx) se dan como píxeles.
+
+```{r}
+area <- 
+leaf_area(img = img,
+          img_leaf = leaf,
+          img_template = tmpl,
+          img_background = background,
+          area_template = 4,
+          text_col = "white")
+
+get_measures(area)
+```
+
+### Índice de severidad de la enfermedad
+
+Importación de imágenes dañadas por la enfermedad.
+
+```{r}
+img <- image_import(image_pliman("sev_leaf.jpg"))
+healthy <- image_import(image_pliman("sev_healthy.jpg"))
+symptoms <- image_import(image_pliman("sev_sympt.jpg"))
+background <- image_import(image_pliman("sev_back.jpg"))
+image_combine(img, healthy, symptoms, background, ncol = 4)
+```
+
+Determinación de la severidad de la enfermedad.
+
+```{r, preview=TRUE}
+symptomatic_area(img = img,
+                 img_healthy = healthy,
+                 img_symptoms = symptoms,
+                 img_background = background,
+                 show_image = TRUE)
+```
+
+
+### Contar objetos
+
+La función [count_objects()]() puede utilizarse para contar los objetos como hojas, granos, vainas y polen en una imagen. En el siguiente ejemplo, contaremos el número de granos de soja de una imagen con 30 granos.
+
+```{r}
+img <- image_import(image_pliman("soybean_touch.jpg"))
+image_show(img)
+
+count_objects(img, marker = "text")
+```
+
+## Conclusión
+
+El paquete *pliman* es una alternativa muy usual en la investigación científica agrícola. El procesamiento de una gran cantidad de imagenes puede mejorar la velocidad de evaluación. Ademas, se puede automatizar el proceso de evaluación y análisis.  
+
+

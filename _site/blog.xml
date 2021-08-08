@@ -7,7 +7,19 @@
     <description>Data Scientist, Plant Breeder and Analist Data
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Tue, 13 Jul 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 06 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Área foliar e índice de severidad con R</title>
+      <dc:creator>Franklin Santos</dc:creator>
+      <link>https://franklinsantos.com/posts/2021-08-06-pliman</link>
+      <description>Les presento una alternativa para hallar área foliar e indice de severidad de enfermedades foliares utilizando el paquete pliman. pliman (PLant IMage ANalysis) es un paquete de R para el análisis de imágenes de plantas, principalmente de hojas.</description>
+      <category>Leaf Area</category>
+      <category>Pliman</category>
+      <category>Disease Severity</category>
+      <guid>https://franklinsantos.com/posts/2021-08-06-pliman</guid>
+      <pubDate>Fri, 06 Aug 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://franklinsantos.com/posts/2021-08-06-pliman/pliman_files/figure-html5/unnamed-chunk-7-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
     <item>
       <title>Tendencias de rendimiento de los cultivos</title>
       <dc:creator>Franklin Santos</dc:creator>
@@ -115,18 +127,6 @@
       <guid>https://franklinsantos.com/posts/2021-03-14-tidyfaostat</guid>
       <pubDate>Mon, 30 Nov 2020 00:00:00 +0000</pubDate>
       <media:content url="https://franklinsantos.com/posts/2021-03-14-tidyfaostat/featured.png" medium="image" type="image/png" width="1834" height="1532"/>
-    </item>
-    <item>
-      <title>Análisis de Varianza y Prueba de Promedios en R</title>
-      <dc:creator>Franklin Santos</dc:creator>
-      <link>https://franklinsantos.com/posts/2021-03-14-anova</link>
-      <description>La figura de prueba de promedios de TukeyHSD es una buena opción, ya que incluye p-valor del ANVA y de la comparación de medias entre tratamientos.</description>
-      <category>ANOVA</category>
-      <category>Post hoc</category>
-      <category>Inferencial Statistic</category>
-      <guid>https://franklinsantos.com/posts/2021-03-14-anova</guid>
-      <pubDate>Sun, 15 Nov 2020 00:00:00 +0000</pubDate>
-      <media:content url="https://franklinsantos.com/posts/2021-03-14-anova/featured.png" medium="image" type="image/png" width="494" height="405"/>
     </item>
   </channel>
 </rss>
