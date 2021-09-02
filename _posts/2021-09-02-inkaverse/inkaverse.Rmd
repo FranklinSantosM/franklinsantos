@@ -1,0 +1,164 @@
+---
+title: "Herramientas estadísticas y experimentales en el mejoramiento de plantas"
+description: |
+  En esta oportunidad hacemos referencia a una colección de aplicaciones (inkaverse) para los procedimientos de diseño experimental y análisis estadístico.
+categories:
+  - Inkaverse
+  - Experimental Design
+  - Plant Breeding
+author:
+  - name: Franklin Santos
+    url: https://franklinsantos.com
+    affiliation: Agritech Bolivia
+    orcid_id: 0000-0002-7509-2910
+date: 09-02-2021
+preview: inkaverse.png
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+## Introducción
+La investigación agrícola es una actividad que conlleva mejorar la productividad y la calidad de los cultivos mediante su mejora genética, una mejor protección de las plantas, el riego, los métodos de almacenamiento, la mecanización de las explotaciones, una comercialización eficaz y una mejor gestión de los recursos.
+
+En el proceso de investigación agrícola se requiere tener mínimamente un libro de campo (fieldbook), la cual contiene una información básica del experimento, croquis, planillas de colección de datos y variables de respuesta. Para este procedimiento a traves del paquete [inti](https://cran.r-project.org/web/packages/inti/index.html) que es parte del proyecto [inkaverse](https://inkaverse.com/index.html) nos proporcionan procidimientos y herramientas para la ciencia de plantas. 
+
+## Instalación
+Puede instalar la versión estable desde [CRAN](https://cran.r-project.org/package=inti), para ello ejecute lo siguiente R:
+
+```{r, eval=FALSE}
+install.packages("inti")
+```
+
+También puede instalar la última versión de desarrollo directamente desde [GitHub](https://github.com/flavjack/inti), ejecute lo siguiente desde una consola de R:
+
+```{r, eval=FALSE}
+if (!require("remotes"))
+  install.packages("remotes")
+remotes::install_github("flavjack/inti")
+```
+
+Para mayor detalle vea el siguiente tutorial de instalación
+
+```{r, echo=FALSE}
+library(vembedr)
+embed_url("https://www.youtube.com/watch?v=sbpBD5CyUGM&t=2s") %>%
+  use_align("center")
+```
+
+## Aplicaciones
+
+Para evitar algun inconveniente, ejecute el siguiente código antes de ejecutar la aplicaciones shiny:
+
+```{r, eval=FALSE}
+inti::yupana(dependencies = TRUE)
+```
+
+Después de instalar el paquete y las dependencias de la aplicación también puedes acceder a las aplicaciones a través de la lista de Addins en Rstudio o ejecutando el siguiente código:
+
+### Tarpuy
+
+Esta herramienta permite la construcción de planes experimentales de forma interactiva.
+
+Tarpuy permite:
+
+- Generación de planes experimentales
+- Construcción de experimentos basados en diseños experimentales
+- Libros de campo para las evaluación de experimentos
+- Incluir lista de variables en los libros de campo
+- Croquis basados en los diseños experimentales
+- Permite adicionar: cronograma, presupuesto y diario
+
+Para mayor detalle puede observar el siguiente tutorial:
+
+```{r, echo=FALSE}
+embed_url("https://www.youtube.com/watch?v=lc3dBJyX4Xw") %>%
+  use_align("center")
+```
+
+Ejecución desde la consola:
+
+```{r, eval=FALSE}
+inti::tarpuy()
+```
+
+Otra manera de ejecutar directamente la app, click en  [Tarpuy](https://flavjack.shinyapps.io/tarpuy/)
+
+#### Módulos
+
+Módulos en la aplicación de Tarpuy
+
+| Módulos | Descripción                   |
+|---------|-------------------------------|
+| Intro      | Página principal con la presentación de la aplicación. Opciones para configurar el nombre de las pestañas en el libro de campo: información del experimento (info), diseño experimental (dsg), lista de variables (var) y libro de campo (fb). Una vez realizada la autenticación, se puede crear de forma directa una hoja de cálculo nueva para exportar la información del plan experimental (Create GS) o insertar el url de una hoja ya creada       |
+| Plex    | El módulo del plan experimental (PLEX) permite incluir la información del experimento, como: datos del investigador y la institución, información del experimento, plan experimental y el modelo del diseño experimental. Esta información permitirá generar los parámetros para el diseño experimental que posteriormente generará el libro de campo para la colecta de datos   |
+| FieldBook   | Permite crear libros de campo de forma independiente o de acuerdo a los datos del módulo del plan experimental. Permite la selección del número de factores, repeticiones y otros parámetros que serán usados para la generación del libro de campo. Si la hoja de lista de variables (var) contiene información, esta será incluida en las variables a evaluar en el libro de campo    |
+| Sketch    | Módulo para generar los croquis o sketchs del diseño experimental seleccionado de acuerdo a la información contenida en el libro de campo (fb)    |
+
+
+
+### Yupana
+
+Esta heramienta interactiva permite analizar y graficar datos basados en diseños experimentales.
+
+Por tanto Yupana permite:
+
+- Análisis de datos con distintos modelos estadisticos
+- Diagnostico de los modelos
+- Análisis de comparación de medias de los tratamientos
+- Información resumen de la comparación de los tratamientos
+- Gráfica de los resultados
+- Análisis multivariados
+
+Para mayor detalle puede observar el siguiente tutorial:
+
+```{r, echo=FALSE}
+embed_url("https://www.youtube.com/watch?v=4UGFtb0n_VU") %>%
+  use_align("center")
+```
+
+#### Base de datos
+Los datos deben estar organizado en formato tidy-data.
+
+Tener en cuenta algunas consideraciones:
+
+- No usar caracteres extraños en la cabeceras, e.i.: %, #, &, $, °, !, ^, etc
+- Los datos deben iniciar en la primera fila y columna, e.i. A1
+- Evitar usar espacio entre los nombres de las variables, en reemplazo pueden usar "_" o “.”
+
+>Las columnas que esten entre corchetes “[]” serán excluidas del análisis
+
+### Módulos
+Módulos de la aplicación Yupana
+
+| Módulos | Descripción                   |
+|---------|-------------------------------|
+| Intro      | Página principal con la presentación de la aplicación. Interface para insertar el url del la hoja que se va analizar. Opciones para configurar el nombre del libro de campo (Fieldbook data) y la información resumen (Fieldbook summary).       |
+| Fieldbook   | Incluye dos sub módulos (1) Summary, para insertar los parámetros de acuerdo al diseño experimental de la base de datos. (2) Reshape, para reformar base de datos que se realizaron con la aplicación `Tarpuy`    |
+| Analysis    | Incluye tres sub módulos (1) Modelo, análisis y diagnósticos de las variables de acuerdo al modelo seleccionado en el módulo `Fieldbook`, puede cambiarse las opciones de forma directa en la hoja `fbsm`. (2) Diagnostic, modulo para observar los supuestos estadísticos y la distribución de los datos. (3) Gsheet, para visualizar la hoja `fbsm` para modificar los parámetros    |
+| Graphics    | Incluye dos sub módulos (1) Plots, gráfico de las variables exportadas en la hoja de cálculo. (2) Gsheet, para visualizar la hoja con la tabla del gráfico y modificar los parámetros    |
+| Multivariate    | Incluye tres sub módulos (1) PCA, selección de la variables para resumen de los datos y análisis de componentes principales. (2) HCPC, Análisis de cluster de los individuos. (3) CORR, correlación de las variables numéricas de la base de datos    |
+
+
+Ejecución desde la consola:
+
+```{r, eval=FALSE}
+inti::yupana() 
+```
+
+Otra manera de ejecutar directamente la app, click en  [Yupana](https://flavjack.shinyapps.io/yupanapro/)
+
+
+## Conclusión
+
+Esta herramienta es muy usual en la investigación agrícola y además puede ser utilizada con mucha facilidad por los iniciantes de R.
+
+Un reconocimiento especial a [Flavio Lozano-Isla](https://lozanoisla.com/) por su valioso aporte en la ciencia de plantas.
+
+
+

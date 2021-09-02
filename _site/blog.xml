@@ -7,7 +7,19 @@
     <description>Data Scientist, Plant Breeder and Analist Data
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Fri, 06 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 02 Sep 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Herramientas estadísticas y experimentales en el mejoramiento de plantas</title>
+      <dc:creator>Franklin Santos</dc:creator>
+      <link>https://franklinsantos.com/posts/2021-09-02-inkaverse</link>
+      <description>En esta oportunidad hacemos referencia a una colección de aplicaciones (inkaverse) para los procedimientos de diseño experimental y análisis estadístico.</description>
+      <category>Inkaverse</category>
+      <category>Experimental Design</category>
+      <category>Plant Breeding</category>
+      <guid>https://franklinsantos.com/posts/2021-09-02-inkaverse</guid>
+      <pubDate>Thu, 02 Sep 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://franklinsantos.com/posts/2021-09-02-inkaverse/inkaverse.png" medium="image" type="image/png" width="518" height="600"/>
+    </item>
     <item>
       <title>Área foliar e índice de severidad con R</title>
       <dc:creator>Franklin Santos</dc:creator>
@@ -115,18 +127,6 @@
       <guid>https://franklinsantos.com/posts/2021-03-14-componentes-principales</guid>
       <pubDate>Tue, 15 Dec 2020 00:00:00 +0000</pubDate>
       <media:content url="https://franklinsantos.com/posts/2021-03-14-componentes-principales/featured.png" medium="image" type="image/png" width="947" height="822"/>
-    </item>
-    <item>
-      <title>Extraer y ordenar datos FAOSTAT con Tidyverse</title>
-      <dc:creator>Franklin Santos</dc:creator>
-      <link>https://franklinsantos.com/posts/2021-03-14-tidyfaostat</link>
-      <description>Un post replicable para extraer y ordenar datos FAOSTAT con el paquete Tidyverse. Se presenta un análisis comparativo de paises latinoamericanos en función al rendimiento de los cultivos mas consumidas por la humanidad.</description>
-      <category>FAOSTAT Data</category>
-      <category>Yield Crop</category>
-      <category>Crop Stats</category>
-      <guid>https://franklinsantos.com/posts/2021-03-14-tidyfaostat</guid>
-      <pubDate>Mon, 30 Nov 2020 00:00:00 +0000</pubDate>
-      <media:content url="https://franklinsantos.com/posts/2021-03-14-tidyfaostat/featured.png" medium="image" type="image/png" width="1834" height="1532"/>
     </item>
   </channel>
 </rss>
