@@ -7,7 +7,19 @@
     <description>Data Scientist, Plant Breeder and Analist Data
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Thu, 02 Sep 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 04 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Introducción a R básico</title>
+      <dc:creator>Franklin Santos</dc:creator>
+      <link>https://franklinsantos.com/posts/2021-10-24-r-intro</link>
+      <description>Es una introducción al manejo y uso básico a la plataforma de R. Este software es muy popular e increíblemente útil para las personas que trabajan como científicos de datos o en empresas.</description>
+      <category>R</category>
+      <category>R Basic</category>
+      <category>Data Science</category>
+      <guid>https://franklinsantos.com/posts/2021-10-24-r-intro</guid>
+      <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://franklinsantos.com/posts/2021-10-24-r-intro/Rfs.png" medium="image" type="image/png" width="200" height="231"/>
+    </item>
     <item>
       <title>Herramientas estadísticas y experimentales en el mejoramiento de plantas</title>
       <dc:creator>Franklin Santos</dc:creator>
@@ -115,18 +127,6 @@
       <guid>https://franklinsantos.com/posts/2021-03-14-tidyinebolivia</guid>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
       <media:content url="https://franklinsantos.com/posts/2021-03-14-tidyinebolivia/newplot.png" medium="image" type="image/png" width="888" height="576"/>
-    </item>
-    <item>
-      <title>Análisis de Componentes Principales</title>
-      <dc:creator>Franklin Santos</dc:creator>
-      <link>https://franklinsantos.com/posts/2021-03-14-componentes-principales</link>
-      <description>l análisis de componentes principales nos permite resumir y visualizar la información de un conjunto de datos que contiene observaciones descritos por múltiples variables cuantitativas inter-correlacionadas.</description>
-      <category>Biplot</category>
-      <category>Componentes Principales</category>
-      <category>Correlation</category>
-      <guid>https://franklinsantos.com/posts/2021-03-14-componentes-principales</guid>
-      <pubDate>Tue, 15 Dec 2020 00:00:00 +0000</pubDate>
-      <media:content url="https://franklinsantos.com/posts/2021-03-14-componentes-principales/featured.png" medium="image" type="image/png" width="947" height="822"/>
     </item>
   </channel>
 </rss>

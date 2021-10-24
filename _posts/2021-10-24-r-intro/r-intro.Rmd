@@ -1,0 +1,665 @@
+---
+title: "Introducción a R básico"
+description: |
+  Es una introducción al manejo y uso básico a la plataforma de R. Este software es muy popular e increíblemente útil para las personas que trabajan como científicos de datos o en empresas.
+categories:
+  - R
+  - R Basic
+  - Data Science
+author:
+  - name: Franklin Santos
+    url: https://franklinsantos.com
+    affiliation: Agritech Bolivia
+    orcid_id: 0000-0002-7509-2910
+date: 10-04-2021
+preview: Rfs.png
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+# R básico
+R es muy popular e increíblemente útil para las personas que trabajan como científicos de datos o en empresas. Pero también puede usar R para cosas más simples, como crear un gráfico agradable o hacer un cálculo rápido. Comenzar a utilizar R es bastante sencillo.
+
+## Introducción a R
+
+>El lenguaje informático estadístico más potente del planeta.
+> -- Norman Nie, fundador de SPSS
+
+R es un lenguaje de programación y un ambiente para trabajar con datos. Es muy utilizado por estadísticos y científicos de datos por su sintaxis de código expresivo, abundantes paquetes y herramientas externas y funciona en todos los sistemas operativos principales.
+
+Es la navaja suiza para el análisis de datos y la computación estadística (¡y también puedes hacer algunos gráficos bonitos!). El lenguaje R se puede ampliar fácilmente con paquetes escritos por una gran y creciente comunidad de desarrolladores de todo el mundo. Puede encontrarlo prácticamente en cualquier lugar: lo utilizan instituciones académicas, empresas emergentes, corporaciones internacionales y muchos más.
+
+### ¿Por qué usar R? 
+
+R es un lenguaje popular para resolver problemas de análisis de datos y también lo usan personas que tradicionalmente no se consideran programadores. Al crear gráficos y visualizaciones con R, descubrirá que tiene muchas más posibilidades creativas que las aplicaciones gráficas, como Excel.
+
+Estas son algunas de las **características** por las que R es más famoso:
+
+**Visualización**: Crear gráficos y visualizaciones hermosos, es una de sus mayores fortalezas. El lenguaje central ya proporciona un amplio conjunto de herramientas utilizadas para trazar gráficos y para todo tipo de gráficos. El cielo es el límite.
+
+**Reproducibilidad**: a diferencia del software de hoja de cálculo, el código R no está acoplado a conjuntos de datos específicos y puede reutilizarse fácilmente en diferentes proyectos, incluso cuando excede más de 1 millón de filas. Cree fácilmente informes reutilizables y genere automáticamente nuevas versiones a medida que cambien los datos.
+
+**Modelamiento avanzado**: R proporciona la base de código más grande y poderosa para el análisis de datos en el mundo. La riqueza y profundidad de los modelos estadísticos disponibles no tiene paralelo y crece día a día, gracias a la gran comunidad de desarrolladores y colaboradores de paquetes de código abierto.
+
+**Automatización**: el código R también se puede utilizar para automatizar informes o para realizar transformación de datos y cálculos de modelos. También se puede integrar en flujos de trabajo de producción automatizados, ambientes informáticos en la nube y sistemas de bases de datos modernos.
+
+### R en buena compañía
+
+R es el estándar de facto para la computación estadística en instituciones académicas y empresas de todo el mundo. Su gran soporte para la programación alfabetizada (código que se puede combinar con texto legible por humanos) permite a los investigadores y científicos de datos crear informes listos para publicación que son fáciles de reproducir para los revisores.
+
+El lenguaje ha tenido una amplia adopción en varias industrias; vea algunos ejemplos a continuación:
+
+**Tecnologías de la información**
+
+* Microsoft: [Microsoft R Open](https://mran.microsoft.com/open), [TrueSkill(TM)](https://www.microsoft.com/en-us/research/publication/trueskilltm-a-bayesian-skill-rating-system), más [aquí](https://blog.revolutionanalytics.com/2018/02/what-does-microsoft-do-with-r.html)
+
+* Google: [R para investigación de mercado y análisis](https://research.google/pubs/pub43342/), [prediciendo el presente con Google Trends](https://static.googleusercontent.com/media/www.google.com/fr//googleblogs/pdfs/google_predicting_the_present.pdf)
+
+* Facebook: [Visualizando amistades](https://www.facebook.com/notes/facebook-engineering/visualizing-friendships/469716398919), [La formación del amor](https://www.facebook.com/notes/facebook-data-science/the-formation-of-love/10152064609253859), Paquete [Prophet](https://facebook.github.io/prophet) para pronósticos de series de tiempo.
+
+* Otros (con enlaces a proyectos): [AirBnB](https://peerj.com/preprints/3182.pdf), [Uber](https://capetown2017.satrdays.org/talks/satRday-2017-van-heerden.pdf), [Oracle](https://www.oracle.com/database/technologies/datawarehouse-bigdata/oml4r.html), IBM, Twitter.
+  
+**Farmacias**: Merck, Genentech (Roche), Novartis, Pfizer
+**Periódicos**: The Economist, The New York Times, Financial Times 
+
+**Finanzas**
+
+* Bancos: Bank of America, J.P.Morgan, Goldman Sachs, Credit Suisse, UBS, Deutsche Bank
+
+* Seguros: Lloyd's, Allianz
+
+## Bloques de construcción
+El lenguaje R consta de tres bloques fundamentales de construcción necesarios para realizar sus primeros pasos en el ambiente R:
+
+* Objeto: todo lo que existe es un objeto
+* Función: todo lo que sucede es una llamada a función
+* Interfaz: R se basa en interfaces para muchos algoritmos
+
+Los **objetos** más importantes en R son **vectores**. Forman la base de (casi) todas las estructuras de datos de R. La mayor parte del poder y la expresividad de R se deriva del hecho de que es un lenguaje orientado a vectores. Las **funciones** y los operadores pueden definirse fácilmente y trabajar directamente en vectores para calcular resultados.
+
+La mayor fortaleza de R es su flexibilidad para integrar fácilmente nuevos algoritmos y construir **interfaces** a su alrededor. El sistema de paquetes R permite a los colaboradores integrar muchos modelos y bibliotecas externas de código abierto. Su repositorio principal de paquetes llamado "**CRAN**" aloja estos paquetes y permite a los usuarios instalarlos y cargarlos fácilmente en sus ambientes.
+
+## Combinar valores en un vector
+
+R siempre crea listas de valores, incluso cuando solo hay un valor en una lista. Estas listas se denominan vectores y facilitan mucho el trabajo con datos.
+
+* Todo es un vector
+* Conozca los diferentes tipos de datos en R
+* Aprenda a crear vectores
+* Utilice el operador `:` para crear secuencias numéricas
+* Utilice la función de concatenar `c()` para crear vectores de diferentes tipos de datos
+
+```{r, eval=FALSE}
+1:100
+c(1, 2, 3, 4)
+c("abc", "def", "ghi")
+c(TRUE, FALSE, TRUE)
+```
+
+### Introducción a los vectores
+
+Un vector es una colección de elementos del mismo tipo y la estructura de datos más básica en R. Por ejemplo, un vector podría contener los cuatro números `1`, `3`, `2` y `5`. Otro vector podría formarse con las tres cadenas de texto `"Bienvenido"`,`"Hi"` y `"Hola"`. Estos diferentes tipos de valores (números, texto) se denominan *tipos de datos*.
+
+Un valor único también se trata como un vector, un vector con un solo elemento. Como veremos a lo largo del curso, este concepto hace que R sea muy especial. Podemos manipular los vectores y sus valores a través de muchas operaciones proporcionadas por R.
+
+Una ventaja clave de los vectores es que podemos aplicar una operación (por ejemplo, una multiplicación) a todos sus valores a la vez en lugar de pasar por cada elemento individualmente. Esto se llama *vectorización*.
+
+### Tipos de vectores
+
+Los vectores solo pueden contener elementos del mismo *tipo de datos*. En este libro trabajaremos con los siguientes tres tipos de datos principales:
+
+Los valores **numéricos** son números. Aunque pueden dividirse aún más en números enteros (enteros) y números con decimales (dobles), R convierte automáticamente entre estos subtipos si es necesario. Por lo tanto, colectivamente nos referiremos a ellos como valores `numéricos`.
+
+Los valores de **caracteres** contienen contenido textual. Estos pueden ser letras, símbolos, espacios y números también. Deben estar entre comillas: comillas simples `'___'` o comillas dobles `"___"`.
+
+Los valores **lógicos** pueden ser `TRUE` o `FALSE`. A menudo también se les conoce como valores *booleanos* o *binarios*. Debido a que un valor `lógico` solo puede ser `TRUE` o `FALSE`, se usan con mayor frecuencia para responder preguntas simples como "¿Es 1 mayor que 2?" o "¿Son más de las 3 en punto?". Este tipo de preguntas solo necesitan respuestas como "Sí" (`TRUE`) o "No" (`FALSE`). Es importante destacar que en R los valores `lógicos` distinguen entre mayúsculas y minúsculas, lo que significa que deben escribirse con mayúsculas.
+
+### Creando una secuencia de números
+
+En R, incluso un solo valor se considera un vector. Crear un vector de un elemento es tan simple como escribir su valor:
+
+`Código de entrada:`
+```{r, eval=FALSE}
+4
+```
+
+`Resultado:`
+```{r, echo=FALSE}
+4
+```
+
+Para crear una secuencia de valores numéricos, podemos usar el operador `:` que toma dos números y genera un vector de todos los números enteros en ese rango:
+
+`Código de entrada:`
+```{r, eval=FALSE}
+2:11
+```
+
+`Resultado:`
+```{r, echo=FALSE}
+2:11
+```
+
+El operador `:` crea un vector desde el número en el lado izquierdo hasta el número en el lado derecho. Por lo tanto, el orden de los números es importante. Si definimos el ejemplo anterior al revés, obtenemos un vector de números descendentes, en lugar de ascendentes:
+
+`Código de entrada:`
+```{r, eval=FALSE}
+11:2
+```
+
+`Resultado:`
+```{r, echo=FALSE}
+11:2
+```
+
+El operador `:` es útil cuando necesitamos un vector de cada número entero en un rango dado. Sin embargo, si necesitamos un vector donde los números no sean lineales, necesitamos algo diferente.
+
+### Concatenando valores numéricos a un vector
+
+Podemos combinar múltiples números en un solo vector usando la función concatenar `c()` que une elementos entre las llaves redondas en una cadena o mas conocido como paréntesis. Múltiples elementos deben estar separados por comas.
+
+Para crear nuestro primer vector con siete números diferentes, podemos usar la función de concatenación `c()` de esta manera:
+
+`Código de entrada:`
+```{r, eval=FALSE}
+c(7, 4, 2, 5, 5, 22, 1)	
+```
+
+`Resultado:`
+```{r, echo=FALSE}
+c(7, 4, 2, 5, 5, 22, 1)	
+```
+
+Tenga en cuenta que el signo "`[1]`" antes de la salida anterior es agregado por R, y siempre se agrega automáticamente al imprimir vectores. Si sus vectores se hacen más grandes, verá más de estos prefijos. Solo sepa que R solo los agrega con fines informativos, y que están allí para ayudarlo mientras codifica. No son parte del vector en sí.
+
+Puede ver esto más claramente, cuando la salida se extiende sobre varias líneas:
+
+`Código de entrada:`
+```{r, eval=FALSE}
+1:60
+```
+
+`Resultado:`
+```{r, echo=FALSE}
+1:60
+```
+
+### Creando vectores de caracteres
+
+Para crear un vector de caracteres de un elemento, todo lo que tenemos que hacer es escribir el texto. Recuerde que debemos usar comillas (`" "`) alrededor de los valores de los caracteres:
+
+`Código de entrada:`
+```{r, eval=FALSE}
+"golden retriever"
+```
+
+`Resultado:`
+```{r, echo=FALSE}
+"golden retriever"
+```
+
+Para crear un vector de caracteres de múltiples elementos, podemos usar nuevamente la función concatenar `c()`. Esta vez lo usaremos con caracteres en lugar de números:
+
+`Código de entrada:`
+```{r, eval=FALSE}
+c("golden retriever", "labrador is a family dog", "beagle")
+```
+
+`Resultado:`
+```{r, echo=FALSE}
+c("golden retriever", "labrador is a family dog", "beagle")
+```
+
+### Creando vectores lógicos
+
+Los vectores lógicos solo pueden contener los valores `TRUE` y `FALSE`. Para crear un vector lógico con un solo valor, escriba uno de los valores válidos `TRUE` o `FALSE`. Recuerde que deben escribirse con letras mayúsculas:
+
+`Código de entrada:`
+```{r, eval=FALSE}
+TRUE
+```
+
+`Resultado:`
+```{r, echo=FALSE}
+TRUE
+```
+
+De manera similar a otros tipos de vectores, podemos usar la función concatenar `c()` para crear un vector lógico de múltiples elementos:
+
+`Código de entrada:`
+```{r, eval=FALSE}
+c(TRUE, FALSE, TRUE, FALSE, TRUE)	
+```
+
+`Resultado:`
+```{r, echo=FALSE}
+c(TRUE, FALSE, TRUE, FALSE, TRUE)	
+```
+
+## Crea variables a través de asignaciones
+
+Por lo general, desea almacenar vectores y otros objetos en variables para poder trabajar con ellos más fácilmente. Las variables son como un cuadro con un nombre. A continuación, puede consultar el nombre para ver qué se almacena en el interior.
+
+* Aprenda a crear una variable
+* Usa variables para almacenar objetos y vectores
+* Reutilizar objetos asignados mediante un nombre de variable
+
+### Asignando variables
+
+Por lo general, queremos usar objetos como vectores más de una vez. Para evitar la molestia de volver a escribirlos y recrearlos todo el tiempo, nos gustaría guardarlos en algún lugar y reutilizarlos más tarde.
+
+Para hacer esto, podemos asignarlos a un nombre de variable. R usa el operador de flecha especial `<-` para asignar valores a una variable. La flecha es simplemente la combinación de un carácter menor que (`<`) y un signo menos (`-`).
+
+Veamos un ejemplo, en el que asignamos un vector numérico a una variable llamada `numbers`:
+
+`Código de entrada:`
+```{r}
+numbers <- c(1, 2, 3, 4, 5, 6, 7, 8, 9)	
+```
+
+
+Ahora podemos usar el nombre de la variable a continuación para ver su contenido:
+
+```{r, eval=FALSE}
+numbers
+```
+
+`Resultado:`
+```{r, echo=FALSE}
+numbers
+```
+
+Tenga en cuenta que cuando asignamos algo a una variable que ya existe, se sobrescribe. Todos los contenidos anteriores se eliminan automáticamente:
+
+`Código de entrada:`
+```{r, eval=FALSE}
+numbers <- c(10, 11, 12, 13)
+numbers
+```
+
+`Resultado:`
+```{r, echo=FALSE}
+numbers <- c(10, 11, 12, 13)
+numbers
+```
+
+Una vez que haya definido una variable, puede usarla tal como usaría el vector subyacente. En el siguiente ejemplo creamos dos vectores numéricos y los asignamos a las variables `low` y `high`. Luego, usamos estas variables y concatenamos los dos vectores en uno solo y los asignamos una variable denominada `sequence`. Finalmente llamamos a la variable `sequence` e inspeccionamos su contenido:
+
+`Código de entrada:`
+```{r, eval=FALSE}
+low <- c(1, 2, 3)
+high <- c(4, 5, 6)
+sequence <- c(low, high)
+sequence
+```
+
+`Resultado:`
+```{r, echo=FALSE}
+low <- c(1, 2, 3)
+high <- c(4, 5, 6)
+sequence <- c(low, high)
+sequence
+```
+
+Como puede ver, los vectores `1, 2, 3` y `4, 5, 6` almacenados en las variables `low` y `high`, se combinaron en un solo vector que ahora es el contenido de la variable `sequence`.
+
+### Reglas de nomenclatura 
+
+Hay algunas reglas que debemos tener en cuenta al crear variables.
+
+**Reglas en la asignación de variables**
+
+* Puede contener letras: `example`
+* Puede contener números: `example1`
+* Puede contener guiones bajos: `example_1`
+* Puede contener puntos: `example.1`
+* Puede contener punto Adelante seguido por una letra: `.task`
+* **No** puede comenzar con números: `2example`
+* **No** se puede comenzar con guiones bajos: `_example`
+* **No** puede comenzar con un punto si va directamente seguido de un número: `.2example`
+
+## Utilice operadores básicos
+
+R no solo es bueno para analizar y visualizar datos, sino también para resolver problemas matemáticos o comparar datos entre sí. Además, puede usarlo como una calculadora de bolsillo.
+
+* Usa R como calculadora de bolsillo
+* Usa operadores aritméticos en vectores
+* Use operadores relacionales en vectores
+* Usa operadores lógicos en vectores
+
+### Usando R como calculadora de bolsillo
+
+```{}
+___ + ___
+___ - ___
+___ / ___
+___ * ___
+```
+
+R es un lenguaje de programación desarrollado principalmente para estadísticas y análisis de datos. Dentro de R puede usar operadores matemáticos tal como lo haría en una calculadora. Por ejemplo, puede sumar `+` y restar `-` números entre sí:
+
+`Código de entrada:`
+```{r, eval=FALSE}
+5 + 5
+```
+
+`Resultado:`
+```{r, echo=FALSE}
+5 + 5
+```
+
+```{r}
+7 - 3.5
+```
+
+Del mismo modo, puede multiplicar `*` o dividir `/` números:
+
+```{r}
+5 * 7	
+```
+
+```{r}
+8 / 4	
+```
+
+Puedes tomar el poder de un número usando el signo `^` para potenciar o elevar:
+
+```{r}
+2^3
+```
+
+De acuerdo con las reglas de las matemáticas, puede usar corchetes para especificar el orden de evaluación en tareas más complejas:
+
+```{r}
+5 * (2 + 4 / 2)
+```
+
+### Aplicación de operadoras aritméticas en vectores
+
+```{}
+___ + ___
+___ - ___
+___ / ___
+___ * ___
+```
+
+Las operaciones, como la suma, la resta, la multiplicación y la división se denominan *operaciones aritméticas*. No solo pueden operar con valores únicos sino también con vectores. Si usa operaciones aritméticas en vectores, la operación se realiza en cada número individual del primer vector y el número individual en la misma posición del segundo vector.
+
+En el siguiente ejemplo creamos dos vectores numéricos y los asignamos a las variables `a` y `b`. Luego los agregamos juntos:
+
+```{r}
+a <- c(1, 3, 6, 9, 12, 15)
+b <- c(2, 4, 6, 8, 10, 12)
+a + b
+```
+
+Como muestra la salida, los primeros elementos de los dos vectores se agregaron juntos y dieron como resultado `1 + 2 = 3`. Los segundos elementos `3 + 4 = 7`, los terceros elementos `6 + 6 = 12` y así sucesivamente.
+
+Podemos aplicar cualquier otra operación aritmética de manera similar:
+
+```{r}
+a <- c(22, 10, 7, 3, 14, 4)
+b <- c(4, 5, 2, 6, 14, 8)
+a / b
+```
+
+Usando el mismo principio, el primer elemento del resultado es `22 / 4 = 5.5`, el segundo es `10 / 5 = 2` y así sucesivamente.
+
+### Usar operadores relacionales
+
+```{}
+___ == ___
+___ != ___
+___ < ___
+___ > ___
+___ <= ___
+___ >= ___
+```
+
+Los operadores relacionales se utilizan para comparar dos valores. La salida de estas operaciones siempre es un valor lógico `TRUE` o `FALSE`. Distinguimos seis tipos diferentes de operadores relacionales, como veremos a continuación.
+
+Los operadores igual `==` y no igual `!=` comprueban si dos valores son iguales (o no):
+
+```{r}
+2 == 1 + 1
+```
+
+```{r}
+2 != 3
+```
+
+Los operadores *menor que* `<` y *mayor que* `>` verifican si un valor es menor o mayor que otro:
+
+```{r}
+2 > 4
+```
+
+```{r}
+2 < 4
+```
+
+Los operadores *menor que o igual a* `<=` y *mayor que o igual a* `>=` combinan la verificación de igualdad con la comparación menor o mayor que:
+
+```{r}
+2 >= 2
+```
+
+```{r}
+2 <= 3
+```
+
+Todos estos operadores pueden usarse en vectores con uno o más elementos también. En ese caso, cada elemento de un vector se compara con el elemento en la misma posición en el otro vector, al igual que con los operadores matemáticos:
+
+```{r}
+vector1 <- c(3, 5, 2, 7, 4, 2)
+vector2 <- c(2, 6, 3, 3, 4, 1)
+vector1 > vector2
+```
+
+Por lo tanto, el resultado de este ejemplo se basa en las comparaciones `3 > 2`, `5 > 6`, `2 > 3` y así sucesivamente.
+
+### Usando operadores lógicos
+
+```{}
+___ & ___
+___ | ___
+```
+
+El operador *AND* `&` se usa para verificar si varias declaraciones son `TRUE` al mismo tiempo. Usando un ejemplo simple, podríamos verificar si 3 es mayor que 1 y al mismo tiempo si 4 es menor que 2:
+
+```{r}
+3 > 1 & 4 < 2
+```
+
+De hecho, 3 es mayor que 1, pero 4 no es menor que 2. Dado que una de las declaraciones es `FALSE`, el resultado de esta evaluación conjunta también es `FALSE`.
+
+El operador *OR* `|` solo verifica si alguna de las declaraciones es `TRUE`.
+
+```{r}
+3 > 1 | 4 < 2
+```
+
+En una declaración *OR*, no todos los elementos tienen que ser `TRUE`. Como 3 es mayor que 1, el resultado de esta evaluación también es `TRUE`.
+
+El operador `!` se utiliza para la negación de valores lógicos, lo que significa que convierte los valores `TRUE` en `FALSE` y los valores `FALSE` en `TRUE`. Si tenemos una declaración que resulta en un valor lógico `TRUE` o `FALSE`, podemos negar el resultado aplicando el operador `!` en él. En el siguiente ejemplo verificamos si 3 es mayor que 2 y luego negamos el resultado de esta comparación:
+
+```{r}
+!3 > 2
+```
+
+Los operadores lógicos, al igual que los operadores aritméticos y relacionales, también se pueden usar en vectores más largos. En el siguiente ejemplo usamos tres vectores diferentes `a`, `b` y `c` e intentamos evaluar múltiples relaciones en combinación.
+
+```{r}
+a <- c(1, 21, 3, 4)
+b <- c(4, 2, 5, 3)
+c <- c(3, 23, 5, 3)
+
+a>b & b<c
+```
+
+Primero, ambas comparaciones relacionales `a > b` y `b < c` se evalúan y dan como resultado dos vectores lógicos. Por lo tanto, esencialmente comparamos los siguientes dos vectores:
+
+```{r}
+c(FALSE, TRUE, FALSE, TRUE) & c(FALSE, TRUE, FALSE, FALSE)
+```
+
+El operador `&` comprueba si ambos valores en la misma posición en los vectores son `TRUE`. Si algún valor de los pares es `FALSE`, la combinación también es `FALSE`.
+
+El operador `|` comprueba si alguno de los valores en la misma posición en los vectores es `TRUE`.
+
+```{r}
+c(FALSE, TRUE, FALSE, TRUE) | c(FALSE, TRUE, FALSE, FALSE)
+```
+
+### Usando el operador %in%
+
+```{}
+___ %in% ___
+```
+
+Un operador especial adicional, de uso frecuente, es el operador `%in%`. Comprueba si el contenido de un vector también está presente en otro.
+
+En el siguiente ejemplo utilizamos la variable `UE` que contiene la abreviatura de todos los países de la Unión Europea. Luego, verificamos si el carácter `"AU"` está presente o no en la variable `UE`.
+
+```{r}
+EU <- c("AU","BE","BG","CY","CZ","DE","DK","EE","ES","FI","FR","GR","HR","HU",
+        "IE","IT","LT","LU","LV","MT","NL","PO","PT","RO","SE","SI","SK")
+
+"AU" %in% EU
+```
+
+El siguiente ejemplo amplía la búsqueda y compara múltiples elementos con el contenido de la variable `EU`. Produce un vector lógico como resultado que contiene un valor lógico para cada elemento:
+
+```{r}
+c("AU","HU","UK") %in% EU
+```
+
+Como muestra el resultado, los dos primeros elementos de caracteres `"AU"` y `"HU"` están presentes en la variable `EU`, sin embargo, el tercer elemento `"UK"` no lo está.
+
+## Llamar al código R existente a través de funciones
+
+Cuando escribe código, las funciones son sus mejores amigas. Pueden hacer las cosas difíciles muy fáciles o proporcionar nuevas funciones de una manera agradable. A través de las funciones, obtiene acceso a todas las potentes funciones que R tiene para ofrecer.
+
+* Funciones de llamada con nombres de funciones y corchetes
+* Usar funciones matemáticas básicas en vectores
+* Personalizar funciones mediante parámetros
+* Cree secuencias numéricas usando `seq()`
+* Crea números aleatorios usando `runif()`
+* Vectores de muestra usando `sample()`
+
+### Introducción a las funciones.
+
+Las funciones en cualquier lenguaje de programación se pueden describir como código predefinido y reutilizable destinado a realizar una tarea específica. Las funciones en R se pueden usar usando su nombre y corchetes justo después de eso. Dentro de los corchetes, podemos especificar parámetros para la función. Una función que ya hemos usado ampliamente es la función concatenada `c()`.
+
+Una función simple, por ejemplo, es `abs()` que se usa para obtener el valor absoluto de un número. En el siguiente ejemplo, la función recibe `-3` como entrada y devuelve el resultado `3`:
+
+```{r}
+abs(-3)
+```
+
+### Personalización de funciones a través de parámetros
+
+Las funciones toman parámetros que los personalizan para la tarea dada. Por ejemplo, la función `runif()` genera valores distribuidos uniformemente, lo que significa que todos los resultados tienen la misma probabilidad. Por defecto, toma los siguientes parámetros:
+
+```{}
+runif(n, min = 0, max = 1)
+```
+
+El primer parámetro `n` es el número de valores que queremos generar. Este es un parámetro obligatorio que debemos definir para que la función funcione.
+
+Por otro lado, podemos ver que algunos de los parámetros tienen valores predeterminados definidos por el signo igual `=`. Esto significa que si no especificamos explícitamente estos parámetros entre paréntesis, la función tomará los predeterminados. Veamos un ejemplo:
+
+```{r}
+runif(n = 5)
+```
+
+La salida es un vector numérico de 5 números. Cada uno de ellos está entre 0 y 1, ya que no cambiamos la configuración predeterminada. Si también cambiamos los parámetros `min` y `max`, podríamos personalizar aún más la salida:
+
+```{r}
+runif(n = 5, min = 8, max = 9)
+```
+
+También es posible omitir el nombre de los parámetros y simplemente escribir los valores de entrada de esta manera:
+
+```{r}
+runif(5, 8, 9)
+```
+
+Sin embargo, en este caso debemos tener cuidado con el orden de las entradas, ya que cada función tiene un orden predeterminado para los parámetros. Si no nombramos explícitamente los parámetros que estamos configurando, R asumirá que los establecemos en el orden predefinido.
+
+### Usar la función `sample()`
+
+La función `sample()` toma un vector y devuelve una muestra aleatoria de él. Los dos primeros de sus parámetros son:
+
+* `x`, que define el vector
+* `size`, que define la cantidad de elementos que queremos incluir en la muestra aleatoria
+
+Utilice la función `sample()` y muestree 5 valores aleatorios de la variable `full`.
+
+```{r}
+full <- c(7, 32, 4, 27, 48, 2, 1, 9, 27, 7)
+sample(x = full, size = 5)
+```
+
+### Utilice la función `seq()`
+
+La función `seq()` crea una secuencia de números enteros. Los primeros tres de sus parámetros son: `from`, `to` y `by`.
+
+* `from` define el inicio de la secuencia
+* `to` define el final de la secuencia
+* `by` establece los pasos entre los valores individuales
+
+Utilice la función `seq()` y cree una secuencia de números del 2 al 10, pero solo incluya cada segundo valor. Por lo tanto, la salida debe ser: `2`, `4`, `6`, `8`, `10`.
+
+```{r}
+seq(from = 2, to = 10, by = 2)
+```
+
+## Utilice funciones y datos existentes a través de paquetes
+
+Los paquetes le dan acceso a un gran conjunto de funciones y conjuntos de datos, la mayoría de los cuales son proporcionados por la generosa comunidad R. Son la salsa secreta que hace posible usar R para casi cualquier cosa que puedas imaginar. Además, muchos paquetes son de código abierto, lo que puede ser un gran recurso de aprendizaje.
+
+* Conozca el concepto de paquetes en R
+* Aprenda a llamar funciones desde paquetes
+
+```{}
+library(___) 
+data(___)
+```
+
+### Introducción a paquetes
+
+Los paquetes son una de las mejores cosas de R. Los paquetes son compatibles con una gran comunidad de desarrolladores y permiten que R se conecte a muchos algoritmos y bibliotecas externos diferentes, muchos de ellos incluso escritos en diferentes lenguajes de programación.
+
+Colaboradores de todo el mundo, incluidos desarrolladores o expertos en el dominio de la física, las finanzas, las estadísticas, etc., crean una gran cantidad de contenido adicional, como funciones personalizadas para casos de uso específicos. Estas funciones, junto con la documentación, los archivos de ayuda y los conjuntos de datos se pueden recopilar en paquetes. Los paquetes pueden hacerse públicos a través de *repositorios de paquetes* para que cualquiera pueda instalarlos y utilizarlos. El repositorio de paquetes más popular es [CRAN](https://cran.r-project.org/), que aloja más de 15.000 paquetes.
+
+### Llamar un paquete
+
+Como demostración, utilizaremos la función `generate_primes()` del paquete `primes`. Esta función toma dos números como parámetros y genera todos los números primos dentro de su rango.
+
+Para usar un paquete, primero tenemos que cargarlo. Esto se puede hacer aplicando la función `library()` e insertando el nombre del paquete como primer argumento de la función. Después de eso, tenemos acceso a todo el contenido del paquete y podemos usar funciones de él como de costumbre.
+
+```{r}
+library(primes)
+generate_primes(min = 500, max = 550)
+```
+
+**Compruebe si hay año bisiesto**
+
+* Cargue el paquete de `lubridate`.
+* Utilice la función `leap_year` para comprobar si 2020 es un año bisiesto o no.
+
+```{r}
+library(lubridate)
+leap_year(2020)
+```
+
+El contenido de este capítulo se encuentra en la página oficial de **Quantargo** en idioma ingles. También, existe mas material en la página oficial y es muy recomendable para introducirse en R.
+
+
