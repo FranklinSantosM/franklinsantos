@@ -1,0 +1,194 @@
+---
+title: "Explorador de datos sobre emisiones de CO2"
+description: |
+  Las emisiones de dióxido de carbono y otros gases de efecto invernadero son uno de los principales motores del cambio climático.
+categories:
+  - CO2
+  - Climate Change
+  - Carbon Dioxide
+author:
+  - name: Franklin Santos
+    url: https://franklinsantos.com
+    affiliation: Agritech Bolivia
+    orcid_id: 0000-0002-7509-2910
+date: 12-03-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+## Introduccion
+¿Por qué son importantes las emisiones de gases de efecto invernadero?
+Las emisiones de dióxido de carbono y otros gases de efecto invernadero son uno de los principales motores del cambio climático. 
+
+En las últimas décadas, las temperaturas mundiales han aumentado considerablemente, con un incremento medio de la temperatura de más de 1℃. En algunas regiones, el calentamiento ha sido -y seguirá siendo- mucho mayor que la media mundial.
+
+Un clima cambiante tiene una serie de impactos potenciales en nuestros medios de vida y en el medio ambiente que nos rodea, incluidos los fenómenos meteorológicos extremos (como inundaciones, sequías, tormentas y olas de calor); el aumento del nivel del mar; la alteración del crecimiento de los cultivos; y la alteración de los sistemas hídricos (véase el último informe del IPCC).
+
+En nuestro Explorador de datos sobre los impactos del cambio climático, puedes explorar los indicadores sobre cómo está cambiando el clima.
+
+¿Estamos avanzando en la reducción de emisiones?
+Para frenar el aumento de las concentraciones de CO₂ y de los gases de efecto invernadero en la atmósfera, en todo el mundo tenemos que reducir rápidamente la cantidad de estos gases que emitimos cada año.
+
+Lejos de reducirse rápidamente, las emisiones mundiales de CO₂ aún no han alcanzado su punto máximo. En consecuencia, las concentraciones atmosféricas de gases de efecto invernadero siguen aumentando rápidamente.
+
+De cara al futuro, las actuales políticas climáticas aplicadas por los países de todo el mundo contribuirán a reducir las emisiones.
+
+Y en el mundo actual se observan grandes diferencias entre países -incluso con niveles de renta similares- que demuestran que incluso con las tecnologías actuales es posible avanzar. En los últimos años, varios países también han avanzado en la reducción de emisiones.
+
+Pero este cambio no se está produciendo con la suficiente rapidez como para acercarnos a nuestros objetivos internacionales de limitar el calentamiento medio a "bastante menos de 2℃".
+
+¿Cómo podemos avanzar en la reducción de las emisiones?
+Actualmente, el mundo está muy lejos de cumplir su objetivo internacional de limitar el calentamiento medio a 2℃. Pero tenemos opciones para acercarnos.
+
+Nuestras emisiones proceden de dos áreas clave: la energía (que incluye la calefacción, el transporte, la electricidad y la industria) y la agricultura (que incluye las emisiones directas de la agricultura y el cambio de uso del suelo).
+
+
+## Data download from GitHub
+
+```{r}
+library(data.table)
+
+mydata = fread("https://raw.githubusercontent.com/owid/co2-data/master/owid-co2-data.csv")
+summary(mydata)
+```
+
+```{r, echo=FALSE}
+#selecting columns to analyze
+dataw <- mydata[, .(country, 
+                    year, 
+                    co2, 
+                    co2_per_capita, 
+                    cumulative_co2, 
+                    co2_per_unit_energy, 
+                    energy_per_gdp, 
+                    population)]
+head(dataw)
+
+#Ranking World
+dataw1 <- dataw[country %in% c("Australia", 
+                              "Brazil", 
+                              "China", 
+                              "India", 
+                              "South Africa", 
+                              "United Kingdom", 
+                              "United Sates",
+                              "World")]
+
+#selecting lines about Latinameric
+data2 <- dataw[country %in% c("Argentina", 
+                              "Chile", 
+                              "Bolivia", 
+                              "Brazil", 
+                              "Paraguay", 
+                              "Uruguay", 
+                              "Peru")]
+head(data2)
+```
+
+*Emisiones de CO₂ per cápita*
+Emisiones de dióxido de carbono (CO₂) procedentes de la quema de combustibles fósiles para la producción de energía y cemento. No se incluye el cambio de uso del suelo.
+
+```{r, echo=FALSE}
+library(tidyverse)
+library(highcharter)
+# CO2 percapita world ranking
+hc01 <- hchart(dataw1, "line",
+              hcaes(x=year, y=co2_per_capita, group = country, color = country)) %>%
+              hc_xAxis(title = list(text = "Años")) %>%
+              hc_yAxis(title = list(text = "co2 per capita (t)"))%>%
+              hc_credits(
+                enabled =TRUE,
+                text = "Data Source: Our world in Data;https://github.com/owid/co2-data",
+                style = list(fontSize = "10px")
+                )
+
+hc01
+```
+
+```{r, echo=FALSE}
+# CO2 percapita Latinameric
+hc1 <- hchart(data2, "line",
+              hcaes(x=year, y=co2_per_capita, group = country, color = country)) %>%
+              hc_xAxis(title = list(text = "Años")) %>%
+              hc_yAxis(title = list(text = "co2 per capita (t)"))%>%
+              hc_credits(
+                enabled =TRUE,
+                text = "Data Source: Our world in Data;https://github.com/owid/co2-data",
+                style = list(fontSize = "10px")
+                )
+
+hc1
+```
+
+*Emisiones acumuladas de CO₂*
+Las emisiones acumuladas de dióxido de carbono (CO₂) representan la suma total de las emisiones de CO₂ producidas por los combustibles fósiles y el cemento desde 1750, y se mide en toneladas. Se miden las emisiones de CO₂ procedentes únicamente de los combustibles fósiles y de la producción de cemento; no se incluye el cambio de uso del suelo.
+
+```{r, echo=FALSE}
+#cumulative_co2
+hc2 <- hchart(data2, "line",
+              hcaes(x=year, y=cumulative_co2, group = country, color = country)) %>%
+              hc_xAxis(title = list(text = "Años")) %>%
+              hc_yAxis(title = list(text = "cumulative_co2 (mt)"))%>%
+              hc_credits(
+                enabled =TRUE,
+                text = "Data Source: Our world in Data;https://github.com/owid/co2-data",
+                style = list(fontSize = "10px")
+                )
+
+hc2
+
+```
+
+
+*Intensidad de carbono en la producción de energía*
+La intensidad de carbono de la producción de energía se mide como la cantidad de dióxido de carbono emitido por unidad de producción de energía. Se mide en kilogramos de CO₂ por kilovatio-hora.
+
+```{r, echo=FALSE}
+
+#tidy years
+##filter only values data in "co2_per_unit_energy" variable
+data3 <- data2[!co2_per_unit_energy == 'is.na']
+
+##co2_per_unit_energy
+hc3 <- hchart(data3, "line",
+              hcaes(x=year, y=co2_per_unit_energy, group = country, color = country)) %>%
+              hc_xAxis(title = list(text = "Años")) %>%
+              hc_yAxis(title = list(text = "co2_per_unit_energy (kg/kWh)"))%>%
+              hc_credits(
+                enabled =TRUE,
+                text = "Data Source: Our world in Data;https://github.com/owid/co2-data",
+                style = list(fontSize = "10px")
+                )
+
+hc3
+```
+
+*Intensidad de las emisiones de carbono de las economías*
+Intensidad de dióxido de carbono (CO₂) de las economías medida en kilogramos de CO₂ por $ de PIB (medido en dólares internacionales a precios de 2011).
+
+```{r, echo=FALSE}
+#filter only values data in "energy_per_gdp" variable
+data4 <- data2[!energy_per_gdp == 'is.na']
+
+#energy_per_gdp
+hc4 <- hchart(data4, "line",
+              hcaes(x=year, y=energy_per_gdp, group = country, color = country)) %>%
+              hc_xAxis(title = list(text = "Años")) %>%
+              hc_yAxis(title = list(text = "co2_per_unit_energy (kg/kWh)"))%>%
+              hc_credits(
+                enabled =TRUE,
+                text = "Data Source: Our world in Data;https://github.com/owid/co2-data",
+                style = list(fontSize = "10px")
+                )
+
+hc4
+```
+
+
+

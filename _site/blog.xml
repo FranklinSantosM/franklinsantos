@@ -7,7 +7,18 @@
     <description>Data Scientist, Plant Breeder and Analist Data
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Wed, 03 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 03 Dec 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Explorador de datos sobre emisiones de CO2</title>
+      <dc:creator>Franklin Santos</dc:creator>
+      <link>https://franklinsantos.com/posts/2021-11-21-co2</link>
+      <description>Las emisiones de dióxido de carbono y otros gases de efecto invernadero son uno de los principales motores del cambio climático.</description>
+      <category>CO2</category>
+      <category>Climate Change</category>
+      <category>Carbon Dioxide</category>
+      <guid>https://franklinsantos.com/posts/2021-11-21-co2</guid>
+      <pubDate>Fri, 03 Dec 2021 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Marco de datos y tibbles</title>
       <dc:creator>Franklin Santos</dc:creator>
@@ -115,18 +126,6 @@
       <guid>https://franklinsantos.com/posts/2021-04-04-worldtemp</guid>
       <pubDate>Mon, 01 Mar 2021 00:00:00 +0000</pubDate>
       <media:content url="https://franklinsantos.com/posts/2021-04-04-worldtemp/image.png" medium="image" type="image/png" width="1920" height="1152"/>
-    </item>
-    <item>
-      <title>Análisis de datos climáticos de la E.E. Kallutaca</title>
-      <dc:creator>Franklin Santos</dc:creator>
-      <link>https://franklinsantos.com/posts/2021-03-14-weatherdatakallutaca</link>
-      <description>Breve análisis de datos climáticos de la Estación Experimental de Kallutaca, durante la campaña agrícola 2019-2020.</description>
-      <category>Tidyverse</category>
-      <category>Climate Analysis</category>
-      <category>Kallutaca</category>
-      <guid>https://franklinsantos.com/posts/2021-03-14-weatherdatakallutaca</guid>
-      <pubDate>Mon, 01 Feb 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://franklinsantos.com/posts/2021-03-14-weatherdatakallutaca/weatherdatakallutaca_files/figure-html5/unnamed-chunk-7-1.png" medium="image" type="image/png" width="1920" height="1152"/>
     </item>
   </channel>
 </rss>
