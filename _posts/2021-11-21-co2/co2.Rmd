@@ -12,6 +12,7 @@ author:
     affiliation: Agritech Bolivia
     orcid_id: 0000-0002-7509-2910
 date: 12-03-2021
+preview: fs.png
 output:
   distill::distill_article:
     self_contained: false
