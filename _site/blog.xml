@@ -13,6 +13,9 @@
       <dc:creator>Franklin Santos</dc:creator>
       <link>https://franklinsantos.com/posts/2022-01-10-diplyr</link>
       <description>Utilice verbos `dplyr` básicos para filtrar filas, seleccionar columnas y ordenar/organizar conjuntos de datos en combinación con el operador pipe `%&gt;%`.</description>
+      <category>Dplyr</category>
+      <category>Data Science</category>
+      <category>Tidyverse</category>
       <guid>https://franklinsantos.com/posts/2022-01-10-diplyr</guid>
       <pubDate>Mon, 10 Jan 2022 00:00:00 +0000</pubDate>
       <media:content url="https://franklinsantos.com/posts/2022-01-10-diplyr/fs.png" medium="image" type="image/png" width="2214" height="2556"/>

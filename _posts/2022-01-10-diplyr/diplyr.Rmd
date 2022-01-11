@@ -2,6 +2,10 @@
 title: "Transformación de datos con dplyr"
 description: |
   Utilice verbos `dplyr` básicos para filtrar filas, seleccionar columnas y ordenar/organizar conjuntos de datos en combinación con el operador pipe `%>%`.
+categories:
+  - Dplyr
+  - Data Science
+  - Tidyverse
 author:
   - name: Franklin Santos
     url: https://franklinsantos.com
