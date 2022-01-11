@@ -7,7 +7,16 @@
     <description>Data Scientist, Plant Breeder and Analist Data
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Fri, 03 Dec 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 10 Jan 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Transformación de datos con dplyr</title>
+      <dc:creator>Franklin Santos</dc:creator>
+      <link>https://franklinsantos.com/posts/2022-01-10-diplyr</link>
+      <description>Utilice verbos `dplyr` básicos para filtrar filas, seleccionar columnas y ordenar/organizar conjuntos de datos en combinación con el operador pipe `%&gt;%`.</description>
+      <guid>https://franklinsantos.com/posts/2022-01-10-diplyr</guid>
+      <pubDate>Mon, 10 Jan 2022 00:00:00 +0000</pubDate>
+      <media:content url="https://franklinsantos.com/posts/2022-01-10-diplyr/fs.png" medium="image" type="image/png" width="2214" height="2556"/>
+    </item>
     <item>
       <title>Explorador de datos sobre emisiones de CO2</title>
       <dc:creator>Franklin Santos</dc:creator>
@@ -115,18 +124,6 @@
       <guid>https://franklinsantos.com/posts/2021-04-10-pesticides</guid>
       <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
       <media:content url="https://franklinsantos.com/posts/2021-04-10-pesticides/picture.png" medium="image" type="image/png" width="1408" height="1052"/>
-    </item>
-    <item>
-      <title>Análisis del cambio de la temperatura del aire</title>
-      <dc:creator>Franklin Santos</dc:creator>
-      <link>https://franklinsantos.com/posts/2021-04-04-worldtemp</link>
-      <description>Se analiza las tendencias del cambio de la temperatura desde el año 1960 hasta 2019 en cada región de los continentes del mundo.</description>
-      <category>Climate Change</category>
-      <category>Air Temperature</category>
-      <category>World</category>
-      <guid>https://franklinsantos.com/posts/2021-04-04-worldtemp</guid>
-      <pubDate>Mon, 01 Mar 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://franklinsantos.com/posts/2021-04-04-worldtemp/image.png" medium="image" type="image/png" width="1920" height="1152"/>
     </item>
   </channel>
 </rss>

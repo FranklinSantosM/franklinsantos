@@ -1,0 +1,459 @@
+---
+title: "Transformación de datos con dplyr"
+description: |
+  Utilice verbos `dplyr` básicos para filtrar filas, seleccionar columnas y ordenar/organizar conjuntos de datos en combinación con el operador pipe `%>%`.
+author:
+  - name: Franklin Santos
+    url: https://franklinsantos.com
+    affiliation: Agritech Bolivia
+    orcid_id: 0000-0002-7509-2910
+date: 01-10-2022
+preview: fs.png
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+
+## Introducción a dplyr
+**dplyr** facilita el proceso de transformación de datos al proporcionar un marco enriquecido para manipular marcos de datos. Las funciones de **dplyr** se pueden concatenar a potentes canalizaciones de transformación para *seleccionar*, *filtrar*, *ordenar*, *unir* y *agregar* datos.
+
+* Descubra lo que hace **dplyr**
+* Obtenga una descripción general de Seleccionar, Filtrar y Ordenar
+* Descubra qué son las uniones, agregaciones y canalizaciones
+
+### ¿Qué es dplyr?
+
+>Existe la broma de que el 80 % de la ciencia de datos está limpiando los datos y el 20 % se queja de limpiar los datos.
+--- Anthony Goldbloom, fundador y CEO de Kaggle
+
+Tener datos *limpios* en cualquier proyecto de Data Science es muy importante, porque los resultados solo son tan buenos como los datos correctos. La limpieza de datos también es la parte que generalmente consume la mayor parte del tiempo y causa los mayores dolores para los científicos de datos. R ya ofrece un amplio conjunto de herramientas y funciones para manipular marcos de datos. Sin embargo, debido a su larga historia, el conjunto de herramientas base R disponible está fragmentado y es difícil de usar para nuevos usuarios.
+
+El paquete **dplyr** facilita el proceso de transformación de datos a través de una colección consistente de funciones. Estas funciones admiten diferentes transformaciones en marcos de datos, que incluyen
+
+* filtrar filas
+* seleccionar columnas
+* ordenar datos
+* agregar datos
+
+Múltiples marcos de datos también se pueden unir mediante valores de atributo comunes.
+
+La coherencia de las funciones de **dplyr** mejora la usabilidad y permite al usuario conectar transformaciones para formar *canalizaciones de datos*. Estas canalizaciones también se pueden ver como un lenguaje de consulta de alto nivel, como p. Ej. el lenguaje SQL para consultas de bases de datos. Además, incluso es posible traducir las canalizaciones de datos creadas a otros back-end, incluidas las bases de datos.
+
+### Marco de funciones
+
+Cada función de transformación de datos en **dplyr** acepta un marco de datos como su primer parámetro de entrada y devuelve el marco de datos transformado como salida. Un plano para una función **dplyr** típica se ve así:
+
+```{r, eval=FALSE}
+transformed <- dplyr_function(my_data_frame, 
+                              param_one, 
+                              param_two, 
+                              ...)
+```
+
+La función `dplyr_function` se puede personalizar aún más a través de argumentos adicionales (`param_one`, `param_two`) colocados después del primer parámetro de marco de datos (`my_data_frame`).
+
+El poder real de **dplyr** viene con el operador pipe `%>%` que permite a los usuarios concatenar funciones de **dplyr** a pipe de datos. Pipe inyecta el marco de datos resultante del cálculo anterior como primer argumento del siguiente. Una transformación de datos que consta de tres funciones se parece a:
+
+```{r, eval=FALSE}
+dplyr_function_three(
+  dplyr_function_two(
+    dplyr_function_one(input_data_frame)))
+
+```
+
+pero con `pipe` se puede escribir de la siguiente manera:
+
+```{r, eval=FALSE}
+input_data_frame %>%
+  dplyr_function_one() %>%
+  dplyr_function_two() %>%
+  dplyr_function_three()
+
+```
+
+El orden de lectura diferente de las funciones de transformación de datos en el orden de transformación real, hace que las canalizaciones sean más fáciles de leer que las llamadas a funciones anidadas.
+
+## Seleccionar columnas de un marco de datos 
+
+Para seleccionar sólo un conjunto específico de columnas de marcos de datos interesantes, **dplyr** ofrece la función `select()` para extraer columnas por nombres, índices y rangos. Incluso puede renombrar las columnas extraídas con `select()`.
+
+* Aprenda a usar la función `select()`
+* Seleccionar las columnas de un marco de datos por nombre o índice
+* Renombrar las columnas de un marco de datos
+
+```{r, eval=FALSE}
+select(my_data_frame, column_one, column_two, ...)
+select(my_data_frame, new_column_name = current_column, ...)
+select(my_data_frame, column_start:column_end)
+select(my_data_frame, index_one, index_two, ...)
+select(my_data_frame, index_start:index_end)
+```
+
+### Seleccionando por nombre
+
+```{r, eval=FALSE}
+select(my_data_frame, column_one, column_two, ...)
+```
+
+En este capítulo veremos el conjunto de datos `pres_results` del paquete **politicaldata**. Contiene datos sobre las elecciones presidenciales de EE.UU. desde 1976, convertidas en un Tibble para una mejor impresión.
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+library(tidyverse)
+library(gapminder)
+library(politicaldata)
+tibble::tibble(pres_results)
+```
+
+Para este ejemplo, veremos el número total de votos en diferentes estados en diferentes elecciones. Como solo estamos interesados en la cantidad de personas que votaron, nos gustaría crear una versión personalizada del marco de datos `pres_results` que solo contenga las columnas `year`, `state` y `total_votes`. Para dicho filtrado, podemos usar la función `select()` del paquete **dplyr**.
+
+La función `select()` toma un marco de datos como parámetro de entrada y nos permite decidir cuál de las columnas queremos mantener. El resultado de la función es un marco de datos con todas las filas, pero que contiene solo las columnas que seleccionamos explícitamente.
+
+Podemos reducir nuestro conjunto de datos a solo `year`, `state` y `total_votes` de la siguiente manera:
+
+```{r}
+tibble(
+select(pres_results, year, state, total_votes)
+)
+```
+
+Como primer parámetro pasamos el marco de datos `pres_results`, como parámetros restantes pasamos las columnas que queremos mantener para `select()`.
+
+Además de mantener las columnas que queremos, la función `select()` también las mantiene en el mismo orden que especificamos en los parámetros de la función.
+
+Si cambiamos el orden de los parámetros cuando llamamos a la función, las columnas de la salida cambian en consecuencia:
+
+```{r}
+tibble(
+select(pres_results, total_votes, year, state)
+)
+```
+
+### Renombrar nombres de columnas
+
+```{r, eval=FALSE}
+select(my_data_frame, new_column_name = current_column, ...)
+```
+
+Además de definir las columnas que queremos conservar, también podemos cambiarles el nombre. Para hacer esto, necesitamos establecer el nuevo nombre de columna dentro de la función `select()` usando el comando
+
+```{r, eval=FALSE}
+new_column_name = current_column
+```
+
+En el siguiente ejemplo, seleccionamos las columnas `year`, `state` y `total_votes` pero cambiamos el nombre de la columna `year` a `Election` en la salida:
+
+```{r}
+tibble(
+select(pres_results, Election = year, state, total_votes)
+)
+```
+
+### Selección por rango de nombre
+
+```{r, eval=FALSE}
+select(my_data_frame, column_start:column_end)
+```
+
+Cuando usamos la función `select()` y definimos las columnas que queremos mantener, **dplyr** en realidad no usa el nombre de las columnas sino el índice de las columnas en el marco de datos. Esto significa que, cuando definimos las primeras tres columnas del marco de datos `pres_results`, `year`, `state` y `total_votes`, **dplyr** convierte estos nombres en los valores de índice `1`, `2` y `3`. Por lo tanto, también podemos usar el nombre de las columnas, aplicar el operador `:` y definir rangos de columnas, que queremos mantener:
+
+```{r}
+tibble(
+select(pres_results, year:total_votes)
+)
+```
+
+Lo que hace `year:total_votes`, se puede traducir a `1:3`, que es simplemente crear un vector de valores numéricos del 1 al 3. Luego, la función `select()` toma el marco de datos `pres_results` y genera un subconjunto del mismo, manteniendo solo Las primeras tres columnas.
+
+### Select() por índices
+
+```{r, eval=FALSE}
+select(my_data_frame, index_one, index_two, ...)
+select(my_data_frame, index_start:index_end)
+```
+
+La función `select()` también se puede usar con índices de columna. En lugar de usar nombres, debemos especificar las columnas que queremos seleccionar por sus índices. En comparación con otros lenguajes de programación, la indexación en R comienza con *uno* en lugar de *cero*. Para seleccionar la primera, cuarta y quinta columna del conjunto de datos `pres_results` podemos escribir
+
+```{r}
+tibble(
+select(pres_results, 1,4,5)
+)
+```
+
+De manera similar a la definición de rangos de columnas usando sus nombres, podemos definir rangos (o vectores) de valores de índice en su lugar:
+
+```{r}
+tibble(
+select(pres_results, 1:3)
+)
+```
+
+## Filtrar filas de marcos de datos
+
+A menudo queremos operar sólo en un subconjunto específico de filas de un marco de datos. La función **dplyr** `filter()` proporciona una forma flexible de extraer las filas de interés en base a múltiples condiciones.
+
+* Utilice la función `filter()` para ordenar las filas de un marco de datos que cumplan una condición específica
+* Filtrar un cuadro de datos por múltiples condiciones
+
+```{r, eval=FALSE}
+filter(my_data_frame, condition)
+filter(my_data_frame, condition_one, condition_two, ...)
+```
+
+### Función filter()
+
+```{r, eval=FALSE}
+filter(my_data_frame, condition)
+```
+
+La función `filter()` toma un marco de datos y una o más expresiones de filtrado como parámetros de entrada. Procesa el marco de datos y mantiene solo las filas que cumplen con las expresiones de filtrado definidas. Estas expresiones pueden verse como reglas para la evaluación y el mantenimiento de filas. En la mayoría de los casos, se basan en operadores relacionales. Como ejemplo, podríamos filtrar el marco de datos `pres_results` y mantener solo las filas, donde la variable de `state` es igual a `"CA"` (California):
+
+```{r}
+tibble(
+filter(pres_results, state == "CA")
+)
+```
+
+En el resultado, podemos comparar los resultados de las elecciones en California para diferentes años.
+
+Como otro ejemplo, podríamos filtrar el marco de datos `pres_results` y mantener solo aquellas filas, donde la variable `dem` (porcentaje de votos para el Partido Demócrata) es mayor que 0.85:
+
+```{r}
+tibble(
+filter(pres_results, dem > 0.85)
+)
+```
+
+En el resultado podemos ver para cada año electoral los estados donde el Partido Demócrata obtuvo más del 85% de los votos. Según los resultados, podríamos decir que el Partido Demócrata tiene una base sólida de votantes en el Distrito de Columbia (conocido como Washington, D.C.).
+
+### Múltiples expresiones de filtro
+
+```{r, eval=FALSE}
+filter(my_data_frame, condition_one, condition_two, ...)
+```
+
+La función `filter()` también puede tomar múltiples reglas de filtrado como entrada. Estos pueden verse como una combinación de reglas con el operador `&`. Para que una fila se incluya en la salida, todas las reglas de filtrado deben cumplirse. En el siguiente ejemplo, filtramos el marco de datos `pres_results` para todas las filas donde la variable `state` es igual a `"CA"` y la variable de `year` es igual a 2016:
+
+```{r}
+tibble(
+filter(pres_results, state == "CA", year==2016)
+)
+```
+
+Obtenemos una sola fila como salida, que contiene los resultados de las elecciones presidenciales de 2016 en los Estados Unidos para el estado de California.
+
+**Ejercicio: Usar filter() con múltiples reglas**
+El conjunto de datos del `gapminder` contiene datos económicos y demográficos sobre diversos países desde 1952. Filtra el tibble e inspecciona qué países tenían una esperanza de vida de más de 80 años en el año 2007. Los paquetes necesarios ya están cargados.
+
+1. Utiliza la función `filter()` en el tibble de gapminder.
+2. Filtra todas las filas en las que la variable `year` es igual a 2007 y la esperanza de vida `lifeExp` es mayor de 80!
+
+**Solución**
+
+```{r}
+tibble(
+filter(gapminder, year==2007, lifeExp > 80)
+)
+```
+
+**Ejercicio**
+El conjunto de datos del `gapminder` contiene datos económicos y demográficos sobre diversos países desde 1952. Filtra el tibble de `gapminder` e inspecciona qué países tenían una población de más de 1.000.000.000 en el año 2007! Los paquetes necesarios ya están cargados.
+
+1. Utiliza la función `filter()` en el tibble `gapminder`.
+2. Filtra todas las filas donde la variable `year` es igual a 2007 y la población `pop` es mayor de 1000000000!
+
+```{r}
+filter(gapminder, year==2007, pop > 1000000000)
+```
+
+## Ordenar marcos de datos por columnas
+
+Para seleccionar las áreas de interés en un marco de datos, a menudo es necesario ordenarlas por columnas específicas. La función **dplyr** `arrange()` permite ordenar los marcos de datos por múltiples columnas en orden ascendente y descendente.
+
+* Utilice la función `arrange()` para ordenar los marcos de datos.
+* Ordene los marcos de datos por múltiples columnas usando `arrange()`.
+
+```{}
+arrange(my_data_frame, column_one)
+arrange(my_data_frame, column_one, column_two, ...)
+```
+
+### La función arrange() con una sola columna
+
+```{r, eval=FALSE}
+arrange(my_data_frame, column_one)
+```
+
+La función `arrange()` ordena las filas de un marco de datos. Toma un marco de datos o un tibble como primer parámetro y los nombres de las columnas en función de los cuales las filas deben ordenarse como parámetros adicionales. Supongamos que queremos responder la pregunta: *¿Qué estados tuvieron el mayor porcentaje de votantes republicanos en las elecciones presidenciales de 2016 en los Estados Unidos?* Para responder a esta pregunta, en el siguiente ejemplo usamos el marco de datos `pres_results_2016`, que contiene información solo para las elecciones presidenciales de EE.UU. de 2016. Nuestra función `arrange()` en el marco de datos `rep` basado en la columna (votos republicanos en porcentaje):
+
+```{r}
+pres_results_2016 <- pres_results %>%
+  filter(year==2016)
+```
+
+
+```{r}
+tibble(
+arrange(pres_results_2016, rep)
+)
+```
+
+Como puede ver en la salida, el marco de datos se ordena en orden ascendente según la columna `rep`. Sin embargo, preferiríamos tener los resultados en orden descendente, para que podamos ver instantáneamente `state` con el mayor porcentaje de repeticiones. Para ordenar una columna en orden descendente, todo lo que tenemos que hacer es aplicar la función `desc()` en la columna dada dentro de la función `arrange()`:
+
+```{r}
+tibble(
+arrange(pres_results_2016, desc(rep))
+)
+```
+
+La organización no solo es posible en valores numéricos, sino también en valores de caracteres. En ese caso, **dplyr** ordena las filas en orden alfabético. Podemos organizar columnas de caracteres como las numéricas:
+
+```{r}
+tibble(
+arrange(pres_results_2016, state)
+)
+```
+
+### La función arrange() con múltiples columnas
+
+También podemos usar la función `arrange()` en varias columnas. En este caso, el orden de las columnas en los parámetros de la función establece una jerarquía de ordenamiento. La función comienza ordenando las filas en función de la primera columna definida en los parámetros. En caso de que haya varias filas con el mismo valor, la función decide el orden en función de la segunda columna definida en los parámetros. Si todavía hay varias filas con los mismos valores, la función decide en función de la tercera columna definida en los parámetros (si está definida) y así sucesivamente.
+
+En el siguiente ejemplo, utilizamos el marco de datos `pres_results_subset`, que contiene los resultados de las elecciones solo para los estados: `"TX"` (Texas), `"UT"` (Utah) y `"FL"` (Florida). Primero ordenamos el marco de datos en orden descendente según la columna de year. Luego, agregamos un segundo nivel y ordenamos el marco de datos basado en la columna `dem`:
+
+```{r}
+pres_results_subset <- pres_results %>%
+  filter(state %in% c("TX",
+                      "UT",
+                      "FL"))
+```
+
+```{r}
+tibble(
+arrange(pres_results_subset, year, dem)
+)
+```
+
+Como puede ver en la salida, el marco de datos se ordena en general en función de la columna `year`. Sin embargo, cuando el valor de `year` es el mismo, el orden de las filas lo decide la columna `dem`.
+
+## Crear una tubería de transformación de datos
+
+Todas las funciones de transformación de datos en **dplyr** pueden ser conectadas a través del operador de tubería (pipe) `%>%` para crear poderosas y a la vez expresivas tuberías de transformación de datos.
+
+* Utilice el operador pipe `%>%` para combinar múltiples funciones **dplyr** en una tubería
+
+```{r, eval=FALSE}
+my_data_frame %>%
+  filter(___) %>%
+  select(___) %>%
+  arrange(___)
+```
+
+### Usando el operador %>%
+El operador pipe `%>%` es una parte especial del universo `tidyverse`. Se utiliza para combinar múltiples funciones y ejecutarlas una tras otra. En esta configuración, la entrada de cada función es la salida de la función anterior. Imagine que tenemos el marco de datos `pres_results` y queremos crear un marco de datos más pequeño y transparente para responder a la pregunta: *¿En qué estados fue el partido democrático la opción más popular en las elecciones presidenciales de 2016 en los Estados Unidos?* Para lograr esta tarea, deberíamos seguir los siguientes pasos:
+
+1. `filter()` el marco de datos para las filas, donde la variable `year` es igual a 2016
+2. `select()` las dos variables `state` y `dem`, ya que no estamos interesados en el resto de las columnas.
+3. `arrange()` el marco de datos filtrado y seleccionado en función de la columna `dem` de forma descendente.
+
+Los pasos y funciones descritos anteriormente deben ejecutarse uno tras otro, donde la entrada de cada función es la salida del paso anterior. Aplicando las cosas que aprendió hasta ahora, puede realizar esta tarea siguiendo los siguientes pasos:
+
+```{r}
+result <- filter(pres_results, year==2016)
+result <- select(result, state, dem)
+result <- arrange(result, desc(dem))
+tibble(result)
+```
+
+La primera función toma el marco de datos `pres_results`, lo filtra de acuerdo con la descripción de la tarea y lo asigna a la variable `result`. Luego, cada función posterior toma la variable `result` como entrada y la sobrescribe con su propia salida.
+
+El operador `%>%` proporciona una forma práctica de combinar los pasos anteriores en aparentemente un paso. Toma un marco de datos como entrada inicial. Luego, aplica una lista de funciones y pasa la salida de cada función para la entrada de la siguiente función. La misma tarea que la anterior se puede lograr usando el operador de tubería `%>%` de esta manera:
+
+```{r}
+tibble(
+pres_results %>%
+  filter(year==2016) %>%
+  select(state, dem, rep) %>%
+  arrange(desc(dem))
+)
+```
+
+Podemos interpretar el código de la siguiente manera:
+
+1. Definimos el conjunto de datos original como punto de partida.
+2. El uso del operador `%>%` justo después del marco de datos le dice a **dplyr**, que viene una función, que toma el marco de datos previamente definido como entrada.
+3. Usamos cada función como de costumbre, pero omite el primer parámetro. La entrada del marco de datos se proporciona automáticamente por la salida del paso anterior.
+4. Mientras agreguemos el operador `%>%` después de un paso, **dplyr** esperará un paso adicional.
+5. En nuestro ejemplo, la tubería se cierra con una función `arrange()`. Obtiene la versión filtrada y seleccionada del marco de datos `pres_results` como entrada y la ordena en función de la columna `dem` de forma descendente. Finalmente, devuelve la salida.
+
+Una diferencia entre los dos enfoques es que el operador `%>%` no guarda permanentemente los resultados intermedios o finales. Para guardar el marco de datos resultante, debemos asignar la salida a una variable:
+
+```{r}
+result <- pres_results %<>%
+  filter(year==2016) %>%
+  select(state, dem) %>%
+  arrange(desc(dem))
+tibble(result)
+```
+
+### Ejercicios: 
+
+**Esperanza de vida austriaca**
+
+Utiliza el operador `%>%` en el conjunto de datos de `gapminder` y crea un simple marco de datos para responder a la siguiente pregunta: *¿Cómo ha cambiado la esperanza de vida en Austria en las últimas décadas?* Los paquetes necesarios ya están cargados.
+
+1. Defina el marco de datos de `gapminder` como el marco de datos de base
+2. Filtra sólo las filas en las que la columna `country` es igual a `Austria` mediante la tubería `gapminder` a la función `filter()`.
+3. Selecciona sólo las columnas: `year` y `lifeExp` del resultado filtrado.
+4. Ordena los resultados en base a la columna `year` en función de las columnas seleccionadas.
+
+**Solución:**
+
+```{r}
+gapminder %>%
+  filter(country == "Austria") %>%
+  select(year, lifeExp) %>%
+  arrange(year)
+```
+
+**PIB europeo per cápita**
+
+Utiliza el operador `%>%` en el conjunto de datos de `gapminder` y crea un simple tibble para responder a la siguiente pregunta: *¿Qué país europeo tuvo el mayor PIB per cápita en 2007?* Los paquetes requeridos ya están cargados.
+
+1. Defina el tibble de `gapminder` como la entrada
+2. Filtra sólo las filas donde la columna `year` es igual a `2007`
+3. Usar una segunda capa de filtro y mantener sólo las filas donde la columna del continente es igual a `Europe`
+4. Seleccione sólo las columnas: `country` y `gdpPercap`
+5. Ordena los resultados basados en la columna `gdpPercap` de forma descendente
+
+```{r}
+gapminder %>%
+  filter(year == 2007, continent == "Europe") %>%
+  select(country, gdpPercap) %>%
+  arrange(desc(gdpPercap))
+```
+
+**Población de las Américas**
+
+Utiliza el operador `%>%` en el conjunto de datos de `gapminder` y crea un simple tibble para responder a la siguiente pregunta: *¿Qué país del continente americano tenía la mayor población en 2007?*
+
+1. Defina el tibble de `gapminder` como la entrada
+2. Filtra sólo las filas donde la columna `year` es igual a `2007`
+3. Utilice una segunda capa de filtro y mantenga sólo las filas donde la columna del `continent` es igual a `Americas`
+4. Seleccione sólo las columnas: `country` y `pop`
+5. Arregla los resultados basados en la columna `pop` de forma descendente
+
+```{r}
+gapminder %>%
+  filter(year == 2007, continent == "Americas") %>%
+  select(country, pop) %>%
+  arrange(desc(pop))
+```
+
+
+
+
