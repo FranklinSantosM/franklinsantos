@@ -7,7 +7,19 @@
     <description>Data Scientist, Plant Breeder and Analist Data
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Mon, 10 Jan 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 03 Feb 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Visualización de datos con ggplot2</title>
+      <dc:creator>Franklin Santos</dc:creator>
+      <link>https://franklinsantos.com/posts/2022-02-03-ggplot</link>
+      <description>Comprender los tipos de gráficos y los principios básicos de la gramática de los gráficos. Cree sus primeras visualizaciones con el paquete ggplot2 que incluye diagramas de dispersión, gráficos de líneas y gráficos de barras.</description>
+      <category>ggplot2</category>
+      <category>Data Science</category>
+      <category>Data Visualization</category>
+      <guid>https://franklinsantos.com/posts/2022-02-03-ggplot</guid>
+      <pubDate>Thu, 03 Feb 2022 00:00:00 +0000</pubDate>
+      <media:content url="https://franklinsantos.com/posts/2022-02-03-ggplot/logo.png" medium="image" type="image/png" width="240" height="278"/>
+    </item>
     <item>
       <title>Transformación de datos con dplyr</title>
       <dc:creator>Franklin Santos</dc:creator>
@@ -115,18 +127,6 @@
       <guid>https://franklinsantos.com/posts/2021-05-05-datable</guid>
       <pubDate>Wed, 05 May 2021 00:00:00 +0000</pubDate>
       <media:content url="https://franklinsantos.com/posts/2021-05-05-datable/dt.png" medium="image" type="image/png" width="1928" height="1174"/>
-    </item>
-    <item>
-      <title>Análisis de la situación de pesticidas en la agricultura</title>
-      <dc:creator>Franklin Santos</dc:creator>
-      <link>https://franklinsantos.com/posts/2021-04-10-pesticides</link>
-      <description>Situación de pesticidas en la agricultura desde 1990 hasta 2017.</description>
-      <category>Pesticides</category>
-      <category>Herbecides</category>
-      <category>Insecticides</category>
-      <guid>https://franklinsantos.com/posts/2021-04-10-pesticides</guid>
-      <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://franklinsantos.com/posts/2021-04-10-pesticides/picture.png" medium="image" type="image/png" width="1408" height="1052"/>
     </item>
   </channel>
 </rss>
