@@ -2147,7 +2147,7 @@ function init_posts_list() {
     var src = $(img).attr('data-src');
     if (src) {
       $(img).attr('src', src);
-      $(img).load(function() {
+      $(img).on("load", function() {
         img.removeAttribute('data-src');
       });
     }
@@ -2193,6 +2193,7 @@ function init_posts_list() {
 
       // mark posts that match the category visible
       var page_category = window.location.hash.replace(/^#category:/, "");
+      page_category = decodeURIComponent(page_category)
       var posts = $('.post-metadata').map(function(idx, script) {
         var metadata = $.parseJSON($(script).html());
         var post = null;
@@ -2208,7 +2209,7 @@ function init_posts_list() {
       set_posts_visible(posts, true);
 
       // mark the hash active
-      $('.categories li>a[href="' + window.location.hash + '"]').addClass('active');
+      $('.categories li>a[href="' + decodeURIComponent(window.location.hash) + '"]').addClass('active');
 
       // update the list_caption
       var list_caption = $('.posts-list-caption');
@@ -2271,6 +2272,23 @@ function init_posts_list() {
 <div class="posts-container posts-with-sidebar posts-apply-limit l-screen-inset">
 <div class="posts-list">
 <h1 class="posts-list-caption" data-caption="Posts">Posts</h1>
+<a href="posts/2022-03-01-intro-ml/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<div class="metadata">
+<div class="publishedDate">March 1, 2022</div>
+<div class="dt-authors">
+<div class="dt-author">Franklin Santos</div>
+</div>
+</div>
+<div class="thumbnail">
+<img src="posts/2022-03-01-intro-ml/int.png"/>
+</div>
+<div class="description">
+<h2>Introducción a Machine Learning</h2>
+<div class="dt-tags"></div>
+<p>En los últimos años, términos como inteligencia artificial, aprendizaje automático y aprendizaje profundo se han utilizado mucho. Tan misteriosas como suenan estas palabras, ¿cuál es su diferencia y de qué son capaces?.</p>
+</div>
+</a>
 <a href="posts/2022-02-03-ggplot/" class="post-preview">
 <script class="post-metadata" type="text/json">{"categories":["ggplot2","Data Science","Data Visualization"]}</script>
 <div class="metadata">
@@ -2364,7 +2382,7 @@ function init_posts_list() {
 </div>
 </div>
 <div class="thumbnail">
-<img src="posts/2021-10-24-r-intro/Rfs.png"/>
+<img data-src="posts/2021-10-24-r-intro/Rfs.png"/>
 </div>
 <div class="description">
 <h2>Introducción a R básico</h2>
@@ -2677,7 +2695,7 @@ function init_posts_list() {
 <ul>
 <li>
 <a href="#category:Articles">Articles</a>
-<span class="category-count">(19)</span>
+<span class="category-count">(20)</span>
 </li>
 <li>
 <a href="#category:Air_Temperature">Air Temperature</a>
