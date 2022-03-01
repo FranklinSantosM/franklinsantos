@@ -15,6 +15,10 @@
       <description>
 
 
+&lt;style&gt;
+body {
+text-align: justify}
+&lt;/style&gt;
 &lt;h1 id="introducción-a-machine-learning"&gt;Introducción a Machine
 Learning&lt;/h1&gt;
 &lt;p&gt;Aprenda los fundamentos del aprendizaje automático, incluidos casos
@@ -515,7 +519,7 @@ el conjunto de datos de &lt;code&gt;cars&lt;/code&gt;, puede usar:&lt;/p&gt;
 &lt;pre class="r"&gt;&lt;code&gt;library(ggplot2)
 library(gapminder)
 ggplot(cars)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src="file8c174445f26_files/figure-html/unnamed-chunk-2-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file9ed4059ce5_files/figure-html/unnamed-chunk-2-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;p&gt;Tenga en cuenta que este comando no traza nada más que un lienzo gris
 todavía. Simplemente define el conjunto de datos para el gráfico y crea
 una base vacía sobre la cual podemos agregar capas adicionales.&lt;/p&gt;
@@ -556,7 +560,7 @@ el operador &lt;code&gt;+&lt;/code&gt;:&lt;/p&gt;
   geom_point(
     mapping = aes(x=speed, y=dist)
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src="file8c174445f26_files/figure-html/unnamed-chunk-4-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file9ed4059ce5_files/figure-html/unnamed-chunk-4-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;p&gt;A través del enlace, &lt;code&gt;ggplot()&lt;/code&gt; sabe que las variables de
 &lt;code&gt;speed&lt;/code&gt; y &lt;code&gt;dist&lt;/code&gt; asignadas se toman del conjunto
 de datos de &lt;code&gt;cars&lt;/code&gt;. &lt;code&gt;geom_point()&lt;/code&gt; instruye a
@@ -622,7 +626,7 @@ gapminder_2007 &amp;lt;- gapminder%&amp;gt;%
   filter(year == 2007)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class="r"&gt;&lt;code&gt;ggplot(gapminder_2007) + 
   geom_point(aes(x = gdpPercap, y = lifeExp))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src="file8c174445f26_files/figure-html/unnamed-chunk-7-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file9ed4059ce5_files/figure-html/unnamed-chunk-7-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;p&gt;Al mapear la variable &lt;code&gt;continent&lt;/code&gt; a través de la estética
 del &lt;code&gt;color&lt;/code&gt; del punto y la población &lt;code&gt;pop&lt;/code&gt; (en
 millones) a través del tamaño del punto &lt;code&gt;size&lt;/code&gt;, obtenemos una
@@ -639,13 +643,13 @@ el PIB per cápita &lt;code&gt;gdpPercap&lt;/code&gt; frente a la esperanza de v
 &lt;code&gt;lifeExp&lt;/code&gt; de la siguiente manera:&lt;/p&gt;
 &lt;pre class="r"&gt;&lt;code&gt;ggplot(gapminder_2007) + 
   geom_point(aes(x = gdpPercap, y = lifeExp))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src="file8c174445f26_files/figure-html/unnamed-chunk-8-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file9ed4059ce5_files/figure-html/unnamed-chunk-8-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;p&gt;Para colorear cada punto en función del &lt;code&gt;continent&lt;/code&gt; de
 cada país podemos utilizar:&lt;/p&gt;
 &lt;pre class="r"&gt;&lt;code&gt;ggplot(gapminder_2007) + 
   geom_point(aes(x = gdpPercap, y = lifeExp,
                  color = continent))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src="file8c174445f26_files/figure-html/unnamed-chunk-9-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file9ed4059ce5_files/figure-html/unnamed-chunk-9-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;p&gt;Vemos que en la trama resultante cada punto está coloreado de manera
 diferente según el &lt;code&gt;continent&lt;/code&gt; de cada país.
 &lt;code&gt;ggplot&lt;/code&gt; usa el esquema de coloración basado en el tipo de
@@ -656,7 +660,7 @@ puntos por el &lt;code&gt;pop&lt;/code&gt; de población de la variable
 &lt;pre class="r"&gt;&lt;code&gt;ggplot(gapminder_2007) + 
   geom_point(aes(x = gdpPercap, y = lifeExp,
                  color = pop))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src="file8c174445f26_files/figure-html/unnamed-chunk-10-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file9ed4059ce5_files/figure-html/unnamed-chunk-10-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;p&gt;La escala cambia inmediatamente a continua como se puede ver en la
 leyenda y los puntos celestes son ahora los países con mayor número de
 población (China e India).&lt;/p&gt;
@@ -667,13 +671,13 @@ vida de la siguiente manera:&lt;/p&gt;
 &lt;pre class="r"&gt;&lt;code&gt;ggplot(gapminder_2007) + 
   geom_point(aes(x = gdpPercap, 
                  y = lifeExp))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src="file8c174445f26_files/figure-html/unnamed-chunk-11-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file9ed4059ce5_files/figure-html/unnamed-chunk-11-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;p&gt;Para ajustar el tamaño de puntos en función de la población
 (&lt;code&gt;pop&lt;/code&gt;) de cada país, podemos usar:&lt;/p&gt;
 &lt;pre class="r"&gt;&lt;code&gt;ggplot(gapminder_2007) + 
   geom_point(aes(x = gdpPercap, y = lifeExp,
                  size = pop))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src="file8c174445f26_files/figure-html/unnamed-chunk-12-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file9ed4059ce5_files/figure-html/unnamed-chunk-12-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;p&gt;Vemos que los tamaños de puntos en el gráfico anterior no reflejan
 claramente las diferencias de población en cada país. Si comparamos el
 tamaño en puntos que representa una población de 250 millones de
@@ -689,7 +693,7 @@ puede agregar como cualquier otro objeto ggplot con el operador
                  color = continent,
                  size = pop)) + 
   scale_size_area(max_size = 10)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src="file8c174445f26_files/figure-html/unnamed-chunk-13-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file9ed4059ce5_files/figure-html/unnamed-chunk-13-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;p&gt;Tenga en cuenta que hemos ajustado el tamaño del punto con
 &lt;code&gt;max_size&lt;/code&gt;, lo que da como resultado tamaños de punto más
 grandes.&lt;/p&gt;
@@ -712,7 +716,7 @@ parámetro constante:&lt;/p&gt;
 &lt;pre class="r"&gt;&lt;code&gt;ggplot(gapminder_2007) + 
   geom_point(aes(x = gdpPercap, y = lifeExp, size = pop), 
              alpha = 0.5)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src="file8c174445f26_files/figure-html/unnamed-chunk-14-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file9ed4059ce5_files/figure-html/unnamed-chunk-14-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;p&gt;Ahora podemos ver claramente cuántos puntos se superponen entre sí y
 la opacidad de cada punto se establece en &lt;code&gt;0.5&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id="crea-un-gráfico-de-líneas-con-ggplot"&gt;Crea un gráfico de líneas
@@ -770,7 +774,7 @@ ggplot(gapminder_japan) +
   geom_line(
     mapping = aes(x = year, y = lifeExp)
 )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src="file8c174445f26_files/figure-html/unnamed-chunk-16-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file9ed4059ce5_files/figure-html/unnamed-chunk-16-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;h3 id="agregar-más-líneas"&gt;Agregar más líneas&lt;/h3&gt;
 &lt;p&gt;Hasta ahora solo nos hemos centrado en líneas simples, pero ¿qué pasa
 si tenemos varios países en el conjunto de datos y queremos
@@ -798,7 +802,7 @@ ggplot(data = gapminder_comparison) +
                           group = country, 
                           color = country)
             )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src="file8c174445f26_files/figure-html/unnamed-chunk-17-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file9ed4059ce5_files/figure-html/unnamed-chunk-17-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;p&gt;Tenga en cuenta que ggplot también separa las líneas correctamente si
 solo se especifica la asignación &lt;code&gt;color&lt;/code&gt; (el parámetro
 &lt;code&gt;group&lt;/code&gt; se establece implícitamente).&lt;/p&gt;
@@ -844,7 +848,7 @@ esperanza de vida de los países más grandes por población en 2007.&lt;/p&gt;
   slice_max(pop, n=5)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class="r"&gt;&lt;code&gt;ggplot(gapminder_top5) + 
   geom_col(aes(x = country, y = pop))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src="file8c174445f26_files/figure-html/unnamed-chunk-20-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file9ed4059ce5_files/figure-html/unnamed-chunk-20-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;p&gt;Vemos que las barras resultantes están ordenadas por los nombres de
 los países en orden alfabético por defecto.&lt;/p&gt;
 &lt;h3 id="llenado-de-barras-de-color"&gt;Llenado de barras de color&lt;/h3&gt;
@@ -859,7 +863,7 @@ población (en millones) de los países más grandes y usamos la variable
 &lt;code&gt;continent&lt;/code&gt; para colorear cada barra:&lt;/p&gt;
 &lt;pre class="r"&gt;&lt;code&gt;ggplot(gapminder_top5) + 
   geom_col(aes(x = country, y = pop, fill = continent))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src="file8c174445f26_files/figure-html/unnamed-chunk-21-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file9ed4059ce5_files/figure-html/unnamed-chunk-21-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;p&gt;Dado que la variable &lt;code&gt;continent&lt;/code&gt; es una variable
 categórica, las barras tienen un esquema de color claro para cada
 continente. Veamos qué sucede si usamos una variable
@@ -867,7 +871,7 @@ continente. Veamos qué sucede si usamos una variable
 su lugar:&lt;/p&gt;
 &lt;pre class="r"&gt;&lt;code&gt;ggplot(gapminder_top5) + 
   geom_col(aes(x = country, y = pop, fill = lifeExp))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src="file8c174445f26_files/figure-html/unnamed-chunk-22-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file9ed4059ce5_files/figure-html/unnamed-chunk-22-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;p&gt;Los colores de las barras ahora han cambiado según la leyenda
 &lt;strong&gt;continua&lt;/strong&gt; de la derecha. Vemos que también se pueden
 utilizar variables &lt;code&gt;numéricas&lt;/code&gt; para &lt;code&gt;rellenar&lt;/code&gt;
@@ -890,7 +894,7 @@ world_phones &amp;lt;- WorldPhones %&amp;gt;%
 &lt;pre class="r"&gt;&lt;code&gt;ggplot(world_phones) + 
   geom_col(aes(x = Year, y = phones,
                fill = region))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src="file8c174445f26_files/figure-html/unnamed-chunk-24-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file9ed4059ce5_files/figure-html/unnamed-chunk-24-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;pre class="r distill-force-highlighting-css"&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt;</description>
       <distill:md5>78ff4a499eb63cb948088988da1f1194</distill:md5>
       <category>ggplot2</category>

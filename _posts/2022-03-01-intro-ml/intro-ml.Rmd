@@ -14,6 +14,11 @@ output:
     self_contained: false
 ---
 
+<style>
+body {
+text-align: justify}
+</style>
+
 # Introducción a Machine Learning
 
 Aprenda los fundamentos del aprendizaje automático, incluidos casos de uso y diferentes técnicas de aprendizaje. Diferenciar entre regresión y clasificación.
