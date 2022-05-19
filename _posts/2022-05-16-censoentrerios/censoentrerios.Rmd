@@ -1,0 +1,296 @@
+---
+title: "Censo Agropecuario de Entre Rios-CBBA"
+description: |
+  Se presenta un resumen de resultados del censo agropecuario del municipio de Entre Ríos del departamento de Cochabamba.
+categories:
+  - Data analysis
+  - Censo Agropecuario
+  - Entre Ríos
+author:
+  - name: Franklin Santos
+    url: https://franklinsantos.com
+    affiliation: Instituto Nacional de Innovación Agropecuaria y Forestal (INIAF) 
+    orcid_id: 0000-0002-7509-2910
+date: 2022-05-16
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+# Análisis del Censo Agropecuario
+
+>La base de datos del Censo Agropecuario del Municipio de Entre Ríos ha sido proporcionado por la Dirección de Desarrollo Productivo del mismo municipio.
+
+Importar la librerias que se usarán durante el análisis de la base de datos del Censo Agropecuario del Municipio de Entre Ríos.
+
+```{r}
+##Importar librerias
+library(tidyverse)
+library(kableExtra)
+
+```
+
+
+```{r echo=FALSE}
+## Importar datos de excel
+library(readxl)
+DATA_RIOS <- read_excel("DATA_RIOS.xlsx", 
+    sheet = "DATA", col_types = c("numeric", 
+        "text", "text", "text", "text", "text", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric"))
+head(DATA_RIOS)
+```
+
+Esta base de datos necesita algunos ajustes para su análisis. Uno de ellos es pivotar los datos para que pueda ser analizada de forma mas adecuada.
+
+```{r echo=FALSE}
+## Pivotando datos 
+pivot_data <- DATA_RIOS %>%
+ pivot_longer(
+    cols = `PIÑA`:`APICULTURA`,
+    names_to = "RUBROS",
+    values_to = "CANTIDAD")
+head(pivot_data)
+```
+
+
+```{r, echo=FALSE}
+## Exportar datos 
+setwd("~/Desktop/alcaldia")
+write.csv(pivot_data, "Censo_data.csv")
+```
+
+
+```{r echo=FALSE}
+## Filtrar datos de superficie
+superficie <- pivot_data %>%
+  filter(RUBROS %in% c("PIÑA",
+                      "BANANO",
+                      "PLATANO",
+                      "CITRICO",
+                      "CAFÉ",
+                      "CACAO",
+                      "COPOAZU",
+                      "MARACUYA",
+                      "PALMITO",
+                      "CAMUCAMU",
+                      "PAPAYA",
+                      "YUCA"))
+```
+
+
+
+```{r echo=FALSE}
+pecuaria <- pivot_data %>%
+  filter(RUBROS %in% c("GANADO_CARNE",
+                      "GANADO_LECHE",
+                      "POLLO_ENGORDE",
+                      "POLLO_POSTURA",
+                      "PISCICULTURA",
+                      "APICULTURA"))
+```
+
+
+## Resultados del Censo Agropecuario
+
+A continuación se presenta un resumen de los datos que refieren a la cantidad de productores por cultivo, superficie en hectareas y promedio de superficie.
+
+```{r echo=FALSE}
+# count observations
+data_super <- superficie %>%
+  filter(!is.na(CANTIDAD))%>%
+  group_by(RUBROS) %>%
+  summarise(Productores = n(), 
+            Superficie=sum(CANTIDAD), 
+            Media=mean(CANTIDAD),
+            Mínimo= min(CANTIDAD),
+            Máximo=max(CANTIDAD)) %>%
+  arrange(desc(Superficie))
+
+#develop table with scroll
+kable(cbind(data_super), "html", caption = 'Resumen del censo agropecuario)') %>%
+    kable_styling() %>%
+    scroll_box(width = "100%", height = "200px")
+```
+
+Por ejemplo del resultado se puede inferir que la población del municipio de Entre Ríos se dedican a producir citricos. Por tanto, ocupa mayor superficie cultivado seguida por piña, yuca y plátano.
+
+```{r echo=FALSE}
+# count observations
+superficie %>%
+  filter(!is.na(CANTIDAD))%>%
+  group_by(RUBROS) %>%
+  summarise(Cantidad = n(), 
+            Superficie=sum(CANTIDAD), 
+            Prom=mean(CANTIDAD)) %>%
+  arrange(desc(Superficie)) %>%
+  ggplot(aes(x = Superficie, y = RUBROS, fill=RUBROS)) +
+    geom_bar(stat = "identity") +
+    theme_classic() +
+    labs(
+        y = "Cultivos",
+        x = "Superficie (ha)"
+    )
+```
+
+
+### Resumen por Central y Rubro
+En la siguiente tabla se presenta un resumen clasificado por Central y cultivos, las cuales estan en ranking en base a superficie.
+
+```{r echo=FALSE}
+# count observations per central
+data_super_central <- superficie %>%
+  filter(!is.na(CANTIDAD))%>%
+  group_by(CENTRAL, RUBROS) %>%
+  summarise(Productores = n(), 
+            Superficie=sum(CANTIDAD), 
+            Prom=mean(CANTIDAD),
+            Mínimo= min(CANTIDAD),
+            Máximo=max(CANTIDAD)) %>%
+  arrange(desc(Superficie))
+
+#develop table with scroll
+kable(cbind(data_super_central), "html", caption = 'Resultados por Central y ranking)') %>%
+    kable_styling() %>%
+    scroll_box(width = "100%", height = "200px")
+
+```
+
+La Central **25 de abril** destaca por superficie en el cultivo de Yuca, con 153 productores. Asimismo, la Central **Mamorecillos "A"** ocupa el segundo lugar en cuanto a superficie con el cultivo de Piña.
+
+```{r layout="l-body-outset", fig.width=10, fig.height=6, echo=FALSE}
+sup_central<- superficie %>%
+  filter(!is.na(CANTIDAD))%>%
+  filter(RUBROS %in% c("CITRICO",
+                      "YUCA",
+                      "PIÑA",
+                      "PLATANO")) %>%
+  group_by(CENTRAL, RUBROS) %>%
+  summarise(Cantidad = n(), 
+            Superficie=sum(CANTIDAD), 
+            Prom=mean(CANTIDAD),
+            Mínimo= min(CANTIDAD),
+            Máximo=max(CANTIDAD))
+sup_central %>%
+  ggplot(aes(x = CENTRAL, y = Superficie, color=CENTRAL)) +
+    geom_bar(stat = "identity", show.legend = FALSE) +
+    facet_wrap(~RUBROS) +
+    labs(x = NULL,
+         y = "Superficie (ha)") +
+  guides(x = guide_axis(angle = 45))
+
+#write.csv(central, "data_central.csv")
+```
+
+
+### Resultados de Ganadería
+
+Se presenta un resumen referida a ganadería en el municipio de Entre Ríos
+
+
+```{r echo=FALSE}
+# count observations
+data_pec <- pecuaria %>%
+  filter(!is.na(CANTIDAD))%>%
+  group_by(RUBROS) %>%
+  summarise(Productores = n(), 
+            Cantidad=sum(CANTIDAD), 
+            Prom=mean(CANTIDAD),
+            Mínimo= min(CANTIDAD),
+            Máximo=max(CANTIDAD)) %>%
+  arrange(desc(Productores))
+
+#develop table with scroll
+kable(cbind(data_pec), "html", caption = 'Resumen del censo agropecuario-Ganadería)') %>%
+    kable_styling() %>%
+    scroll_box(width = "100%", height = "200px")
+```
+
+En la table 3 se puede observar que **757** productores se dedican a la producción de **ganado de carne** seguida por **Apicultura** y **Piscultura**.
+
+```{r echo=FALSE}
+pecuaria %>%
+  filter(!is.na(CANTIDAD))%>%
+  group_by(RUBROS) %>%
+  summarise(Productores = n(), 
+            Cantidad=sum(CANTIDAD), 
+            Prom=mean(CANTIDAD),
+            Mínimo= min(CANTIDAD),
+            Máximo=max(CANTIDAD)) %>%
+  arrange(desc(Cantidad)) %>%
+  ggplot(aes(x = RUBROS, y = Cantidad, fill=RUBROS)) +
+    geom_bar(stat = "identity") +
+    theme_classic() +
+    labs(
+        x = "Ganadería",
+        y = "Cantidad"
+    ) +
+  guides(x = guide_axis(angle = 45))+
+   theme(legend.position = "none")
+```
+
+### Resumen por Central y Distrito
+
+Acontinuación se presenta un resumen clasificado por Central y rubros, las cuales están ranqueadas de acuerdo a la cantidad de productores por rubro.
+
+```{r echo=FALSE}
+# count observations
+data_pec_central <- pecuaria %>%
+  filter(!is.na(CANTIDAD))%>%
+  group_by(CENTRAL, RUBROS) %>%
+  summarise(Productores = n(), 
+            Cantidad=sum(CANTIDAD), 
+            Prom=mean(CANTIDAD),
+            Mínimo= min(CANTIDAD),
+            Máximo=max(CANTIDAD)) %>%
+  arrange(desc(Productores)) 
+
+#develop table with scroll
+kable(cbind(data_pec_central), "html", caption = 'Resultados pecuarios por Central y ranking)') %>%
+    kable_styling() %>%
+    scroll_box(width = "100%", height = "200px")
+
+```
+
+De acuerdo a los resultados de la tabla 4, 194 y 133 productores de la Central 25 de abril se dedican a la apicultura y ganado de carne respectivamente.
+
+```{r echo=FALSE}
+data_pec_dist <- pecuaria %>%
+  filter(!is.na(CANTIDAD))%>%
+  group_by(DISTRITO, RUBROS) %>%
+  summarise(Productores = n(), 
+            Cantidad=sum(CANTIDAD), 
+            Prom=mean(CANTIDAD),
+            Mínimo= min(CANTIDAD),
+            Máximo=max(CANTIDAD)) %>%
+  arrange(desc(Productores))
+
+#develop table with scroll
+kable(cbind(data_pec_dist), "html", caption = 'Resultados pecuarios por distrito)') %>%
+    kable_styling() %>%
+    scroll_box(width = "100%", height = "200px")
+```
+
+La clasificación por distrito muestra que sus productores del Distrito I se dedican a la producción de ganado de carne y apicultura, seguida por el Distrito IV que sus habitantes se dedican a la piscicultura.
+
+```{r layout="l-body-outset", fig.width=10, fig.height=6, echo=FALSE}
+data_pec_dist %>% 
+  ggplot(aes(x = RUBROS, y = Productores, color=RUBROS)) +
+    geom_bar(stat = "identity", show.legend = FALSE) +
+    facet_wrap(~DISTRITO, ncol = 2) +
+    labs(x = NULL,
+         y = "Cantidad de productores") +
+  guides(x = guide_axis(angle = 45))
+```
+
+
