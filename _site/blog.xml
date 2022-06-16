@@ -7,7 +7,150 @@
     <description>Data Scientist, Plant Breeder and Analist Data
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Mon, 16 May 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 Jun 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>R for Excel Users (Part 1)</title>
+      <dc:creator>Franklin Santos</dc:creator>
+      <link>https://franklinsantos.com/posts/2022-06-16-excel</link>
+      <description>
+
+
+&lt;style&gt;
+body {
+text-align: justify}
+&lt;/style&gt;
+&lt;h1 id="introduction"&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;&lt;img src="https://franklinsantos.com/posts/2022-06-16-excel/badge.svg" style="width:50.0%;height:50.0%" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="color: red; "&gt;Excel&lt;/span&gt; is a very important tool to
+interactively work with data in corporate environments. Thanks to its
+statistical capabilities and reproducibility R can be a powerful
+companion to leverage and automate Excel workflows.&lt;/p&gt;
+&lt;ol style="list-style-type: decimal"&gt;
+&lt;li&gt;Excel for data science: Pros and Cons&lt;/li&gt;
+&lt;li&gt;How to use R as a companion to Excel&lt;/li&gt;
+&lt;li&gt;Learn about R packages to work with Excel files&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="excel-pros-and-cons"&gt;Excel Pros and Cons&lt;/h2&gt;
+&lt;p&gt;Excel still is the most important productivity application used in
+corporate environments to work with data. Spreadsheets can be valuable
+tools to setup interactive calculations and communicate results. Excel
+is available in nearly every corporate environment and does not require
+any extra IT-effort to install as compared to other tools.&lt;/p&gt;
+&lt;p&gt;However, using Excel for involved calculations and data science
+projects can be tricky. Most importantly, it mixes a spreadsheet user
+interface with data and calculations which makes it very hard to
+reproduce results. Creating automated reports based on Excel can
+therefore be very tricky. Excel can only handle 1 million rows in one
+spreadsheet and can become very slow for large data sets including many
+calculations. Last but not least, compared to other programming
+languages like &lt;strong&gt;R&lt;/strong&gt;, it does not provide a large
+collection of statistical models and cannot be easily used for advanced
+analytics.&lt;/p&gt;
+&lt;h2 id="excel-vs.-r-summary"&gt;Excel vs. R Summary&lt;/h2&gt;
+&lt;p&gt;Based on the arguments in the previous section we compare Excel vs. R
+based on the following criteria:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Availability&lt;/strong&gt;: Is the tool easily available in
+&lt;strong&gt;corporate environments&lt;/strong&gt;?&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Interactivity&lt;/strong&gt;: Is it easy to create interactive
+calculations and visualizations? In R: through Shiny.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Reproducibility&lt;/strong&gt;: Is it easy to reproduce results in
+the tool, e.g. using different/updated data sets?&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Large Datasets&lt;/strong&gt;: Does the tool handle large data
+sets?&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Automation&lt;/strong&gt;: Is it easy to automate calculations and
+reports?&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Advanced Analytics&lt;/strong&gt;: Does the tool support advanced
+analytics?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The table below gives an indication how Excel and R perform based on
+the above criteria:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class="header"&gt;
+&lt;th align="left"&gt;Feature&lt;/th&gt;
+&lt;th align="left"&gt;Excel&lt;/th&gt;
+&lt;th align="left"&gt;R&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class="odd"&gt;
+&lt;td align="left"&gt;Availability&lt;/td&gt;
+&lt;td align="left"&gt;✅ ✅&lt;/td&gt;
+&lt;td align="left"&gt;✅&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="even"&gt;
+&lt;td align="left"&gt;Interactivity&lt;/td&gt;
+&lt;td align="left"&gt;✅ ✅&lt;/td&gt;
+&lt;td align="left"&gt;✅&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="odd"&gt;
+&lt;td align="left"&gt;Reproducibility&lt;/td&gt;
+&lt;td align="left"&gt;❌ ❌&lt;/td&gt;
+&lt;td align="left"&gt;✅&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="even"&gt;
+&lt;td align="left"&gt;Large Datasets&lt;/td&gt;
+&lt;td align="left"&gt;❌&lt;/td&gt;
+&lt;td align="left"&gt;✅&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="odd"&gt;
+&lt;td align="left"&gt;Automation&lt;/td&gt;
+&lt;td align="left"&gt;❌&lt;/td&gt;
+&lt;td align="left"&gt;✅ ✅&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="even"&gt;
+&lt;td align="left"&gt;Advanced Analytics&lt;/td&gt;
+&lt;td align="left"&gt;❌&lt;/td&gt;
+&lt;td align="left"&gt;✅ ✅&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="using-r-as-a-companion-to-excel"&gt;Using R as a companion to
+Excel&lt;/h2&gt;
+&lt;p&gt;Due to some drawbacks of MS Excel and its proprietary nature many
+data scientists have objections using it. &lt;span
+style="color: red; "&gt;R&lt;/span&gt; also had a rather awkward relationship
+with MS Excel throughout its history. Due to its open-source background
+the “best practice” approach interacting with Excel files has long been
+to export the contents to comma-separated files (CSV). However, this
+approach requires manual interventions and is far from practical.&lt;/p&gt;
+&lt;p&gt;Since most data science projects are interdisciplinary among
+different departments and stakeholders we recommend to use the best tool
+for the job—even if it requires to mix different tools. Currently, Excel
+can be integrated with R through the following workflows and
+packages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Reading from Excel&lt;/strong&gt;: Read Excel files as data input
+for calculations in R. Use the &lt;span style="color: blue; "&gt;readxl&lt;/span&gt;
+package thanks to its performance and ease-of-use.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Writing Excel Files&lt;/strong&gt;: Writing Excel files as results
+from R calculations/scripts. For large datasets the &lt;span
+style="color: blue; "&gt;writexl&lt;/span&gt; package is recommended. If the
+Excel files need to be styled differently including charts, formulas,
+fonts, etc. we recommend using the &lt;span
+style="color: blue; "&gt;openxlsx&lt;/span&gt; package.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Hybrid&lt;/strong&gt;: Excel can be directly integrated with R
+using the &lt;span style="color: blue; "&gt;RExcel&lt;/span&gt; package which even
+allows to use cell formulas for R functions. However, it seems that the
+package is not being further developed and it requires all users to have
+the software installed.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Using one of the above R package integration we can have the best of
+both worlds and seamlessly integrate advanced statistical techniques
+into Excel sheets and workflows.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Coming up &lt;span style="color: green; "&gt;Readxl&lt;/span&gt; package…&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre class="r distill-force-highlighting-css"&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt;</description>
+      <distill:md5>a29d64efcaa0584fbf0274b7c7b9b232</distill:md5>
+      <category>Data Science</category>
+      <category>Excel</category>
+      <category>R</category>
+      <guid>https://franklinsantos.com/posts/2022-06-16-excel</guid>
+      <pubDate>Thu, 16 Jun 2022 00:00:00 +0000</pubDate>
+      <media:content url="https://franklinsantos.com/posts/2022-06-16-excel/badge.svg" medium="image" type="image/svg+xml"/>
+    </item>
     <item>
       <title>Censo Agropecuario de Entre Rios-CBBA</title>
       <dc:creator>Franklin Santos</dc:creator>
@@ -337,7 +480,7 @@ CAMUCAMU
 &lt;p&gt;Por ejemplo del resultado se puede inferir que la población del
 municipio de Entre Ríos se dedican a producir citricos. Por tanto, ocupa
 mayor superficie cultivado seguida por piña, yuca y plátano.&lt;/p&gt;
-&lt;p&gt;&lt;img src="filed193dd19cbd_files/figure-html/unnamed-chunk-8-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file2927545b0b04_files/figure-html/unnamed-chunk-8-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;h3 id="resumen-por-central-y-rubro"&gt;Resumen por Central y Rubro&lt;/h3&gt;
 &lt;p&gt;En la siguiente tabla se presenta un resumen clasificado por Central
 y cultivos, las cuales estan en ranking en base a superficie.&lt;/p&gt;
@@ -3830,7 +3973,7 @@ PALMITO
 cultivo de Yuca, con 153 productores. Asimismo, la Central
 &lt;strong&gt;Mamorecillos “A”&lt;/strong&gt; ocupa el segundo lugar en cuanto a
 superficie con el cultivo de Piña.&lt;/p&gt;
-&lt;p&gt;&lt;img src="filed193dd19cbd_files/figure-html/unnamed-chunk-10-1.png" width="960" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file2927545b0b04_files/figure-html/unnamed-chunk-10-1.png" width="960" /&gt;&lt;/p&gt;
 &lt;h3 id="resultados-de-ganadería"&gt;Resultados de Ganadería&lt;/h3&gt;
 &lt;p&gt;Se presenta un resumen referida a ganadería en el municipio de Entre
 Ríos&lt;/p&gt;
@@ -3989,7 +4132,7 @@ GANADO_LECHE
 &lt;p&gt;En la table 3 se puede observar que &lt;strong&gt;757&lt;/strong&gt; productores
 se dedican a la producción de &lt;strong&gt;ganado de carne&lt;/strong&gt; seguida
 por &lt;strong&gt;Apicultura&lt;/strong&gt; y &lt;strong&gt;Piscultura&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src="filed193dd19cbd_files/figure-html/unnamed-chunk-12-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file2927545b0b04_files/figure-html/unnamed-chunk-12-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;h3 id="resumen-por-central-y-distrito"&gt;Resumen por Central y
 Distrito&lt;/h3&gt;
 &lt;p&gt;Acontinuación se presenta un resumen clasificado por Central y
@@ -6326,9 +6469,9 @@ POLLO_ENGORDE
 Distrito I se dedican a la producción de ganado de carne y apicultura,
 seguida por el Distrito IV que sus habitantes se dedican a la
 piscicultura.&lt;/p&gt;
-&lt;p&gt;&lt;img src="filed193dd19cbd_files/figure-html/unnamed-chunk-15-1.png" width="960" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file2927545b0b04_files/figure-html/unnamed-chunk-15-1.png" width="960" /&gt;&lt;/p&gt;
 &lt;pre class="r distill-force-highlighting-css"&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt;</description>
-      <distill:md5>c9381b0f3135456a9162ad440aeb5a0b</distill:md5>
+      <distill:md5>a3b97c023f5cd8f85fd042dec476617d</distill:md5>
       <category>Data analysis</category>
       <category>Censo Agropecuario</category>
       <category>Entre Ríos</category>
@@ -6428,18 +6571,6 @@ piscicultura.&lt;/p&gt;
       <guid>https://franklinsantos.com/posts/2021-08-06-pliman</guid>
       <pubDate>Fri, 06 Aug 2021 00:00:00 +0000</pubDate>
       <media:content url="https://franklinsantos.com/posts/2021-08-06-pliman/pliman_files/figure-html5/unnamed-chunk-7-1.png" medium="image" type="image/png" width="1248" height="768"/>
-    </item>
-    <item>
-      <title>Tendencias de rendimiento de los cultivos</title>
-      <dc:creator>Franklin Santos</dc:creator>
-      <link>https://franklinsantos.com/posts/2021-07-13-crop-model-yield</link>
-      <description>Se presenta las tendencias de rendimiento de los principales cultivos en los diez paises más poblados del mundo.</description>
-      <category>Crop Yield</category>
-      <category>Model</category>
-      <category>TidyTuesday</category>
-      <guid>https://franklinsantos.com/posts/2021-07-13-crop-model-yield</guid>
-      <pubDate>Tue, 13 Jul 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://franklinsantos.com/posts/2021-07-13-crop-model-yield/crop-model-yield_files/figure-html5/unnamed-chunk-8-1.png" medium="image" type="image/png" width="1248" height="768"/>
     </item>
   </channel>
 </rss>

@@ -66,8 +66,8 @@ head(pivot_data)
 
 ```{r, echo=FALSE}
 ## Exportar datos 
-setwd("~/Desktop/alcaldia")
-write.csv(pivot_data, "Censo_data.csv")
+#setwd("~/Desktop/alcaldia")
+#write.csv(pivot_data, "Censo_data.csv")
 ```
 
 

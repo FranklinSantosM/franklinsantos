@@ -1,0 +1,96 @@
+---
+title: "R for Excel Users (Part 1)"
+description: |
+  Excel is a very important tool to interactively work with data in corporate environments.
+categories:
+  - Data Science
+  - Excel
+  - R
+author:
+  - name: Franklin Santos
+    url: https://franklinsantos.com
+    affiliation: National Institute for Agricultural and Forestry Innovation (INIAF)
+    orcid_id: 0000-0002-7509-2910
+date: 2022-06-16
+preview: badge.svg
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+# Introduction
+
+![](badge.svg){width="50%" height="50%"}
+
+<span style="color: red; ">Excel</span> is a very important tool to interactively work with data in corporate environments. Thanks to its statistical capabilities and reproducibility R can be a powerful companion to leverage and automate Excel workflows.
+
+1. Excel for data science: Pros and Cons
+2. How to use R as a companion to Excel
+3. Learn about R packages to work with Excel files
+
+## Excel Pros and Cons
+Excel still is the most important productivity application used in corporate environments to work with data. Spreadsheets can be valuable tools to setup interactive calculations and communicate results. Excel is available in nearly every corporate environment and does not require any extra IT-effort to install as compared to other tools.
+
+However, using Excel for involved calculations and data science projects can be tricky. Most importantly, it mixes a spreadsheet user interface with data and calculations which makes it very hard to reproduce results. Creating automated reports based on Excel can therefore be very tricky. Excel can only handle 1 million rows in one spreadsheet and can become very slow for large data sets including many calculations. Last but not least, compared to other programming languages like **R**, it does not provide a large collection of statistical models and cannot be easily used for advanced analytics.
+
+## Excel vs. R Summary
+Based on the arguments in the previous section we compare Excel vs. R based on the following criteria:
+
+- **Availability**: Is the tool easily available in **corporate environments**?
+- **Interactivity**: Is it easy to create interactive calculations and visualizations? In R: through Shiny.
+- **Reproducibility**: Is it easy to reproduce results in the tool, e.g. using different/updated data sets?
+- **Large Datasets**: Does the tool handle large data sets?
+- **Automation**: Is it easy to automate calculations and reports?
+- **Advanced Analytics**: Does the tool support advanced analytics?
+
+The table below gives an indication how Excel and R perform based on the above criteria:
+
+| Feature | Excel | R |
+|:--------|:------|:--|
+| Availability | `r emo::ji("check")` `r emo::ji("check")`| `r emo::ji("check")` |
+| Interactivity | `r emo::ji("check")` `r emo::ji("check")`| `r emo::ji("check")` |
+| Reproducibility | `r emo::ji("x")` `r emo::ji("x")`  | `r emo::ji("check")` |
+| Large Datasets | `r emo::ji("x")` | `r emo::ji("check")` |
+| Automation | `r emo::ji("x")` | `r emo::ji("check")` `r emo::ji("check")`|
+| Advanced Analytics | `r emo::ji("x")` | `r emo::ji("check")` `r emo::ji("check")`|
+
+## Using R as a companion to Excel
+Due to some drawbacks of MS Excel and its proprietary nature many data scientists have objections using it. <span style="color: red; ">R</span> also had a rather awkward relationship with MS Excel throughout its history. Due to its open-source background the “best practice” approach interacting with Excel files has long been to export the contents to comma-separated files (CSV). However, this approach requires manual interventions and is far from practical.
+
+Since most data science projects are interdisciplinary among different departments and stakeholders we recommend to use the best tool for the job—even if it requires to mix different tools. Currently, Excel can be integrated with R through the following workflows and packages:
+
+- **Reading from Excel**: Read Excel files as data input for calculations in R. Use the <span style="color: blue; ">readxl</span> package thanks to its performance and ease-of-use.
+- **Writing Excel Files**: Writing Excel files as results from R calculations/scripts. For large datasets the <span style="color: blue; ">writexl</span> package is recommended. If the Excel files need to be styled differently including charts, formulas, fonts, etc. we recommend using the <span style="color: blue; ">openxlsx</span> package.
+- **Hybrid**: Excel can be directly integrated with R using the <span style="color: blue; ">RExcel</span> package which even allows to use cell formulas for R functions. However, it seems that the package is not being further developed and it requires all users to have the software installed.
+
+Using one of the above R package integration we can have the best of both worlds and seamlessly integrate advanced statistical techniques into Excel sheets and workflows.
+
+>Coming up <span style="color: green; ">Readxl</span> package...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
