@@ -7,7 +7,419 @@
     <description>Data Scientist, Plant Breeder and Analist Data
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Thu, 16 Jun 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 03 Jul 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>R for Excel Users (Part 2: readxl package)</title>
+      <dc:creator>Franklin Santos</dc:creator>
+      <link>https://franklinsantos.com/posts/2022-07-03-excel-part2</link>
+      <description>
+
+
+&lt;style&gt;
+body {
+text-align: justify}
+&lt;/style&gt;
+&lt;h1 id="load-excel-files-as-data-frames"&gt;Load Excel Files as Data
+Frames&lt;/h1&gt;
+&lt;p&gt;The &lt;span style="color: green; "&gt;read_excel()&lt;/span&gt; function
+provides an efficient solution to read Excel worksheets as tibbles. It
+is well integrated into the &lt;strong&gt;RStudio&lt;/strong&gt; editor to make data
+imports from Excel even easier.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Read Excel worksheets with &lt;span
+style="color: green; "&gt;read_excel()&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Get familiar with the default settings of &lt;span
+style="color: green; "&gt;read_excel()&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Use the &lt;span style="color: green; "&gt;skip&lt;/span&gt; argument to ignore
+title rows&lt;/li&gt;
+&lt;li&gt;Use the &lt;span style="color: green; "&gt;col_names&lt;/span&gt; argument to
+handle column names&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="r"&gt;&lt;code&gt;library(readxl)
+read_excel(path = &amp;quot;&amp;lt;filename.xlsx&amp;gt;&amp;quot;,
+           skip = ___,
+           col_names = ___)&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id="introduction"&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;The &lt;span style="color: green; "&gt;read_excel()&lt;/span&gt; function from
+the &lt;em&gt;readxl&lt;/em&gt; package probably provides the quickest and most
+convenient way to read Excel files with R. It can be used for either the
+&lt;span style="color: green; "&gt;.xlsx&lt;/span&gt; or the (old) &lt;span
+style="color: green; "&gt;.xls&lt;/span&gt; file extensions and handles each file
+format accordingly. In addition, the function sets column names, data
+types and missing values automatically.&lt;/p&gt;
+&lt;p&gt;Excel file imports through &lt;em&gt;readxl&lt;/em&gt; are also directly
+integrated into the RStudio development environment by just clicking on
+the file in the &lt;em&gt;Files&lt;/em&gt; pane:&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://franklinsantos.com/posts/2022-07-03-excel-part2/a.png" /&gt;&lt;/p&gt;
+&lt;p&gt;For these reasons, &lt;span style="color: green; "&gt;read_excel()&lt;/span&gt;
+is one of the most widely used functions for Excel file imports.&lt;/p&gt;
+&lt;h2 id="the-read_excel-function"&gt;The read_excel() Function&lt;/h2&gt;
+&lt;pre class="r"&gt;&lt;code&gt;library(readxl)
+read_excel(path = &amp;quot;&amp;lt;filename.xlsx&amp;gt;&amp;quot;,&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After loading the &lt;em&gt;readxl&lt;/em&gt; package we can read our first excel
+file by calling the &lt;span style="color: blue; "&gt;read_excel()&lt;/span&gt; with
+the &lt;span style="color: blue; "&gt;path&lt;/span&gt; to the document we want to
+read. As an output, &lt;span style="color: blue; "&gt;read_excel()&lt;/span&gt;
+returns the contents of the spreadsheet as a tibble.&lt;/p&gt;
+&lt;p&gt;In the following example, we read the Excel file &lt;span
+style="color: darkred; "&gt;orders.xlsx&lt;/span&gt;, containing information
+about the orders received by an online shop:&lt;/p&gt;
+&lt;pre class="r"&gt;&lt;code&gt;library(readxl)
+read_excel(path = &amp;quot;orders.xlsx&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# A tibble: 10 × 5
+   OrderID CustID TotalPrice Payment     Status   
+     &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;    
+ 1       1 C1             35 Credit Card Delivered
+ 2       2 C2             30 Debit Card  Delivered
+ 3       3 C4             50 Paypal      Delivered
+ 4       4 C3             13 Credit Card Returned 
+ 5       5 C5             63 Paypal      Delivered
+ 6       6 C6             20 Debit Card  Delivered
+ 7       7 C7             13 Paypal      Delivered
+ 8       8 C3             50 Debit Card  Returned 
+ 9       9 C8             13 Credit Card Delivered
+10      10 C4             40 Debit Card  Delivered&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id="spreadsheet-shape"&gt;Spreadsheet Shape&lt;/h2&gt;
+&lt;p&gt;Excel spreadsheets can come in many forms with different layouts. In
+an optimal case the contents of a spreadsheet are organized in a tabular
+format with the first row defining the name of each column. Based on
+these principles, by default the &lt;span
+style="color: blue; "&gt;read_excel()&lt;/span&gt; function will:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;read the smallest possible rectangular area from the spreadsheet
+that covers all non-empty cells.&lt;/li&gt;
+&lt;li&gt;use the first row of content as column names for the output.&lt;/li&gt;
+&lt;li&gt;handle empty cells as &lt;span style="color: red; "&gt;NA&lt;/span&gt;
+values.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As an example, let’s take a look at the structure of the following
+spreadsheet:&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://franklinsantos.com/posts/2022-07-03-excel-part2/b.png" /&gt;&lt;/p&gt;
+&lt;pre class="r"&gt;&lt;code&gt;read_excel(path = &amp;quot;products.xlsx&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# A tibble: 5 × 4
+  ItemID Description    UnitPrice Stock
+  &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;              &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+1 I1     Socks (2 Pair)      13.0    25
+2 I2     Sweatshirt          40.0    42
+3 &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;                NA      NA
+4 I4     Caps                15.0    30
+5 I5     Pants               50.0    23&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id="data-types"&gt;Data Types&lt;/h2&gt;
+&lt;p&gt;Apart from automatically finding the relevant area of cells, &lt;span
+style="color: blue; "&gt;read_excel()&lt;/span&gt; will also infer the data types
+of the columns based on the used Excel data types. Even if different
+formatting options have been used for numeric values like currencies and
+percentages &lt;span style="color: blue; "&gt;read_excel()&lt;/span&gt; will still
+interpret them as numeric. This would not be the case for manually typed
+(string) percentage values since they change the Excel cell type to
+string and thus are interpreted as characters.&lt;/p&gt;
+&lt;p&gt;As an example, let’s take a look at the following spreadsheet:&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://franklinsantos.com/posts/2022-07-03-excel-part2/c.png" /&gt; If we read this file using &lt;span
+style="color: blue; "&gt;read_excel()&lt;/span&gt;, each column is assigned to
+the most suitable data type:&lt;/p&gt;
+&lt;pre class="r"&gt;&lt;code&gt;read_excel(&amp;quot;customers.xlsx&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# A tibble: 10 × 7
+   CustID FirstName LastName Email          Newsletter Orders Spending
+   &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;          &amp;lt;lgl&amp;gt;       &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt;
+ 1 C1     Lisa      Rogers   lisa.rogers@e… TRUE            2     98.0
+ 2 C2     Mark      Harrison mark.harrison… FALSE           1     30.0
+ 3 C3     Robert    Adams    robert.adams@… TRUE            3     78.0
+ 4 C4     Emily     Jenkins  emily.jenkins… FALSE           2     90.0
+ 5 C5     Sarah     Hunter   sarah.hunter@… FALSE           1     63.0
+ 6 C6     Michael   Mason    michael.mason… TRUE            1     20.0
+ 7 C7     Ryan      Lane     ryan.lane@ema… FALSE           2     26.0
+ 8 C8     Megan     Cole     megan.cole@em… TRUE            1     13.0
+ 9 C9     Daniel    Stone    daniel.stone@… FALSE           1     50.0
+10 C10    Hannah    Edwards  hannah.edward… TRUE            1     60.0&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note, that &lt;span style="color: blue; "&gt;read_excel()&lt;/span&gt; cannot
+automatically identify, whether a column represents a factor variable
+and instead interprets it as a character. These columns must be manually
+converted with &lt;span style="color: blue; "&gt;factor()&lt;/span&gt; after a
+spreadsheet has been read.&lt;/p&gt;
+&lt;h2 id="optional-argument-skip"&gt;Optional Argument: &lt;span
+style="color: blue; "&gt;&lt;em&gt;skip&lt;/em&gt;&lt;/span&gt;&lt;/h2&gt;
+&lt;pre class="r"&gt;&lt;code&gt;library(readxl)
+read_excel(path = &amp;quot;&amp;lt;filename.xlsx&amp;gt;&amp;quot;,
+           skip = ___,
+           col_names = ___)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Excel files often contain header rows at the beginning of the
+spreadsheets which shall not be part of the table to be read. For
+example, the file &lt;span
+style="color: blue; "&gt;customers_title.xlsx&lt;/span&gt; has the following
+layout:&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://franklinsantos.com/posts/2022-07-03-excel-part2/d.png" /&gt; Reading it with a vanilla &lt;span
+style="color: blue; "&gt;read_excel()&lt;/span&gt; function results in&lt;/p&gt;
+&lt;pre class="r"&gt;&lt;code&gt;read_excel(path = &amp;quot;customers_title.xlsx&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# A tibble: 11 × 7
+   `Customer Database` ...2      ...3     ...4       ...5  ...6  ...7 
+   &amp;lt;chr&amp;gt;               &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;      &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;
+ 1 CustID              FirstName LastName Email      News… Orde… Spen…
+ 2 C1                  Lisa      Rogers   lisa.roge… TRUE  2     97.96
+ 3 C2                  Mark      Harrison mark.harr… FALSE 1     29.98
+ 4 C3                  Robert    Adams    robert.ad… TRUE  3     77.97
+ 5 C4                  Emily     Jenkins  emily.jen… FALSE 2     89.97
+ 6 C5                  Sarah     Hunter   sarah.hun… FALSE 1     62.98
+ 7 C6                  Michael   Mason    michael.m… TRUE  1     19.9…
+ 8 C7                  Ryan      Lane     ryan.lane… FALSE 2     25.98
+ 9 C8                  Megan     Cole     megan.col… TRUE  1     12.99
+10 C9                  Daniel    Stone    daniel.st… FALSE 1     49.99
+11 C10                 Hannah    Edwards  hannah.ed… TRUE  1     59.97&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To exclude the first row containing &lt;span
+style="color: blue; "&gt;Customer Database&lt;/span&gt; we can use the &lt;span
+style="color:red;"&gt;skip&lt;/span&gt; parameter and define the exact number of
+rows to be skipped at the beginning of the spreadsheet:&lt;/p&gt;
+&lt;pre class="r"&gt;&lt;code&gt;read_excel(path = &amp;quot;customers_title.xlsx&amp;quot;, skip = 1)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# A tibble: 10 × 7
+   CustID FirstName LastName Email          Newsletter Orders Spending
+   &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;          &amp;lt;lgl&amp;gt;       &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt;
+ 1 C1     Lisa      Rogers   lisa.rogers@e… TRUE            2     98.0
+ 2 C2     Mark      Harrison mark.harrison… FALSE           1     30.0
+ 3 C3     Robert    Adams    robert.adams@… TRUE            3     78.0
+ 4 C4     Emily     Jenkins  emily.jenkins… FALSE           2     90.0
+ 5 C5     Sarah     Hunter   sarah.hunter@… FALSE           1     63.0
+ 6 C6     Michael   Mason    michael.mason… TRUE            1     20.0
+ 7 C7     Ryan      Lane     ryan.lane@ema… FALSE           2     26.0
+ 8 C8     Megan     Cole     megan.cole@em… TRUE            1     13.0
+ 9 C9     Daniel    Stone    daniel.stone@… FALSE           1     50.0
+10 C10    Hannah    Edwards  hannah.edward… TRUE            1     60.0&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id="optional-argument-col_names"&gt;Optional Argument: &lt;span
+style="color: blue; "&gt;&lt;em&gt;col_names&lt;/em&gt;&lt;/span&gt;&lt;/h2&gt;
+&lt;pre class="r"&gt;&lt;code&gt;library(readxl)
+read_excel(path = &amp;quot;&amp;lt;filename.xlsx&amp;gt;&amp;quot;,
+           skip = ___,
+           col_names = ___)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Another frequent issue is the use of common titles instead of
+separate names for each column:&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://franklinsantos.com/posts/2022-07-03-excel-part2/e.png" /&gt;&lt;/p&gt;
+&lt;pre class="r"&gt;&lt;code&gt;read_excel(path = &amp;quot;sales.xlsx&amp;quot;,
+           skip = 1,
+           col_names = FALSE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# A tibble: 5 × 2
+  ...1            ...2
+  &amp;lt;chr&amp;gt;          &amp;lt;dbl&amp;gt;
+1 Socks (2 Pair)     3
+2 Sweatshirt         3
+3 T-Shirt            7
+4 Caps               4
+5 Pants              5&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In case you know the appropriate column names, it is also possible to
+define a character vector with the desired names:&lt;/p&gt;
+&lt;pre class="r"&gt;&lt;code&gt;read_excel(path = &amp;quot;sales.xlsx&amp;quot;,
+           skip = 1,
+           col_names = c(&amp;quot;Item&amp;quot;, &amp;quot;UnitsSold&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# A tibble: 5 × 2
+  Item           UnitsSold
+  &amp;lt;chr&amp;gt;              &amp;lt;dbl&amp;gt;
+1 Socks (2 Pair)         3
+2 Sweatshirt             3
+3 T-Shirt                7
+4 Caps                   4
+5 Pants                  5&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id="handle-excel-files-with-multiple-sheets"&gt;Handle Excel Files with
+Multiple Sheets&lt;/h1&gt;
+&lt;p&gt;The &lt;span style="color: blue; "&gt;read_excel()&lt;/span&gt; function can only
+read one Excel sheet at a time. However, Excel files often contain
+multiple worksheets. In these cases, we can rely on the &lt;span
+style="color: blue; "&gt;excel_sheets()&lt;/span&gt; function to inspect the
+available worksheets and instruct &lt;span
+style="color: blue; "&gt;read_excel()&lt;/span&gt; to read the appropriate
+one.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Use &lt;span style="color: blue; "&gt;excel_sheets()&lt;/span&gt; to retrieve
+all sheet names from an Excel file&lt;/li&gt;
+&lt;li&gt;Use the &lt;span style="color: green; "&gt;sheet&lt;/span&gt; parameter in &lt;span
+style="color: blue; "&gt;read_excel()&lt;/span&gt; to read a specific
+worksheet&lt;/li&gt;
+&lt;li&gt;Read all worksheets using an &lt;span
+style="color: blue; "&gt;sapply()&lt;/span&gt; loop&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="r"&gt;&lt;code&gt;sheets &amp;lt;- excel_sheets(path = &amp;quot;&amp;lt;filename.xlsx&amp;gt;&amp;quot;)
+read_excel(path = &amp;quot;&amp;lt;filename.xlsx&amp;gt;&amp;quot;,
+           sheet = &amp;quot;&amp;lt;sheetname&amp;gt;&amp;quot;)
+sapply(X = sheets, FUN = readxl, path = &amp;quot;&amp;lt;filename.xlsx&amp;gt;&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id="inspect-the-available-excel-sheets"&gt;Inspect the Available Excel
+Sheets&lt;/h2&gt;
+&lt;pre class="r"&gt;&lt;code&gt;sheets &amp;lt;- excel_sheets(path = &amp;quot;&amp;lt;filename.xlsx&amp;gt;&amp;quot;)
+#read_excel(path = &amp;quot;&amp;lt;filename.xlsx&amp;gt;&amp;quot;,
+#          sheet = &amp;quot;&amp;lt;sheetname&amp;gt;&amp;quot;)
+#sapply(X = sheets, FUN = readxl, path = &amp;quot;&amp;lt;filename.xlsx&amp;gt;&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Excel files often contain multiple spreadsheets. These must have
+unique names in order to make an exact identification and selection
+possible. In the world of &lt;em&gt;readxl&lt;/em&gt;, we can use the &lt;span
+style="color: blue; "&gt;excel_sheets()&lt;/span&gt; function to inspect the
+available spreadsheets in an Excel file. As an output it returns a
+character vector with their names:&lt;/p&gt;
+&lt;pre class="r"&gt;&lt;code&gt;library(readxl)
+excel_sheets(&amp;quot;online_shop.xlsx&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;[1] &amp;quot;Customers&amp;quot; &amp;quot;Products&amp;quot;  &amp;quot;Orders&amp;quot;   &lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id="read-a-specific-sheet"&gt;Read a Specific Sheet&lt;/h2&gt;
+&lt;pre class="r"&gt;&lt;code&gt;#sheets &amp;lt;- excel_sheets(path = &amp;quot;&amp;lt;filename.xlsx&amp;gt;&amp;quot;)
+read_excel(path = &amp;quot;&amp;lt;filename.xlsx&amp;gt;&amp;quot;,
+           sheet = &amp;quot;&amp;lt;sheetname&amp;gt;&amp;quot;)
+#sapply(X = sheets, FUN = readxl, path = &amp;quot;&amp;lt;filename.xlsx&amp;gt;&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Once we know which worksheet we want to read from an Excel file, we
+have two options. We can either use the name of the worksheet and define
+it as the sheet parameter:&lt;/p&gt;
+&lt;pre class="r"&gt;&lt;code&gt;read_excel(path = &amp;quot;online_shop.xlsx&amp;quot;,
+           sheet = &amp;quot;Orders&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# A tibble: 10 × 5
+   OrderID CustID TotalPrice Payment     Status   
+     &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;    
+ 1       1 C1             35 Credit Card Delivered
+ 2       2 C2             30 Debit Card  Delivered
+ 3       3 C4             50 Paypal      Delivered
+ 4       4 C3             13 Credit Card Returned 
+ 5       5 C5             63 Paypal      Delivered
+ 6       6 C6             20 Debit Card  Delivered
+ 7       7 C7             13 Paypal      Delivered
+ 8       8 C3             50 Debit Card  Returned 
+ 9       9 C8             13 Credit Card Delivered
+10      10 C4             40 Debit Card  Delivered&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Alternatively, we can use the index of the worksheet within the Excel
+file:&lt;/p&gt;
+&lt;pre class="r"&gt;&lt;code&gt;read_excel(path = &amp;quot;online_shop.xlsx&amp;quot;,
+           sheet = 3)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# A tibble: 10 × 5
+   OrderID CustID TotalPrice Payment     Status   
+     &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;    
+ 1       1 C1             35 Credit Card Delivered
+ 2       2 C2             30 Debit Card  Delivered
+ 3       3 C4             50 Paypal      Delivered
+ 4       4 C3             13 Credit Card Returned 
+ 5       5 C5             63 Paypal      Delivered
+ 6       6 C6             20 Debit Card  Delivered
+ 7       7 C7             13 Paypal      Delivered
+ 8       8 C3             50 Debit Card  Returned 
+ 9       9 C8             13 Credit Card Delivered
+10      10 C4             40 Debit Card  Delivered&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id="read-all-sheets-using-sapply"&gt;Read All Sheets Using &lt;span
+style="color: blue; "&gt;&lt;em&gt;sapply()&lt;/em&gt;&lt;/span&gt;&lt;/h2&gt;
+&lt;pre class="r"&gt;&lt;code&gt;#sheets &amp;lt;- excel_sheets(path = &amp;quot;&amp;lt;filename.xlsx&amp;gt;&amp;quot;)
+#read_excel(path = &amp;quot;&amp;lt;filename.xlsx&amp;gt;&amp;quot;,
+ #          sheet = &amp;quot;&amp;lt;sheetname&amp;gt;&amp;quot;)
+sapply(X = sheets, FUN = readxl, path = &amp;quot;&amp;lt;filename.xlsx&amp;gt;&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In case we want to read all available worksheets from an Excel file,
+we can make use of a simple loop structure. First we extract the names
+of the worksheets:&lt;/p&gt;
+&lt;pre class="r"&gt;&lt;code&gt;sheets &amp;lt;- excel_sheets(&amp;quot;online_shop.xlsx&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Next we use &lt;span style="color: blue; "&gt;sapply()&lt;/span&gt; to
+interactively read each spreadsheet and return a list containing the
+spreadsheet table contents as items. For each iteration, &lt;span
+style="color: blue; "&gt;&lt;em&gt;sapply&lt;/em&gt;&lt;/span&gt; uses a worksheet name from
+&lt;span style="color: blue; "&gt;&lt;em&gt;sheets&lt;/em&gt;&lt;/span&gt; and reads it through
+&lt;span style="color: blue; "&gt;read_excel()&lt;/span&gt;. To make this possible
+we also need to define the path to the Excel file:&lt;/p&gt;
+&lt;pre class="r"&gt;&lt;code&gt;collection &amp;lt;- sapply(X = sheets,
+                     FUN = read_excel,
+                     path = &amp;quot;online_shop.xlsx&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As a result, &lt;span style="color: blue; "&gt;sapply()&lt;/span&gt; will return
+a list of tibbles containing data from all spreadsheets. Afterwards, we
+can simply select a spreadsheet from the list:&lt;/p&gt;
+&lt;pre class="r"&gt;&lt;code&gt;collection$Customers&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# A tibble: 10 × 7
+   CustID FirstName LastName Email          Newsletter Orders Spending
+   &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;          &amp;lt;lgl&amp;gt;       &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt;
+ 1 C1     Lisa      Rogers   lisa.rogers@e… TRUE            2     98.0
+ 2 C2     Mark      Harrison mark.harrison… FALSE           1     30.0
+ 3 C3     Robert    Adams    robert.adams@… TRUE            3     78.0
+ 4 C4     Emily     Jenkins  emily.jenkins… FALSE           2     90.0
+ 5 C5     Sarah     Hunter   sarah.hunter@… FALSE           1     63.0
+ 6 C6     Michael   Mason    michael.mason… TRUE            1     20.0
+ 7 C7     Ryan      Lane     ryan.lane@ema… FALSE           2     26.0
+ 8 C8     Megan     Cole     megan.cole@em… TRUE            1     13.0
+ 9 C9     Daniel    Stone    daniel.stone@… FALSE           1     50.0
+10 C10    Hannah    Edwards  hannah.edward… TRUE            1     60.0&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note, that this approach makes it harder to handle individual issues
+of the spreadsheets and define different &lt;span
+style="color: blue; "&gt;skip&lt;/span&gt; or &lt;span
+style="color: blue; "&gt;col_names&lt;/span&gt; settings for example.&lt;/p&gt;
+&lt;h1 id="read-a-specific-range-from-an-excel-sheet"&gt;Read a Specific Range
+from an Excel Sheet&lt;/h1&gt;
+&lt;p&gt;Excel sheets can contain vast amounts of information, out of which we
+might only require a specific set of rows and columns. The &lt;span
+style="color: blue; "&gt;read_excel()&lt;/span&gt; function has a &lt;span
+style="color: red; "&gt;range&lt;/span&gt; parameter to restrict data input to a
+specific range of cells.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Read only a range of cells using the &lt;span
+style="color: red; "&gt;range&lt;/span&gt; argument&lt;/li&gt;
+&lt;li&gt;Apply selector functions to read a range of rows or columns&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="r"&gt;&lt;code&gt;read_excel(path = &amp;quot;&amp;lt;filename.xlsx&amp;gt;&amp;quot;,
+           sheet = &amp;quot;&amp;lt;sheetname&amp;gt;&amp;quot;,
+           range = &amp;quot;&amp;lt;start&amp;gt;:&amp;lt;end&amp;gt;&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id="define-a-range-selection"&gt;Define a Range Selection&lt;/h2&gt;
+&lt;p&gt;In addition to selecting a specific sheet, we can extend the &lt;span
+style="color: blue; "&gt;read_excel()&lt;/span&gt; function with the &lt;span
+style="color: red; "&gt;range&lt;/span&gt; parameter to read only a given range
+of cells. Ranges need to be specified using the typical Excel format,
+defining a rectangular area of cells.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://franklinsantos.com/posts/2022-07-03-excel-part2/c.png" /&gt;&lt;/p&gt;
+&lt;p&gt;For example, to read the first six rows in column &lt;strong&gt;B&lt;/strong&gt;
+and &lt;strong&gt;C&lt;/strong&gt; from the Excel file &lt;em&gt;online_shop.xlsx&lt;/em&gt; we
+can use&lt;/p&gt;
+&lt;pre class="r"&gt;&lt;code&gt;library(readxl)
+read_excel(path = &amp;quot;online_shop.xlsx&amp;quot;,
+           sheet = &amp;quot;Products&amp;quot;,
+           range = &amp;quot;B1:C6&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# A tibble: 5 × 2
+  Description    UnitPrice       
+  &amp;lt;chr&amp;gt;          &amp;lt;chr&amp;gt;           
+1 Socks (2 Pair)  €        12,99 
+2 Sweatshirt      €        39,99 
+3 &amp;lt;NA&amp;gt;           &amp;lt;NA&amp;gt;            
+4 Caps            €        14,99 
+5 Pants           €        49,99 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that defining a specific &lt;span style="color: red; "&gt;range&lt;/span&gt;
+will overwrite settings such as &lt;span style="color: red; "&gt;skip&lt;/span&gt;.
+It will read exclusively the area defined by &lt;span
+style="color: red; "&gt;range&lt;/span&gt;, no matter if it contains any
+content.&lt;/p&gt;
+&lt;h2 id="use-range-selector-functions"&gt;Use Range Selector Functions&lt;/h2&gt;
+&lt;p&gt;Reading a range of rows or columns from an Excel worksheet can be
+tedious when using an exact cell range definition. We need to know how
+many rows there are or how many columns there are in order to properly
+define the range. As a more convenient alternative, we can apply
+specific selector functions that automatically find all columns for a
+selection of rows and all observations belonging to a selection of
+columns.&lt;/p&gt;
+&lt;p&gt;To read only the first 4 rows, we can use the &lt;span
+style="color: blue; "&gt;cell_rows()&lt;/span&gt; selector function to define the
+&lt;span style="color: red; "&gt;range&lt;/span&gt; of interest:&lt;/p&gt;
+&lt;pre class="r"&gt;&lt;code&gt;read_excel(path = &amp;quot;online_shop.xlsx&amp;quot;,
+           sheet = &amp;quot;Products&amp;quot;,
+           range = cell_rows(1:4))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# A tibble: 3 × 4
+  ItemID Description    UnitPrice        Stock
+  &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;          &amp;lt;chr&amp;gt;            &amp;lt;dbl&amp;gt;
+1 I1     Socks (2 Pair)  €        12,99     25
+2 I2     Sweatshirt      €        39,99     42
+3 &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;           &amp;lt;NA&amp;gt;                NA&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Similarly, to read only the first 2 columns, we can apply the &lt;span
+style="color: blue; "&gt;cell_cols()&lt;/span&gt; selector function:&lt;/p&gt;
+&lt;pre class="r"&gt;&lt;code&gt;read_excel(path = &amp;quot;online_shop.xlsx&amp;quot;,
+           sheet = &amp;quot;Products&amp;quot;,
+           range = cell_cols(1:2))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# A tibble: 5 × 2
+  ItemID Description   
+  &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;         
+1 I1     Socks (2 Pair)
+2 I2     Sweatshirt    
+3 &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;          
+4 I4     Caps          
+5 I5     Pants         &lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Coming up &lt;span style="color: green; "&gt;writexl&lt;/span&gt; package…&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre class="r distill-force-highlighting-css"&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt;</description>
+      <distill:md5>bf196e11559442e591097d95f57362ab</distill:md5>
+      <category>Data Science</category>
+      <category>readxl</category>
+      <category>R</category>
+      <guid>https://franklinsantos.com/posts/2022-07-03-excel-part2</guid>
+      <pubDate>Sun, 03 Jul 2022 00:00:00 +0000</pubDate>
+      <media:content url="https://franklinsantos.com/posts/2022-07-03-excel-part2/logo.png" medium="image" type="image/png" width="240" height="278"/>
+    </item>
     <item>
       <title>R for Excel Users (Part 1)</title>
       <dc:creator>Franklin Santos</dc:creator>
@@ -480,7 +892,7 @@ CAMUCAMU
 &lt;p&gt;Por ejemplo del resultado se puede inferir que la población del
 municipio de Entre Ríos se dedican a producir citricos. Por tanto, ocupa
 mayor superficie cultivado seguida por piña, yuca y plátano.&lt;/p&gt;
-&lt;p&gt;&lt;img src="file2927545b0b04_files/figure-html/unnamed-chunk-8-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file171b3aa791ab_files/figure-html/unnamed-chunk-8-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;h3 id="resumen-por-central-y-rubro"&gt;Resumen por Central y Rubro&lt;/h3&gt;
 &lt;p&gt;En la siguiente tabla se presenta un resumen clasificado por Central
 y cultivos, las cuales estan en ranking en base a superficie.&lt;/p&gt;
@@ -3973,7 +4385,7 @@ PALMITO
 cultivo de Yuca, con 153 productores. Asimismo, la Central
 &lt;strong&gt;Mamorecillos “A”&lt;/strong&gt; ocupa el segundo lugar en cuanto a
 superficie con el cultivo de Piña.&lt;/p&gt;
-&lt;p&gt;&lt;img src="file2927545b0b04_files/figure-html/unnamed-chunk-10-1.png" width="960" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file171b3aa791ab_files/figure-html/unnamed-chunk-10-1.png" width="960" /&gt;&lt;/p&gt;
 &lt;h3 id="resultados-de-ganadería"&gt;Resultados de Ganadería&lt;/h3&gt;
 &lt;p&gt;Se presenta un resumen referida a ganadería en el municipio de Entre
 Ríos&lt;/p&gt;
@@ -4132,7 +4544,7 @@ GANADO_LECHE
 &lt;p&gt;En la table 3 se puede observar que &lt;strong&gt;757&lt;/strong&gt; productores
 se dedican a la producción de &lt;strong&gt;ganado de carne&lt;/strong&gt; seguida
 por &lt;strong&gt;Apicultura&lt;/strong&gt; y &lt;strong&gt;Piscultura&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src="file2927545b0b04_files/figure-html/unnamed-chunk-12-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file171b3aa791ab_files/figure-html/unnamed-chunk-12-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;h3 id="resumen-por-central-y-distrito"&gt;Resumen por Central y
 Distrito&lt;/h3&gt;
 &lt;p&gt;Acontinuación se presenta un resumen clasificado por Central y
@@ -6469,7 +6881,7 @@ POLLO_ENGORDE
 Distrito I se dedican a la producción de ganado de carne y apicultura,
 seguida por el Distrito IV que sus habitantes se dedican a la
 piscicultura.&lt;/p&gt;
-&lt;p&gt;&lt;img src="file2927545b0b04_files/figure-html/unnamed-chunk-15-1.png" width="960" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file171b3aa791ab_files/figure-html/unnamed-chunk-15-1.png" width="960" /&gt;&lt;/p&gt;
 &lt;pre class="r distill-force-highlighting-css"&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt;</description>
       <distill:md5>a3b97c023f5cd8f85fd042dec476617d</distill:md5>
       <category>Data analysis</category>
@@ -6559,18 +6971,6 @@ piscicultura.&lt;/p&gt;
       <guid>https://franklinsantos.com/posts/2021-09-02-inkaverse</guid>
       <pubDate>Thu, 02 Sep 2021 00:00:00 +0000</pubDate>
       <media:content url="https://franklinsantos.com/posts/2021-09-02-inkaverse/inkaverse.png" medium="image" type="image/png" width="518" height="600"/>
-    </item>
-    <item>
-      <title>Área foliar e índice de severidad con R</title>
-      <dc:creator>Franklin Santos</dc:creator>
-      <link>https://franklinsantos.com/posts/2021-08-06-pliman</link>
-      <description>Les presento una alternativa para hallar área foliar e indice de severidad de enfermedades foliares utilizando el paquete pliman. pliman (PLant IMage ANalysis) es un paquete de R para el análisis de imágenes de plantas, principalmente de hojas.</description>
-      <category>Leaf Area</category>
-      <category>Pliman</category>
-      <category>Disease Severity</category>
-      <guid>https://franklinsantos.com/posts/2021-08-06-pliman</guid>
-      <pubDate>Fri, 06 Aug 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://franklinsantos.com/posts/2021-08-06-pliman/pliman_files/figure-html5/unnamed-chunk-7-1.png" medium="image" type="image/png" width="1248" height="768"/>
     </item>
   </channel>
 </rss>
