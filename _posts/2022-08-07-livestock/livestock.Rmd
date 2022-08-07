@@ -1,0 +1,140 @@
+---
+title: "Distribución Pecuaria de Entre Ríos - CBBA"
+description: |
+  Se presenta dos imagen interactivas que refieren al porcentaje de distribución pecuaria en el municipio de Entre Ríos - Cochabamba.
+categories:
+  - Livestock
+  - Highcharter
+  - Donut Graphics
+author:
+  - name: Franklin Santos
+    url: https://franklinsantos.com
+    affiliation: Instituto Nacional de Innovación Agropecuaria y Forestal (INIAF) 
+    orcid_id: 0000-0002-7509-2910
+date: 2022-08-07
+preview: dc.png
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+## Porcentaje de distribución pecuaria
+
+```{r, echo=FALSE}
+library(tidyverse)
+library(highcharter)
+library(googlesheets4)
+```
+
+```{r, echo=FALSE}
+data = read_sheet("https://docs.google.com/spreadsheets/d/1q6HLPcmzDDKoVO9Kh0Fu5qdzCxWoNr3rjBb2B4oAU4A/edit?usp=sharing")
+```
+
+```{r, echo=FALSE}
+library(scales)
+#Resumen de datos
+data_final = data %>%
+  select(RUBROS, Productores)%>%
+  mutate(porcentaje = percent(Productores/sum(Productores)))
+
+```
+
+```{r, echo=FALSE}
+#para un pie remover la parte de "innerSize"
+hc1 <- hchart(
+  data_final, "pie", hcaes(name = RUBROS, y = Productores),
+  name = "Rubros",
+  innerSize = "80%",
+  dataLabels = list(format = "{point.name}<br>({point.porcentaje})")
+  )
+
+hc1
+```
+
+## Generando una gráfica más avanzada y elegante
+
+```{r, echo=FALSE}
+# Avanzado
+hc1 %>%
+  # con la siguiente opción desactivamos los 'dataLabels' para que no 
+  # exista infomración redundante
+   hc_plotOptions(
+    series = list(dataLabels = list(enabled = FALSE))) %>% 
+  hc_tooltip(
+    useHTML = TRUE,
+    style = list(fontSize = "20px"),
+    headerFormat = "",
+    pointFormat = "<div style='text-align: center;'>Rubro <b>{point.name}</b><br>{point.y} productores<br>{point.porcentaje} del total</div>",
+    positioner = JS(
+      "function () {
+      
+        /* one of the most important parts! */
+        xp =  this.chart.chartWidth/2 - this.label.width/2
+        yp =  this.chart.chartHeight/2 - this.label.height/2
+      
+        return { x: xp, y: yp };
+      
+      }"),
+    shadow = FALSE,
+    borderWidth = 0,
+    backgroundColor = "transparent",
+    hideDelay = 1000
+    )
+```
+
+## Distribución de cantidad por rubro
+
+```{r, echo=FALSE}
+
+data_final2 = data %>%
+  select(RUBROS, Cantidad)%>%
+  mutate(porcentaje = percent(Cantidad/sum(Cantidad)))
+
+```
+
+
+```{r, echo=FALSE}
+#para un pie remover la parte de "innerSize"
+hc2 <- hchart(
+  data_final2, "pie", hcaes(name = RUBROS, y = Cantidad),
+  name = "Rubros",
+  innerSize = "75%",
+  dataLabels = list(format = "{point.name}<br>({point.porcentaje})")
+  )
+
+hc2
+```
+
+```{r, echo=FALSE}
+# Avanzado
+hc2 %>%
+  # con la siguiente opción desactivamos los 'dataLabels' para que no 
+  # exista infomración redundante
+   hc_plotOptions(
+    series = list(dataLabels = list(enabled = FALSE))) %>% 
+  hc_tooltip(
+    useHTML = TRUE,
+    style = list(fontSize = "20px"),
+    headerFormat = "",
+    pointFormat = "<div style='text-align: center;'>Rubro <b>{point.name}</b><br>{point.y} unidades<br>{point.porcentaje} del total</div>",
+    positioner = JS(
+      "function () {
+      
+        /* one of the most important parts! */
+        xp =  this.chart.chartWidth/2 - this.label.width/2
+        yp =  this.chart.chartHeight/2 - this.label.height/2
+      
+        return { x: xp, y: yp };
+      
+      }"),
+    shadow = FALSE,
+    borderWidth = 0,
+    backgroundColor = "transparent",
+    hideDelay = 1000
+    )
+```

@@ -7,7 +7,41 @@
     <description>Data Scientist, Plant Breeder and Analist Data
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Sun, 03 Jul 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 07 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Distribución Pecuaria de Entre Ríos - CBBA</title>
+      <dc:creator>Franklin Santos</dc:creator>
+      <link>https://franklinsantos.com/posts/2022-08-07-livestock</link>
+      <description>
+
+
+&lt;style&gt;
+body {
+text-align: justify}
+&lt;/style&gt;
+&lt;h2 id="porcentaje-de-distribución-pecuaria"&gt;Porcentaje de distribución
+pecuaria&lt;/h2&gt;
+&lt;div id="htmlwidget-a8e44bef58034fdbf352" style="width:672px;height:480px;" class="highchart html-widget"&gt;&lt;/div&gt;
+&lt;script type="application/json" data-for="htmlwidget-a8e44bef58034fdbf352"&gt;{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":null},"yAxis":{"title":{"text":"Productores"}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"RUBROS":"GANADO_CARNE","Productores":757,"porcentaje":"31.3%","y":757,"name":"GANADO_CARNE"},{"RUBROS":"APICULTURA","Productores":538,"porcentaje":"22.3%","y":538,"name":"APICULTURA"},{"RUBROS":"PISCICULTURA","Productores":492,"porcentaje":"20.4%","y":492,"name":"PISCICULTURA"},{"RUBROS":"POLLO_POSTURA","Productores":308,"porcentaje":"12.7%","y":308,"name":"POLLO_POSTURA"},{"RUBROS":"POLLO_ENGORDE","Productores":187,"porcentaje":"7.7%","y":187,"name":"POLLO_ENGORDE"},{"RUBROS":"GANADO_LECHE","Productores":135,"porcentaje":"5.6%","y":135,"name":"GANADO_LECHE"}],"type":"pie","name":"Rubros","innerSize":"80%","dataLabels":{"format":"{point.name}&lt;br&gt;({point.porcentaje})"}}],"xAxis":{"type":null,"title":{"text":[]},"categories":null}},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}&lt;/script&gt;
+&lt;h2 id="generando-una-gráfica-más-avanzada-y-elegante"&gt;Generando una
+gráfica más avanzada y elegante&lt;/h2&gt;
+&lt;div id="htmlwidget-4292c42e7a69add1779f" style="width:672px;height:480px;" class="highchart html-widget"&gt;&lt;/div&gt;
+&lt;script type="application/json" data-for="htmlwidget-4292c42e7a69add1779f"&gt;{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":null},"yAxis":{"title":{"text":"Productores"}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false,"dataLabels":{"enabled":false}},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"RUBROS":"GANADO_CARNE","Productores":757,"porcentaje":"31.3%","y":757,"name":"GANADO_CARNE"},{"RUBROS":"APICULTURA","Productores":538,"porcentaje":"22.3%","y":538,"name":"APICULTURA"},{"RUBROS":"PISCICULTURA","Productores":492,"porcentaje":"20.4%","y":492,"name":"PISCICULTURA"},{"RUBROS":"POLLO_POSTURA","Productores":308,"porcentaje":"12.7%","y":308,"name":"POLLO_POSTURA"},{"RUBROS":"POLLO_ENGORDE","Productores":187,"porcentaje":"7.7%","y":187,"name":"POLLO_ENGORDE"},{"RUBROS":"GANADO_LECHE","Productores":135,"porcentaje":"5.6%","y":135,"name":"GANADO_LECHE"}],"type":"pie","name":"Rubros","innerSize":"80%","dataLabels":{"format":"{point.name}&lt;br&gt;({point.porcentaje})"}}],"xAxis":{"type":null,"title":{"text":[]},"categories":null},"tooltip":{"useHTML":true,"style":{"fontSize":"20px"},"headerFormat":"","pointFormat":"&lt;div style='text-align: center;'&gt;Rubro &lt;b&gt;{point.name}&lt;\/b&gt;&lt;br&gt;{point.y} productores&lt;br&gt;{point.porcentaje} del total&lt;\/div&gt;","positioner":"function () {\n      \n        /* one of the most important parts! */\n        xp =  this.chart.chartWidth/2 - this.label.width/2\n        yp =  this.chart.chartHeight/2 - this.label.height/2\n      \n        return { x: xp, y: yp };\n      \n      }","shadow":false,"borderWidth":0,"backgroundColor":"transparent","hideDelay":1000}},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":["hc_opts.tooltip.positioner"],"jsHooks":[]}&lt;/script&gt;
+&lt;h2 id="distribución-de-cantidad-por-rubro"&gt;Distribución de cantidad por
+rubro&lt;/h2&gt;
+&lt;div id="htmlwidget-e621e2135fd20455f675" style="width:672px;height:480px;" class="highchart html-widget"&gt;&lt;/div&gt;
+&lt;script type="application/json" data-for="htmlwidget-e621e2135fd20455f675"&gt;{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":null},"yAxis":{"title":{"text":"Cantidad"}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"RUBROS":"GANADO_CARNE","Cantidad":19828,"porcentaje":"16.00%","y":19828,"name":"GANADO_CARNE"},{"RUBROS":"APICULTURA","Cantidad":1947,"porcentaje":"1.57%","y":1947,"name":"APICULTURA"},{"RUBROS":"PISCICULTURA","Cantidad":1742,"porcentaje":"1.41%","y":1742,"name":"PISCICULTURA"},{"RUBROS":"POLLO_POSTURA","Cantidad":8698,"porcentaje":"7.02%","y":8698,"name":"POLLO_POSTURA"},{"RUBROS":"POLLO_ENGORDE","Cantidad":89341,"porcentaje":"72.11%","y":89341,"name":"POLLO_ENGORDE"},{"RUBROS":"GANADO_LECHE","Cantidad":2340,"porcentaje":"1.89%","y":2340,"name":"GANADO_LECHE"}],"type":"pie","name":"Rubros","innerSize":"75%","dataLabels":{"format":"{point.name}&lt;br&gt;({point.porcentaje})"}}],"xAxis":{"type":null,"title":{"text":[]},"categories":null}},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}&lt;/script&gt;
+&lt;div id="htmlwidget-0f0e008ab00c204a6c61" style="width:672px;height:480px;" class="highchart html-widget"&gt;&lt;/div&gt;
+&lt;script type="application/json" data-for="htmlwidget-0f0e008ab00c204a6c61"&gt;{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":null},"yAxis":{"title":{"text":"Cantidad"}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false,"dataLabels":{"enabled":false}},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"RUBROS":"GANADO_CARNE","Cantidad":19828,"porcentaje":"16.00%","y":19828,"name":"GANADO_CARNE"},{"RUBROS":"APICULTURA","Cantidad":1947,"porcentaje":"1.57%","y":1947,"name":"APICULTURA"},{"RUBROS":"PISCICULTURA","Cantidad":1742,"porcentaje":"1.41%","y":1742,"name":"PISCICULTURA"},{"RUBROS":"POLLO_POSTURA","Cantidad":8698,"porcentaje":"7.02%","y":8698,"name":"POLLO_POSTURA"},{"RUBROS":"POLLO_ENGORDE","Cantidad":89341,"porcentaje":"72.11%","y":89341,"name":"POLLO_ENGORDE"},{"RUBROS":"GANADO_LECHE","Cantidad":2340,"porcentaje":"1.89%","y":2340,"name":"GANADO_LECHE"}],"type":"pie","name":"Rubros","innerSize":"75%","dataLabels":{"format":"{point.name}&lt;br&gt;({point.porcentaje})"}}],"xAxis":{"type":null,"title":{"text":[]},"categories":null},"tooltip":{"useHTML":true,"style":{"fontSize":"20px"},"headerFormat":"","pointFormat":"&lt;div style='text-align: center;'&gt;Rubro &lt;b&gt;{point.name}&lt;\/b&gt;&lt;br&gt;{point.y} unidades&lt;br&gt;{point.porcentaje} del total&lt;\/div&gt;","positioner":"function () {\n      \n        /* one of the most important parts! */\n        xp =  this.chart.chartWidth/2 - this.label.width/2\n        yp =  this.chart.chartHeight/2 - this.label.height/2\n      \n        return { x: xp, y: yp };\n      \n      }","shadow":false,"borderWidth":0,"backgroundColor":"transparent","hideDelay":1000}},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":["hc_opts.tooltip.positioner"],"jsHooks":[]}&lt;/script&gt;
+&lt;pre class="r distill-force-highlighting-css"&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt;</description>
+      <distill:md5>724067c7ec87668c57edf8528c196ad1</distill:md5>
+      <category>Livestock</category>
+      <category>Highcharter</category>
+      <category>Donut Graphics</category>
+      <guid>https://franklinsantos.com/posts/2022-08-07-livestock</guid>
+      <pubDate>Sun, 07 Aug 2022 00:00:00 +0000</pubDate>
+      <media:content url="https://franklinsantos.com/posts/2022-08-07-livestock/dc.png" medium="image" type="image/png" width="838" height="814"/>
+    </item>
     <item>
       <title>R for Excel Users (Part 2: readxl package)</title>
       <dc:creator>Franklin Santos</dc:creator>
@@ -119,18 +153,19 @@ style="color: blue; "&gt;read_excel()&lt;/span&gt;, each column is assigned to
 the most suitable data type:&lt;/p&gt;
 &lt;pre class="r"&gt;&lt;code&gt;read_excel(&amp;quot;customers.xlsx&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;# A tibble: 10 × 7
-   CustID FirstName LastName Email          Newsletter Orders Spending
-   &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;          &amp;lt;lgl&amp;gt;       &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt;
- 1 C1     Lisa      Rogers   lisa.rogers@e… TRUE            2     98.0
- 2 C2     Mark      Harrison mark.harrison… FALSE           1     30.0
- 3 C3     Robert    Adams    robert.adams@… TRUE            3     78.0
- 4 C4     Emily     Jenkins  emily.jenkins… FALSE           2     90.0
- 5 C5     Sarah     Hunter   sarah.hunter@… FALSE           1     63.0
- 6 C6     Michael   Mason    michael.mason… TRUE            1     20.0
- 7 C7     Ryan      Lane     ryan.lane@ema… FALSE           2     26.0
- 8 C8     Megan     Cole     megan.cole@em… TRUE            1     13.0
- 9 C9     Daniel    Stone    daniel.stone@… FALSE           1     50.0
-10 C10    Hannah    Edwards  hannah.edward… TRUE            1     60.0&lt;/code&gt;&lt;/pre&gt;
+   CustID FirstName LastName Email              Newsl…¹ Orders Spend…²
+   &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;              &amp;lt;lgl&amp;gt;    &amp;lt;dbl&amp;gt;   &amp;lt;dbl&amp;gt;
+ 1 C1     Lisa      Rogers   lisa.rogers@email… TRUE         2    98.0
+ 2 C2     Mark      Harrison mark.harrison@ema… FALSE        1    30.0
+ 3 C3     Robert    Adams    robert.adams@emai… TRUE         3    78.0
+ 4 C4     Emily     Jenkins  emily.jenkins@ema… FALSE        2    90.0
+ 5 C5     Sarah     Hunter   sarah.hunter@emai… FALSE        1    63.0
+ 6 C6     Michael   Mason    michael.mason@ema… TRUE         1    20.0
+ 7 C7     Ryan      Lane     ryan.lane@email.c… FALSE        2    26.0
+ 8 C8     Megan     Cole     megan.cole@email.… TRUE         1    13.0
+ 9 C9     Daniel    Stone    daniel.stone@emai… FALSE        1    50.0
+10 C10    Hannah    Edwards  hannah.edwards@em… TRUE         1    60.0
+# … with abbreviated variable names ¹​Newsletter, ²​Spending&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Note, that &lt;span style="color: blue; "&gt;read_excel()&lt;/span&gt; cannot
 automatically identify, whether a column represents a factor variable
 and instead interprets it as a character. These columns must be manually
@@ -170,18 +205,19 @@ style="color:red;"&gt;skip&lt;/span&gt; parameter and define the exact number of
 rows to be skipped at the beginning of the spreadsheet:&lt;/p&gt;
 &lt;pre class="r"&gt;&lt;code&gt;read_excel(path = &amp;quot;customers_title.xlsx&amp;quot;, skip = 1)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;# A tibble: 10 × 7
-   CustID FirstName LastName Email          Newsletter Orders Spending
-   &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;          &amp;lt;lgl&amp;gt;       &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt;
- 1 C1     Lisa      Rogers   lisa.rogers@e… TRUE            2     98.0
- 2 C2     Mark      Harrison mark.harrison… FALSE           1     30.0
- 3 C3     Robert    Adams    robert.adams@… TRUE            3     78.0
- 4 C4     Emily     Jenkins  emily.jenkins… FALSE           2     90.0
- 5 C5     Sarah     Hunter   sarah.hunter@… FALSE           1     63.0
- 6 C6     Michael   Mason    michael.mason… TRUE            1     20.0
- 7 C7     Ryan      Lane     ryan.lane@ema… FALSE           2     26.0
- 8 C8     Megan     Cole     megan.cole@em… TRUE            1     13.0
- 9 C9     Daniel    Stone    daniel.stone@… FALSE           1     50.0
-10 C10    Hannah    Edwards  hannah.edward… TRUE            1     60.0&lt;/code&gt;&lt;/pre&gt;
+   CustID FirstName LastName Email              Newsl…¹ Orders Spend…²
+   &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;              &amp;lt;lgl&amp;gt;    &amp;lt;dbl&amp;gt;   &amp;lt;dbl&amp;gt;
+ 1 C1     Lisa      Rogers   lisa.rogers@email… TRUE         2    98.0
+ 2 C2     Mark      Harrison mark.harrison@ema… FALSE        1    30.0
+ 3 C3     Robert    Adams    robert.adams@emai… TRUE         3    78.0
+ 4 C4     Emily     Jenkins  emily.jenkins@ema… FALSE        2    90.0
+ 5 C5     Sarah     Hunter   sarah.hunter@emai… FALSE        1    63.0
+ 6 C6     Michael   Mason    michael.mason@ema… TRUE         1    20.0
+ 7 C7     Ryan      Lane     ryan.lane@email.c… FALSE        2    26.0
+ 8 C8     Megan     Cole     megan.cole@email.… TRUE         1    13.0
+ 9 C9     Daniel    Stone    daniel.stone@emai… FALSE        1    50.0
+10 C10    Hannah    Edwards  hannah.edwards@em… TRUE         1    60.0
+# … with abbreviated variable names ¹​Newsletter, ²​Spending&lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id="optional-argument-col_names"&gt;Optional Argument: &lt;span
 style="color: blue; "&gt;&lt;em&gt;col_names&lt;/em&gt;&lt;/span&gt;&lt;/h2&gt;
 &lt;pre class="r"&gt;&lt;code&gt;library(readxl)
@@ -317,18 +353,19 @@ a list of tibbles containing data from all spreadsheets. Afterwards, we
 can simply select a spreadsheet from the list:&lt;/p&gt;
 &lt;pre class="r"&gt;&lt;code&gt;collection$Customers&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;# A tibble: 10 × 7
-   CustID FirstName LastName Email          Newsletter Orders Spending
-   &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;          &amp;lt;lgl&amp;gt;       &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt;
- 1 C1     Lisa      Rogers   lisa.rogers@e… TRUE            2     98.0
- 2 C2     Mark      Harrison mark.harrison… FALSE           1     30.0
- 3 C3     Robert    Adams    robert.adams@… TRUE            3     78.0
- 4 C4     Emily     Jenkins  emily.jenkins… FALSE           2     90.0
- 5 C5     Sarah     Hunter   sarah.hunter@… FALSE           1     63.0
- 6 C6     Michael   Mason    michael.mason… TRUE            1     20.0
- 7 C7     Ryan      Lane     ryan.lane@ema… FALSE           2     26.0
- 8 C8     Megan     Cole     megan.cole@em… TRUE            1     13.0
- 9 C9     Daniel    Stone    daniel.stone@… FALSE           1     50.0
-10 C10    Hannah    Edwards  hannah.edward… TRUE            1     60.0&lt;/code&gt;&lt;/pre&gt;
+   CustID FirstName LastName Email              Newsl…¹ Orders Spend…²
+   &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;              &amp;lt;lgl&amp;gt;    &amp;lt;dbl&amp;gt;   &amp;lt;dbl&amp;gt;
+ 1 C1     Lisa      Rogers   lisa.rogers@email… TRUE         2    98.0
+ 2 C2     Mark      Harrison mark.harrison@ema… FALSE        1    30.0
+ 3 C3     Robert    Adams    robert.adams@emai… TRUE         3    78.0
+ 4 C4     Emily     Jenkins  emily.jenkins@ema… FALSE        2    90.0
+ 5 C5     Sarah     Hunter   sarah.hunter@emai… FALSE        1    63.0
+ 6 C6     Michael   Mason    michael.mason@ema… TRUE         1    20.0
+ 7 C7     Ryan      Lane     ryan.lane@email.c… FALSE        2    26.0
+ 8 C8     Megan     Cole     megan.cole@email.… TRUE         1    13.0
+ 9 C9     Daniel    Stone    daniel.stone@emai… FALSE        1    50.0
+10 C10    Hannah    Edwards  hannah.edwards@em… TRUE         1    60.0
+# … with abbreviated variable names ¹​Newsletter, ²​Spending&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Note, that this approach makes it harder to handle individual issues
 of the spreadsheets and define different &lt;span
 style="color: blue; "&gt;skip&lt;/span&gt; or &lt;span
@@ -599,19 +636,21 @@ library(kableExtra)&lt;/code&gt;&lt;/pre&gt;
 #   COPOAZU &amp;lt;dbl&amp;gt;, MARACUYA &amp;lt;dbl&amp;gt;, PALMITO &amp;lt;dbl&amp;gt;, CAMUCAMU &amp;lt;dbl&amp;gt;,
 #   PAPAYA &amp;lt;dbl&amp;gt;, YUCA &amp;lt;dbl&amp;gt;, GANADO_CARNE &amp;lt;dbl&amp;gt;, GANADO_LECHE &amp;lt;dbl&amp;gt;,
 #   POLLO_ENGORDE &amp;lt;dbl&amp;gt;, POLLO_POSTURA &amp;lt;dbl&amp;gt;, PISCICULTURA &amp;lt;dbl&amp;gt;,
-#   APICULTURA &amp;lt;dbl&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+#   APICULTURA &amp;lt;dbl&amp;gt;
+# ℹ Use `colnames()` to see all variable names&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Esta base de datos necesita algunos ajustes para su análisis. Uno de
 ellos es pivotar los datos para que pueda ser analizada de forma mas
 adecuada.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;# A tibble: 6 × 8
-     ID DISTRITO CENTRAL  SINDICATO     NOMBRES  CI    RUBROS CANTIDAD
-  &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;     &amp;lt;dbl&amp;gt;
-1     1 V        ISARZAMA PUERTO_ICHILO FRANCIS… 3641… PIÑA       NA  
-2     1 V        ISARZAMA PUERTO_ICHILO FRANCIS… 3641… BANANO     NA  
-3     1 V        ISARZAMA PUERTO_ICHILO FRANCIS… 3641… PLATA…     NA  
-4     1 V        ISARZAMA PUERTO_ICHILO FRANCIS… 3641… CITRI…      1.2
-5     1 V        ISARZAMA PUERTO_ICHILO FRANCIS… 3641… CAFÉ       NA  
-6     1 V        ISARZAMA PUERTO_ICHILO FRANCIS… 3641… CACAO      NA  &lt;/code&gt;&lt;/pre&gt;
+     ID DISTRITO CENTRAL  SINDICATO     NOMBRES   CI    RUBROS CANTI…¹
+  &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;    &amp;lt;dbl&amp;gt;
+1     1 V        ISARZAMA PUERTO_ICHILO FRANCISC… 3641… PIÑA      NA  
+2     1 V        ISARZAMA PUERTO_ICHILO FRANCISC… 3641… BANANO    NA  
+3     1 V        ISARZAMA PUERTO_ICHILO FRANCISC… 3641… PLATA…    NA  
+4     1 V        ISARZAMA PUERTO_ICHILO FRANCISC… 3641… CITRI…     1.2
+5     1 V        ISARZAMA PUERTO_ICHILO FRANCISC… 3641… CAFÉ      NA  
+6     1 V        ISARZAMA PUERTO_ICHILO FRANCISC… 3641… CACAO     NA  
+# … with abbreviated variable name ¹​CANTIDAD&lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id="resultados-del-censo-agropecuario"&gt;Resultados del Censo
 Agropecuario&lt;/h2&gt;
 &lt;p&gt;A continuación se presenta un resumen de los datos que refieren a la
@@ -651,13 +690,13 @@ Máximo
 CITRICO
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-2364
+2367
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-2663.311
+2664.111
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-1.1266121
+1.1255222
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
 0.00
@@ -671,13 +710,13 @@ CITRICO
 PIÑA
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-1623
+1628
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-2487.740
+2489.740
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-1.5328035
+1.5293243
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
 0.01
@@ -691,13 +730,13 @@ PIÑA
 YUCA
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-1074
+1075
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-2351.525
+2351.825
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-2.1895019
+2.1877442
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
 0.02
@@ -711,13 +750,13 @@ YUCA
 PLATANO
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-1240
+1242
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-1291.140
+1292.140
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-1.0412419
+1.0403704
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
 0.01
@@ -731,13 +770,13 @@ PLATANO
 CAFÉ
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-458
+459
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-314.350
+314.850
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-0.6863537
+0.6859477
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
 0.03
@@ -811,13 +850,13 @@ PAPAYA
 PALMITO
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-71
+72
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-86.320
+86.820
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-1.2157746
+1.2058333
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
 0.10
@@ -871,13 +910,13 @@ MARACUYA
 CAMUCAMU
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-28
+29
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-18.700
+19.000
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-0.6678571
+0.6551724
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
 0.10
@@ -892,7 +931,7 @@ CAMUCAMU
 &lt;p&gt;Por ejemplo del resultado se puede inferir que la población del
 municipio de Entre Ríos se dedican a producir citricos. Por tanto, ocupa
 mayor superficie cultivado seguida por piña, yuca y plátano.&lt;/p&gt;
-&lt;p&gt;&lt;img src="file171b3aa791ab_files/figure-html/unnamed-chunk-8-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file9857c4aa9c_files/figure-html/unnamed-chunk-8-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;h3 id="resumen-por-central-y-rubro"&gt;Resumen por Central y Rubro&lt;/h3&gt;
 &lt;p&gt;En la siguiente tabla se presenta un resumen clasificado por Central
 y cultivos, las cuales estan en ranking en base a superficie.&lt;/p&gt;
@@ -1074,13 +1113,13 @@ CITRICO
 PIÑA
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-168
+169
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-369.800
+370.300
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-2.2011905
+2.1911243
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
 0.300
@@ -1120,13 +1159,13 @@ ISARZAMA
 CITRICO
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-259
+260
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-290.000
+290.500
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-1.1196911
+1.1173077
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
 0.300
@@ -1189,13 +1228,13 @@ BULO_BULO
 CITRICO
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-147
+148
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-220.840
+221.040
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-1.5023129
+1.4935135
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
 0.080
@@ -1327,13 +1366,13 @@ CITRICO
 YUCA
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-116
+117
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-112.100
+112.400
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-0.9663793
+0.9606838
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
 0.200
@@ -1419,13 +1458,13 @@ ICHOA
 CITRICO
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-264
+265
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-101.660
+101.760
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-0.3850758
+0.3840000
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
 0.100
@@ -1557,13 +1596,13 @@ CITRICO
 PIÑA
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-68
+70
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-77.000
+77.500
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-1.1323529
+1.1071429
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
 0.200
@@ -1626,13 +1665,13 @@ ISARZAMA
 PIÑA
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-78
+80
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-73.500
+74.500
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-0.9423077
+0.9312500
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
 0.500
@@ -1695,13 +1734,13 @@ PLATANO
 PLATANO
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-169
+170
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-63.820
+64.320
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-0.3776331
+0.3783529
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
 0.100
@@ -1919,6 +1958,29 @@ YUCA
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td style="text-align:left;"&gt;
+18_DE_OCTUBRE
+&lt;/td&gt;
+&lt;td style="text-align:left;"&gt;
+PLATANO
+&lt;/td&gt;
+&lt;td style="text-align:right;"&gt;
+35
+&lt;/td&gt;
+&lt;td style="text-align:right;"&gt;
+42.470
+&lt;/td&gt;
+&lt;td style="text-align:right;"&gt;
+1.2134286
+&lt;/td&gt;
+&lt;td style="text-align:right;"&gt;
+0.010
+&lt;/td&gt;
+&lt;td style="text-align:right;"&gt;
+6.00
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:left;"&gt;
 INDEPENDIENTE
 &lt;/td&gt;
 &lt;td style="text-align:left;"&gt;
@@ -1938,29 +2000,6 @@ YUCA
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
 3.00
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;
-18_DE_OCTUBRE
-&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;
-PLATANO
-&lt;/td&gt;
-&lt;td style="text-align:right;"&gt;
-34
-&lt;/td&gt;
-&lt;td style="text-align:right;"&gt;
-41.970
-&lt;/td&gt;
-&lt;td style="text-align:right;"&gt;
-1.2344118
-&lt;/td&gt;
-&lt;td style="text-align:right;"&gt;
-0.010
-&lt;/td&gt;
-&lt;td style="text-align:right;"&gt;
-6.00
 &lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -2747,6 +2786,29 @@ PAPAYA
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td style="text-align:left;"&gt;
+INDEPENDIENTE
+&lt;/td&gt;
+&lt;td style="text-align:left;"&gt;
+PALMITO
+&lt;/td&gt;
+&lt;td style="text-align:right;"&gt;
+12
+&lt;/td&gt;
+&lt;td style="text-align:right;"&gt;
+13.500
+&lt;/td&gt;
+&lt;td style="text-align:right;"&gt;
+1.1250000
+&lt;/td&gt;
+&lt;td style="text-align:right;"&gt;
+0.500
+&lt;/td&gt;
+&lt;td style="text-align:right;"&gt;
+2.50
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:left;"&gt;
 BULO_BULO
 &lt;/td&gt;
 &lt;td style="text-align:left;"&gt;
@@ -2770,25 +2832,25 @@ CAFÉ
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td style="text-align:left;"&gt;
-INDEPENDIENTE
+18_DE_OCTUBRE
 &lt;/td&gt;
 &lt;td style="text-align:left;"&gt;
-PALMITO
+CAFÉ
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-11
+14
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-13.000
+12.910
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-1.1818182
+0.9221429
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-0.500
+0.030
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-2.50
+6.00
 &lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -2835,29 +2897,6 @@ COPOAZU
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
 1.20
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;
-18_DE_OCTUBRE
-&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;
-CAFÉ
-&lt;/td&gt;
-&lt;td style="text-align:right;"&gt;
-13
-&lt;/td&gt;
-&lt;td style="text-align:right;"&gt;
-12.410
-&lt;/td&gt;
-&lt;td style="text-align:right;"&gt;
-0.9546154
-&lt;/td&gt;
-&lt;td style="text-align:right;"&gt;
-0.030
-&lt;/td&gt;
-&lt;td style="text-align:right;"&gt;
-6.00
 &lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -3466,13 +3505,13 @@ ICHOA
 CAMUCAMU
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-7
+8
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-3.550
+3.850
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
-0.5071429
+0.4812500
 &lt;/td&gt;
 &lt;td style="text-align:right;"&gt;
 0.100
@@ -4385,7 +4424,7 @@ PALMITO
 cultivo de Yuca, con 153 productores. Asimismo, la Central
 &lt;strong&gt;Mamorecillos “A”&lt;/strong&gt; ocupa el segundo lugar en cuanto a
 superficie con el cultivo de Piña.&lt;/p&gt;
-&lt;p&gt;&lt;img src="file171b3aa791ab_files/figure-html/unnamed-chunk-10-1.png" width="960" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file9857c4aa9c_files/figure-html/unnamed-chunk-10-1.png" width="960" /&gt;&lt;/p&gt;
 &lt;h3 id="resultados-de-ganadería"&gt;Resultados de Ganadería&lt;/h3&gt;
 &lt;p&gt;Se presenta un resumen referida a ganadería en el municipio de Entre
 Ríos&lt;/p&gt;
@@ -4544,7 +4583,7 @@ GANADO_LECHE
 &lt;p&gt;En la table 3 se puede observar que &lt;strong&gt;757&lt;/strong&gt; productores
 se dedican a la producción de &lt;strong&gt;ganado de carne&lt;/strong&gt; seguida
 por &lt;strong&gt;Apicultura&lt;/strong&gt; y &lt;strong&gt;Piscultura&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src="file171b3aa791ab_files/figure-html/unnamed-chunk-12-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file9857c4aa9c_files/figure-html/unnamed-chunk-12-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;h3 id="resumen-por-central-y-distrito"&gt;Resumen por Central y
 Distrito&lt;/h3&gt;
 &lt;p&gt;Acontinuación se presenta un resumen clasificado por Central y
@@ -6881,7 +6920,7 @@ POLLO_ENGORDE
 Distrito I se dedican a la producción de ganado de carne y apicultura,
 seguida por el Distrito IV que sus habitantes se dedican a la
 piscicultura.&lt;/p&gt;
-&lt;p&gt;&lt;img src="file171b3aa791ab_files/figure-html/unnamed-chunk-15-1.png" width="960" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="file9857c4aa9c_files/figure-html/unnamed-chunk-15-1.png" width="960" /&gt;&lt;/p&gt;
 &lt;pre class="r distill-force-highlighting-css"&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt;</description>
       <distill:md5>a3b97c023f5cd8f85fd042dec476617d</distill:md5>
       <category>Data analysis</category>
@@ -6959,18 +6998,6 @@ piscicultura.&lt;/p&gt;
       <guid>https://franklinsantos.com/posts/2021-10-24-r-intro</guid>
       <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate>
       <media:content url="https://franklinsantos.com/posts/2021-10-24-r-intro/Rfs.png" medium="image" type="image/png" width="200" height="231"/>
-    </item>
-    <item>
-      <title>Herramientas estadísticas y experimentales en el mejoramiento de plantas</title>
-      <dc:creator>Franklin Santos</dc:creator>
-      <link>https://franklinsantos.com/posts/2021-09-02-inkaverse</link>
-      <description>En esta oportunidad hacemos referencia a una colección de aplicaciones (inkaverse) para los procedimientos de diseño experimental y análisis estadístico.</description>
-      <category>Inkaverse</category>
-      <category>Experimental Design</category>
-      <category>Plant Breeding</category>
-      <guid>https://franklinsantos.com/posts/2021-09-02-inkaverse</guid>
-      <pubDate>Thu, 02 Sep 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://franklinsantos.com/posts/2021-09-02-inkaverse/inkaverse.png" medium="image" type="image/png" width="518" height="600"/>
     </item>
   </channel>
 </rss>
