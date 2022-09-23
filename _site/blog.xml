@@ -7,7 +7,165 @@
     <description>Data Scientist, Plant Breeder and Analist Data
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Sun, 07 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 14 Sep 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Part 3: Save Data Frames as Excel Files</title>
+      <dc:creator>Franklin Santos</dc:creator>
+      <link>https://franklinsantos.com/posts/2022-09-14-writexl</link>
+      <description>
+
+
+&lt;style&gt;
+body {
+text-align: justify}
+&lt;/style&gt;
+&lt;p&gt;The &lt;span style="color: red; "&gt;write_xlsx()&lt;/span&gt; function from the
+&lt;strong&gt;writexl&lt;/strong&gt; package provides a straightforward and
+efficient way to export data frames as Excel files.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Use &lt;span style="color: red; "&gt;write_xlsx()&lt;/span&gt; to export data
+frames as Excel files&lt;/li&gt;
+&lt;li&gt;Use the &lt;span style="color: red; "&gt;col_names&lt;/span&gt; col_names
+argument to handle column names&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="r"&gt;&lt;code&gt;write_xlsx(x = &amp;lt;data.frame&amp;gt;,
+           path = &amp;quot;&amp;lt;filename.xlsx&amp;quot;,
+           col_names = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id="the-write_xlsx-function"&gt;The &lt;span
+style="color: red; "&gt;write_xlsx()&lt;/span&gt; Function&lt;/h2&gt;
+&lt;pre class="r"&gt;&lt;code&gt;write_xlsx(x = &amp;lt;data.frame&amp;gt;,
+           path = &amp;quot;&amp;lt;filename.xlsx&amp;quot;,&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;em&gt;writexl&lt;/em&gt; package is one of the most efficient options
+when it comes to exporting data frames as Excel worksheets. The &lt;span
+style="color: red; "&gt;write_xlsx()&lt;/span&gt; provides a fast and convenient
+solution to write Excel files, with only a handful of input parameters.
+It can be used to export a single data frame as an Excel worksheet, but
+also to write multiple data frames to an Excel workbook.&lt;/p&gt;
+&lt;p&gt;The main reason for the popularity of &lt;span
+style="color: red; "&gt;write_xlsx()&lt;/span&gt; is its speed and simplicity.
+Consider the following tibble, containing the average spending per order
+for each customer:&lt;/p&gt;
+&lt;pre class="r"&gt;&lt;code&gt;avgSpending&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# A tibble: 10 × 5
+   OrderID CustID TotalPrice Payment     Status   
+     &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;    
+ 1       1 C1             35 Credit Card Delivered
+ 2       2 C2             30 Debit Card  Delivered
+ 3       3 C4             50 Paypal      Delivered
+ 4       4 C3             13 Credit Card Returned 
+ 5       5 C5             63 Paypal      Delivered
+ 6       6 C6             20 Debit Card  Delivered
+ 7       7 C7             13 Paypal      Delivered
+ 8       8 C3             50 Debit Card  Returned 
+ 9       9 C8             13 Credit Card Delivered
+10      10 C4             40 Debit Card  Delivered&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To write &lt;code&gt;avgSpending&lt;/code&gt; to an Excel file with &lt;span
+style="color: green; "&gt;write_xlsx()&lt;/span&gt;, we only need to define the
+following two parameters:&lt;/p&gt;
+&lt;ol style="list-style-type: decimal"&gt;
+&lt;li&gt;The data frame object as the argument &lt;span
+style="color: red; "&gt;x&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;span style="color: red; "&gt;path&lt;/span&gt; with the name for the
+output file.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class="r"&gt;&lt;code&gt;library(writexl)
+write_xlsx(x = avgSpending,
+           path = &amp;quot;avgSpending.xlsx&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src="https://franklinsantos.com/posts/2022-09-14-writexl/ab.png" /&gt;&lt;/p&gt;
+&lt;p&gt;Note: that if we define an existing Excel file for the &lt;span
+style="color: red; "&gt;path&lt;/span&gt;, the function will automatically
+overwrite it.&lt;/p&gt;
+&lt;h2 id="optional-argument-col_names"&gt;Optional Argument: col_names&lt;/h2&gt;
+&lt;pre class="r"&gt;&lt;code&gt;           col_names = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;By default, the &lt;span style="color: red; "&gt;write_xlsx()&lt;/span&gt;
+function will automatically extract the column names from the data frame
+and use them as column names for the Excel worksheet as well. However,
+in certain situations we might want to skip the column names and only
+write the data entries to an Excel file. In these cases we can change
+the default setting using the &lt;span
+style="color: red; "&gt;col_names&lt;/span&gt; argument.&lt;/p&gt;
+&lt;p&gt;Consider the &lt;span
+style="color: red; "&gt;newsletter_subscriptions&lt;/span&gt; tibble with a
+single column containing the users, who are subscribed to the weekly
+updates:&lt;/p&gt;
+&lt;pre class="r"&gt;&lt;code&gt;newsletter_subscriptions&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# A tibble: 10 × 1
+   Email                   
+   &amp;lt;chr&amp;gt;                   
+ 1 lisa.rogers@email.com   
+ 2 mark.harrison@email.com 
+ 3 robert.adams@email.com  
+ 4 emily.jenkins@email.com 
+ 5 sarah.hunter@email.com  
+ 6 michael.mason@email.com 
+ 7 ryan.lane@email.com     
+ 8 megan.cole@email.com    
+ 9 daniel.stone@email.com  
+10 hannah.edwards@email.com&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If we want to write this tibble to an Excel file but ignore the
+column names, we must set the &lt;span
+style="color: red; "&gt;col_names&lt;/span&gt; argument to &lt;span
+style="color: green; "&gt;FALSE&lt;/span&gt;:&lt;/p&gt;
+&lt;pre class="r"&gt;&lt;code&gt;write_xlsx(x = newsletter_subscriptions,
+           path = &amp;quot;newsletter_subscriptions.xlsx&amp;quot;,
+           col_names = FALSE)&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id="write-multiple-data-frames-to-an-excel-file"&gt;Write Multiple Data
+Frames to an Excel File&lt;/h2&gt;
+&lt;p&gt;The &lt;span style="color: red; "&gt;write_xlsx()&lt;/span&gt; function supports
+the export of multiple data frames to an Excel file. In this case, the
+data frames need to be collected in a list, with each element inserted
+as an individual worksheet into the output.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Use &lt;span style="color: red; "&gt;write_xlsx()&lt;/span&gt; to insert
+multiple data frames into an Excel file&lt;/li&gt;
+&lt;li&gt;Specify a (named) list holding all data frames mapping to worksheet
+names&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="r"&gt;&lt;code&gt;write_xlsx(x = list(&amp;lt;sheet_name1&amp;gt; = &amp;lt;data.frame1&amp;gt;,
+                    &amp;lt;sheet_name2&amp;gt; = &amp;lt;data.frame2&amp;gt;),
+           path = &amp;quot;&amp;lt;filename.xlsx&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id="export-a-workbook-from-a-list-of-data-frames"&gt;Export a Workbook
+from a List of Data Frames&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;write_xlsx()&lt;/code&gt; function enables to write multiple data
+frames to an Excel file. These will be organized in separate worksheets,
+forming an Excel workbook.&lt;/p&gt;
+&lt;p&gt;Consider the tibbles &lt;code&gt;productMargins&lt;/code&gt; and
+&lt;code&gt;itemsSold&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class="r"&gt;&lt;code&gt;productMargins&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# A tibble: 5 × 2
+  Product        Margin
+  &amp;lt;chr&amp;gt;           &amp;lt;dbl&amp;gt;
+1 Socks (2 Pair)   0.34
+2 Sweatshirt       0.4 
+3 T-Shirt          0.22
+4 Caps             0.27
+5 Pants            0.35&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="r"&gt;&lt;code&gt;itemsSold&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;# A tibble: 5 × 2
+  Product         Sold
+  &amp;lt;chr&amp;gt;          &amp;lt;dbl&amp;gt;
+1 Socks (2 Pair)     3
+2 Sweatshirt         3
+3 T-Shirt            7
+4 Caps               4
+5 Pants              5&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To write these tibbles to an Excel file, we must provide them as a
+list to &lt;span style="color: red; "&gt;write_xlsx()&lt;/span&gt;. In addition, we
+can name the list elements. These names will be used as names for the
+respective worksheets:&lt;/p&gt;
+&lt;pre class="r"&gt;&lt;code&gt;library(writexl)
+write_xlsx(x = list(margins = productMargins, sales = itemsSold),
+           path = &amp;quot;summaries.xlsx&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src="https://franklinsantos.com/posts/2022-09-14-writexl/abc.png" /&gt;&lt;/p&gt;
+&lt;pre class="r distill-force-highlighting-css"&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt;</description>
+      <distill:md5>3591f59d36a70db9ef20ec23b8202667</distill:md5>
+      <category>Data Science</category>
+      <category>writexl</category>
+      <category>R</category>
+      <guid>https://franklinsantos.com/posts/2022-09-14-writexl</guid>
+      <pubDate>Wed, 14 Sep 2022 00:00:00 +0000</pubDate>
+      <media:content url="https://franklinsantos.com/posts/2022-09-14-writexl/badge.svg" medium="image" type="image/svg+xml"/>
+    </item>
     <item>
       <title>Distribución Pecuaria de Entre Ríos - CBBA</title>
       <dc:creator>Franklin Santos</dc:creator>
@@ -21,18 +179,18 @@ text-align: justify}
 &lt;/style&gt;
 &lt;h2 id="porcentaje-de-distribución-pecuaria"&gt;Porcentaje de distribución
 pecuaria&lt;/h2&gt;
-&lt;div id="htmlwidget-a8e44bef58034fdbf352" style="width:672px;height:480px;" class="highchart html-widget"&gt;&lt;/div&gt;
-&lt;script type="application/json" data-for="htmlwidget-a8e44bef58034fdbf352"&gt;{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":null},"yAxis":{"title":{"text":"Productores"}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"RUBROS":"GANADO_CARNE","Productores":757,"porcentaje":"31.3%","y":757,"name":"GANADO_CARNE"},{"RUBROS":"APICULTURA","Productores":538,"porcentaje":"22.3%","y":538,"name":"APICULTURA"},{"RUBROS":"PISCICULTURA","Productores":492,"porcentaje":"20.4%","y":492,"name":"PISCICULTURA"},{"RUBROS":"POLLO_POSTURA","Productores":308,"porcentaje":"12.7%","y":308,"name":"POLLO_POSTURA"},{"RUBROS":"POLLO_ENGORDE","Productores":187,"porcentaje":"7.7%","y":187,"name":"POLLO_ENGORDE"},{"RUBROS":"GANADO_LECHE","Productores":135,"porcentaje":"5.6%","y":135,"name":"GANADO_LECHE"}],"type":"pie","name":"Rubros","innerSize":"80%","dataLabels":{"format":"{point.name}&lt;br&gt;({point.porcentaje})"}}],"xAxis":{"type":null,"title":{"text":[]},"categories":null}},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}&lt;/script&gt;
+&lt;div id="htmlwidget-603790e2e0350e1fb6eb" style="width:672px;height:480px;" class="highchart html-widget"&gt;&lt;/div&gt;
+&lt;script type="application/json" data-for="htmlwidget-603790e2e0350e1fb6eb"&gt;{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":null},"yAxis":{"title":{"text":"Productores"}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"RUBROS":"GANADO_CARNE","Productores":757,"porcentaje":"31.3%","y":757,"name":"GANADO_CARNE"},{"RUBROS":"APICULTURA","Productores":538,"porcentaje":"22.3%","y":538,"name":"APICULTURA"},{"RUBROS":"PISCICULTURA","Productores":492,"porcentaje":"20.4%","y":492,"name":"PISCICULTURA"},{"RUBROS":"POLLO_POSTURA","Productores":308,"porcentaje":"12.7%","y":308,"name":"POLLO_POSTURA"},{"RUBROS":"POLLO_ENGORDE","Productores":187,"porcentaje":"7.7%","y":187,"name":"POLLO_ENGORDE"},{"RUBROS":"GANADO_LECHE","Productores":135,"porcentaje":"5.6%","y":135,"name":"GANADO_LECHE"}],"type":"pie","name":"Rubros","innerSize":"80%","dataLabels":{"format":"{point.name}&lt;br&gt;({point.porcentaje})"}}],"xAxis":{"type":null,"title":{"text":[]},"categories":null}},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}&lt;/script&gt;
 &lt;h2 id="generando-una-gráfica-más-avanzada-y-elegante"&gt;Generando una
 gráfica más avanzada y elegante&lt;/h2&gt;
-&lt;div id="htmlwidget-4292c42e7a69add1779f" style="width:672px;height:480px;" class="highchart html-widget"&gt;&lt;/div&gt;
-&lt;script type="application/json" data-for="htmlwidget-4292c42e7a69add1779f"&gt;{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":null},"yAxis":{"title":{"text":"Productores"}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false,"dataLabels":{"enabled":false}},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"RUBROS":"GANADO_CARNE","Productores":757,"porcentaje":"31.3%","y":757,"name":"GANADO_CARNE"},{"RUBROS":"APICULTURA","Productores":538,"porcentaje":"22.3%","y":538,"name":"APICULTURA"},{"RUBROS":"PISCICULTURA","Productores":492,"porcentaje":"20.4%","y":492,"name":"PISCICULTURA"},{"RUBROS":"POLLO_POSTURA","Productores":308,"porcentaje":"12.7%","y":308,"name":"POLLO_POSTURA"},{"RUBROS":"POLLO_ENGORDE","Productores":187,"porcentaje":"7.7%","y":187,"name":"POLLO_ENGORDE"},{"RUBROS":"GANADO_LECHE","Productores":135,"porcentaje":"5.6%","y":135,"name":"GANADO_LECHE"}],"type":"pie","name":"Rubros","innerSize":"80%","dataLabels":{"format":"{point.name}&lt;br&gt;({point.porcentaje})"}}],"xAxis":{"type":null,"title":{"text":[]},"categories":null},"tooltip":{"useHTML":true,"style":{"fontSize":"20px"},"headerFormat":"","pointFormat":"&lt;div style='text-align: center;'&gt;Rubro &lt;b&gt;{point.name}&lt;\/b&gt;&lt;br&gt;{point.y} productores&lt;br&gt;{point.porcentaje} del total&lt;\/div&gt;","positioner":"function () {\n      \n        /* one of the most important parts! */\n        xp =  this.chart.chartWidth/2 - this.label.width/2\n        yp =  this.chart.chartHeight/2 - this.label.height/2\n      \n        return { x: xp, y: yp };\n      \n      }","shadow":false,"borderWidth":0,"backgroundColor":"transparent","hideDelay":1000}},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":["hc_opts.tooltip.positioner"],"jsHooks":[]}&lt;/script&gt;
+&lt;div id="htmlwidget-6de82fe613f3cbab59cc" style="width:672px;height:480px;" class="highchart html-widget"&gt;&lt;/div&gt;
+&lt;script type="application/json" data-for="htmlwidget-6de82fe613f3cbab59cc"&gt;{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":null},"yAxis":{"title":{"text":"Productores"}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false,"dataLabels":{"enabled":false}},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"RUBROS":"GANADO_CARNE","Productores":757,"porcentaje":"31.3%","y":757,"name":"GANADO_CARNE"},{"RUBROS":"APICULTURA","Productores":538,"porcentaje":"22.3%","y":538,"name":"APICULTURA"},{"RUBROS":"PISCICULTURA","Productores":492,"porcentaje":"20.4%","y":492,"name":"PISCICULTURA"},{"RUBROS":"POLLO_POSTURA","Productores":308,"porcentaje":"12.7%","y":308,"name":"POLLO_POSTURA"},{"RUBROS":"POLLO_ENGORDE","Productores":187,"porcentaje":"7.7%","y":187,"name":"POLLO_ENGORDE"},{"RUBROS":"GANADO_LECHE","Productores":135,"porcentaje":"5.6%","y":135,"name":"GANADO_LECHE"}],"type":"pie","name":"Rubros","innerSize":"80%","dataLabels":{"format":"{point.name}&lt;br&gt;({point.porcentaje})"}}],"xAxis":{"type":null,"title":{"text":[]},"categories":null},"tooltip":{"useHTML":true,"style":{"fontSize":"20px"},"headerFormat":"","pointFormat":"&lt;div style='text-align: center;'&gt;Rubro &lt;b&gt;{point.name}&lt;\/b&gt;&lt;br&gt;{point.y} productores&lt;br&gt;{point.porcentaje} del total&lt;\/div&gt;","positioner":"function () {\n      \n        /* one of the most important parts! */\n        xp =  this.chart.chartWidth/2 - this.label.width/2\n        yp =  this.chart.chartHeight/2 - this.label.height/2\n      \n        return { x: xp, y: yp };\n      \n      }","shadow":false,"borderWidth":0,"backgroundColor":"transparent","hideDelay":1000}},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":["hc_opts.tooltip.positioner"],"jsHooks":[]}&lt;/script&gt;
 &lt;h2 id="distribución-de-cantidad-por-rubro"&gt;Distribución de cantidad por
 rubro&lt;/h2&gt;
-&lt;div id="htmlwidget-e621e2135fd20455f675" style="width:672px;height:480px;" class="highchart html-widget"&gt;&lt;/div&gt;
-&lt;script type="application/json" data-for="htmlwidget-e621e2135fd20455f675"&gt;{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":null},"yAxis":{"title":{"text":"Cantidad"}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"RUBROS":"GANADO_CARNE","Cantidad":19828,"porcentaje":"16.00%","y":19828,"name":"GANADO_CARNE"},{"RUBROS":"APICULTURA","Cantidad":1947,"porcentaje":"1.57%","y":1947,"name":"APICULTURA"},{"RUBROS":"PISCICULTURA","Cantidad":1742,"porcentaje":"1.41%","y":1742,"name":"PISCICULTURA"},{"RUBROS":"POLLO_POSTURA","Cantidad":8698,"porcentaje":"7.02%","y":8698,"name":"POLLO_POSTURA"},{"RUBROS":"POLLO_ENGORDE","Cantidad":89341,"porcentaje":"72.11%","y":89341,"name":"POLLO_ENGORDE"},{"RUBROS":"GANADO_LECHE","Cantidad":2340,"porcentaje":"1.89%","y":2340,"name":"GANADO_LECHE"}],"type":"pie","name":"Rubros","innerSize":"75%","dataLabels":{"format":"{point.name}&lt;br&gt;({point.porcentaje})"}}],"xAxis":{"type":null,"title":{"text":[]},"categories":null}},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}&lt;/script&gt;
-&lt;div id="htmlwidget-0f0e008ab00c204a6c61" style="width:672px;height:480px;" class="highchart html-widget"&gt;&lt;/div&gt;
-&lt;script type="application/json" data-for="htmlwidget-0f0e008ab00c204a6c61"&gt;{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":null},"yAxis":{"title":{"text":"Cantidad"}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false,"dataLabels":{"enabled":false}},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"RUBROS":"GANADO_CARNE","Cantidad":19828,"porcentaje":"16.00%","y":19828,"name":"GANADO_CARNE"},{"RUBROS":"APICULTURA","Cantidad":1947,"porcentaje":"1.57%","y":1947,"name":"APICULTURA"},{"RUBROS":"PISCICULTURA","Cantidad":1742,"porcentaje":"1.41%","y":1742,"name":"PISCICULTURA"},{"RUBROS":"POLLO_POSTURA","Cantidad":8698,"porcentaje":"7.02%","y":8698,"name":"POLLO_POSTURA"},{"RUBROS":"POLLO_ENGORDE","Cantidad":89341,"porcentaje":"72.11%","y":89341,"name":"POLLO_ENGORDE"},{"RUBROS":"GANADO_LECHE","Cantidad":2340,"porcentaje":"1.89%","y":2340,"name":"GANADO_LECHE"}],"type":"pie","name":"Rubros","innerSize":"75%","dataLabels":{"format":"{point.name}&lt;br&gt;({point.porcentaje})"}}],"xAxis":{"type":null,"title":{"text":[]},"categories":null},"tooltip":{"useHTML":true,"style":{"fontSize":"20px"},"headerFormat":"","pointFormat":"&lt;div style='text-align: center;'&gt;Rubro &lt;b&gt;{point.name}&lt;\/b&gt;&lt;br&gt;{point.y} unidades&lt;br&gt;{point.porcentaje} del total&lt;\/div&gt;","positioner":"function () {\n      \n        /* one of the most important parts! */\n        xp =  this.chart.chartWidth/2 - this.label.width/2\n        yp =  this.chart.chartHeight/2 - this.label.height/2\n      \n        return { x: xp, y: yp };\n      \n      }","shadow":false,"borderWidth":0,"backgroundColor":"transparent","hideDelay":1000}},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":["hc_opts.tooltip.positioner"],"jsHooks":[]}&lt;/script&gt;
+&lt;div id="htmlwidget-c70f6072d8f8c13bd343" style="width:672px;height:480px;" class="highchart html-widget"&gt;&lt;/div&gt;
+&lt;script type="application/json" data-for="htmlwidget-c70f6072d8f8c13bd343"&gt;{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":null},"yAxis":{"title":{"text":"Cantidad"}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"RUBROS":"GANADO_CARNE","Cantidad":19828,"porcentaje":"16.00%","y":19828,"name":"GANADO_CARNE"},{"RUBROS":"APICULTURA","Cantidad":1947,"porcentaje":"1.57%","y":1947,"name":"APICULTURA"},{"RUBROS":"PISCICULTURA","Cantidad":1742,"porcentaje":"1.41%","y":1742,"name":"PISCICULTURA"},{"RUBROS":"POLLO_POSTURA","Cantidad":8698,"porcentaje":"7.02%","y":8698,"name":"POLLO_POSTURA"},{"RUBROS":"POLLO_ENGORDE","Cantidad":89341,"porcentaje":"72.11%","y":89341,"name":"POLLO_ENGORDE"},{"RUBROS":"GANADO_LECHE","Cantidad":2340,"porcentaje":"1.89%","y":2340,"name":"GANADO_LECHE"}],"type":"pie","name":"Rubros","innerSize":"75%","dataLabels":{"format":"{point.name}&lt;br&gt;({point.porcentaje})"}}],"xAxis":{"type":null,"title":{"text":[]},"categories":null}},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}&lt;/script&gt;
+&lt;div id="htmlwidget-1f01d9c5a3b2a140f3a9" style="width:672px;height:480px;" class="highchart html-widget"&gt;&lt;/div&gt;
+&lt;script type="application/json" data-for="htmlwidget-1f01d9c5a3b2a140f3a9"&gt;{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":null},"yAxis":{"title":{"text":"Cantidad"}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false,"dataLabels":{"enabled":false}},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"RUBROS":"GANADO_CARNE","Cantidad":19828,"porcentaje":"16.00%","y":19828,"name":"GANADO_CARNE"},{"RUBROS":"APICULTURA","Cantidad":1947,"porcentaje":"1.57%","y":1947,"name":"APICULTURA"},{"RUBROS":"PISCICULTURA","Cantidad":1742,"porcentaje":"1.41%","y":1742,"name":"PISCICULTURA"},{"RUBROS":"POLLO_POSTURA","Cantidad":8698,"porcentaje":"7.02%","y":8698,"name":"POLLO_POSTURA"},{"RUBROS":"POLLO_ENGORDE","Cantidad":89341,"porcentaje":"72.11%","y":89341,"name":"POLLO_ENGORDE"},{"RUBROS":"GANADO_LECHE","Cantidad":2340,"porcentaje":"1.89%","y":2340,"name":"GANADO_LECHE"}],"type":"pie","name":"Rubros","innerSize":"75%","dataLabels":{"format":"{point.name}&lt;br&gt;({point.porcentaje})"}}],"xAxis":{"type":null,"title":{"text":[]},"categories":null},"tooltip":{"useHTML":true,"style":{"fontSize":"20px"},"headerFormat":"","pointFormat":"&lt;div style='text-align: center;'&gt;Rubro &lt;b&gt;{point.name}&lt;\/b&gt;&lt;br&gt;{point.y} unidades&lt;br&gt;{point.porcentaje} del total&lt;\/div&gt;","positioner":"function () {\n      \n        /* one of the most important parts! */\n        xp =  this.chart.chartWidth/2 - this.label.width/2\n        yp =  this.chart.chartHeight/2 - this.label.height/2\n      \n        return { x: xp, y: yp };\n      \n      }","shadow":false,"borderWidth":0,"backgroundColor":"transparent","hideDelay":1000}},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":["hc_opts.tooltip.positioner"],"jsHooks":[]}&lt;/script&gt;
 &lt;pre class="r distill-force-highlighting-css"&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt;</description>
       <distill:md5>724067c7ec87668c57edf8528c196ad1</distill:md5>
       <category>Livestock</category>
@@ -636,8 +794,7 @@ library(kableExtra)&lt;/code&gt;&lt;/pre&gt;
 #   COPOAZU &amp;lt;dbl&amp;gt;, MARACUYA &amp;lt;dbl&amp;gt;, PALMITO &amp;lt;dbl&amp;gt;, CAMUCAMU &amp;lt;dbl&amp;gt;,
 #   PAPAYA &amp;lt;dbl&amp;gt;, YUCA &amp;lt;dbl&amp;gt;, GANADO_CARNE &amp;lt;dbl&amp;gt;, GANADO_LECHE &amp;lt;dbl&amp;gt;,
 #   POLLO_ENGORDE &amp;lt;dbl&amp;gt;, POLLO_POSTURA &amp;lt;dbl&amp;gt;, PISCICULTURA &amp;lt;dbl&amp;gt;,
-#   APICULTURA &amp;lt;dbl&amp;gt;
-# ℹ Use `colnames()` to see all variable names&lt;/code&gt;&lt;/pre&gt;
+#   APICULTURA &amp;lt;dbl&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Esta base de datos necesita algunos ajustes para su análisis. Uno de
 ellos es pivotar los datos para que pueda ser analizada de forma mas
 adecuada.&lt;/p&gt;
@@ -931,7 +1088,7 @@ CAMUCAMU
 &lt;p&gt;Por ejemplo del resultado se puede inferir que la población del
 municipio de Entre Ríos se dedican a producir citricos. Por tanto, ocupa
 mayor superficie cultivado seguida por piña, yuca y plátano.&lt;/p&gt;
-&lt;p&gt;&lt;img src="file9857c4aa9c_files/figure-html/unnamed-chunk-8-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="fileb1f7522d68c_files/figure-html/unnamed-chunk-8-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;h3 id="resumen-por-central-y-rubro"&gt;Resumen por Central y Rubro&lt;/h3&gt;
 &lt;p&gt;En la siguiente tabla se presenta un resumen clasificado por Central
 y cultivos, las cuales estan en ranking en base a superficie.&lt;/p&gt;
@@ -4424,7 +4581,7 @@ PALMITO
 cultivo de Yuca, con 153 productores. Asimismo, la Central
 &lt;strong&gt;Mamorecillos “A”&lt;/strong&gt; ocupa el segundo lugar en cuanto a
 superficie con el cultivo de Piña.&lt;/p&gt;
-&lt;p&gt;&lt;img src="file9857c4aa9c_files/figure-html/unnamed-chunk-10-1.png" width="960" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="fileb1f7522d68c_files/figure-html/unnamed-chunk-10-1.png" width="960" /&gt;&lt;/p&gt;
 &lt;h3 id="resultados-de-ganadería"&gt;Resultados de Ganadería&lt;/h3&gt;
 &lt;p&gt;Se presenta un resumen referida a ganadería en el municipio de Entre
 Ríos&lt;/p&gt;
@@ -4583,7 +4740,7 @@ GANADO_LECHE
 &lt;p&gt;En la table 3 se puede observar que &lt;strong&gt;757&lt;/strong&gt; productores
 se dedican a la producción de &lt;strong&gt;ganado de carne&lt;/strong&gt; seguida
 por &lt;strong&gt;Apicultura&lt;/strong&gt; y &lt;strong&gt;Piscultura&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src="file9857c4aa9c_files/figure-html/unnamed-chunk-12-1.png" width="672" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="fileb1f7522d68c_files/figure-html/unnamed-chunk-12-1.png" width="672" /&gt;&lt;/p&gt;
 &lt;h3 id="resumen-por-central-y-distrito"&gt;Resumen por Central y
 Distrito&lt;/h3&gt;
 &lt;p&gt;Acontinuación se presenta un resumen clasificado por Central y
@@ -6920,7 +7077,7 @@ POLLO_ENGORDE
 Distrito I se dedican a la producción de ganado de carne y apicultura,
 seguida por el Distrito IV que sus habitantes se dedican a la
 piscicultura.&lt;/p&gt;
-&lt;p&gt;&lt;img src="file9857c4aa9c_files/figure-html/unnamed-chunk-15-1.png" width="960" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="fileb1f7522d68c_files/figure-html/unnamed-chunk-15-1.png" width="960" /&gt;&lt;/p&gt;
 &lt;pre class="r distill-force-highlighting-css"&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt;</description>
       <distill:md5>a3b97c023f5cd8f85fd042dec476617d</distill:md5>
       <category>Data analysis</category>
@@ -6986,18 +7143,6 @@ piscicultura.&lt;/p&gt;
       <guid>https://franklinsantos.com/posts/2021-11-21-tibbles</guid>
       <pubDate>Wed, 03 Nov 2021 00:00:00 +0000</pubDate>
       <media:content url="https://franklinsantos.com/posts/2021-11-21-tibbles/download.jpeg" medium="image" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Introducción a R básico</title>
-      <dc:creator>Franklin Santos</dc:creator>
-      <link>https://franklinsantos.com/posts/2021-10-24-r-intro</link>
-      <description>Es una introducción al manejo y uso básico a la plataforma de R. Este software es muy popular e increíblemente útil para las personas que trabajan como científicos de datos o en empresas.</description>
-      <category>R</category>
-      <category>R Basic</category>
-      <category>Data Science</category>
-      <guid>https://franklinsantos.com/posts/2021-10-24-r-intro</guid>
-      <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://franklinsantos.com/posts/2021-10-24-r-intro/Rfs.png" medium="image" type="image/png" width="200" height="231"/>
     </item>
   </channel>
 </rss>
