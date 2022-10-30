@@ -1,0 +1,226 @@
+---
+title: "Radar Plot"
+description: |
+  This is an interesting plor to compare variables in a lot of researches.
+categories:
+  - Data Science
+  - ggradar
+  - R
+author:
+  - name: Franklin Santos
+    url: https://franklinsantos.com
+    affiliation: National Institute for Agricultural and Forestry Innovation (INIAF)
+    orcid_id: 0000-0002-7509-2910
+date: 2022-10-15
+preview: un.png
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+# Building a radar plot
+
+```{r}
+library(ggradar)
+library(tidyverse)
+library(tidyquant)
+library(scales)
+library(corrr)
+```
+
+## Data
+```{r}
+mpg
+```
+
+## Format
+
+```{r}
+vehicle_summary_tbl = mpg %>%
+  select(class, where(is.numeric), -year) %>%
+  
+  # Median values by vehicle class
+  group_by(class) %>%
+  summarise(
+    across(displ:hwy, .fns = median)
+  ) %>%
+  ungroup() %>%
+  
+  # Prep for ggradar (make sure to scale to 0-1)
+  rename(group = class) %>%
+  mutate_at(vars(-group), rescale)
+
+vehicle_summary_tbl
+
+```
+
+## Radar plots
+
+### Single radar
+
+```{r}
+vehicle_summary_tbl %>%
+  ggradar()
+
+vehicle_summary_tbl %>%
+  ggradar(
+    group.colours = palette_light() %>%
+      unname(),
+    plot.title = "MPG Comparison By Vehicle Class"
+  )
+```
+
+## Faceted Radar
+
+```{r, layout="l-body-outset", fig.width=18, fig.height=12}
+vehicle_summary_tbl %>%
+  ggradar() +
+  
+  # Facet
+  facet_wrap(~ group, ncol = 3) +
+  
+  # Theme
+  theme_void() +
+  scale_color_tq() +
+  theme(
+    strip.text = element_text(
+      size = 12,
+      colour = "white",
+      margin = margin(t = 5, b = 5)
+    ),
+    strip.background = element_rect(fill = "#2C3E50"),
+    legend.position = "none"
+  ) +
+  
+  #Title
+  labs(title = "MPG Comparison By Vehicle Class")
+
+```
+
+# Which vehicles are most similar?
+
+## Get Vehicle Similarity
+
+
+```{r}
+vehicle_similarity_tbl = vehicle_summary_tbl %>%
+  
+  #Transpose
+  pivot_longer(cols = -1) %>%
+  pivot_wider(
+    names_from = group,
+    values_from = value
+  ) %>%
+  
+  # Correlate and Arrange
+  corrr::correlate() %>%
+  mutate(across(where(is.numeric), .fns = ~replace_na(., 1))) %>%
+  arrange(`2seater`)
+
+vehicle_similarity_tbl
+
+```
+
+## Reorder By Similarity
+
+```{r, layout="l-body-outset", fig.width=18, fig.height=12}
+vehicle_summary_tbl %>%
+  mutate(group = factor(group, levels = vehicle_similarity_tbl$term)) %>%
+  ggradar()+
+  facet_wrap(~group, ncol = 3)+
+  scale_color_tq()+
+  labs(title = "Vehicle Classes Arranged By Similarity") +
+  theme(
+    legend.position = "none",
+    strip.background = element_rect(fill = "#2C3E50"),
+    strip.text = element_text(color = "white")
+    
+  )
+```
+
+
+# Coffee data analysis
+
+```{r, echo=FALSE}
+library(googlesheets4)
+data = read_sheet("https://docs.google.com/spreadsheets/d/1cIFWuOKnZEtxO6GpIdh9pJ4DeFaFIh0st-VsKujHyHU/edit?usp=sharing")
+```
+
+
+```{r, echo=FALSE}
+
+coffee_summary = data %>%
+  filter(Calidad != "Punt_tot") %>%
+  select(Calidad, where(is.numeric), -Loc) %>%
+  
+  # Median values by coffee quality
+  group_by(Calidad) %>%
+  summarise(
+    across(Espesor_4cm:Espesor_2cm, .fns = mean)
+  ) %>%
+  ungroup()
+
+ #Transpose
+data_transpose = coffee_summary %>%
+  pivot_longer(cols = -1) %>%
+  pivot_wider(
+    names_from = Calidad,
+    values_from = value
+  ) 
+  
+  # Prep for ggradar (make sure to scale to 0-1)
+data_transpose_summ = data_transpose %>%
+  rename(group = name) %>%
+  mutate_at(vars(-group), rescale)
+
+data_transpose_summ
+```
+
+
+## Radar coffee quality plots
+
+### Single radar
+
+```{r, echo=FALSE}
+data_transpose_summ %>%
+  ggradar()
+
+data_transpose_summ %>%
+  ggradar(
+    group.colours = palette_light() %>%
+      unname(),
+    plot.title = "Calidad de café según espesor de secado"
+  )
+```
+
+## Faceted Radar
+
+```{r, echo=FALSE, layout="l-body-outset", fig.width=18, fig.height=12}
+data_transpose_summ %>%
+  ggradar() +
+  
+  # Facet
+  facet_wrap(~ group, ncol = 2) +
+  
+  # Theme
+  theme_void() +
+  scale_color_tq() +
+  theme(
+    strip.text = element_text(
+      size = 12,
+      colour = "white",
+      margin = margin(t = 5, b = 5)
+    ),
+    strip.background = element_rect(fill = "#2C3E50"),
+    legend.position = "none"
+  ) +
+  
+  #Title
+  labs(title = "Calidad de café según espesor de secado")
+
+```
