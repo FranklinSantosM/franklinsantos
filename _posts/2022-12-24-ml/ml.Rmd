@@ -1,0 +1,72 @@
+---
+title: "Using chatGPT"
+description: |
+  ChatGPT is a trending artificial intelligence. Thus, now we are attempt to use this tools.
+categories:
+  - chatGPT
+  - Artifial Intelligence
+  - AI
+author:
+  - name: Franklin Santos
+    url: https://franklinsantos.com
+    affiliation: National Institute for Agricultural and Forestry Innovation (INIAF)
+    orcid_id: 0000-0002-7509-2910
+date: 2022-12-24
+preview: chatgpt.png
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+## ChatGPT
+
+ChatGPT is a chatbot launched by OpenAI in November 2022. It is built on top of OpenAI's GPT-3.5 family of large language models, and is fine-tuned with both supervised and reinforcement learning techniques.
+
+ChatGPT was launched as a prototype on November 30, 2022, and quickly garnered attention for its detailed responses and articulate answers across many domains of knowledge. Its uneven factual accuracy was identified as a significant drawback. 
+
+## Test with chatGPT
+
+### Question
+
+How to improve writing code with R?
+
+### Answer
+
+Great! R is a powerful programming language that is widely used for statistical computing and data analysis. Here are a few tips to help you improve your skills with R:
+
+- Practice, practice, practice! The more you code in R, the more familiar you will become with the language and the more confident you will become in your ability to write and troubleshoot code.
+
+- Make use of online resources such as tutorials, documentation, and forums. There are many resources available online that can help you learn R and get answers to your questions.
+
+- Start with the basics. Make sure you have a strong foundation in the fundamental concepts of programming, such as variables, data types, and control structures.
+
+- Pay attention to syntax. R has a very specific syntax that you need to follow in order to write correct code. Make sure you understand the syntax and pay close attention to details such as case sensitivity and proper use of punctuation.
+
+- Test your code as you go. It's a good idea to test your code as you write it, rather than waiting until you have completed a large block of code. This will help you catch errors sooner and make it easier to identify and fix them.
+
+I hope these tips are helpful as you continue learning R! If you have any specific questions or need further guidance, don't hesitate to ask.
+
+### Questions
+
+Are there better data science packages?
+
+### Answer
+
+There are many packages in R that are useful for data science tasks. Some of the most popular packages include:
+
+- dplyr: This package provides a set of functions for manipulating data frames and working with large datasets. It is particularly useful for filtering, grouping, and summarizing data.
+
+- ggplot2: This package is a popular tool for creating visualizations of data. It allows you to create a wide range of plots and charts, including scatter plots, bar plots, and line plots.
+
+- tidyr: This package provides functions for cleaning and reshaping data. It is particularly useful for transforming data into a format that is easier to work with.
+
+- caret: This package provides a set of functions for building and evaluating machine learning models. It is a popular choice for tasks such as classification, regression, and clustering.
+
+- stringr: This package provides a set of functions for working with strings and text data. It is particularly useful for tasks such as extracting substrings, searching for patterns, and replacing text.
+
+These are just a few examples of the many packages available for data science in R. The best packages for your specific needs will depend on the tasks you are trying to accomplish and the type of data you are working with.
